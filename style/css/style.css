@@ -620,4 +620,10 @@ footer .owner p a{
 .highlight .ss{
     color:#90a959
 }
- 
+
+.titlelink {
+    color:000000;
+}
+.titlelink:hover {
+    text-decoration: none;
+}
