@@ -1,0 +1,157 @@
+
+
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../../style/css/style.css">
+        <title>Demo 12, olio-ohjelmoinnista</title>
+    </head>
+    
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1><a class="titlelink" href="../index.html">Sähköisten asiointipalveluiden toteuttaminen (PHP)</a></h1>
+            </header>
+            <div id="container">
+    
+                <div id="main" role="main">
+                    <div class="download-bar">
+                        <div class="inner">
+    
+                            <a href="https://github.com/eermau/eermau.github.io" class="code">View eermau.github.io on
+                                GitHub</a>
+                        </div>
+                        <span class="blc"><span class="trc">
+                    </div>
+                    <article class="markdown-body">
+
+
+<h2>Demo 12: olio-ohjelmoinnin perusteita</h2>
+
+<!--<p><img src="../kuvat/kaavio.jpg" class="keskikoko" alt="Demon kuva luokkakaaviona"></p>
+<p>Luokkakaaviossa pisteviivan yläpuolella näkyvät luokan ominaisuudet. - -merkki nimen edessä tarkoittaa private-määrettä eli niitä ei vuoraan käsitellä luokan ulkopuolella.</p>
+<p>Katkoviivan alapuolella ovat luokan toiminnot, määre on public ja esitellään +  -merkillä.</p>
+-->
+
+<p>Demossa toteutetaan luokat ja erotetaan ulkoasun tuottaminen omaksi tiedostokseen. Tätä lähestymistapaa kehitämme myöhemmin pidemmälle.</p>
+
+<h3>Luokka Opiskelija (opiskelija.php)</h3>
+
+
+<pre>
+&lt;?php
+class&nbsp;Opiskelija
+{
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$nimi;
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$email;
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$puh;
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;__construct($nimi,&nbsp;$email)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;nimi&nbsp;=&nbsp;$nimi;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;email&nbsp;=&nbsp;$email;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;haeNimi()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$this-&gt;nimi;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;haeEmail()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$this-&gt;email;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+?&gt;
+</pre>
+<h3>Luokka Opetusryhma (opetusryhma.php)</h3>
+
+
+<pre>&lt;?php&nbsp;
+class&nbsp;&nbsp;Opetusryhma
+{
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$ryhmannimi;
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$aloitusvuosi;
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$oma_opettaja;
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$opiskelijat&nbsp;=&nbsp;array();
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;__construct($ryhmannimi,$aloitusvuosi)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;ryhmannimi&nbsp;=&nbsp;$ryhmannimi;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;aloitusvuosi&nbsp;=&nbsp;$aloitusvuosi;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;lisaa($opiskelija)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;opiskelijat[]&nbsp;=&nbsp;$opiskelija;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;haeRyhmannimi&nbsp;()
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// miksi ei viitata suoraan?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// mikä private ja public ero?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$this-&gt;ryhmannimi;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;nimilista()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$nimet&nbsp;=&nbsp;array();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach($this-&gt;opiskelijat&nbsp;as&nbsp;$opiskelija)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$nimet[]&nbsp;=&nbsp;$opiskelija-&gt;haeNimi();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$nimet;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+?&gt;
+</pre>
+<h3>Tiedosto index.php</h3>
+<p>Tämä tiedosto kutsuu muita tiedostoja (jatkossa sen sisältö jakaantuu kahteen eri tiedostoon (kontrolleriin ja reitittimieen).</p>
+
+
+<pre>&lt;?php
+require&nbsp;"opiskelija.php";
+require&nbsp;"opetusryhma.php";
+
+$opetusryhma&nbsp;=&nbsp;new&nbsp;Opetusryhma('TiViDO',2019);
+$opetusryhma-&gt;lisaa(new&nbsp;Opiskelija("Jaakko",&nbsp;"jaakko@netti.fi"));
+$opetusryhma-&gt;lisaa(new&nbsp;Opiskelija("Jorma",&nbsp;"jorma@gmail.com"));
+$opetusryhma-&gt;lisaa(new&nbsp;Opiskelija("Jaana",&nbsp;"jaana67@gmail.com"));
+$ryhma&nbsp;=&nbsp;$opetusryhma-&gt;haeRyhmannimi();
+$opiskelijat&nbsp;=&nbsp;$opetusryhma-&gt;nimilista();
+
+require&nbsp;'opetusryhma.view.php';
+?&gt;
+</pre>
+
+<h3>Tiedosto (opetusryhma.view.php)</h3>
+<p>Tämä tiedosto rakentaa kaiken html:n, muiden tehtävä on muokata tietoja taustalla.</p>
+<p>Huomaa nopea tapa kirjoittaa 	<code>&lt;?php echo</code> korvautuu 	<code></code>&lt;?= merkeillä.</p>
+
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Oliodemo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Ryhmä&nbsp;&lt;?=$ryhma;?&gt;&lt;/h1&gt;
+&lt;h3&gt;Opiskelijaluettelo&lt;/h3&gt;
+&lt;?php
+
+foreach($opiskelijat&nbsp;as&nbsp;$opiskelija)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$opiskelija."&lt;br&gt;";
+}
+
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

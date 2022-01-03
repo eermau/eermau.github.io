@@ -1,0 +1,78 @@
+
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../../style/css/style.css">
+        <title>Demo 8</title>
+    </head>
+    
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1><a class="titlelink" href="../index.html">Sähköisten asiointipalveluiden toteuttaminen (PHP)</a></h1>
+            </header>
+            <div id="container">
+    
+                <div id="main" role="main">
+                    <div class="download-bar">
+                        <div class="inner">
+    
+                            <a href="https://github.com/eermau/eermau.github.io" class="code">View eermau.github.io on
+                                GitHub</a>
+                        </div>
+                        <span class="blc"></span><span class="trc"></span>
+                    </div>
+                    <article class="markdown-body">
+
+<h2>Demo 8, päivämäärät ja ajat PHP:ssa</h2>
+<p>PHP:n aikaa ja päivämääriä käsittelevät omat funktiot.</p>
+<p>Funktioita käytettäessä tulee esiin termi timestamp, joka tarkoittaa jonkin hetken ajankohtaa. Timestamp numeerinen arvo - sekunneissa aika tämän hetken ja 1.1.1970 00:00:00 Greenwich aikaa (GMT).</p>
+<p>Aika(time) riippuu oletusaikavyöhykkeestä, joka asetetaan php.ini -tiedostossa. Sen voi myös asettaa ohjelmaan seuraavasti:</p>
+
+<pre>
+date_default_timezone_set("Europe/Helsinki");
+</pre>
+
+
+<p>Tärkeimpiä funktioita ovat:</p>
+<ul>
+<li>time() palauttaa ko. hetken timestampin.</li>
+<li>date(), joka muotoilee annetun timestampin eli ajankohdan oikeaan muotoon (ja jos ei anneta, käyttää tätä päivää ja kellonaikaa)</li>
+<li>mktime</li>
+</ul>
+
+
+<p>Tulosta tämän hetken kellonaika tai päiväys seuraavissa muodoissa: </p>
+<ul>
+<li>2019.10.30.</li>
+<li>12.5.2019</li>
+<li>tämän päivän viikonpäivä</li>
+</ul>
+
+<p>Luo aika seuraavista tiedoista  (mktime) ja tulosta se alla esitetyssä muodossa ruudulle:</p>
+<ul>
+<li>9.11.2019  klo 12:15:10</li>
+</ul>
+
+<p>Laadi funktiokirjasto, joka sisältää seuraavat aikaa käsittelevät funktiot ja pääohjelma, joka testaa funktiot.</p>
+
+<ul>
+<li>palautaPvm(), palauttaa tämän päivän tietokantojen hyväksymässä muodossa</li>
+<li>laskeLoppumisPvm(), joka lisää tähän päivään kaksi viikkoa sekä palauttaa tuloksen tietokantojen hyväksymässä muodossa</li>
+<li>laske_kesto($aika1,$aika2), joka saa syötteekseen kaksi ajankohtaa ja laskee niiden välisen eron. Tulosta pääohjelmassa ero päivinä.</li>
+</ul>
+
+
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>
