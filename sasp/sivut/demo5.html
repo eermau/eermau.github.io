@@ -28,23 +28,27 @@
 
 
 
-<h2>Demo 5, palautussivu</h2>
-<p>
-Laadi tiedosto index.php, joka näyttää linkkilistan demoista ja harjoituksista. Kun klikkaa linkkiä, se avaa samalle sivulle näkyviin sekä työn että sen lähdekoodin.</p>
+                    <h2>Demo 5, palautussivu</h2>
+                    <p>
+                        Laadi tiedosto index.php, joka näyttää linkkilistan demoista ja harjoituksista. Kun klikkaa
+                        linkkiä, se avaa samalle sivulle näkyviin sekä työn että sen lähdekoodin.</p>
 
-<ol>
-<li>Tee php-kansiosi alle kansio demot ja kansio harjoitukset</li>
-<li>Siirrä ensimmäiset demot kansioon demot ja nimeä ne oikein (demo1.php, demo2.php jne)</li>
-<li>Siirrä ensimmäiset harjoitukset harjoituset-kansioon ja nimeä ne oikein (harj1.php, harj2.php jne)</li>
-<li>Tee kansio partials, tänne tallennamme tiedostot alku.php, navi.php ja loppu.php</li>
-</ol>
+                    <ol>
+                        <li>Tee php-kansiosi alle kansio demot ja kansio harjoitukset</li>
+                        <li>Siirrä ensimmäiset demot kansioon demot ja nimeä ne oikein (demo1.php, demo2.php jne)</li>
+                        <li>Siirrä ensimmäiset harjoitukset harjoituset-kansioon ja nimeä ne oikein (harj1.php,
+                            harj2.php jne)</li>
+                        <li>Tee kansio partials, tänne tallennamme tiedostot alku.php, navi.php ja loppu.php</li>
+                    </ol>
 
-<p>Lisää kaikki tekemäsi tiedostot palautussivulle.<p>
-    
-</p> Huom! Lomakkeen action on oltava muodossa index.php?sivu=lomakkeenkasittelija, jos käytät sisällyttämistä käyttävää palautussivustoa.</p>
+                    <p>Lisää kaikki tekemäsi tiedostot palautussivulle.
+                    <p>
 
-<h4>alku.php</h4>
-<pre>
+                    </p> Huom! Lomakkeen action on oltava muodossa index.php?sivu=lomakkeenkasittelija, jos käytät
+                    sisällyttämistä käyttävää palautussivustoa.</p>
+
+                    <h4>alku.php</h4>
+                    <pre>
 &lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
@@ -54,15 +58,15 @@ Laadi tiedosto index.php, joka näyttää linkkilistan demoista ja harjoituksist
   &lt;body&gt;
 </pre>
 
-<h4>loppu.php</h4>
-<pre>
+                    <h4>loppu.php</h4>
+                    <pre>
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 
 
-<h4>index.php</h4>
-<pre>
+                    <h4>index.php</h4>
+                    <pre>
 &lt;?php
 include "./partials/alku.php";
 include "./partials/navi.php";
@@ -78,8 +82,8 @@ include "./partials/loppu.php";
 </pre>
 
 
-<h4>navi.php</h4>
-<pre>
+                    <h4>navi.php</h4>
+                    <pre>
 &lt;h2&gt;Demot&lt;/h2&gt;
 &lt;ul&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href="./index.php?sivu=demo1&amp;kansio=demot"&gt;Demo&nbsp;1&lt;/a&gt;&lt;/li&gt;
@@ -96,11 +100,13 @@ include "./partials/loppu.php";
 </pre>
 
 
-<h4>Toiminta</h4>
+                    <h4>Toiminta</h4>
 
-<p>Toiminta index.php-sivulla tapahtuu seuraavalla tavalla. Tarkistetaan sivu ja kansio $_GET-muuttujasta, varmistetaan että sivu löytyy sallituista sivuista ja tämän jälkeen avataan php-sivu näkyviin. highlight_file-funktion avulla saadaan näppärästi näkyviin lähdekoodi.</p>
+                    <p>Toiminta index.php-sivulla tapahtuu seuraavalla tavalla. Tarkistetaan sivu ja kansio
+                        $_GET-muuttujasta, varmistetaan että sivu löytyy sallituista sivuista ja tämän jälkeen avataan
+                        php-sivu näkyviin. highlight_file-funktion avulla saadaan näppärästi näkyviin lähdekoodi.</p>
 
-<pre>
+                    <pre>
 if(isset($_GET["sivu"])) $sivu = htmlentities($_GET["sivu"]);
 else $sivu = "demo1"; //oletusarvo, jos ei pyyntöä
 
@@ -122,13 +128,13 @@ if(in_array($sivu,$sallitut)) {
 </pre>
 
 
-</article>
-</div>
-</div>
-</div>
-<div class="current-section">
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
 
-</div>
+    </div>
 </body>
 
 </html>

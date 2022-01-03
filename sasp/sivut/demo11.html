@@ -1,5 +1,3 @@
-
-
 <html>
 
 <head>
@@ -26,52 +24,58 @@
                     <span class="blc"></span><span class="trc"></span>
                 </div>
                 <article class="markdown-body">
-<h2>Demo 11, eväste ja istunto</h2>
+                    <h2>Demo 11, eväste ja istunto</h2>
 
-<p>Eväste (tai keksi) säilytetään käyttäjän selaimessa, käytännössä globaali muuttuja joka on olemassa tietyn ajan (tai kunnes välimuisti tyhjennetään). Istunto (sessio) säilöö uniikin ID-luvun client-puolella ja varsinaisen tiedon server-puolella.
+                    <p>Eväste (tai keksi) säilytetään käyttäjän selaimessa, käytännössä globaali muuttuja joka on
+                        olemassa tietyn ajan (tai kunnes välimuisti tyhjennetään). Istunto (sessio) säilöö uniikin
+                        ID-luvun client-puolella ja varsinaisen tiedon server-puolella.
 
-<p>Keksien käyttö on yksinkertaisempaa mutta sisältävät tietoturvariskin (keksit luettavaa tietoa selaimessa).
+                    <p>Keksien käyttö on yksinkertaisempaa mutta sisältävät tietoturvariskin (keksit luettavaa tietoa
+                        selaimessa).
 
-<h3>demo11a.php</h3>
+                    <h3>demo11a.php</h3>
 
-<p>Laadi tiedosto demo12a.php. Tee lomake jolla voidaan syöttää keksille arvo ja toinen lomake jolla voidaan tyhjentää keksi. 
+                    <p>Laadi tiedosto demo12a.php. Tee lomake jolla voidaan syöttää keksille arvo ja toinen lomake jolla
+                        voidaan tyhjentää keksi.
 
-<p><img src="../kuvat/demo12a.png" />
+                    <p><img src="../kuvat/demo12a.png" />
 
-<p>Tee ensin lomake
-<pre>&lt;form method=&quot;post&quot;&gt;
+                    <p>Tee ensin lomake
+                    <pre>&lt;form method=&quot;post&quot;&gt;
 &lt;label for=&quot;keksi&quot;&gt;Syötä keksille tieto&lt;/label&gt;&lt;br /&gt;
 &lt;input type=&quot;text&quot; name=&quot;keksi&quot; value=&quot;&quot; /&gt;&lt;br /&gt;
 &lt;input type=&quot;submit&quot; value=&quot;Tallenna keksi&quot; /&gt;&lt;br /&gt;
 &lt;/form&gt;
 </pre>
-<pre>&lt;form method=&quot;post&quot;&gt;
+                    <pre>&lt;form method=&quot;post&quot;&gt;
 &lt;input type=&quot;submit&quot; name=&quot;tyhjenna&quot; value=&quot;Tyhjennä keksi&quot; /&gt;
 &lt;/form&gt;</pre>
-<p>Tämän jälkeen lisää yläpuolelle lomakkeenkäsittelijä:</p>
-<pre>// lomakkeen käsittely
+                    <p>Tämän jälkeen lisää yläpuolelle lomakkeenkäsittelijä:</p>
+                    <pre>// lomakkeen käsittely
 if (isset($_POST[&quot;keksi&quot;])) {
  // yritetään tallentaa
  setcookie(&quot;keksi&quot;,$_POST[&quot;keksi&quot;], time() +1800);
  }</pre>
-<p>Tyhjentäminen menee seuraavasti</p>
-<pre>// jos lähetetään tyhjennä:
+                    <p>Tyhjentäminen menee seuraavasti</p>
+                    <pre>// jos lähetetään tyhjennä:
    if (isset($_POST[&quot;tyhjenna&quot;])) {
  setcookie(&quot;keksi&quot;,&quot;&quot;, time() -1800);
  }</pre>
-<h3>demo11b.php</h3>
+                    <h3>demo11b.php</h3>
 
-<p>Laadi toinen tiedosto demo12b.php jolla näytetään lomake salasanan syöttämistä varten.
+                    <p>Laadi toinen tiedosto demo12b.php jolla näytetään lomake salasanan syöttämistä varten.
 
-<p><img src="../kuvat/demo12b.png" />
+                    <p><img src="../kuvat/demo12b.png" />
 
-<ul>
-<li>Lomakkeenkäsittelijässä tarkistetaan tuliko salasana, jos salasana on "salasana" niin tulostetaan teksti "Tunnus oikein" ja tallennetaan salasana evästeeseen.</li>
-<li>Jos salasana on jotain muuta niin tulostetaan tunnus väärin ja tuhotaan eväste.</li>
-<li>Jos kirjauduttu-eväste löytyy niin näytetään uloskirjautuminen, muuten näytetään kirjautuminen.</li>
-</ul> 
-<p>1. Tee aluksi lomake, näytetään joko sisäänkirjautuminen tai uloskirjautuminen </p>
-<pre>&lt;?php
+                    <ul>
+                        <li>Lomakkeenkäsittelijässä tarkistetaan tuliko salasana, jos salasana on "salasana" niin
+                            tulostetaan teksti "Tunnus oikein" ja tallennetaan salasana evästeeseen.</li>
+                        <li>Jos salasana on jotain muuta niin tulostetaan tunnus väärin ja tuhotaan eväste.</li>
+                        <li>Jos kirjauduttu-eväste löytyy niin näytetään uloskirjautuminen, muuten näytetään
+                            kirjautuminen.</li>
+                    </ul>
+                    <p>1. Tee aluksi lomake, näytetään joko sisäänkirjautuminen tai uloskirjautuminen </p>
+                    <pre>&lt;?php
 // lomakkeenkäsittely
 // apumuuttuja - ollaanko kirjauduttu
 $ok = false; // oletuksena ei kirjauduttu
@@ -100,9 +104,10 @@ else {
 &lt;?php
 }
 ?&gt;</pre>
-<p>&nbsp;</p>
-<p>2. Lomakkeenkäsittelijässä tarkistetaan onko eväste tallennettu tai onko syötetty oikea salasana</p>
-<pre>if (isset($_COOKIE[&quot;ok&quot;])) {
+                    <p>&nbsp;</p>
+                    <p>2. Lomakkeenkäsittelijässä tarkistetaan onko eväste tallennettu tai onko syötetty oikea salasana
+                    </p>
+                    <pre>if (isset($_COOKIE[&quot;ok&quot;])) {
  $ok = $_COOKIE[&quot;ok&quot;];
  }
  else if (isset($_POST[&quot;password&quot;])) {
@@ -117,20 +122,20 @@ else {
  echo &quot;Tunnus väärin :( &quot;;
  }
  }</pre>
-<p>Viimeinen asia on uloskirjautuminen - tyhjennetään eväste jos painetaan logoff-nappia:</p>
-<pre>// jos painettiin logoff-submit:
+                    <p>Viimeinen asia on uloskirjautuminen - tyhjennetään eväste jos painetaan logoff-nappia:</p>
+                    <pre>// jos painettiin logoff-submit:
 if (isset($_POST[&quot;logoff&quot;])) {
   setcookie(&quot;ok&quot;,&quot;&quot;, time() -1800);
   $ok = false;
 }</pre>
-<h3>demo11c.php</h3>
+                    <h3>demo11c.php</h3>
 
-<p>Tehdään kirjautuminen myös käyttäen istuntoa.
+                    <p>Tehdään kirjautuminen myös käyttäen istuntoa.
 
 
-	<p>1. Käytä samanlaista alkuosaa kuin evästeen kanssa, vain lomakkeenkäsittelijä on erilainen.    
-	<p>2. Lomakkeenkäsittelijässä tarkistetaan syöte ja kirjaudutaan:    
-	<pre>// lomakkeenkäsittely
+                    <p>1. Käytä samanlaista alkuosaa kuin evästeen kanssa, vain lomakkeenkäsittelijä on erilainen.
+                    <p>2. Lomakkeenkäsittelijässä tarkistetaan syöte ja kirjaudutaan:
+                    <pre>// lomakkeenkäsittely
 session_start(); // ottaa istunnon käyttöön
 // apumuuttuja - ollaanko kirjauduttu
 $ok = false; // oletuksena ei kirjauduttu
@@ -156,13 +161,13 @@ if (isset($_POST[&quot;logoff&quot;])) {
 
 
 
-</article>
-</div>
-</div>
-</div>
-<div class="current-section">
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
 
-</div>
+    </div>
 </body>
 
 </html>

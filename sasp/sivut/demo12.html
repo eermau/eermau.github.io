@@ -1,46 +1,45 @@
-
-
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href="../../style/css/style.css">
-        <title>Demo 12, olio-ohjelmoinnista</title>
-    </head>
-    
-    <body>
-        <div class="wrapper">
-            <header>
-                <h1><a class="titlelink" href="../index.html">Sähköisten asiointipalveluiden toteuttaminen (PHP)</a></h1>
-            </header>
-            <div id="container">
-    
-                <div id="main" role="main">
-                    <div class="download-bar">
-                        <div class="inner">
-    
-                            <a href="https://github.com/eermau/eermau.github.io" class="code">View eermau.github.io on
-                                GitHub</a>
-                        </div>
-                        <span class="blc"><span class="trc">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Demo 12, olio-ohjelmoinnista</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><a class="titlelink" href="../index.html">Sähköisten asiointipalveluiden toteuttaminen (PHP)</a></h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        <a href="https://github.com/eermau/eermau.github.io" class="code">View eermau.github.io on
+                            GitHub</a>
                     </div>
-                    <article class="markdown-body">
+                    <span class="blc"><span class="trc">
+                </div>
+                <article class="markdown-body">
 
 
-<h2>Demo 12: olio-ohjelmoinnin perusteita</h2>
+                    <h2>Demo 12: olio-ohjelmoinnin perusteita</h2>
 
-<!--<p><img src="../kuvat/kaavio.jpg" class="keskikoko" alt="Demon kuva luokkakaaviona"></p>
+                    <!--<p><img src="../kuvat/kaavio.jpg" class="keskikoko" alt="Demon kuva luokkakaaviona"></p>
 <p>Luokkakaaviossa pisteviivan yläpuolella näkyvät luokan ominaisuudet. - -merkki nimen edessä tarkoittaa private-määrettä eli niitä ei vuoraan käsitellä luokan ulkopuolella.</p>
 <p>Katkoviivan alapuolella ovat luokan toiminnot, määre on public ja esitellään +  -merkillä.</p>
 -->
 
-<p>Demossa toteutetaan luokat ja erotetaan ulkoasun tuottaminen omaksi tiedostokseen. Tätä lähestymistapaa kehitämme myöhemmin pidemmälle.</p>
+                    <p>Demossa toteutetaan luokat ja erotetaan ulkoasun tuottaminen omaksi tiedostokseen. Tätä
+                        lähestymistapaa kehitämme myöhemmin pidemmälle.</p>
 
-<h3>Luokka Opiskelija (opiskelija.php)</h3>
+                    <h3>Luokka Opiskelija (opiskelija.php)</h3>
 
 
-<pre>
+                    <pre>
 &lt;?php
 class&nbsp;Opiskelija
 {
@@ -63,10 +62,10 @@ class&nbsp;Opiskelija
 }
 ?&gt;
 </pre>
-<h3>Luokka Opetusryhma (opetusryhma.php)</h3>
+                    <h3>Luokka Opetusryhma (opetusryhma.php)</h3>
 
 
-<pre>&lt;?php&nbsp;
+                    <pre>&lt;?php&nbsp;
 class&nbsp;&nbsp;Opetusryhma
 {
 &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$ryhmannimi;
@@ -101,11 +100,12 @@ class&nbsp;&nbsp;Opetusryhma
 }
 ?&gt;
 </pre>
-<h3>Tiedosto index.php</h3>
-<p>Tämä tiedosto kutsuu muita tiedostoja (jatkossa sen sisältö jakaantuu kahteen eri tiedostoon (kontrolleriin ja reitittimieen).</p>
+                    <h3>Tiedosto index.php</h3>
+                    <p>Tämä tiedosto kutsuu muita tiedostoja (jatkossa sen sisältö jakaantuu kahteen eri tiedostoon
+                        (kontrolleriin ja reitittimieen).</p>
 
 
-<pre>&lt;?php
+                    <pre>&lt;?php
 require&nbsp;"opiskelija.php";
 require&nbsp;"opetusryhma.php";
 
@@ -120,11 +120,12 @@ require&nbsp;'opetusryhma.view.php';
 ?&gt;
 </pre>
 
-<h3>Tiedosto (opetusryhma.view.php)</h3>
-<p>Tämä tiedosto rakentaa kaiken html:n, muiden tehtävä on muokata tietoja taustalla.</p>
-<p>Huomaa nopea tapa kirjoittaa 	<code>&lt;?php echo</code> korvautuu 	<code></code>&lt;?= merkeillä.</p>
+                    <h3>Tiedosto (opetusryhma.view.php)</h3>
+                    <p>Tämä tiedosto rakentaa kaiken html:n, muiden tehtävä on muokata tietoja taustalla.</p>
+                    <p>Huomaa nopea tapa kirjoittaa <code>&lt;?php echo</code> korvautuu <code></code>&lt;?= merkeillä.
+                    </p>
 
-<pre>
+                    <pre>
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;Oliodemo&lt;/title&gt;
@@ -145,13 +146,13 @@ foreach($opiskelijat&nbsp;as&nbsp;$opiskelija)
 &lt;/html&gt;
 </pre>
 
-</article>
-</div>
-</div>
-</div>
-<div class="current-section">
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
 
-</div>
+    </div>
 </body>
 
 </html>
