@@ -2,7 +2,7 @@
 -- Rakenne taululle `games`
 --
 
-CREATE TABLE `d10_games` (
+CREATE TABLE `test_games` (
   `gameid` int(11) NOT NULL,
   `name` varchar(120) NOT NULL,
   `company` varchar(120) NOT NULL,
@@ -10,10 +10,10 @@ CREATE TABLE `d10_games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Vedos taulusta `games`
+-- Vedos taulusta `test_games`
 --
 
-INSERT INTO `d10_games` (`gameid`, `name`, `company`, `release`) VALUES
+INSERT INTO `test_games` (`gameid`, `name`, `company`, `release`) VALUES
 (1, 'Grand Theft Auto IV', 'Rockstar Games', 2008),
 (2, 'Fallout 3', 'Bethesda Game Studios', 2008),
 (3, 'The Elder Scrolls III: Morrowind', 'Bethesda Game Studios', 2002),
@@ -36,9 +36,9 @@ INSERT INTO `d10_games` (`gameid`, `name`, `company`, `release`) VALUES
 --
 
 --
--- Indexes for table `games`
+-- Indexes for table `test_games`
 --
-ALTER TABLE `d10_games`
+ALTER TABLE `test_games`
   ADD PRIMARY KEY (`gameid`);
 
 --
@@ -46,7 +46,7 @@ ALTER TABLE `d10_games`
 --
 
 --
--- AUTO_INCREMENT for table `games`
+-- AUTO_INCREMENT for table `test_games`
 --
-ALTER TABLE `d10_games`
+ALTER TABLE `test_games`
   MODIFY `gameid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
