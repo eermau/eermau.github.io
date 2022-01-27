@@ -28,7 +28,7 @@
 
                     <h2>Demo 9, funktioita, syötteiden käsittelyä</h2>
 
-                    <h3>11.1 salasanan suojaus</h3>
+                    <h3>9.1 salasanan suojaus</h3>
                     <p>Seuraavien funktioiden (password_hash ja password_verify) avulla suojataan salasanat.
                     <p>
                     <p> Siis: Suojaa sana "salasana", tulosta se suojattuna. Vertaa suojattua sanaa toisessa muuttujassa
@@ -39,7 +39,7 @@
 	boolean password_verify($passwd, $row['account_password'])
 -->
 
-                    <h3>11.2 filter_var - merkkijono</h3>
+                    <h3>9.2 filter_var - merkkijono</h3>
                     <p>Poista html seuraavasta lauseesta ja tulosta lopputulos:</p>
                     <pre>
 &lt;h1&gt;Hei! Kuinka voit tänään?&lt;/h1&gt;
@@ -52,7 +52,7 @@ $lause = "<h1>Hei! Kuinka voit tänään?</h1>";
 <!--$sanitizedComment = filter_var($comment, FILTER_SANITIZE_STRING);
 echo $sanitizedComment;Katso myös <a href="https://www.tutorialrepublic.com/php-tutorial/php-filters.php">Tutorialrepublicin filter-materiaali</a></p>-->
 
-                    <h3>11.3 filter_var - kokonaisluku</h3>
+                    <h3>9.3 filter_var - kokonaisluku</h3>
                     <p>Tarkista, onko annettu kokonaisluku validi:</p>
                     <pre>
 $int = 20;
@@ -65,7 +65,7 @@ if(filter_var($int, FILTER_VALIDATE_INT)){
     echo "The <b>$int</b> is not a valid integer";
 }-->
 
-                    <h3>11.4 filter_var - URL</h3>
+                    <h3>9.4 filter_var - URL</h3>
                     Tarkista, onko annettu URL validi
                     <pre>
 172.16.254.1
@@ -82,7 +82,7 @@ if(filter_var($ip, FILTER_VALIDATE_IP)){
     echo "The <b>$ip</b> is not a valid IP address";
 }-->
 
-                    <h3>11.5 filter_var - sähköposti</h3>
+                    <h3>9.5 filter_var - sähköposti</h3>
                     <p>Validoi ja sanitoi seuraava sähköpostiosoite:</p>
                     <pre>
 someone@@example.com
@@ -103,7 +103,7 @@ if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 }
 -->
 
-                    <h3>11.6 filter_var - kokonaisluku ja väli</h3>
+                    <h3>9.6 filter_var - kokonaisluku ja väli</h3>
                     <p>Validoi kokonaisluvun arvo ja tarkista, onko se jossain välissä:</p>
                     <pre>
 75
