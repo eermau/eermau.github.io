@@ -68,7 +68,7 @@ try {
 ?&gt;</pre>
           <p>Kun toimii niin kokeile tulostaa li-elementeissä pelien nimet, tähän sopii foreach-toistorakenne:</p>
           <p><img width="400" src="../kuvat/demo_pdo_1.png" />
-          <!---
+            <!---
           <pre>// tuliko jotain?
 //print_r($rows);
 // käydään kaikki tulokset läpi
@@ -81,7 +81,7 @@ try {
 
 
           <p>Listan lisäksi voidaan tulostaa tiedot esimerkiksi taulukossa:</p>
-          <p><img width="400"  src="../kuvat/demo_pdo_2.png" /></p>
+          <p><img width="400" src="../kuvat/demo_pdo_2.png" /></p>
           <!--
           <pre>echo &quot;&lt;table border='1'&gt;&quot;;
 foreach ($rows as $row) {
@@ -115,7 +115,7 @@ echo &quot;&lt;/table&gt;&quot;;</pre>
 
           <p>Kun lomake lähetetään demo10.php -sivulla oleva käsittelijä tarkistaa löytyykö lomakkeen tiedot ja
             tarvittaessa suorittaa INSERT INTO -kyselyn.
-<!--
+            <!--
           <pre>&lt;form method=&quot;post&quot;&gt;<br>&lt;input type=&quot;text&quot; placeholder=&quot;name&quot; value=&quot;&quot; name=&quot;name&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;text&quot; placeholder=&quot;company&quot; value=&quot;&quot; name=&quot;company&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;number&quot; min=&quot;1900&quot; max=&quot;2099&quot; step=&quot;1&quot; value=&quot;2021&quot; 
   placeholder=&quot;year&quot; value=&quot;&quot; name=&quot;release&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;submit&quot; value=&quot;insert&quot; /&gt;&lt;br /&gt;<br>&lt;/form&gt;
 </pre>-->
@@ -134,6 +134,8 @@ echo &quot;&lt;/table&gt;&quot;;</pre>
  $stmt = $pdo-&gt;prepare($sql);
  $stmt-&gt;execute($data);
  }</pre>
+
+          <hr />
           <h3>DELETE</h3>
 
           <p>Lisää table-taulukollesi uusi sarake "actions", lisää taulukon luonnissa td-kenttään tekstit edit ja
@@ -153,7 +155,8 @@ if (isset($_GET["id"])){
 }
 -->
 
-          <pre>echo &quot;&lt;td&gt;&lt;a href='./demot/delete.php?id=&quot; . $row[&quot;gameid&quot;] . &quot;'&gt;delete&lt;/a&gt; edit&lt;/td&gt;&quot;;
+          <pre>echo &quot;&lt;td&gt;&lt;a href='./demot/delete.php?id=&quot; . 
+  $row[&quot;gameid&quot;] . &quot;'&gt;delete&lt;/a&gt; edit&lt;/td&gt;&quot;;
 </pre>
           <p>Tee uusi tiedosto jossa hoidetaan poistaminen:
           <pre>&lt;?php
@@ -176,17 +179,20 @@ if (isset($_GET["id"])){
               &quot;'&gt;delete&lt;/a&gt; edit&lt;/td&gt;&quot;;</li>
             <li>header('Location: ../index.php?sivu=demo10&amp;kansio=demot');</li>
           </ul>
+          <hr />
+
           <h3>UPDATE</h3>
 
           <p>Tiedon päivittäminen kannattaa tehdä omalle php-sivulle, taulukossa oleva linkki johtaa edit.php-sivulle ja
             välittää myös tiedon mitä tietuetta ollaan muokkaamassa (id).
 
             Tee uudi edit.php ja tallenna se demot-kansioosi.
+          <p><img src="../kuvat/demo_pdo_3.png" /></p>
           <pre>
 &lt;?php
 require &quot;yhteys.php&quot;;
 
-if (isset($_GET[&quot;id&quot;])){<br>	// tuli get<br>	$sql = &quot;SELECT * FROM games WHERE gameid=?&quot;;<br>	$data = array($_GET[&quot;id&quot;]);<br>	$stmt = $pdo-&gt;prepare($sql);<br>	$stmt-&gt;execute($data);<br>	<br>	$rows = $stmt-&gt;fetchAll();<br>	//var_dump($rows);<br>	if (!$rows) {<br>		echo &quot;No games!&quot;;<br>	}<br>	else {<br>		$name = $rows[0][&quot;name&quot;];<br>		$company = $rows[0][&quot;company&quot;];<br>		$release = $rows[0][&quot;release&quot;];<br>		$gameid = $_GET[&quot;id&quot;];<br>	}<br>}
+if (isset($_GET[&quot;id&quot;])){<br>	// tuli get<br>	$sql = &quot;SELECT * FROM test_games WHERE gameid=?&quot;;<br>	$data = array($_GET[&quot;id&quot;]);<br>	$stmt = $pdo-&gt;prepare($sql);<br>	$stmt-&gt;execute($data);<br>	<br>	$rows = $stmt-&gt;fetchAll();<br>	//var_dump($rows);<br>	if (!$rows) {<br>		echo &quot;No games!&quot;;<br>	}<br>	else {<br>		$name = $rows[0][&quot;name&quot;];<br>		$company = $rows[0][&quot;company&quot;];<br>		$release = $rows[0][&quot;release&quot;];<br>		$gameid = $_GET[&quot;id&quot;];<br>	}<br>}
 
 ?&gt;</pre>
 
@@ -194,8 +200,8 @@ if (isset($_GET[&quot;id&quot;])){<br>	// tuli get<br>	$sql = &quot;SELECT * FRO
           <pre>&lt;h3&gt;Edit game&lt;/h3&gt;<br>&lt;form method=&quot;post&quot;&gt;<br>&lt;input type=&quot;text&quot; value=&quot;&lt;?php echo $name; ?&gt;&quot; name=&quot;name&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;text&quot; value=&quot;&lt;?php echo $company; ?&gt;&quot; name=&quot;company&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;number&quot; value=&quot;&lt;?php echo $release; ?&gt;&quot; name=&quot;release&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;hidden&quot; name=&quot;gameid&quot; value=&quot;&lt;?php echo $gameid; ?&gt;&quot; /&gt;<br>&lt;input type=&quot;submit&quot; value=&quot;Save&quot; /&gt;&lt;br /&gt;<br>&lt;/form&gt;</pre>
           <p>Kun lomake lähetetään tarvitaan toinen käsittelijä, tee tämä lomakkeen yläpuolelle php-tagien sisälle:
           <pre>if (isset($_POST[&quot;name&quot;], $_POST[&quot;company&quot;], 
-  $_POST[&quot;release&quot;], $_POST[&quot;gameid&quot;])) {<br>	// tuli post <br>	$name = $_POST[&quot;name&quot;];<br>	$company = $_POST[&quot;company&quot;];<br>	$release = $_POST[&quot;release&quot;];<br>	$gameid = $_POST[&quot;gameid&quot;];<br>	$data = array($name, $company, $release, $gameid);<br>	$sql = &quot;UPDATE `games` SET `name`=?, 
-		`company`=?, `release`=? WHERE gameid=?&quot;;<br>	$stmt = $pdo-&gt;prepare($sql);<br>	$stmt-&gt;execute($data);<br>	header('Location: games.php');<br>	exit;<br>}
+  $_POST[&quot;release&quot;], $_POST[&quot;gameid&quot;])) {<br>	// tuli post <br>	$name = $_POST[&quot;name&quot;];<br>	$company = $_POST[&quot;company&quot;];<br>	$release = $_POST[&quot;release&quot;];<br>	$gameid = $_POST[&quot;gameid&quot;];<br>	$data = array($name, $company, $release, $gameid);<br>	$sql = &quot;UPDATE `test_games` SET `name`=?, 
+		`company`=?, `release`=? WHERE gameid=?&quot;;<br>	$stmt = $pdo-&gt;prepare($sql);<br>	$stmt-&gt;execute($data);<br>	header('Location: ../index.php?kansio=demot&sivu=demo10');<br>	exit;<br>}
 
 </pre>
           <hr />
