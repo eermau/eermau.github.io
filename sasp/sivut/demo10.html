@@ -93,9 +93,10 @@ foreach ($rows as $row) {
   echo &quot;&lt;/tr&gt;&quot;;
 }
 echo &quot;&lt;/table&gt;&quot;;</pre>
--->
-          <p>Kokeile lisätä vielä otsikot taulukolle:</p>
+
           <pre>echo &quot;&lt;tr&gt;&lt;th&gt;gameid&lt;/th&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;company&lt;/th&gt;&lt;th&gt;release&lt;/th&gt;&lt;/tr&gt;&quot;;</pre>
+-->
+          <p>Kokeile lisätä vielä otsikot taulukolle (th).</p>
 
           <hr />
 
@@ -159,11 +160,11 @@ if (isset($_GET["id"])){
  // delete.php
  require &quot;yhteys.php&quot;;
  if (isset($_GET[&quot;id&quot;])) {
-   $sql = &quot;DELETE FROM games WHERE gameid=?&quot;;
+   $sql = &quot;DELETE FROM test_games WHERE gameid=?&quot;;
    $data = array($_GET[&quot;id&quot;]);
    $stmt = $pdo-&gt;prepare($sql);
    $stmt-&gt;execute($data);
-   header('Location: demo9.php');
+   header('Location: demo10.php');
    exit;
  }
 ?&gt;</pre>
