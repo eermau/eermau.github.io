@@ -59,7 +59,7 @@ try {
    // lue mukaan yhteys.php
    require &quot;yhteys.php&quot;;
 // haetaan sql-kyselyllä kaikki pelit
-   $sql = &quot;SELECT * FROM games&quot;;
+   $sql = &quot;SELECT * FROM test_games&quot;;
 // suoritetaan kysely pdo-yhteydelle
    $stmt = $pdo-&gt;query($sql);
    $rows = $stmt-&gt;fetchAll();
@@ -67,6 +67,8 @@ try {
    print_r($rows);
 ?&gt;</pre>
           <p>Kun toimii niin kokeile tulostaa li-elementeissä pelien nimet, tähän sopii foreach-toistorakenne:</p>
+          <p><img width="400" src="../kuvat/demo_pdo_1.png" />
+          <!---
           <pre>// tuliko jotain?
 //print_r($rows);
 // käydään kaikki tulokset läpi
@@ -75,7 +77,12 @@ try {
    echo &quot;&lt;li&gt;&quot; . $row[&quot;name&quot;] . &quot;&lt;/li&gt;&quot;;
    }
    echo &quot;&lt;/ul&gt;&quot;</pre>
+-->
+
+
           <p>Listan lisäksi voidaan tulostaa tiedot esimerkiksi taulukossa:</p>
+          <p><img width="400"  src="../kuvat/demo_pdo_2.png" /></p>
+          <!--
           <pre>echo &quot;&lt;table border='1'&gt;&quot;;
 foreach ($rows as $row) {
   echo &quot;&lt;tr&gt;&quot;;
@@ -86,6 +93,7 @@ foreach ($rows as $row) {
   echo &quot;&lt;/tr&gt;&quot;;
 }
 echo &quot;&lt;/table&gt;&quot;;</pre>
+-->
           <p>Kokeile lisätä vielä otsikot taulukolle:</p>
           <pre>echo &quot;&lt;tr&gt;&lt;th&gt;gameid&lt;/th&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;company&lt;/th&gt;&lt;th&gt;release&lt;/th&gt;&lt;/tr&gt;&quot;;</pre>
 
@@ -104,12 +112,12 @@ echo &quot;&lt;/table&gt;&quot;;</pre>
             <input type="submit" value="insert" /><br />
           </form>
 
-          <p>Kun lomake lähetetään demo9.php -sivulla oleva käsittelijä tarkistaa löytyykö lomakkeen tiedot ja
+          <p>Kun lomake lähetetään demo10.php -sivulla oleva käsittelijä tarkistaa löytyykö lomakkeen tiedot ja
             tarvittaessa suorittaa INSERT INTO -kyselyn.
-
+<!--
           <pre>&lt;form method=&quot;post&quot;&gt;<br>&lt;input type=&quot;text&quot; placeholder=&quot;name&quot; value=&quot;&quot; name=&quot;name&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;text&quot; placeholder=&quot;company&quot; value=&quot;&quot; name=&quot;company&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;number&quot; min=&quot;1900&quot; max=&quot;2099&quot; step=&quot;1&quot; value=&quot;2021&quot; 
   placeholder=&quot;year&quot; value=&quot;&quot; name=&quot;release&quot; /&gt;&lt;br /&gt;<br>&lt;input type=&quot;submit&quot; value=&quot;insert&quot; /&gt;&lt;br /&gt;<br>&lt;/form&gt;
-</pre>
+</pre>-->
 
 
           <p>Lomakkeen käsittelijä:</p>
@@ -118,7 +126,7 @@ echo &quot;&lt;/table&gt;&quot;;</pre>
  $company = $_POST[&quot;company&quot;];
  $release = $_POST[&quot;release&quot;];
  // muuttujien paikalle ? -merkit
- $sql = &quot;INSERT INTO `games` (`name`, `company`, `release`) VALUES (?, ?, ?)&quot;;
+ $sql = &quot;INSERT INTO `test_games` (`name`, `company`, `release`) VALUES (?, ?, ?)&quot;;
  // kerätään muuttujat taulukkoon:
  $data = array ($name, $company, $release);
  // suoritetaan sql-lause
