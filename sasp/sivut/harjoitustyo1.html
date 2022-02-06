@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Harjoitusstyö 1</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><a class="titlelink" href="../index.html">Sähköisten asiointipalveluiden toteuttaminen</a></h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        <a href="https://github.com/eermau/eermau.github.io" class="code">View eermau.github.io on
+                            GitHub</a>
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+
+                    <h2>Harjoitukset 1: arvostelut</h2>
+
+                    <h3>Yleistä</h3>
+                    Tehtävänä on tehdä web-sovellus jolla voidaan kirjoittaa arvosteluita ja hallita niitä. Valitse
+                    omalle sovelluksellesi jokin tietty aihe jota arvostellaan. Aihe voi olla peli, elokuva, tv-sarja
+                    tms. Noudata tietokannan kanssa ohessa annettua mallia, voit kuitenkin muokata sitä halutessasi. Kun
+                    valitset aiheen sinun kannattaa miettiä mitä kenttiä taulu arvosteltava tarvitsisi lisää.
+                    <h3>Tietokanta</h3>
+                    <p>Laadi itsellesi kuvan kaltainen tietokanta. Nimeä tietokanta järkevästi.
+                    </p>
+                    <p><img src="../kuvat/arvostelut_db.png" /></p>
+                    <p>Voit muuttaa arvioitavia asioita sisältävän taulun omaan aiheeseesi sopivaksi.</p>
+
+                    <h3>Taso 1</h3>
+
+                    <ul>
+                        <li>Laadi tietokantaasi kaksi taulua, toinen sisältää arvioitavat asiat (esim. ht1_elokuvat), toinen arvostelut (esim ht1_arvostelut).</li>
+                        <li>Tee kansio arvostelut ja sen alle mielellään alikansio <i>images</i> ja <i>components</i>. Työssä käytetyt kuvat tulisi tallettaa images-kansioon ja coponents-kansiossa esimerkiksi funktioita ja sivuilla hyödynnettäviä muita tiedostoja (header, footer, css).</li>
+                        <li>Laadi sovellukseesi toiminto uusien arvioitavien asioiden hallintaa varten (lisääminen, poistaminen, muokkaaminen). Jos arvosteltavasta asiasta on tehty jo arvostelu niin sitä ei saa poistaa sovelluksesta.</li>
+                        <li>Laadi sovellukseesi toiminto uusien arovsteluiden lisäämistä varten.</li>
+                    </ul>
+
+                    <h3>Taso 2</h3>
+
+                    <ul>
+                        <li>Lisää etusivu, jolla näytetään viisi uusinta arvostelua järjestettynä lisäyspäivän mukaiseen järjestykseen. Näytä arvostelun lisäyspäivä, annetut tähdet sekä varsinainen arvostelun teksti.</li>
+                        <li>Lisää etusivulle näkyviin myös kaikki arvosteltavat asiat. Näytä arvosteltavista asioista montako arvostelua on tehty ja mikä on arvostelujen tähtien keskiarvo.</li>
+                        <li>Lisää etusivulle linkki tai painike jolla voidaan kirjautua sovellukseen. Vain kirjautunut käyttäjä voi tehdä arvostelun tai hallita arvosteltavia asioita. Voit käyttää kirjautumisessa "kovakoodattua" salasanaa.</li>
+                    </ul>
+
+                    <h3>Taso 3</h3>
+                        <ul>
+                            <li>Lisää uusi taulu johon lisätään käyttäjät. Tarvittavia tietoja ovat nimi, sähköposti, salasana ja liittymispäivä.</li>
+                            <li>Lisää sovellukseesi rekisteröityminen. Uusi käyttäjä rekisteröityy lomakkeen avulla. Rekisteröityessä tulee varmistaa, ettei samalla sähköpostiosoitteella ole jo olemassa olevaa käyttäjää. Käyttäjän salasana tulee talletaa tietokantaan salatussa muodossa (esim. Argon2).</li>
+                            <li>Toteuta kirjautuminen käyttäen tietokannan taulua.</li>
+                        </ul>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
