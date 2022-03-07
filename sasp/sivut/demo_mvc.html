@@ -1,0 +1,147 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Demo 1</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><a class="titlelink" href="../index.html">Sähköisten asiointipalveluiden toteuttaminen</a></h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        <a href="https://github.com/eermau/eermau.github.io" class="code">View eermau.github.io on
+                            GitHub</a>
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+
+<h1>MVC-malli</h1>
+
+<p>MVC-malli (Model - View - Controller) on tapa jäsentää sovellus eri osiin tarkoituksensa mukaisiin osiin. Kun sovelluksen koko kasvaa muuttuu tarve ohjelman hallinnalle ja ylläpidolle. Koodi pitää jäsentää selkeästi jotta sitä on yksinkertaisempi lukea ja ymmärtää. Ohjelmistoarkkitehtuurissa erotetaan kolme osaa:</p>
+
+<ul>
+    <li>Model: tiedon käsittely (malli, tietokanta)</li>
+    <li>View: käyttöliittymä (näkymä)</li>
+    <li>Controller: edellisten linkitys ohjaimella joka käsittelee käyttöliittymältä tulleet komennot ja hakee tiedot tietokannasta.</li>
+</ul>
+
+<h4>Linkkejä</h4>
+<ul>
+    <li><a href="https://fi.wikipedia.org/wiki/MVC-arkkitehtuuri" target="_blank">Wikipedia: MVC-arkkitehtuuri</a></li>
+    <li><a href="https://github.com/otredu/news_2021" target="_blank">news_2021</a></li>
+</ul>
+
+<h3>news 2021</h3>
+<p>Käytetään pohjana tälle demolle otredun <a href="https://github.com/otredu/news_2021" target="_blank">news_2021</a>-pohjaa. Kloonaa repo itsellesi oman reposi sisälle.</p> 
+
+<h4>Tietokanta</h4>
+<p>Tee samariumille database_dump-kansiosta löytyvän tietokannan mukaiset taulut. Päivitä database / connection.php funktioon connect() oikeat tunnukset.</p>
+
+<h4>Testaaminen</h4>
+<p>Siirry terminal-kehotteessa public-kansioon, käynnistä täällä php</p>
+<pre>
+php -S localhost:8888    
+</pre>
+<p>Kokeile sovelluksen käyttämistä</p>
+<ul>
+    <li>luo uusi käyttäjä rekisteröitymällä</li>
+    <li>tarkista tietokannasta menikö käyttäjä tauluun users</li>
+    <li>kirjaudu järjestelmään</li>
+    <li>kirjoita uusi uutinen, varmista että uutinen tallennettu tietokantaan ja että uutisen userid oikein.</li>
+    <li>testaa uutisen muokkaamista ja poistamista</li>
+</ul> 
+
+<h4>Muutokset</h4>
+
+
+<p>1. Käyttäjän syntymäpäivä</p>
+
+<ul>
+    <li>Lisää tietokantaan user-tauluun uusi date-tyyppinen kenttä birthday</li>
+    <li>Lisää register.view-tiedostoon uusi date-kenttä, nimeä birthday.</li>
+    <li>Lisää users.php:n addUser-funktioon mukaan birthday parametriksi, data-taulukkoon sekä SQL-lauseeseen.</li>
+    <li>Lisää birthday mukaan userManagement.php:n registerController()-funktioon.</li>
+</ul>
+
+<p>2. Uutisen osasto</p>
+
+<ul>
+    <li>Lisää article-taululle uusi kenttä section (varchar 50)</li>
+    <li>Lisää newArticle.view.php:ssa kovakoodattu select-ohjain uutisosaston valinnalle.<br />
+<select name="esimerkki">
+    <option>Kotimaa</option>
+    <option>Mielipide</option>
+    <option>Ulkomaa</option>
+    <option>Urheilu</option>
+    <option>Viihde</option>
+</select>
+
+    </li>
+    <li>Lisää uusi muuttuja $section mukaan article.php:n addArticle-funktiolle.</li>
+    <li>Lisää articleManagement.php:ssa addArticleController()-funktiolle uusi kenttäsi.</li>
+</ul>
+
+
+<p>3. Artikkelien hakeminen osaston mukaan</p>
+
+<ul>
+    <li>Kopioi select-ohjaimesi articles.view.php:lle. Lisää submit-painike sekä näiden ympärille form.</li>
+    <li>Muutetaan articleManagement.php:ssa viewArticlesController()-funktiota
+<pre>
+function viewArticlesController(){
+    $allnews = null;
+    if (isset($_POST['section'])) {
+        $section = cleanUpInput($_POST['section']);
+        $allnews = getSectionArticles($section);
+    }
+    else {
+        $allnews = getAllArticles();
+    }
+    require "views/articles.view.php";    
+}
+</pre>        
+    </li>
+    <li>
+        Lisätään article.php:lle funktio getSectionArticles:
+<pre>
+function getSectionArticles($section){
+    $pdo =connectDB();
+    $sql = "SELECT * FROM articles WHERE section = ?";
+    $stm=$pdo-&gt;prepare($sql);
+    $stm-&gt;execute(array($section));
+    $all = $stm-&gt;fetchAll(PDO::FETCH_ASSOC);
+    return $all;
+}    
+</pre>        
+    </li>
+</ul>
+
+
+<p>4. Ulkoasu</p>
+
+<ul>
+    <li>Kokeile muuttaa ylä- ja alatunnisteen tekstit.</li>
+    <li>Muuta hieman CSS-tyylitiedostoa haluamallasi tavalla.</li>
+</ul>
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>
