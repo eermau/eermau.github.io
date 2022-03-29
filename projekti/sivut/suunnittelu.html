@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Suunnittelusta</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><a class="titlelink" href="../index.html">Sähköisten asiointipalveluiden toteuttaminen</a></h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        <a href="https://github.com/eermau/eermau.github.io" class="code">View eermau.github.io on
+                            GitHub</a>
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+<h2>Suunnitelma</h2>
+<h3>Käyttötapaukset</h3>
+<p>Käyttötapaukset (Use case), valitse Visiossa Ohjelmisto / UML-käyttötapauskaavio:</p>
+<p><img width="450px" src="../kuvat/usecase_1.png" /></p>
+<p>Esimerkki käyttötapauskaaviosta:</p>
+<p><img width="450px" src="../kuvat/usecase_2.png" /></p>
+<p>Pyri tekemään mahdollisimman selkeitä toimintoja, älä ryhmittele kovin monia saman otsikon alle (parempi "Uutisen lisäys", "Uutisen poisto" kuin "Käyttäjä hallinnoi uutisia" tai "Uutisten lisäily, poistelu, muokkaaminen, selailu ja haku")</p>
+<h3>Tietokanta</h3>
+<ul>
+    <li>mietitään mitä tietoa tallennetaan sovelluksen aikana</li>
+    <li>älä sekoita toimintoihin (rekisteröityminen, kirjautuminen jne)!</li>
+    <li>ER-kaavio ja tietokantakaavio kuvaavat samaa asiaa, käsite = taulu</li>
+    </ul>
+<h4>ER-kaavio</h4>
+<ul>	
+    <li>neliöt = käsitteet, yksi taulu jonka tietoja tallennetaan</li>
+    <li>ympyrät = attribuutit, taulun ominaisuus (= kenttä), id-kenttää ei tarvitse merkitä</li>
+    <li>relaatiot käsitteiden välillä, lukumääräsuhde melkein aina 1:N</li>
+    </ul>                    <p><img width="450px" src="../kuvat/tietokanta_1.png" /></p>
+                    
+    <p>Esimerkki ER_kaaviosta, kolme eri variaatiota tilauksesta ja tuotteesta. 1. yksi tilaus voi sisältää vain yhden tuotteen (vierasavain taulussa Tilaus). 2. tilauksella voi olla monta tuotetta aputaulun avulla (assosiatiivinen käsite), 3. aputaulukko kuvattuna 1:n yhteyksin.</p>
+    <p><img width="450px" src="../kuvat/er_kaavio.png" /></p>
+                    <h4>Tietokantakaavio</h4>
+                    <ul>
+                        <li>samat käsitteet kuin ER-kaaviossa nyt tauluja</li>
+                        <li>hiiren oikea / Näytä määritetyypit niin saat näkyviin kenttien tietotyypit (int, varchar, date, text)</li>
+                        </ul>            
+<p><img width="450px" src="../kuvat/tietokantakaavio_kukonaskel.png" /></p>
+</article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
