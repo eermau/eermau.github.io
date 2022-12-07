@@ -1,0 +1,144 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Harjoitukset 4</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Sähköisten asiointipalveluiden toteuttaminen</h1><a class="titlelink" href="../index.html">Etusivulle</a>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+                    <h2>Harjoitukset 4</h2>
+
+                    <h3>Harjoitus 4.1</h3>
+
+                    <p>Laadi ohjelma, joka tulostaa nimesi 10 kertaa, käytä for-silmukkaa.</p>
+
+                    <h3>Harjoitus 4.2</h3>
+                    <p>
+                        Laadi ohjelma, joka tulostaa seuraavat viisi vuotta kuvaruudulle. Nykyisen vuoden saat selville
+                        funktiolla date('Y');
+                    </p>
+
+                    <h3>Harjoitus 4.3</h3>
+                    <p>
+                        Tee while-silmukan avulla vuorovaikutteinen ohjelma, joka pyytää lomakkeen avulla suorakaiteen
+                        korkeuden ja leveyden sekä tulostaa "*"-merkeistä muodostuvan suorakaiteen. Jos syötteet ovat
+                        vaikka 3 ja 8, ohjelma tulostaa:<br />
+                        <br />
+                        ********<br />
+                        ********<br />
+                        ********
+                    </p>
+
+
+                    <h3>Harjoitus 4.4</h3>
+
+                    <p>Esittele kaksi taulukkoa joista toisessa on etunimiä (vähintään viisi) ja toisessa sukunimiä
+                        (saman verran). Tulosta taulukoiden sisällöt li-elementtien sisälle php:n avulla.
+
+                    <pre>
+$etunimet = array("Timo", "Tero", "Tauno");
+$sukunimet = array("Virtanen", "Salonen", "Nieminen");
+</pre>
+                    <p>Esimerkki:
+                    <ul>
+                        <li>Virtanen, Timo</li>
+                        <li>Salonen, Tero</li>
+                        <li>Nieminen, Tauno</li>
+                    </ul>
+
+
+                    <h3>Harjoitus 4.5</h3>
+
+                    <p>Käytä edellisen harjoituksen taulukoita myös tässä harjoituksessa. Arvo luku väliltä nolla -
+                        taulukon koko - 1 ja tulosta satunnainen sukunimi ja satunnainen etunimi. Suorita arpominen
+                        nappia painamalla.
+                    <p><input type="button" value="Arvo satunnainen nimi" />
+
+                    <p>Jotta voit tarkistaa php:ssa onko nappia painettu sinun täytyy määritellä myös
+                        submit-painikkeelle nimi:</p>
+                    <pre>&lt;?php
+if (isset($_POST[&quot;arvoNimi&quot;])) {
+  echo &quot;nappia painettu&quot;;
+}
+?&gt;</pre>
+                    <pre>&lt;form method=&quot;post&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Arvo nimi&quot; name=&quot;arvoNimi&quot; /&gt;
+&lt;/form&gt;</pre>
+
+                    <h3>Harjoitus 4.6</h3>
+
+                    <p>Määrittele koodissasi <a href="https://www.w3schools.com/php/php_arrays_multidimensional.asp"
+                            target="_blank">moniulotteinen taulukko</a> joka sisältää vähintään viisi maata, kyseisten
+                        maiden pääkaupunkia ja maiden väkiluvut. Tulosta kaupunkien tiedot taulukkoon.
+
+                    <p>Esimerkki
+
+                    <table>
+                        <tr>
+                            <th>Index</th>
+                            <th>Country</th>
+                            <th>Capital</th>
+                            <th>Population</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>Finland</td>
+                            <td>Helsinki</td>
+                            <td>5528737</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Sweden</td>
+                            <td>Stockholm</td>
+                            <td>10377781</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Norway</td>
+                            <td>Oslo</td>
+                            <td>5372191</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Denmark</td>
+                            <td>Copenhagen</td>
+                            <td>5809502</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Iceland</td>
+                            <td>Reykjavik</td>
+                            <td>343518</td>
+                        </tr>
+                    </table>
+
+
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
