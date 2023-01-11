@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_new.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+
+    <title>Ympäristö</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Sähköisten asiointipalveluiden toteuttaminen</h1><a class="titlelink" href="../index.html">Etusivulle</a>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+
+                    <h1>PHP:n ajaminen</h1>
+                    <p>PHP-ohjelma ajetaan palvelimella, oppilaitoksella käytämme aluksi XAMPP-sovellusta.</p>
+
+<h2>XAMPP</h2>
+<p>Asenna kotikoneellasi itsellesi <a href="https://www.apachefriends.org/" target="_blank">XAMPP</a>. Oppilaitoksella sovellus löytyy c:\xampp-kansiosta, mikäli sitä ei ole asennettu saat sen Sofware Centerin kautta koneellesi käyttöön.</p>
+
+<p>Kun XAMPP käynnistetään se sisältää MySQL-tietokantapalvelun sekä Apachen www-sivujen esittämiseen. Web-palvelimen juurihakemisto on htdocs-kansio. Huom: koululla emme käytä XAMPP:n kansiota vaan ajamme PHP.exe-tiedoston omassa kansiossamme.</p>
+
+<h2>Kloonaa github-reposi</h2>
+<p>Kloonaa kurssin repo itsellesi c-asemalle. Kannattaa käyttää esimerkiksi Tiedostot-kansiota tai muuta oman profiilisi alla olevaa kansiota. OneDrive-kansion kanssa on ollut joskus ongelmia.</p>
+
+<ul>
+    <li>kopioi repon osoite github-sivulta</li>
+    <li>valitse resurssinhallinnassa hiiren oikealla oikeassa kansiossa "Git Bash Here"</li>
+    <li>kloonaa repo <pre>git clone https://github.com/tredu/sahkoinen_asiointipalvelu-tunnuksesi-git</pre></li>
+</ul>
+
+<h2>PHP:n ajaminen paikallisesti</h2>
+<p>Tee yksinkertainen PHP-sovellus (testi.php).</p>
+<pre>
+ &lt;?php
+ echo "&lt;h1&gt;Hello world!&lt;/h1&gt;";
+ ?&gt;
+</pre>
+<p>Avaa uusi komentokehote (Terminal / New Terminal) ja käynnistä PHP</p>
+<pre>
+PHP -S localhost:8888    
+</pre>
+<p>Kokeile avata selaimessa osoite <a href="http://localhost:8888/testi.php" target="_blank">http://localhost:8888/testi.php</a>. Mikäli tallensit sivun esimerkiksi kansioon testi on silloin oikea osoite vastaavasti <a href="http://localhost:8888/testi/testi.php" target="_blank">http://localhost:8888/testi/testi.php</a></p>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
