@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+    <title>Javascript demo 1</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Sähköisten asiointipalveluiden toteuttaminen</h1><a class="titlelink" href="../index.html">Etusivulle</a>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+
+
+                    <h2>Javascript-harjoitukset 2</h2>
+                    <p>Aloita uusi tiedosto, tallenna se kansioon harj nimellä jsharj2.html. Käytä apuna <a href="https://www.w3schools.com/js/" target="_blank">w3schoolin javascript-materiaalia</a>. 
+                        <h3>1. Bussilipun hinta (if)</h3>
+
+                        <p>Pyydä käyttäjältä ikä. Kerro tämän jälkeen käyttäjälle paljonko bussilippu maksaa. </p>
+                        <p>Hinnasto:                    </p>
+
+                            <table>
+                                <thead>
+                                    <tr><th>ikäryhmä</th><th>hinta</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>7-16</td><td> 1.05 €</td></tr>
+                                    <tr><td>17-24</td><td> 1.52 €</td></tr>
+                                    <tr><td>aikuiset</td><td> 2.10 €</td></tr>
+                                    <tr><td>65+</td><td> 1.16 €</td></tr>
+                                </tbody>
+                            </table>
+
+                    <h3>2. Numeron arvaaminen</h3>
+                    <p>Tee lomake jossa pyydetään luvulle ala- ja yläraja. Lisää myös kenttä jolla pyydetään käyttäjän arvaama luku. Tietokone kertoo arvasiko käyttäjä oikean luvun kun painetaan nappia Vastaa.</p>
+                
+<form>
+    Alaraja<br>
+    <input type="number" min="0" max="100" /><br>
+    Yläraja<br>
+    <input type="number" min="0" max="100" /><br>
+    Vastaus<br>
+    <input type="number" min="0" max="100" /><br>
+    <button type="button">Vastaa</button>
+</form>
+<p>Jos käyttäjä arvaa oikein kehu käyttäjää oikeasta vastauksesta, muuten ilmoita että käyttäjä vastasi väärin.</p>
+<h3>3. Numeron arvaaminen 2.0</h3>
+<p>Parantele sovellustasi siten, että lähtöarvojen tulee olla hyväksyttyjä. Alaraja ei voi olla suurempi kuin yläraja, arvauksen tulee olla oikealla välillä jne.</p>
+<p>Lisää sovellukseen laskuri joka kertoo montako kertaa on arvattu. Kun arvataan oikein kerrotaan käyttäjälle montako arvausta kului.</p>
+<p>Lisää sovellukseen vihje joka kertoo onko käyttäjän arvaama luku liian pieni tai liian suuri.</p>
+
+<h3>4. toistorakenne</h3>
+
+<p>Laadi lomake jossa pyydetään käyttäjältä montako päivää hän haluaa tulostettavan. Painiketta painettaessa tulostetaan divin sisälle seuraavat n päivämäärää. Päiväys voi olla esimerkiksi p-elementin sisällä (innerHTML).</p>
+<p>Päivämäärän hallintaan on useita funktioita, tutki niiden käyttöä <a href="https://www.w3schools.com/jsref/jsref_obj_date.asp" target="_blank">w3schoolin</a> sivuilla.</p>
+<pre>
+// tämä päivä Date-oliossa
+let today = new Date();
+// huominen käyttäen Date-olion metodeja, lisätään päivään yksi
+let tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+</pre>
+
+
+<h3>5. Lisätehtävä</h3>
+<p>Kokeile miten yksinkertaisen pelin tekeminen onnistuisi käyttäen canvasta.</p>
+<p><img src="../kuvat/js_pingpong.png" alt="Ping Pong"></p>
+<ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript" target="_blank">2D Breakout Game</a></li>
+</ul>
+
+                    </article>
+
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
