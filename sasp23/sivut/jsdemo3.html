@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+    <title>Javascript demo 3</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Sähköisten asiointipalveluiden toteuttaminen</h1><a class="titlelink" href="../index.html">Etusivulle</a>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+
+
+                    <h2>Javascript-demo 3, taulukot</h2>
+                    <p>Demon asiat käydään yhdessä tunnilla. Tarkoitus on tehdä yksi tiedosto johon lisätään pikku hiljaa demon osatehtävät. Aloita uusi tiedosto, tallenna se kansioon demot nimellä jsdemo3.html. Tee javascript omaan tiedostoon jsdemo3.js. Lähdemateriaalina käytetään <a href="https://www.w3schools.com/js/" target="_blank">w3schoolin javascript-materiaalia</a>. 
+                    <h3>1. Henkilöt</h3>
+
+                    <p>Tee html-tiedstoon painike jolla kutsutaan javascript-funktiota listPersons(). Lisää myös div tuloksen syöttämistä varten (id esimerkiksi divPersons).</p>
+                    <pre>persons = ["aku", "hessu", "mikki"];</pre>
+<p>Esittele javascript-tiedostossa taulukko persons. Laadi funktio listPersons joka a.) luo uuden ul-elementin, b.) käy läpi persons-taulukon ja luo jokaisesta henkilöstä li-elementin, c.) lisää ul-elementin divPersons-lapseksi. </p>
+<p>Apua löydät w3schoolin materiaalista (<a href="https://www.w3schools.com/js/js_arrays.asp">taulukot</a>, <a href="https://www.w3schools.com/jsref/met_document_createelement.asp">createElement</a>)</p>
+<!--
+    function listPersons() {
+    let ul = document.createElement("ul");
+    for (let i = 0; i < persons.length; i++) {
+        //console.log(persons[i]);
+        let li = document.createElement("li");
+        li.innerHTML = persons[i];
+        ul.appendChild(li);
+    }
+    document.getElementById("divPersons").appendChild(ul);
+
+}
+-->
+<h3>2. Lisää henkilö</h3>
+<p>Lisää pieni form jolla voidaan syöttää uusi henkilö taulukkoon persons. </p>
+<form action="">
+    <label for="newPerson">Uusi henkilö</label><br>
+    <input type="text" id="newPerson" /><br>
+    <button type="button" onClick="addPerson()">Lisää</button>
+</form>
+<p>Nappia painamalla kutsutaan funktiota addPerson joka a.) lisää henkilön taulukkoon ja b.) kutsuu listPersons()-funktiota.</p>
+
+<h3>3. Sort</h3>
+<p>Lisää painike joka järjestää listan aakkosjärjestykseen.</p>
+                    </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
