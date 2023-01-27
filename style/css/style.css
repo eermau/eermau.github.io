@@ -628,3 +628,10 @@ footer .owner p a{
 .titlelink:hover {
     text-decoration: none;
 }
+
+.image{
+    border:5px solid;
+    color:rgb(196, 165, 165);
+    padding: 3px;
+    margin:3px;
+}
