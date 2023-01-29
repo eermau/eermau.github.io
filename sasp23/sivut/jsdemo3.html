@@ -61,8 +61,30 @@
 <p>Lisää painike joka järjestää listan aakkosjärjestykseen.</p>
 
 
+<h3>4. Poistaminen</h3>
 
-<h3>4. Olio</h3>
+<p>Lisää painike jolla voidaan poistaa henkilö. delete-metodi jättää aukkoja taulukkoon joten käytä splice-metodia. </p>
+
+<!--
+    let ruuat = ["keitto", "heitto", "peippo"]
+
+
+function removeAt(i) {
+    ruuat.splice(i, 1);
+    list();
+}
+
+function list() {
+    document.getElementById("root").innerHTML = "";
+    ruuat.forEach ((item, index) => {
+        console.log("index", index)
+        let p = document.createElement("p");
+        p.innerHTML = item + "<br><button onClick='removeAt(" + index + ")'>poista</button>";
+        document.getElementById("root").appendChild(p);
+    })
+}
+-->
+<h3>5. Olio</h3>
 <p>Tee js-tiedostoon kolme autoa.
 <pre>
 let car1 = {
@@ -86,6 +108,7 @@ let cars = [car1, car2, car3];
     <li>lisää div-elementille auton nimi otsikolla ja listana auton tiedot.</li>
 </ul>
 <p><img class="image" src="../kuvat/js_cars.png" alt="" /></p>
+
                     </article>
             </div>
         </div>
