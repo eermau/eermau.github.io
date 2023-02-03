@@ -27,21 +27,29 @@
 
                     <h2>Harjoitukset 6, funktioita</h2>
 
-                    <h3>Harjoitus 6.1</h3>
+                    <h3>6.1 Tekstin tulostaminen</h3>
 
-                    <p>Tulosta tämän hetken kellonaika tai päiväys seuraavissa muodoissa: </p>
-                    <ul>
-                        <li>14:54:43 (tunnit 24 tunnin mukaisessa muodossa).</li>
-                        <li>2019-03-15</li>
-                        <li>tämän päivän viikonpäivä</li>
-                    </ul>
+                    <p>Laadi funktio  joka tulostaa divin, jonka sisällä otsikko sekä teksti kappale. Kokeile miten funktio toimii pääohjelmassasi.
+                    </p>
+<pre>function outputDiv()</pre>
+                    
+                    <p>Muuta funktiota siten, että otsikko sekä tekstikappale tulevat parametreinä. Testaa toiminta.
+                    </p>
+                    <pre>function outputDiv($title, $text)</pre>
+                    
+                    <p>Katso mallia <a href="https://www.w3schools.com/php/php_functions.asp" target="_blank">w3schoolin materiaalista</a>.</p>
+
 
                     <h3>Harjoitus 6.2</h3>
-                    <p>Luo aika (<a href="https://www.php.net/manual/en/function.mktime.php" target="_blank">mktime</a>) ja tulosta se alla esitetyssä muodossa ruudulle:</p>
-                    <ul>
-                        <li>2.2.2022 klo 12:45:00</li>
-                    </ul>
 
+                    <p>Tee lomake jolla pyydetään pelaajalta pisteet, pelit ja vahvuusluku. Tee samalle sivulle lomakkeenkäsittelijä jossa luet tiedot muuttujiin ja kutsut funktiota joka laskee pelaajan suoritusluvun.
+                        </p>
+                        <pre>function calculatePerformance($points, $games, $elo)</pre>
+
+                        <p>Suoritusluku lasketaan seuraavalla kaavalla: 
+
+                        </p>
+                        <pre>suoritusluku = (pisteet/pelit-0.5)*400 + vahvuusluku</pre>
                     <h3>Funktioita 6.3</h3>
                     <p>Laadi seuraavat funktiot:</p>
                     <ul>
@@ -52,8 +60,7 @@
                     </ul>
                     <p>Kokeile funktioiden toimintaa.</p>
                     <h3>Funktioita 6.4</h3>
-                    <p>Laadi funktiokirjasto, joka sisältää seuraavat funktiot.</p>
-                    <p>Laadi lisäksi pääohjelma, joka kutsuu funktioita, ja testaa niiden toiminta.</p>
+                    <p>Laadi seuraavat funktiot, kokeile niiden toimintaa sivullasi.</p>
 
                     <ul>
                         <li>onVokaali($kirjain), tarkistaa, onko lähetetty kirjain vokaali, palauttaa true, jos on<br>
