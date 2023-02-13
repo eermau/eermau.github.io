@@ -193,6 +193,18 @@ if (isset($_GET["deletedid"])) {
 <p>Lisää linkki sivulle joka johtaa toiselle sivulle, demo10form.php:lle.</p>
 
 <pre>&lt;a href='./demo10form.php'&gt;Lisää uusi&lt;/a&gt;</pre>
+
+<h5>Lisää peli</h5>
+<form action="" method="POST">
+    <input type="hidden" name="mode" value="">
+    <label for="name">nimi</label><br>
+    <input type="text" name="name" id=""><br>
+    <label for="company">yritys</label><br>
+    <input type="text" name="company" id=""><br>
+    <label for="release">vuosi</label><br>
+    <input type="number" name="release" id=""><br>
+    <input type="submit" value="Tallenna">
+</form>
   
 
 <h4>Muokkaaminen</h4>
