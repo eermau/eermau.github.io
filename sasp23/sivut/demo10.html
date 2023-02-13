@@ -69,7 +69,7 @@ function connect() {
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn-&lt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "Connected successfully";
         return $conn;
     } catch(PDOException $e) {
@@ -101,8 +101,8 @@ function connect() {
  function getAllGames() {
      $pdo = connect();
      $sql = "SELECT * FROM test_games";
-     $stm = $pdo->query($sql);
-     $games = $stm->fetchAll(PDO::FETCH_ASSOC);
+     $stm = $pdo-&lt;query($sql);
+     $games = $stm-&lt;fetchAll(PDO::FETCH_ASSOC);
      return $games;
  }  
 </pre>
@@ -114,6 +114,19 @@ function connect() {
 </pre>
 <p>Funktio joka poistaa pelin id:n perusteella
 </p>
+<pre>
+  /**
+  * Poistaa pelin jonka gameid on $id
+  */
+ function deleteGame($id) {
+     $pdo = connect();
+     $sql = "DELETE FROM test_games WHERE gameid=?";
+     $stm = $pdo-&lt;prepare($sql);
+     $ok = $stm-&lt;execute([$id]);
+     return $ok;
+ }  
+</pre>
+
 <p>Funktio joka hakee pelin id:n perusteella
 </p>
 <p>Funktio joka lisää pelin
