@@ -94,6 +94,24 @@ function connect() {
 
 <p>Funktio joka hakee kaikki pelit
 </p>
+<pre>
+  /**
+  * Hakee kaikki pelit taulusta test_games
+  */
+ function getAllGames() {
+     $pdo = connect();
+     $sql = "SELECT * FROM test_games";
+     $stm = $pdo->query($sql);
+     $games = $stm->fetchAll(PDO::FETCH_ASSOC);
+     return $games;
+ }  
+</pre>
+<p>Voit testata tätä taas demossasi:</p>
+<pre>
+  //$pdo = connect();
+  $games = getAllGames();
+  var_dump($games);  
+</pre>
 <p>Funktio joka poistaa pelin id:n perusteella
 </p>
 <p>Funktio joka hakee pelin id:n perusteella
