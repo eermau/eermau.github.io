@@ -101,8 +101,8 @@ function connect() {
  function getAllGames() {
      $pdo = connect();
      $sql = "SELECT * FROM test_games";
-     $stm = $pdo-&lt;query($sql);
-     $games = $stm-&lt;fetchAll(PDO::FETCH_ASSOC);
+     $stm = $pdo-&gt;query($sql);
+     $games = $stm-&gt;fetchAll(PDO::FETCH_ASSOC);
      return $games;
  }  
 </pre>
@@ -121,8 +121,8 @@ function connect() {
  function deleteGame($id) {
      $pdo = connect();
      $sql = "DELETE FROM test_games WHERE gameid=?";
-     $stm = $pdo-&lt;prepare($sql);
-     $ok = $stm-&lt;execute([$id]);
+     $stm = $pdo-&gt;prepare($sql);
+     $ok = $stm-&gt;execute([$id]);
      return $ok;
  }  
 </pre>
@@ -136,9 +136,9 @@ function connect() {
  function getGameById($id) {
      $pdo = connect();
      $sql = "SELECT * FROM test_games WHERE gameid=?";
-     $stm = $pdo-&lt;prepare($sql);
-     $stm-&lt;execute([$id]);
-     $game = $stm-&lt;fetch(PDO::FETCH_ASSOC);
+     $stm = $pdo-&gt;prepare($sql);
+     $stm-&gt;execute([$id]);
+     $game = $stm-&gt;fetch(PDO::FETCH_ASSOC);
      return $game;
  }  
 </pre>
@@ -150,8 +150,8 @@ function connect() {
   function insertNewGame($name, $company, $release) {
     $pdo = connect();
     $sql = "INSERT INTO test_games (`name`, company, `release`) VALUES (?, ?, ?)";
-    $stm = $pdo-&lt;prepare($sql);
-    $ok = $stm-&lt;execute([$name, $company, $release]);
+    $stm = $pdo-&gt;prepare($sql);
+    $ok = $stm-&gt;execute([$name, $company, $release]);
     return $ok;
 }
 </pre>
@@ -162,8 +162,8 @@ function connect() {
   function updateGame($name, $company, $release, $id) {
     $pdo = connect();
     $sql = "UPDATE test_games SET `name`=?, company=?, `release`=? WHERE gameid=?";
-    $stm = $pdo-&lt;prepare($sql);
-    $ok = $stm-&lt;execute([$name, $company, $release, $id]);
+    $stm = $pdo-&gt;prepare($sql);
+    $ok = $stm-&gt;execute([$name, $company, $release, $id]);
     return $ok;
 }  
 </pre>
