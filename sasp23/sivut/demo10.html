@@ -50,6 +50,34 @@
 
           <h3>dbfunctions.php</h3>
 
+          <p>Tee aluksi itsellesi uusi tiedosto dbfunctions10.php demot-kansioosi
+
+            . Tehdään aluksi funktio jonka avulla voidaan ottaa yhteys tietokantaan:</p>
+
+<pre>/**
+ * Ottaa yhteyden tietokantaan, palauttaa 
+ * pdo-olion.
+ * 13.2.2023/EM
+ */
+function connect() {
+    $servername = "eermau.treok.io";
+    $username = "eermau_sasp";
+    $password = "5C=5dNaVbIPa";
+    //$port = 3306;
+    $dbname = "eermau_sasp";
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connected successfully";
+        return $conn;
+    } catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+        die();
+    }
+}
+</pre>
 
 
 
