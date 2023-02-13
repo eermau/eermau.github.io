@@ -129,6 +129,20 @@ function connect() {
 
 <p>Funktio joka hakee pelin id:n perusteella
 </p>
+<pre>
+  /**
+  * Palauttaa tietyn pelin
+  */
+ function getGameById($id) {
+     $pdo = connect();
+     $sql = "SELECT * FROM test_games WHERE gameid=?";
+     $stm = $pdo-&lt;prepare($sql);
+     $stm-&lt;execute([$id]);
+     $game = $stm-&lt;fetch(PDO::FETCH_ASSOC);
+     return $game;
+ }  
+</pre>
+
 <p>Funktio joka lisää pelin
 </p>
 <p>Funktio joka muokkaa tietyn id:n peliä 
