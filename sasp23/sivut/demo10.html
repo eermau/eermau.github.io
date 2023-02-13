@@ -188,7 +188,20 @@ if (isset($_GET["deletedid"])) {
 }  
 </pre>
 
+<h4>Lisääminen</h4>
 
+<p>Lisää linkki sivulle joka johtaa toiselle sivulle, demo10form.php:lle.</p>
+
+
+
+<h4>Muokkaaminen</h4>
+<p>Lisää linkki taulukolle joka johtaa form-sivulle.
+
+<pre>
+echo "&lt;td&gt;&lt;a href='./demo10form.php?editedid=" . $game["gameid"] . "'&gt;muokkaa&lt;/a&gt;&lt;/td&gt;";  
+</pre>
+
+</p>
 </article>
       </div>
     </div>
