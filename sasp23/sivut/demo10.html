@@ -145,8 +145,28 @@ function connect() {
 
 <p>Funktio joka lisää pelin
 </p>
+
+<pre>
+  function insertNewGame($name, $company, $release) {
+    $pdo = connect();
+    $sql = "INSERT INTO test_games (`name`, company, `release`) VALUES (?, ?, ?)";
+    $stm = $pdo-&lt;prepare($sql);
+    $ok = $stm-&lt;execute([$name, $company, $release]);
+    return $ok;
+}
+</pre>
+
 <p>Funktio joka muokkaa tietyn id:n peliä 
 </p>
+<pre>
+  function updateGame($name, $company, $release, $id) {
+    $pdo = connect();
+    $sql = "UPDATE test_games SET `name`=?, company=?, `release`=? WHERE gameid=?";
+    $stm = $pdo-&lt;prepare($sql);
+    $ok = $stm-&lt;execute([$name, $company, $release, $id]);
+    return $ok;
+}  
+</pre>
         </article>
       </div>
     </div>
