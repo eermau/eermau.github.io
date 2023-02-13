@@ -1,0 +1,66 @@
+<?php
+// funktiot käyttöön
+require "./dbfunctions10.php";
+
+// jos saadaan mode niin ollaan tallentamassa (uutta tai vanhaa)
+if (isset($_POST["mode"])) {
+    // tallennus: lisääminen tai poistaminen
+    $mode = $_POST["mode"];
+    $name = $_POST["name"];
+    $company = $_POST["company"];
+    $release = $_POST["release"];
+
+    if ($mode == "insert") {
+        $ok = insertNewGame($name, $company, $release);
+    }
+    else if ($mode == "edit") {
+        // viimeinen lisäys: tallennetaan muutettu peli:
+        $gameid = $_POST["gameid"];
+        $ok = updateGame($name, $company, $release, $gameid);
+    }
+
+    if ($ok) {
+        header('Location: ./demo10.php');
+    }
+}
+else if (isset($_GET["editedid"])) {
+    // avataan muokkaustilassa 
+    $mode = "edit";
+    $id = $_GET["editedid"];
+    $game = getGameById($id);
+    //var_dump($game);
+?>
+
+<h3>Muokkaa peliä</h3>
+<form action="" method="POST">
+    <input type="hidden" name="mode" value="<?= $mode ?>">
+    <label for="name">nimi</label><br>
+    <input type="text" name="name" id="" value="<?= $game["name"] ?>"><br>
+    <label for="company">yritys</label><br>
+    <input type="text" name="company" id="" value="<?= $game["company"] ?>"><br>
+    <label for="release">vuosi</label><br>
+    <input type="number" name="release" id="" value="<?= $game["release"] ?>"><br>
+    <input type="hidden" name="gameid" value="<?= $game["gameid"] ?>">
+    <input type="submit" value="Tallenna">
+</form>
+
+
+<?php
+}
+else {
+    $mode = "insert";
+?>
+<h3>Lisää peli</h3>
+<form action="" method="POST">
+    <input type="hidden" name="mode" value="<?= $mode ?>">
+    <label for="name">nimi</label><br>
+    <input type="text" name="name" id=""><br>
+    <label for="company">yritys</label><br>
+    <input type="text" name="company" id=""><br>
+    <label for="release">vuosi</label><br>
+    <input type="number" name="release" id=""><br>
+    <input type="submit" value="Tallenna">
+</form>
+<?php
+}
+?>
