@@ -171,7 +171,25 @@ function connect() {
 <h3>demo10.php</h3>
 <p>Hae funktion avulla pelit ja näytä ne taulukossa. Tulokset kannattaa käydä foreach-silmukassa läpi.</p>
 <p><img src="../kuvat/demo10_1.png" alt="demo10"></p>
-        </article>
+
+
+<h4>Poistaminen</h4>
+<p>Lisää linkki jolla kutsut samaa sivua ja lähetät parametrina deletedid:n.</p>
+
+<pre>
+  echo "&lt;td&gt;&lt;a href='./demo10.php?deletedid=" . $game["gameid"] . "'&gt;poista&lt;/a&gt;&lt;/td&gt;";  
+</pre>
+
+<p>Lisää sivun alkuun tarkistus:</p>
+<pre>
+if (isset($_GET["deletedid"])) {
+  $id = $_GET["deletedid"];
+  $ok = deleteGame($id);
+}  
+</pre>
+
+
+</article>
       </div>
     </div>
   </div>
