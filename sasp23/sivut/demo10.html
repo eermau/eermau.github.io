@@ -185,9 +185,11 @@ function connect() {
 if (isset($_GET["deletedid"])) {
   $id = $_GET["deletedid"];
   $ok = deleteGame($id);
+  // ohjataan sivu lataamaan uudestaan
+  header("Location: ./demo10.php");
 }  
 </pre>
-
+<p>Lataamalla sivu uudestaan estetään refresh-ongelma missä aina uudelleen päivitettäessä sivua tämä funktio suoritettaisiin uudestaan.</p>
 <h4>Lisääminen</h4>
 
 <p>Lisää linkki sivulle joka johtaa toiselle sivulle, demo10form.php:lle.</p>
