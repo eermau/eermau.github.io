@@ -28,11 +28,48 @@
 
                     <h2>Javascript-demo 4, json</h2>
                     <p>Demon asiat käydään yhdessä tunnilla. Tarkoitus on tehdä yksi tiedosto johon lisätään pikku hiljaa demon osatehtävät. Aloita uusi tiedosto, tallenna se kansioon demot nimellä jsdemo4.html. Tee javascript omaan tiedostoon jsdemo4.js. Lähdemateriaalina käytetään <a href="https://www.w3schools.com/js/" target="_blank">w3schoolin javascript-materiaalia</a>. 
-                    <h3>1. Henkilöt</h3>
+                        <p>JSON (JavaScript Object Notation) on merkintätapa jolla voidaan helposti tallettaa tietoa. JSON on usein korvannut XML-merkintätavan. </p>
+                        <p>Esimerkki JSON-tiedostosta</p>
+<pre>{
+        "nimi": "aku ankka",
+        "ikä": 100,
+        "puhelin": "03 131313",
+        "huollettavat": [{
+                "nimi": "Hupu"
+            },
+            {
+                "nimi": "Tupu"
+            },
+            {
+                "nimi": "Lupu"
+            }
+        ]
+    }    
+</pre>
+                        <ul>
+                            <li><a href="https://fi.wikipedia.org/wiki/JSON">Wikipedia: JSON</a></li>
+                            <li><a href="https://jsonlint.com/">JSON validaattori</a></li>
+                        </ul>
 
-                    <h3>1. Henkilöt</h3>
+                        <h3>1. Muunnos JavaScriptiksi, JSON.parse</h3>
 
-                    <h3>1. Henkilöt</h3>
+                        <p>Lue seuraavan JSON -objektin arvot ja  tulosta ne div-elementin sisälle.</p>
+                        <pre>{"nimi": "Pekka", "ika": 25, "maa": "Suomi"}</pre>
+                        <p>Jos json on merkkijonon sisällä niin sinun tulee parsettaa tieto näin:</p>
+                        <pre>let obj = JSON.parse(json)
+                        </pre>
+
+                    <h3>2. Muunnos JSONiksi</h3>
+
+                    <p>Joskus joudutaan muuttamaan taulukoita JSON-muotoon, silloin käytetään JSON.stringify()-metodia.</p>
+<p>Muunna taulukon sisältö json-muotoon ja tulosta se alertin avulla.</p>
+                    <pre>var arr = ["Omena", "Banaani", "Mango", "Appelisiini", "Papaija"];</pre>
+                        <p>Tieto näyttää taulukolta mutta on merkkijono, se voidaan esimerkiksi tallettaa merkkijonona tiedostoon tms.</p>
+                    <h3>3. Kirjaluettelo listaksi</h3>
+
+                    <p>Luo kirjaluettelo JSONilla ja lue se html-listaan.</p>
+
+<p>Kun luot luettelon, validoi sen <a href="https://jsonlint.com/" target="top">jsonlint.comissa</a></p>
 
                 </div>
 </body>
