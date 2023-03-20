@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h1>Semifinaalitehtävä: Taitaja2023_206_FI (Suomi)  </h1>
+<ul>
+  <li>Tekijät: Margit Tennosaar, Sari Mattsson, Abdihakim Yasin Arase, Keijo Salakari, Seise Matti,  Teemu Turunen, Veera Soininen, Mikko Ulvi, Jari Leivo ja Sari Paunonen (Lajin 206  Lajiohjausryhmän jäsenet)</li>
+</ul>
+<h2>Tehtävän yleiskuvaus  </h2>
+<p>Kuopiolainen sääpalveluyritys Weather Oy on julkaisemassa uuden sääpalvelun Internettiin.  Sivuston kehittäminen on jäänyt kesken ja nyt sinun tulee kehittää palvelu julkaisukelpoiseksi.  Kaikki tiedostot ja alkusivusto on saatavilla GitHubin kautta, josta kehittäjän tulee hakea tiedostot  sekä ohjeet ja viedä ne palvelimelle ohjeen mukaisesti.  </p>
+<ul>
+  <li>Tehtävässä kehittäjän tulee hakea, lukea ja ottaa haltuun aikaisemmin tuotettu koodi sekä kesken  jäänyt web-palvelu (esim. index.php). Kehittäjä tuottaa tarvittavat / pyydetyt ominaisuudet ja  toiminnot palvelun lanseerausta ja käyttöönottoa varten. Weather Oy:n aikaisempi kehittäjä on  pyytänyt mainostoimistolta graafisen suunnitelman yrityksen palvelun ja yritysilmeen pohjaksi.  Graafista ilmettä tulee noudattaa julkaistavassa palvelussa. Graafinen ohje ja kuva  rautalankamallista sekä tulevasta sivustosta löytyvät graafisesta ohjeesta (graafinenohje.pdf).  </li>
+</ul>
+<p>Sääpalvelu on käytettävissä kirjautuneille ja rekisteröityneille käyttäjille. Rekisteröitymisen ja  kirjautumisen jälkeen, käyttäjä pääsee näkemään palvelusta Kuopion säätietoja graafisessa  muodossa sääpalvelusta annetulla ajanjaksolla. Säätiedot sijaitsevat weatherdata.json tiedostossa,  josta ne näytetään kirjautumisen jälkeen sivulla weather.php. Kirjautumistunnus pitää löytyä  users.sql tietokannasta.  </p>
+<p>Weather Oy on antanut sinulle index - sivun keskeneräisenä. Sivusto tulee jatkokehittää annetun  graafisen ohjeen mukaan. Graafista ilmettä varten tee CSS - tyylitiedosto, jota käytät kaikissa  palvelun sivustoissa graafisen ohjeen mukaan. Asiakas vaatii, että sivu on käyttäjäystävällinen,  moderni ja helppo käyttöinen eri päätelaitteilla.  </p>
+<p>Weather Oy on määritellyt valmiiksi sivuston rakenteen. Asiakas haluaa sinun valmistelevan /  viimeistelevän HTML/CSS/JS-prototyypin, joka sisältää ainakin nämä sivut:  </p>
+<ul>
+  <li>Sisäänkirjautuminen & Tervetuloa sivu  </li>
+  <li> Sääpalvelusivu (weather.php) </li>
+  <li> Tyylisivu (styles.css) </li>
+</ul>
+<p>Sivuston täytyy olla responsiivinen. Graafisesta suunnitelmasta pakolliset osiot, joita toteutuksessa  tulee huomioida ovat</p>
+<ul>
+  <li> logo</li>
+  <li>värit </li>
+  <li> fontit ja tekstikoko </li>
+  <li> esimerkki rautalankamalli </li>
+</ul>
+<p>Semifinaalissa sivuston tekemistä saat jatkaa haluamallasi työvälineellä. Tehtävässä ei saa  käyttää mitään frameworkia vaan se on tehtävä pelkästään ohjelmoimalla HTML5, CSS3,  JavaScript, PHP sekä SQL kielillä. Tehtävässä ei saa myöskään käyttää valmiita  julkaisujärjestelmiä (CMS).  </p>
+<p>Koodin tuottamisessa huomioi, että koodi on laadukasta eli jatkokehityskelpoista. Koodi on helposti  luettavissa ja ylläpidettävissä. Laadukas koodi on napakkaa, yksinkertaista sekä koodissa on  käytetty sen lukemista, jäsentämistä ja ymmärtämistä helpottavia tekniikoita.  </p>
+<p>Tehtävässä sinun on myös määritettävä GitHub-repositori ja readme-tiedosto, jossa alat kerätä  kaikkia projektista tarvittavia tietoja.  </p>
+<h2>Sisäänkirjautuminen  </h2>
+<p>Weather palvelussa Intranet-sivustoon pääsee vain kirjautumistoiminnon (login) kautta sisään  kirjautumalla. Jos intranet-sivuston URL-osoitteeseen menee ilman sisäänkirjautumista, niin  käyttäjä ohjataan Tervetuloa sivulle (index) sivu, jossa on kirjautumistoiminto.  </p>
+<p>Käytä tehtävässä annettua users.sql tietokantaa, jonka otat käyttöön GitHubista ja viet omalle  palvelinosiollesi tehtävää varten. Tietokannassa on valmiina kirjautumista varten tunnus: admin ja  salasanalla taitaja2023. Tällä tunnuksella on admin tason käyttöoikeudet. Admin tunnuksella  pääsee hallitsemaan dataa.  </p>
+<p>Kehittäjän tulee lisätä suoraan tietokantaan käyttäjätunnus (esim. phpMyAdmin)  %omaetunimi.sukunimi% ja salasana: taitaja2023. Salasana tulee kryptata argon 2 – salauksella.  </p>
+<p>Sääpalvelun käyttäjän tulee kirjautua sääpalvelun käyttäjäksi luodulla omalla tunnuksella  %omaetunimi.sukunimi%. Tämän jälkeen käyttäjä pystyy näkemään annetun datan pohjalta  säätiedot sivuston kautta. Säätiedot tulee näyttää weatherdata.json tiedostosta rautalankamallin  (wireframessa) kuvan mukaisesti. Tällä tunnuksella on vain sääpalvelun katseluoikeudet.  </p>
+<p>Poimi ja näytä sivulla weatherdata.json tiedostosta 2.1 – 8.1.2023 (ma – su) säätiedot  rautalankamallin mukaisesti. Weatherdata.json olemassa olevaa tietosisältöä ei saa muuttaa tai  poistaa.  </p>
+<p>Kirjautumissivun ulkoasussa sinun on noudatettava graafisesta ohjetta:  </p>
+<ul>
+  <li> logo </li>
+  <li> värit </li>
+  <li> fontit ja tekstikoko </li>
+  <li> yksi taustakuva valittuna annetuista kuvista </li>
+</ul>
+<h2>Tervetuloa sivu  </h2>
+<p>Etusivun (esim. index) pakolliset elementit ovat:</p>
+<ul>
+  <li>  Header  
+    <ul>
+      <li> Yrityksen nimi ja Logo  </li>
+      <li> Kirjautuminen 
+        <ul>
+          <li> Kirjaudu (esim. login.php)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li> Content  
+    <ul>
+      <li>Sisältö vaihtuu, kun käyttäjä on kirjautunut login – toiminnon kautta palveluun.  </li>
+      <li> Teksti ja sääkuva &rdquo;Tervetuloa, kirjaudu sisälle nähdäksesi säätiedot&rdquo;.  Tai  </li>
+      <li> Teksti ja säätiedot (rautalankamallin mukaisesti)</li>
+    </ul>
+  </li>
+  <li> Footer
+    <ul>
+      <li>Copyright</li>
+      <li> Etu- ja Sukunimi </li>
+      <li> Oppilaitos </li>
+    </ul>
+  </li>
+</ul>
+<h2>Ohjeet kilpailijalle  </h2>
+<p>Semifinaalissa sivuston tekemistä saat jatkaa haluamallasi työvälineellä. Tehtävässä ei saa  käyttää mitään frameworkia tai CMS – järjestelmää, vaan se on tehtävä pelkästään ohjelmoimalla  HTML5, CSS3, JavaScript, PHP sekä SQL kielillä.  </p>
+<p>Palauta ohjeiden mukaisesti tehty sivu www - palvelimelle omaan hakemiston kautta julkaistavaksi.  Tunnukset olet saanut tämän tehtäväksi annon mukana huoltajaltasi.  </p>
+<p><s>Semifinaalitehtävä tulee olla palautettuna www - palvelimelle semifinaalipäivänä klo 15:45  mennessä. Käyttäjätunnuksesi avautuu palvelimelle klo 8:30, jolloin on yhteyksien testaus.  Tehtävä annetaan klo 9:00. Palvelimen tunnus menee lukkoon semifinaalipäivänä klo 16, jonka  jälkeen ei pysty työskentelemään palvelimella. Palvelimen lisäksi palauta tehtävän lähdekoodi ja  readme tiedosto GitHubin Taitaja2023 organisaatioon. Kilpailijan GitHub tilin tulee olla liittynyt  Taitaja2023 – GitHub organisaatioon.  </s></p>
+<p>Sivusto testataan W3C –validaattorilla. Sivusto tarkistetaan Google Chrome selaimella (uusin  stabiili version).  </p>
+<p>Palvelin on julkisesti internetissä ja hakukoneiden löydettävissä, käytä sivuissa vain sellaista  materiaalia, joka ei riko tekijänoikeuksia.</p>
+<p>&nbsp;</p>
+</body>
+</html>
