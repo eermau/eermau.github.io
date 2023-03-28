@@ -1,0 +1,19 @@
+GitHubin käyttäminen ryhmässä
+
+Projektiseinä
+Käsitteitä
+sprint
+user storyt
+daily
+
+Toteuttaminen
+- Github-demo
+- Toteutus-harjoitus, oma branch 
+- markdown readme.md -tiedosto jossa ohjeet sovelluksen käynnistämiseksi
+
+Projektin suunnitteluosuus
+
+Käyttöliittymän suunnitteluosuus
+Tietokannan suunnittelu 
+ER-kaavio
+Tietokantakaavio
