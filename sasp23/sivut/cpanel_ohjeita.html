@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    <title>CPanel</title>
+    <title>cPanel</title>
 </head>
 
 <body>
@@ -35,7 +35,19 @@
                     <p><img width="450" src="../kuvat/cpanel_phpmyadmin_export.png" /></p>
                     <p>Kun tuot tietokantaasi tietoja valitse Tuonti (Import) tai kopioi SQL-tiedoston sisältämät käskyt suoraan SQL-ikkunaan.</p>
                     <p><img width="450" src="../kuvat/cpanel_phpmyadmin_import.png" /></p>
+                    
+                    <h4>Tietokantatunnukset</h4>
+                    <p>Kun teet tietokannan cPanelin alle määrittele tietokantayhteys näin:</p>
+                    <ul>
+                        <li>host: tunnuksesi.treok.io</li>
+                        <li>db: tekemäsi tietokanta (tunnus_tietokanta)</li>
+                        <li>user: tekemäsi käyttäjä (tunnus_tietokanta)</li>
+                        <li>password: generoimasi salasana</li>
+                    </ul>
+                    <p>Huom: kun siirrät sivuston cPanelin alle on host hyvä määritellä localhost-nimellä.</p>
+                    
                     <h4>Remote MySQL</h4>
+                    <p>Kun halutaan ottaa yhteys paikallisesti php:lla web-hotellissasi olevaan tietokantaan meidän pitää sallia IP-osoitteesi (whitelist).</p>
                     <p><img width="450" src="../kuvat/remote_mysql.png" /></p>
                     <p>cPanelille tulee sallia ulkoinen yhteys MySQL-tietokantaan</p>
                     <ul>
@@ -46,14 +58,6 @@
                         <li>Kirjoita kommentti-kohtaan esim. "koulu"</li>
                     </ul>
 
-                    <h4>Tietokantatunnukset</h4>
-                    <p>Cpanelin käyttäminen connection.php:ssa</p>
-                    <ul>
-                        <li>host: tunnuksesi.treok.io</li>
-                        <li>db: tekemäsi tietokanta (tunnus_tietokanta)</li>
-                        <li>user: tekemäsi käyttäjä (tunnus_tietokanta)</li>
-                        <li>password: generoimasi salasana</li>
-                    </ul>
                     <h3>Domain</h3>
                     <p>Kun siirretään web-sovellus cPanelin alle niin tehdään sille aluksi oma domain.</p>
                     <ul>
