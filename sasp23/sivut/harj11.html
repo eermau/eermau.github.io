@@ -27,7 +27,20 @@
 
                     <h2>Harjoitus 11: Lomakkeet ja tiedostot</h2>
 
-                    <h3>H11.1. Rekisteröityminen</h3>
+                    <h3>H11.1. Tiedoston kirjoittaminen</h3>
+                    <p>Tutki miten <a href="https://www.w3schools.com/php/php_file_create.asp" target="_blank">tiedoston
+                            kirjoittaminen</a> tapahtuu. Kokeile tehdä esimerkin kaltainen lomake jolla voit kirjoittaa
+                        php/temp -kansioon txt-tiedoston.
+                    <form>
+                        <label for="nimi">Tiedoston nimi</label><br />
+                        <input type="text" value="" /><br />
+                        <label for="nimi">Sisältö</label><br />
+                        <textarea rows="4" cols="50">
+</textarea><br />
+                        <input type="submit" value="Kirjoita" />
+                    </form>
+
+                    <h3>H11.2. Rekisteröityminen</h3>
                     <p>Tee lomake jolla voidaan syöttää seuraavat tiedot:
                     <ul>
                         <li>nimi</li>
@@ -47,19 +60,9 @@
                     <p>Salasanan tulee olla pituudeltaan vähintään kuusi merkkiä ja sen tulee sisältää jokin luku. Jos
                         salasana ei ole kunnollinen niin näytä käyttäjälle lomake ja varoitusviesti ("Syötä
                         monimutkaisempi salasana.").
+                        <p>Kun lomake lähetetään niin tallenna lomakkeen tiedot tiedostoon.</p>
 
-                    <h3>H11.2. Tiedoston kirjoittaminen</h3>
-                    <p>Tutki miten <a href="https://www.w3schools.com/php/php_file_create.asp" target="_blank">tiedoston
-                            kirjoittaminen</a> tapahtuu. Kokeile tehdä esimerkin kaltainen lomake jolla voit kirjoittaa
-                        php/temp -kansioon txt-tiedoston.
-                    <form>
-                        <label for="nimi">Tiedoston nimi</label><br />
-                        <input type="text" value="" /><br />
-                        <label for="nimi">Sisältö</label><br />
-                        <textarea rows="4" cols="50">
-</textarea><br />
-                        <input type="submit" value="Kirjoita" />
-                    </form>
+                    
 
 
                     <h3>11.3. Tiedostojen lataaminen</h3>
