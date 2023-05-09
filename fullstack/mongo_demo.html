@@ -33,7 +33,13 @@
 <li><a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a></li>
 
 <p>
-Käytetään <a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a>-palvelua tietokannallemme. Luo uusi tili, käytä mielellään edu.tampere.fi-tunnustasi.</p>
+Käytetään <a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a>-palvelua tietokannallemme. Luo uusi tili, käytä mielellään edu.tampere.fi-tunnustasi. Huom: mikäli koululta ei saada yhteyttä toimimaan voidaan MongoDB tehdä Dockerin avulla.
+
+<ul>
+    <li><a href="https://otredu.github.io/docker/mongodb.html" target="_blank">Mongodb ja mongo-express (localhost)
+    </a> (otredu)</li>
+</ul>
+</p>
 
 
 <p>Valitse <i>Databases</i> / <i>Build</i>, valitse <i>Shared</i>. Cloud Provider & Region-kohdassa anna olla oletusvaihtoehdot (aws, Stockholm). Valitse alhaalta <i>Create Cluster</i> / Create.</p>
@@ -139,21 +145,49 @@ Note.find({ important: true }).then(result =&gt; {
 <p>Lisää .env-tiedosto ja sinne</p>
 <pre>
 PORT = 3001
-MONGODB_URI =
-    `mongodb+srv://tunnus:salasana@cluster0.pl1fr.mongodb.net/noteApp?retryWrites=true&w=majority`
-    
-</pre>
+DB_HOST = mongodb://localhost:27017/
+DB_USER = root
+DB_PASS = mypass123
+DB_DATABASE = demo</pre>
+
 <p>Asenna dotenv ja express</p>
 <pre>
 npm install dotenv
 npm install express --save
 </pre>
+
+<p>Tee config.js -tiedosto</p>
+<pre>
+require('dotenv').config()
+
+let PORT = process.env.PORT
+
+let DATABASE_OPTIONS = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE,
+}
+
+let URL = process.env.DB_HOST + process.env.DB_DATABASE
+
+module.exports = {
+    DATABASE_OPTIONS,
+    PORT, 
+    URL
+}  
+</pre>
+
+
 <p>index.js-tiedostossa ota mukaan .env ja express</p>
 
 <pre>
 require('dotenv').config();
-const PORT = process.env.PORT;
-//const Note = require('./models/note')
+
+const dbConfig = require('./config');
+const PORT = dbConfig.PORT;
+
+const Note = require('./models/note')
 
 const express = require('express')
 const app = express()
@@ -163,24 +197,28 @@ app.use(express.json());</pre>
 <pre>
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
-    })    
+})    
 </pre>
 <h4>note.js</h4>
 
 <p>Erotetaan <i>models</i> / <i>note.js</i> -tiedostoon mongoDB:n käsittely.</p>
 
 <pre>
-const url = process.env.MONGODB_URI
+const dbConfig = require('../config');
+const mongoose = require('mongoose');
 
-console.log('connecting to', url)
-
-mongoose.connect(url)
-    .then(result =&gt; {
-    console.log('connected to MongoDB')
-    })
-    .catch((error) =&gt; {
-    console.log('error connecting to MongoDB:', error.message)
-    })
+mongoose.connect(dbConfig.URL, {
+    useNewUrlParser: true,
+    user: dbConfig.DATABASE_OPTIONS.user,
+    pass: dbConfig.DATABASE_OPTIONS.password,
+    authSource: "admin"
+}).then(() => {
+    console.log('successfully connected to the database');
+}).catch(err => {
+    console.log(dbConfig.URL)
+    console.log('error connecting to the database', err.message);
+    process.exit();
+});
 
 const noteSchema = new mongoose.Schema({
     content: String,
