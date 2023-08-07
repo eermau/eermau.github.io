@@ -1,0 +1,135 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+  <h1>Matopeli</h1>
+
+  <h4>Yleistä</h4>
+  
+  <p>Aloita uusi tyhjä projekti, voit käyttää C-asemaa tai muistitikkua tallennusvälineenäsi.
+  
+<h4>Matopeli</h4>
+  <ol>
+	<li>Valitse <b>Assets / Scenes</b> ja  vaihda Scenen nimi (SampleScene -> GameScene)</li>
+	<li>Valitse kamera ja tarkistetaan ominaisuuksista kameran sijainti (Projection), tulisi olla Orthographic)
+	<li>Kameran koko (Size) tarkoittaa kuinka paljon nähdään tällä hetkellä (oletus 5 eli -5 - +5), voit kokeilla vaihdella tätä ja tarkistaa miten kameran alue muuttuu. Aseta kooksi 50.</li>
+  
+	<li>Hiiren oikea GameScenen Hierarchy-ikkunassa, valitse Create Empty ja muuta GameObject-objektin nimeksi GameHandler. Tämän olion on tarkoitus hoitaa pelin toimintalogiikka. Aseta sijainniksi (Position) Inspector-valikossa 0,0,0.</li>
+	<li>Raahaa kamera GameHandlerin sisälle
+  <p><img src="../kuvat/unity_snake_1.png"  /></p>
+	</li>
+	<li>Luo uusi Assets-kansion alle uusi kansio Scripts ja sinne C# Script-tiedosto GameHandler
+	<p><img src="../kuvat/unity_snake_2.png"  /></p>
+	</li>
+	<li>Tuplaklikkaa skriptiä ja se avautuu Visual Studioon. Aluksi sinun kannattaa hylätä kirjautuminen ja valita Development Settings -kohdassa Visual C#.
+	<p><img src="../kuvat/visual_studio_1.png"  /></p>
+<pre>
+void Start()
+{
+Debug.Log("GameHandler.Start");
+}</pre>
+	</li>
+	<li>Seuraavaksi lisätään skripti objektille. Klikkaa Hierarchy-ikkunasta GameHandler aktiiviseksi ja voit raahata GameHandler-skriptin uudeksi komponentiksi. Toinen tapa on valita Add Component.
+	</li>
+	<li>Suorita ohjelma (Play) niin konsolissa tulisi näkyä viesti GameHandler.Start</li>
+	
+	<li>Taustakuvan lisääminen: tee aluksi uusi kansio Textures Assets-kansion alle.
+	Raahaa kansioon valmiit materiaalit tai tee itse paremmat (<a href="../kuvat/FoodApple.png">FoodApple.png</a>, <a href="../kuvat/SnakeBody.png">SnakeBody.png</a>, <a href="../kuvat/SnakeHead.png">SnakeHead.png</a>, <a href="../kuvat/White_1_1.png">White_1_1.png</a>).
+	</li>
+	<li>Valitse white_1_1.png-kuva ja aseta sen Pixels Per Unit arvoksi 1. Aseta muille kuville kooksi 180 pikseliä.
+	<p>Lisää uusi GameObject, aseta nimeksi Background (Hierarchy-ikkuna, hiiren oikea, Create Empty). Lisää tälle objektille uusi komponentti Sprite Renderer, raahaa white_1_1-kuva tämän komponentin Spriteksi.</p>
+	<p><img src="../kuvat/unity_snake_3.png"  /></p>
+	<p>Aseta vielä väriksi harmaa ja Scale-kohdassa kooksi 50 x 50. Aseta X-koordinaatiksi 25, Y-koordinaatiksi 25 ja Z arvolle 0.
+	</li>
+	<li>Lisää uusi Game Object, muuta nimeksi Snake. Lisää Sprite Renderer ja raahaa SnakeBody-kuva Spriteksi.</li>
+	<li>Lisätään vielä Sorting layer käärmeelle. Valitse Add Sorting Layer ja lisää uusi layer. Nimeä se nimellä Background. Siirrä ylimmäksi. Lisää myös Over-layer jota voidaan käyttää korostukseen tarvittaessa.
+	<p><img src="../kuvat/unity_snake_4.png"  /></p>
+	</li>
+	<li>
+	Lisätään aloitusviesti:
+<pre>
+void Start()
+{
+	Debug.Log("GameHandler.Start");
+	// Lisää tämä rivi:
+	EditorUtility.DisplayDialog("Message", "Peli alkaa!", "OK", "");
+}
+</pre>
+	</li>
+	<li>
+	Lisätään uusi luokka joka kokoaa eri Assets-tiedot yhteen. Lisää aluksi Scripts-kansioon uusi skripti (GameAssets).
+<pre>
+public class GameAssets : MonoBehaviour
+{
+	// jotta luokkaa voidaan käsitellä ulkoa päin:
+	public static GameAssets instance;
+	private void Awake() {
+		instance = this;
+	}
+	
+    // sisältö tässä vaiheessa:
+    public Sprite snakeHeadSprite;
+    public Sprite snakeBodySprite;
+}
+</pre>
+	</li>
+	<li>Tarvitaan lisäksi uusi Game Object nimeltä GameAssets ja raahataan tälle skriptiksi äsken tehty skripti.
+	<p><img src="../kuvat/unity_snake_5.png"  /></p>
+	</li>
+  <li><p>Nyt voidaan luodaan koodissa uusia GameObject-olioita:
+<pre>
+void Start()
+{
+Debug.Log("GameHandler.Start");
+EditorUtility.DisplayDialog("Message", "Peli alkaa!", "OK", "");
+// Lisätään nyt tämä:
+GameObject snakeHeadGameObject = new GameObject();
+SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
+snakeSpriteRenderer.sprite = GameAssets.instance.snakeHeadSprite;
+}
+</pre>
+<p>Kokeile käynnistää nyt peli ja tarkista ilmestyykö koodissa toinen käärme näkyviin.
+
+  </li>
+<li>
+Jotta tämä GameAssets käynnistyisi ensimmäisenä lisätään se projektin asetuksiin: File / Project Settings / Script Execution Order, raahaa GameAssets tänne ja siirrä ennen DefaultTime-osiota.
+<p><img src="../kuvat/unity_snake_6.png"  /></p>
+</li>  
+  
+  </ol>
+  
+  <h4>Lähteitä ja linkkejä</h4>
+    <ul><li>Lähteenä käytety <a href="https://www.youtube.com/playlist?list=PLzDRvYVwl53ucaUs0YGfyyKXdgqh5OtiK">Simple 2D Game in Unity</a> -videosarjaa.</li>
+	</ul>
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

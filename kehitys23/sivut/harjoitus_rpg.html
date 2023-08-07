@@ -1,0 +1,197 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+	<h1>Harjoitus: RPG</h1>
+
+<h4>Yleistä</h4>
+<ul>
+<li>Tarkoitus on laatia yksinkertainen 2d roolipeli. Pelin maailma voi olla ulkoilmassa tai esimerkiksi linnan tai luolan sisällä. Pelisi voi aivan hyvin sijoittua myös avaruuteen tai vaikka meren pohjalle. </li>
+	<ul>
+	<li>Hahmon suunnittelu</li>
+	<li>Pelimaailman "tiilien" laatiminen</li>
+	<li>Vihollisen suunnittelu</li>
+	<li>Hahmon liikuttaminen</li>
+	<li>Törmääminen (BoxController, TileCollider, RigidBody)</li>
+	<li>Hahmon ominaisuudet: voima, nopeus, ketteryys</li>
+	<li>Taisteleminen ja lukujen arpominen</li>
+	</ul>
+</ul>
+
+<h5>Kansiot</h5>
+
+<ul>
+<li>Laadi järkevä kansiorakenne Assets-kansion alle</li>
+<li>Mieti mitä kaikkea peliin tarvitaan?</li>
+</ul>
+
+<hr />
+<h4>Pelihahmo</h4>
+<ul>
+<li>Piirrä pelihahmo ja tuo se projektiisi. Pelihahmolla kannattaa olla läpinäkyvä tausta.</li>
+<li>Tee pelihahmosta Prefab.</li>
+</ul>
+
+<p>PhotoShop, tee uusi kuva jonka koko esimerkiksi 200px x 200 px, valitse taustan väriksi läpinäkyvä <img src="../kuvat/rpg_1_photoshop_new_image.png" /></p>
+
+<h4>Pelimaailma</h4>
+<ul><li>Laadi pelin maailmalle ulkoasu. Mieti mitä osasia maailmasi vaatisi. Voit tehdä esimerkiksi
+<ul>
+<li>Nurmi</li>
+<li>Puu (este)</li>
+<li>Vuori (este)
+<li>Joki / meri (este)</li>
+</ul>
+
+<li>Tutki miten Ruby's 2D RPG:ssä Tilemap-tapahtuikaan (<a href="https://learn.unity.com/tutorial/world-design-tilemaps?projectId=5c6166dbedbc2a0021b1bc7c">World Design: Tilemaps</a>).</li>
+
+
+
+<li>Tutki miten maastolle määriteltiin törmäys (<a href="https://learn.unity.com/tutorial/world-interactions-blocking-movement?projectId=5c6166dbedbc2a0021b1bc7c#5ce3cdabedbc2a3ce61754e7">World Interactions: Blocking Movement</a>).</li>
+
+
+</ul>
+
+<hr />
+<h4>Animaatio hahmolle (*)</h4>
+<ul>
+<li>Laadi hahmolle animaatio. Tässä kannattaa pyrkiä noudattamaan Ruby's 2D -tutoriaalin mallia (kohta <a href="https://learn.unity.com/tutorial/sprite-animation?projectId=5c6166dbedbc2a0021b1bc7c">Sprite Animation</a>). </li>
+<li>Piirrä aluksi hahmolle muutamia kuvia jotka kuvaavat kävelemistä eri suuntaan.</li>
+</ul>
+<h5>Animation</h5>
+
+<h5>Controller</h5>
+
+<h4>Cinemachine</h4>
+<ul>
+<li>Asenna Cinemachine ja palauta mieleen kuinka kamera liikkuu hahmon mukana.(<a href="https://learn.unity.com/tutorial/camera-cinemachine?projectId=5c6166dbedbc2a0021b1bc7c">Camera - Cinemachine</a>)</li>
+</ul>
+
+
+<h4>Vihollinen</h4>
+<ul>
+<li>Piirrä vihollinen ja tuo se projektiisi. Myös vihollisella kannattaa olla läpinäkyvä tausta.</li>
+<li>Tee vihollisesta Prefab.</li>
+<li>Lisää viholliselle myös BoxCollider 2D ja RigidBody 2D.</li>
+</ul>
+<h4>Ominaisuudet</h4>
+
+<ul>
+<li>Tarkoitus on lisätä hahmolle ja vastustajalle ominaisuuksia.</li>
+<li>Voima vaikuttaa lyönnin kovuuteen, ketteryys siihen osuuko isku ja elinvoima kestävyyteen.</li>
+<li>Esittele kolme muuttujaa ja arvo niihin Start()-metodissa järkevät arvot.
+<pre>
+voima = Random.Range(0, 10) + 10;
+Debug.Log("Voima = " + voima);
+</pre>
+</li>
+
+<h5>Tietojen näyttäminen pelaajalle</h5>
+<p>Hahmon tiedot olisi hyvä näyttää pelaajalle jollain tapaa. Yksinkertaisinta olisi käyttää Text-objektia.
+<ul>
+	<li>Lisää uusi Text-objekti Hieararchy-ikkunaan (ilmestyy Canvas ja Text)</li>
+	<li>Canvas Render Mode: World Space<p><img src="../kuvat/hello_4_canvas.png" /></li>
+	<li>Canvas Scale vaatii säätämistä jotta koko sopiva<p><img src="../kuvat/hello_5_canvas.png" /></li>
+	<li>Lisää skriptissä pelihahmolle julkinen Text-muuttuja<pre>public Text txtInfo;</pre>Lisää alkuun <pre>using UnityEngine.UI;</pre></li>
+	<li>Raahaa Text-objekti Hierarchy-ikkunasta pelihahmon julkiseen muuttujaan.</li>
+	<li>Koodissa voit asettaa muuttujat nyt näkyviin kun arvot muuttuvat.
+	<pre>txtInfo.text = "str:" + strength;</pre>
+	</li>
+</ul>
+
+</ul>
+
+<h4>Taisteleminen</h4>
+
+<ul>
+<li>Tarkoitus on saada pelissä arvottua hahmon ja vastustajan törmätessä lyönti</li>
+<li>Törmätessä hahmo lyö vastustajaa ja vastustaja hahmoa, arvotaan tulos johon vaikuttaa molempien ominaisuudet. Vähennetään elinvoimaa tarvittaessa.</li>
+
+<ul>
+	<li>Arvotaan luku, tarkistetaan onko luku suurempi kuin vastustajan ketteryys: jos on niin osuu, jos ei niin ei osu</li>
+	<li>Jos isku osuu niin vahinko arvosaan luku esimerkiksi nolla - voimakkuus. Tämän jälkeen vähennetään elinvoimaa.</li>
+</ul>
+
+
+<p>Miten käytännössä menisi? Tarvitaan julkisia (public) funktioita joiden avulla tarkistetaan ja asetetaan arvoja.
+<pre>
+// kertoo onko olento elossa
+public bool isAlive() {
+   if (hp > 0) return true;
+   else return false;
+}
+</pre>
+<p>Voit tehdä aliohjelman arvojen muuttamista varten:
+<pre>
+public void changeHP (int value) {
+   hp = hp + value;
+   Debug.Log("new hp" + hp);
+}
+</pre>
+
+<p>Tiedon välittäminen tapahtuu gettereillä ja settereillä:
+<pre>
+public int getStrength() {
+   return strength;
+}
+</pre>
+
+<p>Hahmolla voisi olla taistelu esimerkiksi seuraavaan tapaan OnTriggerEnger2D-metodissa:
+<pre>
+void OnTriggerEnter2D(Collider2D other)
+{
+	VihuController vihu = other.GetComponent&lt;VihuController&gt;();
+
+	if (vihu != null)
+	{
+		// onko vihu elossa?
+		if (vihu.isAlive())
+		{
+			// arvotaan hyökkäys (0-5 + hahmon voima)
+			int attack = Random.Range(0, 5) + strength;
+			// osuuko hyökkäys? jos yli vihun dex niin osuu
+			if (vihu.getDexterity() &lt; attack)
+			{
+				// osui nyt, vähennetään vihun elinvoimaa
+			}
+		}
+	}
+}
+</pre>
+
+</ul>
+
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

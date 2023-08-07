@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+<h1>Tietovisa</h1>
+<h5>Tehtävän kuvaus</h5>
+<p>Tarkoituksena on laatia tietovisa joka lukee kysymykset csv-tiedostosta. Tiedostossa on kysymyksiä jotka ladataan pelille. Käyttäjälle esitetään kysymyksiä yksitellen kunnes vastaamiseen käytettävissä oleva aika tulee täyteen. Lopuksi kerrotaan montako vastausta oli oikein ja vastausprosentti (oikeat / kysymykset).
+
+<h5>Pelin päättäminen</h5>
+
+<p>Kun peli päättyy pyydetään pelaajalta nimimerkki ja tallennetaan pisteet tiedostoon. 
+Lopputuloksissa näytetään kymmenen parasta tulosta (nimimerkki, tulos ja päiväys).
+
+
+<h5>Mitä on tarkoitus tehdä?</h5>
+<ol>
+<li>Laadi käyttöliittymä pelillesi: mieti mitä Text ja Button -ohjaimia tarvitset pelillesi.</li>
+<li>Laadi csv-tiedosto pelin kysymyksille. Tässä vaiheessa riittää että sinulla on muutamia (3-5) kysymystä mietittynä valmiiksi. Tässä vaiheessa on oleellista miettiä mistä tiedetään mikä vastaus on oikea.
+<ul>
+	<li>Olisivatko kysymykset aina kyllä / ei -tyyppisiä?</li>
+	<li>Olisiko kysymykseen esimerkiksi kolme vaihtoehtoa joista pitää vastata oikeaan?</li>
+</ul>
+
+
+</li>
+<li>Laadi luokka joka edustaa yhtä kysymystäsi. Esimerkiksi <code>class Question</code>.</li>
+<li>Kysymysten lataaminen tiedostosta (esim. <code>LoadQuestions()</code>): tee aliohjelma joka hakee kysymykset listalle. Esimerkiksi <code>List &lt;Kysymys&gt; listKysymykset;</code>. Tätä aliohjelmaa tulisi kutsua Start()-metodissa.
+<ul>
+	<li>Lisää tällä kertaa <code>List &lt;Question&gt;listQuestions;</code> luokan attribuutiksi jotta se näkyy kaikille aliohjelmille.</li>
+</ul>
+</li>
+<li>Yhden kysymyksen näyttäminen (esim. <code>SetQuestion()</code>): laadi aliohjelma joka näyttää yhden satunnaisen kysymyksen listastasi. Tätä pitäisi kutsua Start()-metodissa (ja uudestaan kun käyttäjä vastannut oikein/väärin).</li>
+<li>Vastaaminen: kun nappia painetaan niin vastasiko pelaaja oikein vai väärin? Pisteiden kasvattaminen ja uuden kysymyksen näyttäminen (<code>SetQuestion()</code>)</li>
+</ol>
+
+
+
+<hr />
+<h4>Ohjeita</h4>
+<h5>UI-ohjaimet</h5>
+
+<ul>
+	<li>Lisää ohjaimet yhdelle tai useammalla Canvas-objektille. Käytä Scale-attribuuttia skaalatessasi koko Canvas-objektin sopivan kokoiseksi.</li>
+<li>Hover-väri: kokeile painikkeen Highlighted-väriä</li>
+	<li>Kokeile tehdä pelin ulkoasusta fonttien ja värien avulla tyylikäs. Kannattaa miettiä voitko esimerkiksi hyödyntää <a href="https://fi.wikipedia.org/wiki/Vastav%C3%A4ri">vastavärejä</a> tms. työssäsi.</li>
+</ul>
+
+<h5>Napin klikkaaminen</h5>
+
+<p>Jos haluat tietää klikatun napin tekstin niin yksi tapa on lisätä napin Text-teksti mukaan parametrina.
+
+<pre>
+public void ClickHandler(Text t) {
+  Debug.Log("Klikkasit: " + t.text);
+}
+</pre>
+
+<p>Tämä teksti asetetaan raahaamalla Button:n sisällä oleva Text-objekti parametriksi editorissa:
+<p><img src="../kuvat/tietovisa_1.png" />
+
+<h5>Timer</h5>
+
+<p>Tässä skripti esimerkki ajanotosta. Tämä skripti päivittää Text-objektille nykyisen ajan näkyviin. 
+<pre>
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System; 
+
+public class TimerScript : MonoBehaviour
+{
+public Text txtTime;
+public float currentTime = 0f;
+public float startingTime = 10f;
+
+void Start()
+{
+    currentTime = startingTime;
+}
+
+void Update()
+{
+currentTime -= 1 * Time.deltaTime;
+txtTime.text = "Time: " + Math.Round(currentTime);
+}
+}
+</pre>
+
+<p>Käytetty lähde: <a href="https://www.youtube.com/watch?v=o0j7PdU88a4">Countdown Timer In Unity - Easy Beginners Tutorial/ Guide</a></p>
+
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>
