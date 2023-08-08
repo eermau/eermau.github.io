@@ -58,14 +58,12 @@ Hierarchy-ikkuna / hiiren oikea / Create Empty</li>
 <li>Lisätään Assets / Scripts -kansioon uusi C# Script, nimeä se CharacterHandler.</li>
 
 <li>Lisää Update()-metodille koodiksi:
-<pre>
-if (Input.GetKeyDown(KeyCode.LeftArrow))
+<pre>if (Input.GetKeyDown(KeyCode.LeftArrow))
 {
     Vector3 position = this.transform.position;
     position.x--;
     this.transform.position = position;
-}
-</pre>
+}</pre>
 </li>
 <li>Tarkoitus on liittää tämä skripti Character-oliolle (object). Silloin this-määre viittaa kyseiseen olioon: katsotaan mikä on olion nykyinen sijainti, vähennetään sijainnin x-koordinaattia yhdellä ja laitetaan uusi sijainti oliolle.
 </li>
@@ -75,13 +73,18 @@ if (Input.GetKeyDown(KeyCode.LeftArrow))
 </li>
 
 <li>Aja sovellus Play-napilla ja testaa toimiiko liikkuminen. Jos hahmo kävelee vasemmalle niin voit pysäyttää sovelluksen ja lisätä liikkumisen myös oikealle, ylös- ja alaspäin. </li>
+</ul>
 
-
+<p>Jos haluat kääntää koodissa hahmon voit kokeilla SpriteRenderer-komponentin muokkaamista näin:
+    <pre>this.GetComponent&lt;SpriteRenderer&gt;().flipX = true;</pre>    
+    </p>
+    
+<h5>Pommi</h5>
+<ul>
 <li>Lisätään toinen objekti, pommi. Paina hiiren oikea / Create Empty, nimeä Bomb. Lisää Images-kansioon kuva pommista. Lisää Bomb-objektille uusi Sprite Renderer ja raahaa kuva Spriteksi. (Jos kuva näyttää liian isolta tai pieneltä voit säätää sitä kuvan ominaisuuksista Pixels Per Unit tai muokkaamalla kuvaa halutun kokoiseksi.)</li>
 </ul>
 
 <h4>Törmäys</h4>
-
 <ul>
 <li>Tällä hetkellä ei ole käytössä mitään fyysisiä sääntöjä jotka määrittelisivät objektien toimintaa. Jotta pelaaja ja pommi ymmärtäisivät kosketuksen täytyy lisätä uusia komponentteja Insepector-ikkunassa:
 </li>
@@ -116,7 +119,7 @@ void OnCollisionExit2D(Collision2D colInfo)
 <h4>Teksti</h4>
 
 <ul>
-<li>Lisätään teksti: Component / UI / Text, kirjoita tekstiksi tässä vaiheessa "Osumia: 0". Voit kokeilla säätää tekstikentän väriä ja fonttia. Muuta Text-objektin nimeksi ScoreText.
+<li>Lisätään teksti: Component / UI / Text TextMeshPro, kirjoita tekstiksi tässä vaiheessa "Osumia: 0". Voit kokeilla säätää tekstikentän väriä ja fonttia. Muuta Text-objektin nimeksi txtScoreText. Voit tuplaklikata Canvas-objektia nähdäksesi UI-elementtien alueen ja palata takaisin kameran näkymään tuplaklikkaamalla MainCamera-objektia.
 </li>
 
 <li>Seuraavaksi lisätään hahmolle (Character) koodissa tekstikenttä ja tämän tekstikentän arvoksi asetetaan kehitysympäristössä äsken tehty ScoreText.
@@ -124,13 +127,13 @@ void OnCollisionExit2D(Collision2D colInfo)
 <pre>
 public class CharacterHandler : MonoBehaviour
 {
-    public Text txtViesti;
+    public TextMeshProUGUI txtViesti;
     private int osumat;
 </pre>
 <p>Text-objektista tulee virheilmoitus kun kirjastoa ei ole vielä määritelty. Lisää siis alkuun myös:
-<pre>using UnityEngine.UI;</pre>
+<pre>using TMPro;</pre>
 </li>
-<li>Raahaa ScoreText-teksti julkisen txtViesti-muuttujan arvoksi.
+<li>Raahaa txtScoreText-teksti julkisen txtViesti-muuttujan arvoksi.
 <p><img src="../kuvat/hello_3.png" /></p></li>
 
 <li>Lopuksi lisätään toimintaa törmäykselle:
@@ -141,8 +144,6 @@ public class CharacterHandler : MonoBehaviour
 }
 </pre>
 </li>
-<li>Canvas Render Mode: World Space<p><img src="../kuvat/hello_4_canvas.png" /></li>
-<li>Canvas Scale vaatii säätämistä jotta koko sopiva<p><img src="../kuvat/hello_5_canvas.png" /></li>
 
 </ul>
 
