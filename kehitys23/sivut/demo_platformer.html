@@ -223,22 +223,8 @@ rb = GetComponent&lt;Rigidbody2D&gt;();
 <p><img src="../kuvat/game_over_1.png" width="400" />
 </li>
 
-<li>Hierarchy-ikkuna, hiiren oikea, UI / Text. Ilmestyy valtava Canvas ja Text-objekti
-
-<h5>a.) Screen Space - Camera</h5>
-<ul>
-<li>Valitse Canvas ja Render Mode: Screen space Camera</li>
-<li>Raahaa Hierarchy-ikkunasta <b>Main Camera</b> kohtaan <b>Render Camera</b></li>
-</ul> 
-<h5>tai b.) World Space</h5>
-<ul>
-<li>Valitse Canvas ja Render Mode: World Space</li>
-<li>Pienennä nyt kanvas muuttamalla Scale-attribuutteja (exim. 0.03 x 0.03 x 0.03)</li>
-<li>Aseta Pos X ja Pos Y arvoiksi 0 ja 0
-<p><img src="../kuvat/game_over_4.png" />
-</li>
-</ul>
-
+<li>Hierarchy-ikkuna, hiiren oikea, UI / Text - TextMeshPro. Ilmestyy valtava Canvas ja Text-objekti</li>
+<li>Tuplaklikkaa Canvas-objektia ja säädä teksti sopivaan muotoon.</li>
 <li>Lisää Canvas-objektille uusi Button, anna teksti esimerkiksi "Aloita uudestaan".</li>
 </ul>
 
@@ -366,18 +352,18 @@ private void OnTriggerEnter2D(Collider2D col)
 <h4>5. Pisteet näkyviin</h4>
 <p><img src="../kuvat/tasohyppely_ulkoasu.png" width="400" />
 <ul>
-<li>Lisää hierarchy-ikkunaan uusi Text-elementti (hiiren oikea / UI / Text).</li>
+<li>Lisää hierarchy-ikkunaan uusi Text-elementti (hiiren oikea / UI / Text - TextMeshPro).</li>
 <li>Syntyy valtava Canvas joten pienennä se aluksi (Render Mode: World Space, Pos X 0, Pos Y 0, Scale 0.03 x 0.03 x 0.03)</li>
 
 <li>Siirrä Text-elementti sopivaan kohtaan ja kirjoita tekstiksi tässä vaiheessa esimerkiksi "Pisteet:0"</li>
 <li>
 PlayerController.cs: Lisää uusi julkinen muuttuja
 <pre>
-public Text txtScore;
+public TextMeshProUGUI txtScore;
 </pre>
 Tarvittaessa lisää kirjasto
 <pre>
-using UnityEngine.UI;
+using TMPro;
 </pre>
 </li>
 <li>Raahataan Text-elementti editorissa julkisen muuttujan kohdalle. Nyt muuttuja viittaa tähän käyttöliittymän Text-objektiin.
@@ -417,7 +403,7 @@ txtScore.text = "Pisteet:" + score;
 <ul>
 	<li>Lisää Text-objekti ja kirjoita sen tekstiksi esimerkiksi "Pisteet: 0"</li>
 	<li>Lisää GameOverScript-skriptille julkinen muuttuja
-	<pre>public Text txtScore;</pre>
+	<pre>public TextMeshProUGUI txtScore;</pre>
 	</li>
 	<li>Raahaa editorissa Text-objekti GameOverScript-skriptin txtScore-muuttujalle arvoksi, silloin koodissa tehty muutos vaikuttaisi juuri tähän käyttöliittymän objektiin.</li>
 	<li>Lisää GameOverScriptille Start()-metodi jota kutsutaan kun tämä käynnistyy:
