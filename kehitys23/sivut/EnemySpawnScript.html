@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<pre>
+/**
+* Esimerkki, muokattu tästä yksinkertaisemmaksi:
+* https://answers.unity.com/questions/1075630/spawn-random-enemies-2d.html
+*/
+
+public class EnemySpawnScript : MonoBehaviour
+{
+    public GameObject enemy;
+    public float spawnTime = 3f;
+    private Vector3 spawnPosition;
+
+    /**
+    * Start aloittaa vastustajien luonnin
+    */
+    void Start()
+    {
+        InvokeRepeating("Spawn", spawnTime, spawnTime);
+    }
+
+    /**
+    * Spawn luo vastustajan satunnaiseen x-koordinaattiin
+    */
+    void Spawn()
+    {
+        spawnPosition.x = Random.Range(-5, 5);
+        spawnPosition.y = 0.5f;
+        spawnPosition.z = 0;
+        Instantiate(enemy, spawnPosition, Quaternion.identity);
+    }
+}
+</pre>    
+</body>
+</html>
