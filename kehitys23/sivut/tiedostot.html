@@ -185,10 +185,10 @@ catch (System.Exception e)
 <p>Järjestetään vielä lista nimen mukaiseen järjestykseen:</li>
 <li>
   <pre>// järjestetään lista 
-listHenkilot.Sort((x, y) => x.nimi.CompareTo(y.nimi)); 
+listHenkilot.Sort((x, y) =&gt; x.nimi.CompareTo(y.nimi)); 
 // Lopuksi käydään henkilöt läpi ja asetetaan näkyviin: 
 // käydään läpi henkilöt ja sijoitetaan näkyviin 
-for (int i = 0; i < listHenkilot.Count; i++) { 	
+for (int i = 0; i &lt; listHenkilot.Count; i++) { 	
  Henkilo x = listHenkilot[i];
 	Debug.Log(i + "\t" + x.nimi);
  txtReadAika.text += x.aika + "\n";	
