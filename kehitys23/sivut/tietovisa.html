@@ -67,18 +67,18 @@ Lopputuloksissa näytetään kymmenen parasta tulosta (nimimerkki, tulos ja päi
 	<li>Kokeile tehdä pelin ulkoasusta fonttien ja värien avulla tyylikäs. Kannattaa miettiä voitko esimerkiksi hyödyntää <a href="https://fi.wikipedia.org/wiki/Vastav%C3%A4ri">vastavärejä</a> tms. työssäsi.</li>
 </ul>
 
-<h5>Napin klikkaaminen</h5>
+<h5>Painikkeen toiminto</h5>
 
-<p>Jos haluat tietää klikatun napin tekstin niin yksi tapa on lisätä napin Text-teksti mukaan parametrina.
-
+<p>Kun haluamme tietää mitä painiketta on painettu niin lisätään aliohjelmalle mukaan parametrina arvo (true/false tai vaihtoehdon numero).
 <pre>
-public void ClickHandler(Text t) {
-  Debug.Log("Klikkasit: " + t.text);
+public void answerQuestion(bool btn) {
+  Debug.Log("Painettu: " + btn);
 }
 </pre>
 
-<p>Tämä teksti asetetaan raahaamalla Button:n sisällä oleva Text-objekti parametriksi editorissa:
-<p><img src="../kuvat/tietovisa_1.png" />
+<p>Aseta Kyllä-painikkeelle arvoksi editorissa true ja Ei-painikkeelle false.
+    
+    <p><img src="../kuvat/tietovisa_1.png" />
 
 <h5>Timer</h5>
 
