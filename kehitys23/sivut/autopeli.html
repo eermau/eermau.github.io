@@ -310,17 +310,17 @@ Time.timeScale = 0;
 	<li>Pelissä olisi enemmän järkeä jos se edistyisi ja muuttuisi vaikeammaksi. Helpointa olisi, jos pelaaja saisi pisteitä jokaisesta vastustajasta joka on tuhottu (ohitettu). Samalla pelin tulisi muuttua vaikeammaksi.</li>
 	<ul>Vaikeuden lisääminen
 	<li>Vastustajien nopeuden kasvattaminen</li>
-	<li>Vastustajien luontinopeuden kasvattaminen</li>
+	<li>Vastustajien luontinopeuden kasvattaminen.</li>
 	<li>Taustan liikkumisen nopeus</li>
 </ul>
 </ul>
 
-<p>Track-skriptin kutsuminen muualta: - esimerkiksi kun pisteet kasvavat niin halutaan vauhdin kasvavan
+<p>TrackController-skriptin kutsuminen muualta: - esimerkiksi kun pisteet kasvavat niin halutaan vauhdin kasvavan
 <pre>
-TrackContoller track = GameObject.Find("Track").GetComponent&lt;TrackContoller&gt;();
+TrackController track = GameObject.Find("Track").GetComponent&lt;TrackController&gt;();
 track.AddSpeed();
 </pre>
-<p>TrackConteller.cs tarvitsee julkisen aliohjelman joka kasvattaisi nopeutta
+<p>TrackController.cs tarvitsee julkisen aliohjelman joka kasvattaisi nopeutta
 <pre>
 public void AddSpeed() {
   speed++;
