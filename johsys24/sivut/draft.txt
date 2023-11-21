@@ -1,0 +1,35 @@
+Johdatus systeemityöhön
+--------------------------------------------------------
+Tietokannat 30t
+- phpMyAdmin, cPanel
+- SQL (select, delete, insert, update, inner join, left join, count)
+- SQL Mooc
+- kaaviot (ER, tietokanta)
+- suunnitteluharjoitus
+
+
+
+Suunnittelu 5t
+- figma, XD
+- värit
+- saavutettavuus (https://wave.webaim.org/)
+- responsiivisuus
+- XD-harjoitus
+
+Suunnitteluharjoitus 10t
+- esitutkimus
+- kaaviot
+
+Systeemitestaus 5t
+- testitapaukset ja testaaminen
+- testitapauspohjan laatiminen
+
+Projektissa työskentely ja GitHub 15t
+- scrum, agile, sprint
+- user story
+- kanban
+- GitHub-branches
+- GitHub-projektiseinä
+- demoprojekti
+
+Viimeistely 10t
