@@ -1,14 +1,79 @@
+<html lang="fi">
 
-select
-- kentät
-- distinct
-- order by desc|asc
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
 
-where 
-- yhtäsuuri kuin =
-- eri suuri kuin <>
-- pienempi kuin
-- suurempi kuin
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Johdatus systeemityöhön 5 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+<h1>SQL-kielestä</h1>
+
+<h2>SELECT</h2>
+<h3>Tietojen hakeminen</h3>
+<p>SELECT-komennolla haetaan taulun tai taulujen tietoja.</p>
+
+<pre>SELECT kentät FROM taulu</pre>
+<p>Esimerkiksi:
+<pre>SELECT etunimi, sukunimi, kotikunta FROM opiskelijat</pre>    
+</p>
+
+<table>
+<tr><th>etunimi</th><th>sukunimi</th><th>kotikunta</th></tr>
+<tr><td>aku</td><td>ankka</td><td>ankkalinna</td></tr>    
+<tr><td>roope</td><td>ankka</td><td>ankkalinna</td></tr>    
+<tr><td>mikki</td><td>hiiri</td><td>ankkalinna</td></tr>    
+<tr><td>milla</td><td>magia</td><td>noitavuori</td></tr>    
+</table>
+
+<p>Jos halutaan hakea tietty kenttä kerran tuloksista käytetään DISTINCT määrettä.
+<pre>SELECT DISTINCT kotikunta FROM opiskelijat</pre>    
+</p>
+
+<table>
+<tr><th>kotikunta</th></tr>
+<tr><td>ankkalinna</td></tr>
+<tr><td>noitavuori</td></tr>    
+</table>
+
+<p>Tulosjoukkoa voi järjestää yhden tai useamman kentän avulla ORDER BY (desc|asc) määreen avulla.
+<pre>SELECT * FROM opiskelijat ORDER BY sukunimi, etunimi</pre>    
+</p>
+
+<h3>Tietojen rajaaminen</h3>
+
+<p>Yleensä ei haluta kaikkia tietoja vaan rajataan tuloksia hakuehtojen perusteella. 
+<pre>SELECT * FROM opiskelijat WHERE etunimi="aku"</pre>    
+</p>
+
+<table>
+    <tr><th>vertailu</th><th>syntaksi</th></tr>
+    <tr><td>yhtä suuri kuin</td><td>=</td></tr>
+    <tr><td>eri suuri kuin</td><td>&lt;&gt;</td></tr>
+    <tr><td>pienempi kuin</td><td>&lt;</td></tr>
+    <tr><td>suurempi kuin</td><td>&gt;</td></tr>
+    <tr><td>LIKE (teksti)</td><td>LIKE '%linna%'</td></tr>
+</table>
+
+<p>Useita ehtoja voi yhdistää AND ja OR -operaattorien kanssa.</p>
+
 
 group by
 - 
@@ -26,3 +91,15 @@ inner join
 
 alikysely
 - select nimi from tuotteet where hinta = (select min(hinta) from tuotteet)
+
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>
