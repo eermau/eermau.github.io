@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
     <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
-    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+    <title>Johdatus systeemityöhön 5 osp</title>
 </head>
 
 <body>
@@ -26,6 +26,7 @@
                 <article class="markdown-body">
 <h1>Tietokannoista</h1>
 
+<h2>Yleistä</h2>
 <p>Tietokannat ovat kokoelma tietoja jotka on järjestetty siten, että tiedot ovat helposti haettavissa ja päivitettävissä. Tällä kurssilla käydään läpi relaatiotietokannan suunnittelua ja SQL-kieltä. Relaatiotietokantojen lisäksi ohjelmoinnissa käytetään NoSQL-tietokantoja.</p>
 
 <p>Yksinkertaistetusti</p>
@@ -35,6 +36,24 @@
     <li>Kenttä (attribuutti) on yksi taulun sisältöä kuvaava tieto (esimerkiksi nimi, osoite, hinta). Kentän tietotyyppi voi olla esimerkiksi päivämäärä, teksti, kokonaisluku tai desimaaliluku.</li>
     <li>Tietue on yksi tapaus taulun tiedoista. Esimerkiksi tietyn opiskelijan tiedot.</li>
     <li>Yhteys (relaatio) yhdistää kahta taulua pää- ja viiteavaimen avulla.</li>
+</ul>
+<h2>Tietokantakaavio ja ER-kaavio</h2>
+<p>Tietokantaa voidaan mallintaa käsitekaaviolla (Entity Relationship Diagram).</p>
+
+<h3>ER-kaavio</h3>
+<p><img src="../kuvat/tietokanta_esimerkki-er.png" alt="ER-kaavio"></p>
+<ul>
+    <li>käsitteet suorakulmioita</li>
+    <li>yhteydet vinoneliöitä</li>
+    <li>attribuutit soikioita, avaimia ei esitetä kaaviossa</li>
+</ul>
+<h3>Tietokantakaavio</h3>
+<p><img src="../kuvat/tietokanta_esimerkki.png" alt="ER-kaavio"></p>
+
+<ul>
+    <li>taulut kenttineen kaaviossa</li>
+    <li>pääavaimet (Primary Key) ja viiteavaimet (Foreign Key) mukana kaaviossa.</li>
+    <li>yhteydet voi esittää esimerkiksi "kukonaskel" -merkintätavalla.</li>
 </ul>
 
 </article>
