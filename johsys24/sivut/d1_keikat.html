@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
     <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
-    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+    <title>Johdatus systeemityöhön 5 osp</title>
 </head>
 
 <body>
@@ -30,10 +30,50 @@
 <p>Toteutetaan kuvan mukainen tietokanta jossa säilytetään keikkojen tietoja.</p>
 <p><img src="../kuvat/gigs_db.png" alt="Gigs"></p>
 
-<ol>
+<h2>Tietokannan luonti</h2>
+<ul>
     <li>Lisää taulut cPanelin alle tietokantaasi.</li>
     <li>Tee yhteydet tietokantataulujen välille.</li>
     <li>Lisää hieman testidataa jokaiseen tauluun phpMyAdminin avulla.</li>
+    <li>Avaa phpMyAdminin työkalu Suunnittelija (Designer) ja ota kuvakaappaus tietokantasi rakenteesta. Tallenna kuva itsellesi.</li>
+</ul>
+
+<h2>GitHub</h2>
+
+<ul>
+<li>Tee GitHub-repon sisälle kansio demo1, lisää sinne markdown-tiedosto readme.md. Liitä kuva mukaan GitHub-repoon ja näytä se readme-tiedostossa.</li>
+<li>lisää aliotsikko Kyselyt ja kopioi tänne ratkaisusi demon kyselyihin (SQL).</li>
+</ul>
+
+<h2>Kyselyt</h2>
+
+<ol>
+    <li>Hae kaikki keikat päivämäärän mukaan järjestettynä (SELECT + ORDER BY).</li>
+    <li>Hae kaikki Tampereella sijaitsevat keikkapaikat (WHERE).</li>
+    <li>Hae esiintyjät joilla on gmail-osoite (LIKE)</li>
+    <li>Hae kaikki esiintyjät, näytä tuloksissa esiintyjän ja tyylin nimi (INNER JOIN).</li>
+    <li>Hae kaikki K18-keikat, näytä tuloksissa keikkapaikan nimi ja esiintyjän nimi.</li>
+    <li>Hae kaikki tietokantasi esiitynjät joiden tyylin nimi on esimerkiksi "Rock".</li>
+    <li>Hae K18-keikkojen lukumäärä (COUNT)</li>
+    <li>Hae eri paikkakuntien keikkapaikkojen keikkojen lukumäärät (GROUP BY)
+        <table style="width:75%">
+            <tr><th>PostalAddress</th><th>COUNT</th></tr>
+            <tr><td>Tampere</td><td>2</td></tr>
+            <tr><td>Helsinki</td><td>1</td></tr>
+            <tr><td>Oulu</td><td>1</td></tr>
+        </table>
+    </li>
+    <li>Hae lukumäärät eri tyylien esiityjistä (GROUP BY + INNER JOIN)
+        <table style="width:75%">
+            <tr><th>StyleName</th><th>COUNT</th></tr>
+            <tr><td>Pop</td><td>1</td></tr>
+            <tr><td>Rock</td><td>1</td></tr>
+            <tr><td>Metal</td><td>5</td></tr>
+        </table>
+
+    </li>
+    <li>Hae kaikki tammikuun keikat.</li>
+
 </ol>
 
 </article>
