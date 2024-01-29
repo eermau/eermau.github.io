@@ -28,7 +28,7 @@
 
                     <h2>Yleistä</h2>
                     <p>Suunnittele oma relaatiotietokanta valinnaisesta aiheesta. Tietokannassa tulee olla vähintään
-                        neljä taulua joiden välillä on keskenään yhteyksiä.</p>
+                        kolme taulua joiden välillä on keskenään yhteyksiä. Syötä riittävästi testidataa tietokantaasi jotta voit tehdä tehtävässä vaaditut kyselyt.</p>
 
                     <p>Aihe voi olla esimerkiksi</p>
 
@@ -42,14 +42,29 @@
 
                     <h2>Tehtävä</h2>
 
-                    <ol>
+                    <ul>
                         <li>Tee GitHub-repoon kansio t2_tietokanta</li>
-                        <li>Laadi ER-kaavio ja tietokantakaavio tietokannasta.</li>
-                        <li>Toteuta tietokanta cPanelin alle ja lisää hieman testidataa. Vie tietokanta sql-tiedostona
-                            (export) ja lisää se GitHub-repoosi.</li>
+                        <li>Laadi ER-kaavio ja tietokantakaavio tietokannasta. Tallenna nämä repoosi.</li>
+                        <li>Toteuta tietokanta cPanelin alle ja lisää riittävästi testidataa.</li>
                         <li>Tee kansioon readme.md-tiedosto johon lisäät markdown-syntaksia käyttäen lyhyen kuvauksen
                             tietokannastasi. </li>
-                    </ol>
+
+                            <li>Ota phpMyAdminin suunnittelunäkymässä kuvakaappaus tietokantasi yhteyksistä, näytä kuva readme.md-tiedostossa.</li>
+                            <li>
+                            Tee seuraavat kyselyt phpMyAdminin SQL-näkymässä ja kopioi ratkaisusi readme.md-tiedostoon.
+                            <ol>
+                                <li>Laadi kysely jossa haet kaikki tietyn taulun tiedot, lajittele sopivan kentän mukaan.</li>
+                                <li>Laadi kysely jossa haet tietoja kahdesta tai useammasta taulusta INNER JOIN-liitoksen avulla.</li>
+                            <li>Laadi kysely jossa käytät funktiota. Voit esimerkiksi hakea tietyn taulun tietueitten lukumäärän.</li>
+                        <li>Laadi kysely jossa käytät funktiota ja ryhmittelet tiedot.</li>
+                        <li>Laadi yksi INSERT-kysely jossa lisäät testitietueen.</li>
+                        <li>Laadi yksi UPDATE-kysely jossa päivität testitietuetta.</li>
+                        <li>Laadi yksi DELETE-kysely jossa poistat testitietueen.</li>    
+                        </ol>
+                    </li>
+                    <li>Vie tietokanta sql-tiedostona
+                        (export) ja lisää se GitHub-repoosi.</li>
+                    </ul>
 
                 </article>
             </div>
