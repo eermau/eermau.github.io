@@ -16,6 +16,18 @@ Suunnittelu 5t
 - responsiivisuus
 - XD-harjoitus
 
+Rautalankamalli (Wireframe)
+- XD-demo
+- Oman tietokannan käyttöliittymä
+
+
+
+Tyyliopas
+- logo, värit, fontit
+- esimerkki painikkeesta
+- esimerkki otsikosta ja leipätekstistä
+
+
 Suunnitteluharjoitus 10t
 - esitutkimus
 - kaaviot
