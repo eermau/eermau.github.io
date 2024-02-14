@@ -10,13 +10,21 @@ Tietokannat 30t
 
 
 Suunnittelu 5t
-- figma, XD
-- värit
+
+Web-käyttöliittymä
+- web-käyttöliittymä, single page application
+- html semantic elements (header, footer, nav, section, article)
+- navigointi sivustolla
+- kuvakkeet (https://fonts.google.com/icons)
+- menu (megamenu)
+- responsiivinen, menu, 
+- XD (figma)
+- värit (pun/vih, 3-5 väriä riittävä)
 - saavutettavuus (https://wave.webaim.org/)
 - responsiivisuus
 - XD-harjoitus
 
-Rautalankamalli (Wireframe)
+Rautalankamalli (Wireframe
 - XD-demo
 - Oman tietokannan käyttöliittymä
 
