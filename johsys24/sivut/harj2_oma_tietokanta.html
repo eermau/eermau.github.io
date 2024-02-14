@@ -1,78 +1,73 @@
 <html lang="fi">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../../style/css/style.css">
-    <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
-    <title>Johdatus systeemityöhön 5 osp</title>
-</head>
-
-<body>
-    <div class="wrapper">
-        <header>
-            <h1>Johdatus systeemityöhön 5 osp</h1>
-        </header>
-        <div id="container">
-
-            <div id="main" role="main">
-                <div class="download-bar">
-                    <div class="inner">
-
-
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../../style/css/style.css">
+        <link rel="stylesheet" href="../../style/css/bootstrap.min.css">
+        <title>Johdatus systeemityöhön 5 osp</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1>Johdatus systeemityöhön 5 osp</h1>
+            </header>
+            <div id="container">
+                <div id="main" role="main">
+                    <div class="download-bar">
+                        <div class="inner"></div>
+                        <span class="blc"></span>
+                        <span class="trc"></span>
                     </div>
-                    <span class="blc"></span><span class="trc"></span>
-                </div>
-                <article class="markdown-body">
-                    <h1>Harjoitus 2: oma tietokanta</h1>
-
-                    <h2>Yleistä</h2>
-                    <p>Suunnittele oma relaatiotietokanta valinnaisesta aiheesta. Tietokannassa tulee olla vähintään
-                        kolme taulua joiden välillä on keskenään yhteyksiä. Syötä riittävästi testidataa tietokantaasi jotta voit tehdä tehtävässä vaaditut kyselyt.</p>
-
-                    <p>Aihe voi olla esimerkiksi</p>
-
-                    <ul>
-                        <li>Tietokanta jostain pelistä. Voit tehdä esimerkiksi tietokannan Pokémon Gon erilaisista
-                            Pokémoneista, niiden hyökkäyksistä ja tyypeistä.</li>
-                        <li>Tietokanta erilaisista autoista malleineen ja merkkeineen.</li>
-                        <li>Tietokanta jonkin yhdistyksen tai harrastuksen käyttöön. Käyttötarkoituksesta riippuen
-                            tietokannassa voi olla jäsenten, tilojen ja välineiden tietoja.</li>
-                    </ul>
-
-                    <h2>Tehtävä</h2>
-
-                    <ul>
-                        <li>Tee GitHub-repoon kansio t2_tietokanta</li>
-                        <li>Laadi ER-kaavio ja tietokantakaavio tietokannasta. Tallenna nämä repoosi.</li>
-                        <li>Toteuta tietokanta cPanelin alle ja lisää riittävästi testidataa.</li>
-                        <li>Tee kansioon readme.md-tiedosto johon lisäät markdown-syntaksia käyttäen lyhyen kuvauksen
-                            tietokannastasi. </li>
-
+                    <article class="markdown-body">
+                        <h1>Harjoitus 2: oma tietokanta</h1>
+                        <h2>Yleistä</h2>
+                        <p>
+                            Suunnittele oma relaatiotietokanta valinnaisesta aiheesta. Tietokannassa tulee olla vähintään
+                        kolme taulua joiden välillä on keskenään yhteyksiä. Syötä riittävästi testidataa tietokantaasi jotta voit tehdä tehtävässä vaaditut kyselyt.
+                        </p>
+                        <p>Aihe voi olla esimerkiksi</p>
+                        <ul>
+                            <li>
+                                Tietokanta jostain pelistä. Voit tehdä esimerkiksi tietokannan Pokémon Gon erilaisista
+                            Pokémoneista, niiden hyökkäyksistä ja tyypeistä.
+                            </li>
+                            <li>Tietokanta erilaisista autoista malleineen ja merkkeineen.</li>
+                            <li>
+                                Tietokanta jonkin yhdistyksen tai harrastuksen käyttöön. Käyttötarkoituksesta riippuen
+                            tietokannassa voi olla jäsenten, tilojen ja välineiden tietoja.
+                            </li>
+                        </ul>
+                        <h2>Tehtävä</h2>
+                        <ul>
+                            <li>Tee GitHub-repoon kansio t2_tietokanta</li>
+                            <li>Laadi ER-kaavio ja tietokantakaavio tietokannasta. Tallenna nämä repoosi.</li>
+                            <li>Toteuta tietokanta cPanelin alle ja lisää riittävästi testidataa.</li>
+                            <li>
+                                Tee kansioon readme.md-tiedosto johon lisäät markdown-syntaksia käyttäen lyhyen kuvauksen
+                            tietokannastasi.
+                            </li>
                             <li>Ota phpMyAdminin suunnittelunäkymässä kuvakaappaus tietokantasi yhteyksistä, näytä kuva readme.md-tiedostossa.</li>
                             <li>
-                            Tee seuraavat kyselyt phpMyAdminin SQL-näkymässä ja kopioi ratkaisusi readme.md-tiedostoon.
-                            <ol>
-                                <li>Laadi kysely jossa haet kaikki tietyn taulun tiedot, lajittele sopivan kentän mukaan.</li>
-                                <li>Laadi kysely jossa haet tietoja kahdesta tai useammasta taulusta INNER JOIN-liitoksen avulla.</li>
-                            <li>Laadi kysely jossa käytät funktiota. Voit esimerkiksi hakea tietyn taulun tietueitten lukumäärän.</li>
-                        <li>Laadi kysely jossa käytät funktiota ja ryhmittelet tiedot.</li>
-                        <li>Laadi yksi INSERT-kysely jossa lisäät testitietueen.</li>
-                        <li>Laadi yksi UPDATE-kysely jossa päivität testitietuetta.</li>
-                        <li>Laadi yksi DELETE-kysely jossa poistat testitietueen.</li>    
-                        </ol>
-                    </li>
-                    <li>Vie tietokanta sql-tiedostona
-                        (export) ja lisää se GitHub-repoosi.</li>
-                    </ul>
-
-                </article>
+                                Tee seuraavat kyselyt phpMyAdminin SQL-näkymässä ja kopioi ratkaisusi readme.md-tiedostoon.
+                                <ol>
+                                    <li>Laadi kysely jossa haet kaikki tietyn taulun tiedot, lajittele sopivan kentän mukaan.</li>
+                                    <li>Laadi kysely jossa haet tietoja kahdesta tai useammasta taulusta INNER JOIN-liitoksen avulla.</li>
+                                    <li>Laadi kysely jossa käytät funktiota. Voit esimerkiksi hakea tietyn taulun tietueitten lukumäärän.</li>
+                                    <li>Laadi kysely jossa käytät funktiota ja ryhmittelet tiedot.</li>
+                                    <li>Laadi yksi INSERT-kysely jossa lisäät testitietueen.</li>
+                                    <li>Laadi yksi UPDATE-kysely jossa päivität testitietuetta.</li>
+                                    <li>Laadi yksi DELETE-kysely jossa poistat testitietueen.</li>
+                                </ol>
+                            </li>
+                            <li>
+                                Vie tietokanta sql-tiedostona
+                        (export) ja lisää se GitHub-repoosi.
+                            </li>
+                        </ul>
+                    </article>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="current-section">
-
-    </div>
-</body>
-
+        <div class="current-section"></div>
+    </body>
 </html>
