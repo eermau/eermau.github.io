@@ -7,8 +7,6 @@ Tietokannat 30t
 - kaaviot (ER, tietokanta)
 - suunnitteluharjoitus
 
-
-
 Suunnittelu 5t
 
 Web-käyttöliittymä
