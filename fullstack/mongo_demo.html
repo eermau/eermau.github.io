@@ -157,6 +157,7 @@ npm install express --save
 npm install bcryptjs --save
 npm install jsonwebtoken --save
 npm install --save-dev nodemon    
+npm install mongoose
 </pre>
 <p>Lisää package.json -tiedostoon start-skripti, käynnistä backend <code>npm start</code>.</p>
 <pre>
@@ -198,7 +199,7 @@ const jwt = require('jsonwebtoken')
 const dbConfig = require('./config');
 const PORT = dbConfig.PORT;
 
-const Note = require('./models/note')
+// const Note = require('./models/note')
 // const User = require('./models/user')
 const express = require('express')
 const app = express()
@@ -238,6 +239,7 @@ mongoose.connect(dbConfig.URL, {
 const noteSchema = new mongoose.Schema({
     content: String,
     date: Date,
+    user_id: String,
     important: Boolean,
 })
 
@@ -275,7 +277,7 @@ const getTokenFrom = req =&gt; {
 Haetaan notesit tietokannasta:    
 </p>
 <pre>
-app.get('/api/notes', (request, response) =&gt; {
+app.get('/api/notes', (req, response) =&gt; {
     const token = getTokenFrom(req);
     console.log(token);
 
@@ -311,7 +313,7 @@ app.get('/api/notes', (request, response) =&gt; {
 <h4>index.js</h4>
 <p>Muistiinpanon lisääminen</p>
 <pre>
-app.post('/api/notes', (req, response) =&gt; {
+app.post('/api/notes', (req, res) =&gt; {
     const token = getTokenFrom(req);
     console.log(token);
 
@@ -401,6 +403,7 @@ content-type: application/json
 <p>Lisääminen:</p>
 <pre>
 POST http://localhost:3001/api/notes HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVlcmlra2kiLCJpZCI6IjY2MTNjMWIxMjllNzU2MTUxNWI2MGY1NSIsImlhdCI6MTcxMjU3MTA3MX0.3-LYBqE_rCmE9PjvSusd2VNn2BGCwMqt5HzUiq-SoVA
 content-type: application/json
 
 {
