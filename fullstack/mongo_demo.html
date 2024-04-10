@@ -365,10 +365,10 @@ app.get('/api/notes/:id', (req, response) =&gt; {
     })
 })    
 </pre>
-<p>Muistiinpanon poistaminen onnistuu findByIdAndRemove-metodilla:</p>
+<p>Muistiinpanon poistaminen onnistuu findByIdAndDelete-metodilla:</p>
 <pre>
 app.delete('/api/notes/:id', (req, response, next) =&gt; {
-    Note.findByIdAndRemove(req.params.id)
+    Note.findByIdAndDelete(req.params.id)
         .then(result =&gt; {
         response.status(204).end()
     })
