@@ -27,6 +27,12 @@ header {
     padding-right: 20px;
     margin-top: -30px;
 }
+#divHeadLink a {
+    color:#457b9d
+}
+#divHeadLink a:hover {
+    color:#ffffff
+}
 
 .current-section {
     max-width: 800px;
