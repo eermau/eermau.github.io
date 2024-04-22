@@ -1,0 +1,77 @@
+<html lang="fi">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../../style/css/style.css">
+        
+        <title>Johdatus systeemityöhön 5 osp</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1>Johdatus systeemityöhön 5 osp</h1>
+            </header>
+            <div id="container">
+                <div id="main" role="main">
+                    <div class="download-bar">
+                        <div class="inner"></div>
+                        <span class="blc"></span>
+                        <span class="trc"></span>
+                    </div>
+                    <article class="markdown-body">
+                        <h1>Harjoitus 1: verkkokauppa</h1>
+                        <h2>Yleistä</h2>
+                        <p>
+                            Tehtävänä on suunnitella relaatiotietokanta verkkokaupalle. Voit itse valita verkkokaupan aiheen.
+                        Tietokannassa tulee säilyttää tietoja kaupan asiakkaista, tuotteista ja tilauksista. Onko
+                        kaupassa myynnissä eri tuotekategorioita? Miten saadaan tallennettua tieto tilauksen tuotteista?
+                        </p>
+                        <h2>Tehtävä</h2>
+                        <ol>
+                            <li>Tee GitHub-repoon kansio t1_verkkokauppa</li>
+                            <li>
+                                Suunnittele tietokanta ER-kaavion ja tietokantakaavion avulla. Lisää kaaviot mukaan
+                            GitHub-repon kansioon.
+                            </li>
+                            <li>
+                                Toteuta tietokanta cPanelin alle ja lisää hieman testidataa. Vie tietokanta sql-tiedostona
+                            (export) ja lisää se GitHub-repoosi.
+                            </li>
+                            <li>
+                                Tee kansioon readme.md-tiedosto johon lisäät markdown-syntaksia käyttäen lyhyen kuvauksen
+                            tietokannastasi. Lisää aliotsikko Kyselyt ja lisää ratkaisut omassa tietokannassasi alla
+                            oleviin kysymyksiin.
+                            </li>
+                        </ol>
+                        <h3>Kyselyt</h3>
+                        <p>
+                            Laadi seuraavat kyselyt phpMyAdminin avulla tietokannassasi. Lisää ratkaisut
+                        readme.md-tiedostoon.
+                        </p>
+                        <ol>
+                            <li>
+                                hae kaikki tietokantasi asiakkaat, järjestä postitoiminumeron ja nimen
+                            mukaiseen järjestykseen (SELECT, ORDER BY).
+                            </li>
+                            <li>
+                                hae kaikki tietokantasi tuotteet tuotekategorioineen, järjestä tuotekategorian ja nimen mukaan
+                            aakkosjärjestykseen (INNER JOIN).
+                            </li>
+                            <li>
+                                hae tietokannan tietyn asiakasID:n kaikki tilaukset. Näytä asiakkaan nimi ja tilatut
+                            tuotteet (INNER JOIN).
+                            </li>
+                            <li>hae tietyn asiakkaan tilausten määrä (COUNT)</li>
+                            <li>hae tietyn asiakkaan tilaamien tuotteiden yhteissumma (SUM)</li>
+                            <li>hae kaikkien asiakkaiden ostosten yhteishinta, ryhmittele asiakkaan nimen mukaan (GROUP BY).</li>
+                            <li>Tee yksi INSERT-kysely jossa lisäät testituotteen, nimike "TESTI SAA POISTAA".</li>
+                            <li>Tee yksi UPDATE-kysely jossa muutat tietyn asiakasID:n omaavan asiakkaan yhteystiedot.</li>
+                            <li>Tee yksi DELETE-kysely jossa poistat kaikki tuotteet joiden nimike "TESTI SAA POISTAA".</li>
+                        </ol>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="current-section"></div>
+    </body>
+</html>

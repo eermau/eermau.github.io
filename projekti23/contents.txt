@@ -17,3 +17,10 @@ Käyttöliittymän suunnitteluosuus
 Tietokannan suunnittelu 
 ER-kaavio
 Tietokantakaavio
+
+
+Tietoturva
+- md5, s256 decrypt
+
+id selainrivillä -> hash toiseen muotoon jos pakko
+muuten pyri siihen että id ei ole näkyvissä

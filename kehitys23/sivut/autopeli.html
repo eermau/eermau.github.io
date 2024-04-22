@@ -1,0 +1,352 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+<h1>Racing Game</h1>
+
+<h5>1. Projektin aloittaminen</h5>
+<p>Tehdään yksinkertainen autopeli jossa ajetaan autolla 
+<p><img src="../kuvat/autopeli_1.png" style="padding: 0 25px; float: right;"/>
+<ul>
+	<li>Lisää projektille kansiot Scripts ja Sprites</li>
+<li>Etsi sopiva kuva autosta ylhäältä päin kuvattuna. Voit hakea Googlen kuvahaussa Leikekuvia jotta kuvissa läpinäkyvä tausta.</li>
+<li>Lisää auto projektiisi. Voit säätää auton asentoa Rotation z-attribuutin avulla</li>
+</ul>
+<p>Piirrä tiestä sopiva kuva piirrosohjelmassa (esim. Paint).
+<ul>
+<li>Tuo tie mukaan projektiin</li>
+<li>Älä raahaa tietä skenelle vaan määritä Inspectorissa sen Texture Type: Default ja Wrap Mode: Repeat.</li>
+</ul>
+<p>Quad
+<ul>	
+<li>Lisää Skenelle (GameObject / 3D Object / Quad)</li>
+<li>Nimeä se esim. Track</li>
+<li>Muuta Scale-attribuuteilla tie sopivan kokoiseksi</li>
+<li>Raahaa tie tämän Quadin päälle</li>
+<li>Voit lisätä Directional Light -objektin ja säätää sen Intensity-attribuutin avulla valoisuutta </li>haluamaksesi (GameObject / Light / Directional Light).</li>
+</ul>
+<h5>2. Tien liikuttaminen</h5>
+<ul>
+<li>Lisää uusi Skripti (TrackController), lisää se  Track-objektille
+Lisää skriptille uusi julkinen muuttuja:
+<pre>
+public float speed;
+Vector2 offset;
+</pre>
+</li>
+<li>Update-metodissa määritetään paljonko ollaan liikuttamassa tietä eteenpäin:
+<pre>
+void Update()
+{
+// pystysuunnassa y asteikko siirtyy nopeuden suhteessa
+offset = new Vector2(0, Time.time * speed);
+GetComponent&lt;Renderer&gt;().material.mainTextureOffset = offset;
+}
+</pre>
+<p>Lisää komponentti TrackController (Add Component) Track-objektille
+</li>
+<li>Testaa tässä vaiheessa liikkuuko tausta, aseta speed-muuttujan arvo sopivaksi.
+</li>
+</ul>
+<h5>3. Auto</h5>
+<ul>
+<li>Lisää uusi skripti (CarController), lisää se autolle.
+<li>Auto tarvitsee aluksi nopeuden ja sijainnin liikkumista varten
+<pre>
+public float speed;
+Vector3 position;
+</pre></li>
+<li>Kun ohjelma käynnistyy niin otetaan talteen tieto missä auto sijaitsee:
+<pre>
+void Start()
+{
+position = transform.position;
+}
+</pre>
+</li>
+<li>
+Päivitettäessä muutetaan auton sijaintia Horizontal-inputin mukaan:
+<pre>
+void Update()
+{
+// Time.delta jotta tapahtuisi aina samalla nopeudella
+position.x += Input.GetAxis("Horizontal") * speed * Time.deltaTime;  
+transform.position = position;      
+}
+</pre>
+</li>
+
+</ul>
+
+<h5>4. Liikkuminen reunojen yli</h5>
+
+<p>Nyt auto voi mennä yli ajoradan. Lisää ehtolause jolla tarkistat ettei auto voi mennä tien ulkopuolelle.
+</p>
+
+<h5>5. Vastustajat</h5>
+
+<ul>
+<li>Etsi sopiva auto joka toimisi vastustajana. Lisää auto Sprites-kansioon ja raahaa se sieltä Skenelle.
+</li>
+<li>
+Lisää vastustajalle uusi skripti, esimerkiksi EnemyController
+</li>
+<li>
+Lisää aluksi skriptille nopeus, voit säätää tämän myöhemmin sopivaksi:
+<pre>
+public float speed = 0.5f;
+</pre>
+</li>
+<li>
+ Lisää Update-metodissa liikuttaminen alaspäin:
+<pre>
+void Update()
+{
+// asetetaan vastustajalle suunta: suoraan alaspäin
+transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+}
+</pre>
+</li>
+</ul>
+
+<h5>6. Spawn</h5>
+<ul>
+<li>Lisää uusi tyhjä Game Object, nimeä se esimerkiksi EnemySpawnPosition. Tarkoitus on käyttää tätä uusien vastustajien lisäämiseen.
+</li><li>Siirrä objekti pelin näytön yläpuolelle
+</li>
+<li>Lisää uusi skripti, EnemySpawner
+</li><li>Raahaa skripti EnemySpawnPosition-objektille. 
+</li>
+<li>Lisää skriptille julkinen muuttuja:
+<pre>
+public GameObject enemy;
+</pre>
+</li>
+<li>Tee vastustajasta prefab (kannattaa tehdä oma kansio Prefabs ja raahata vastustaja sinne.). Voit nyt poistaa vastustajan Skeneltä ja raahata skriptin muuttujalle prefabin.
+<p><img src="../kuvat/enemyspawnposition_1.png" />
+</li>
+<li>Lisätään aloituskoodi jolla voidaan testata tuleeko auto näkyviin (jos ei tule niin tarkista Rotation-attribuutti).
+<pre>
+void Start()
+{
+// luodaan uusi vastustaja ja asetetaan sille halutti sijainti
+Vector3 carPos = new Vector3(0, transform.position.y, 0);
+Instantiate(enemy, carPos, transform.rotation);
+}
+</pre>
+</li>
+<li>Testaa toimintaa. Mieti miten saisit arvottaua sijainnin x-akselilla satunnaiseksi.
+<pre>
+// arvotaan luku -3 .. 3
+float x = Random.Range(-3.0f, 3.0f);
+</pre></li>
+<!--
+	float posX = Random.Range(leftRange, rightRange);
+Vector3 carPos = new Vector3(posX, transform.position.y, 0); 
+        Instantiate(enemy, carPos, transform.rotation);
+-->
+<li>Lisätään ajastin luomaan autoja, lisää enemySpawner-luokalle muuttujat:
+<pre>
+public float timer;
+public float delayTimer;
+</pre>
+</li>
+<li>
+	Lisää Start()-metodissa ajastimen alustus:
+<pre>
+void Start()
+{
+	timer = delayTimer;
+}
+</pre>
+Update()-metodissa päivitetään ajastinta ja tarkistetaan pitääkö auto luoda:
+<pre>
+void Update()
+{
+	timer -= Time.deltaTime;
+	if (timer < 0) {
+		// luo täällä uusi auto ja aseta ajastin taas alkuasentoon:
+		Vector3 carPos = new Vector3(0, transform.position.y, 0);
+            Instantiate(enemy, carPos, transform.rotation); 
+            timer = delayTimer;
+	}
+}	
+</pre>
+</li>
+</ul>
+
+<h5>7. Törmääminen</h5>
+<ul>
+	<li>Lisää autolle RigidBody2D ja BoxCollider2D, säädä "laatikko" sopivan kokoiseksi (Edit Collider)
+	</li>
+	<li>Lisää myös vastustajalle RigidBody2D ja BoxCollider2D. 
+	</li>
+	<li>Lisää tag vastustajalle (esimerkiksi "enemy").
+	</li>
+	<li>Lisää pelaajalle metodi jossa tarkistat törmättiinkö vastustajaan.
+<pre>
+void OnCollisionEnter2D(Collision2D col) {
+if (col.gameObject.tag == "enemy") {
+// täällä törmätään
+// lisää pelaajan tuhoaminen
+}
+}
+</pre>
+Jos pelaaja osuu vastustajaan niin lisää tuhoa pelaaja.
+<pre>	
+Debug.Log("törmäys vastustajaan");
+// tuhotaan pelaaja
+Destroy(gameObject);
+</pre>			
+	</li>
+</ul>
+<h5>8. Vastustajien tuhoaminen</h5>
+
+<ul>
+	<li>Kun vastustaja liikkuu y-akselilla näytön ulkopuolelle niin se kannattaa tuhota. Ylimääräiset objektit voivat pikku hiljaa hidastaa ohjelmaasi (ja kuluttavat muistia yms.). Tällä kertaa tehdään piiloon GameObject joka hoitaa tuhoamisen. Lisää uusi tyhjä GameObject, nimeä esimerkiksi "destroyer". Siirrä tämä tuhoaja pelialueen alapuolelle, juuri näytön ulkopuolelle. </li>
+	<li>Lisää tuhoajalle BoxCollider2D, muuta sen koko niin leveäksi että se peittää tien. </li>
+	<li>Lisää tuhoajalle tag, esimerkiksi "destroyer".</li>
+	<li>Lisää nyt vastustajalle OnCollisionEnter2D samaan tapaan kuin pelaajalla, nyt jos vastustaja osuu tuhoajaan niin tuhoa auto. Kokeile ohjelman toimintaa, nyt vastustajien pitäisi hävitä Sceneltä kun ne osuvat tuhoajaan.
+<pre>
+void OnCollisionEnter2D(Collision2D col)
+{
+	if (col.gameObject.tag == "destroyer")
+	{
+		Debug.Log("törmäys tuhoajaan");
+		Destroy(gameObject);
+	}
+}
+</pre>	
+	</li>
+</ul>
+
+<h5>9. Lisäautot</h5>
+<ul>
+	<li>Lisää 2-3 uutta vastaustaja-autoa projektiisi. Tämä kannattaa tehdä ensin kopioimalla alkuperäinen vihollinen jotta uudella autolla on valmiiksi skripti yms. ominaisuudet. Muuta uuden auton sprite haluamaksesi.</li>
+	<li>Tee uusista autoista Prefab-kansioosi uusia prfabeja. Lisää näille uusille autoille sama EnemyController-skripti.</li>
+<li>EnemySpawner-skriptissä muutetaan GameObject jossa on yksi auto taulukoksi jossa voi olla monta autoa:
+<pre>
+// muuta GameObject jossa vastustaja:
+public GameObject[] enemies;
+</pre>
+Nyt meidän pitää arpoa satunnainen vastustaja, tämä riippuu siitä montako erilaista vastustajaa sinulla on. Random.Range:n arvot tulee olla 0 - autojen määrä.
+<pre>
+void Update()
+{
+	timer -= Time.deltaTime;
+	if (timer < 0) {
+		float posX = Random.Range(leftRange, rightRange);
+		<span class="korostus">int carIndex = Random.Range(0,5);</span>
+		Vector3 carPos = new Vector3(posX, transform.position.y, 0); 
+		Instantiate(<span class="korostus">enemies[carIndex]</span>, carPos, transform.rotation);
+		timer = delayTimer;
+	}
+}
+</pre>	
+</li>
+<li>Taulukon käyttäminen editorissa. Kun koodi toimii voidaan palata editoriin asettamaan prefabit paikalleen taulukkoon. Muuta enemies-taulukon koko oikeaksi ja raahaa Prefabs-kansiostasi vastustajat paikalleen. Testaa toimintaa.</li>
+</ul>
+
+<h5>9. Pause</h5>
+
+<ul>
+	<li>Tarkoitus on pysäyttää peli kun painetaan esimerkiksi välilyöntiä tai p-kirjainta. Pysäytettäessä pelin aika pysähtyy ja ilmestyy teksti "PAUSE", kun painiketta painetaan uudestaan peli käynnistyy ja teksti häviää.</li>
+	<li>Lisää kaksi muuttujaa pelaajalle:
+<pre>
+public Text txtPaused;
+private bool paused;
+</pre>
+	 </li>
+	<li>Lisää skenelle Text ja aseta se oikealle kohdalla. Raahaa Text muuttujan arvoksi skriptissä.</li>
+	<li>Lisätään lopuksis koodi joka pysäyttää pelin:
+<pre>
+if (Input.GetKeyDown("space"))
+{
+if (paused) {
+ // pelin pitäisi jatkua	
+}
+else {
+paused = true;
+txtPaused.text = "PAUSE";
+Time.timeScale = 0;	
+}
+}
+</pre>	
+
+	</li>
+</ul>
+
+
+<h5>10. Game Over</h5>
+
+<ul>
+	<li>Kun pelaaja osuu vastustajaan pelin pitäisi päättyä. Lisää uusi skene ja lisää sinne Game over-teksti. Lisäksi tarvitaan painike jolla pelin voi aloittaa uudestaan.</li>
+</ul>
+
+<h5>11. Pisteet (*)</h5>
+	<ul>
+	<li>Pelissä olisi enemmän järkeä jos se edistyisi ja muuttuisi vaikeammaksi. Helpointa olisi, jos pelaaja saisi pisteitä jokaisesta vastustajasta joka on tuhottu (ohitettu). Samalla pelin tulisi muuttua vaikeammaksi.</li>
+	<ul>Vaikeuden lisääminen
+	<li>Vastustajien nopeuden kasvattaminen</li>
+	<li>Vastustajien luontinopeuden kasvattaminen.</li>
+	<li>Taustan liikkumisen nopeus</li>
+</ul>
+</ul>
+
+<p>TrackController-skriptin kutsuminen muualta: - esimerkiksi kun pisteet kasvavat niin halutaan vauhdin kasvavan
+<pre>
+TrackController track = GameObject.Find("Track").GetComponent&lt;TrackController&gt;();
+track.AddSpeed();
+</pre>
+<p>TrackController.cs tarvitsee julkisen aliohjelman joka kasvattaisi nopeutta
+<pre>
+public void AddSpeed() {
+  speed++;
+}
+</pre>
+<!---
+	<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+-->
+
+<h4>Käytetty lähde:</h4>
+<ul>
+	<li><a href="https://www.youtube.com/watch?v=Sah9I9-NHdw&list=PLytjVIyAOStpcOGg6HIHhnnOZAdxkAr1U&index=2">Unity Racing Game Developement Tutorial For Beginners</a></li>
+</ul>
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

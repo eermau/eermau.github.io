@@ -1,9 +1,9 @@
-<html>
+<html lang="fi">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/style.css">
     <title>Fullstack-kehitys</title>
 </head>
 
@@ -13,18 +13,10 @@
             <h1>Fullstack-kehitys</h1>
         </header>
         <div id="container">
-
             <div id="main" role="main">
-                <div class="download-bar">
-                    <div class="inner">
-
-                        
-                    </div>
-                    <span class="blc"></span><span class="trc"></span>
-                </div>
                <article class="markdown-body">
 
-<h3>MongoDB</h3>
+<h2>MongoDB</h2>
 <p>MongoDB on dokumenttitietokanta ja NoSQL-tietokanta. NoSQL-tietokantaan tallennetaan tietoa toisella tapaa kuin relaatiotietokantaan. NoSQL-tietokanta on tullut vaihtoehdoksi perinteiselle relaatiotietokannalle tallennuskapasiteetin ja tietokoneiden tehokkuuden kasvettua vuosien saatossa. NoSQL-tietokantaa ei käytetä SQL-kyselyiden kautta vaan sinne lisätään ja poistetaan uusia dokumentteja. Tässä demossa käytetään lähteenä Helsingin yliopiston Fullstack-kurssin osiota <a href="https://fullstackopen.com/osa3/tietojen_tallettaminen_mongo_db_tietokantaan" target="_blank">Tietojen tallentaminen MongoDB-tietokantaan</a>.
 </p>
 <h4>Linkkejä</h4>
@@ -33,7 +25,13 @@
 <li><a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a></li>
 
 <p>
-Käytetään <a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a>-palvelua tietokannallemme. Luo uusi tili, käytä mielellään edu.tampere.fi-tunnustasi.</p>
+Käytetään <a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a>-palvelua tietokannallemme. Luo uusi tili, käytä mielellään edu.tampere.fi-tunnustasi. Huom: mikäli koululta ei saada yhteyttä toimimaan voidaan MongoDB tehdä Dockerin avulla.
+
+<ul>
+    <li><a href="https://otredu.github.io/docker/mongodb.html" target="_blank">Mongodb ja mongo-express (localhost)
+    </a> (otredu)</li>
+</ul>
+</p>
 
 
 <p>Valitse <i>Databases</i> / <i>Build</i>, valitse <i>Shared</i>. Cloud Provider & Region-kohdassa anna olla oletusvaihtoehdot (aws, Stockholm). Valitse alhaalta <i>Create Cluster</i> / Create.</p>
@@ -139,52 +137,101 @@ Note.find({ important: true }).then(result =&gt; {
 <p>Lisää .env-tiedosto ja sinne</p>
 <pre>
 PORT = 3001
-MONGODB_URI =
-    `mongodb+srv://tunnus:salasana@cluster0.pl1fr.mongodb.net/noteApp?retryWrites=true&w=majority`
-    
-</pre>
-<p>Asenna dotenv ja express</p>
+DB_HOST = mongodb://localhost:27017/
+DB_USER = root
+DB_PASS = mypass123
+DB_DATABASE = demo</pre>
+
+<p>Asenna dotenv, express, bcryptjs, jsonwebtoken ja nodemon:</p>
 <pre>
 npm install dotenv
 npm install express --save
+npm install bcryptjs --save
+npm install jsonwebtoken --save
+npm install --save-dev nodemon    
+npm install mongoose
 </pre>
+<p>Lisää package.json -tiedostoon start-skripti, käynnistä backend <code>npm start</code>.</p>
+<pre>
+"start": "npx nodemon index.js"    
+</pre>
+
+<p>Tee config.js -tiedosto</p>
+<pre>
+require('dotenv').config()
+
+let PORT = process.env.PORT
+
+let DATABASE_OPTIONS = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE,
+}
+
+let URL = process.env.DB_HOST + process.env.DB_DATABASE
+let SECRET = "tosisalainensalasanainen"
+
+module.exports = {
+    DATABASE_OPTIONS,
+    PORT, 
+    URL,
+    SECRET
+}  
+</pre>
+
+
 <p>index.js-tiedostossa ota mukaan .env ja express</p>
 
 <pre>
 require('dotenv').config();
-const PORT = process.env.PORT;
-//const Note = require('./models/note')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
+const dbConfig = require('./config');
+const PORT = dbConfig.PORT;
+
+// const Note = require('./models/note')
+// const User = require('./models/user')
 const express = require('express')
 const app = express()
 app.use(express.json());</pre>
 
 <p>Kuunnellaan porttia</p>
 <pre>
-app.listen(PORT, () => {
+app.listen(PORT, () =&gt; {
     console.log(`Server running on port ${PORT}`)
-    })    
+})
+
+app.get('/', (req, res) =&gt; {
+    res.send('&lt;h1&gt;Hello World!&lt;/h1&gt;')
+})
 </pre>
 <h4>note.js</h4>
 
 <p>Erotetaan <i>models</i> / <i>note.js</i> -tiedostoon mongoDB:n käsittely.</p>
 
 <pre>
-const url = process.env.MONGODB_URI
+const dbConfig = require('../config');
+const mongoose = require('mongoose');
 
-console.log('connecting to', url)
-
-mongoose.connect(url)
-    .then(result =&gt; {
-    console.log('connected to MongoDB')
-    })
-    .catch((error) =&gt; {
-    console.log('error connecting to MongoDB:', error.message)
-    })
+mongoose.connect(dbConfig.URL, {
+    useNewUrlParser: true,
+    user: dbConfig.DATABASE_OPTIONS.user,
+    pass: dbConfig.DATABASE_OPTIONS.password,
+    authSource: "admin"
+}).then(() => {
+    console.log('successfully connected to the database');
+}).catch(err => {
+    console.log(dbConfig.URL)
+    console.log('error connecting to the database', err.message);
+    process.exit();
+});
 
 const noteSchema = new mongoose.Schema({
     content: String,
     date: Date,
+    user_id: String,
     important: Boolean,
 })
 
@@ -206,29 +253,84 @@ Otetaan Note käyttöön index.js-tiedoston alussa.
 <pre>
 const Note = require('./models/note')
 </pre>
+<p>Tässä käytössä jo käyttäjän kirjautuminen ja rekisteröityminen. Tähän tarvitaan apufunktiota getTokenFrom:</p>
+<pre>
+const getTokenFrom = req =&gt; {
+    const authorization = req.get('authorization');
+    console.log("authorization", authorization);
+    if(authorization && authorization.toLowerCase().startsWith('bearer ')){
+        return authorization.substring(7)
+    } else {
+        return null
+    }
+}    
+</pre>
 <p>
 Haetaan notesit tietokannasta:    
 </p>
 <pre>
-app.get('/api/notes', (request, response) =&gt; {
-    Note.find({}).then(notes =&gt; {
+app.get('/api/notes', (req, response) =&gt; {
+    const token = getTokenFrom(req);
+    console.log(token);
+
+    if(!token){
+        return res.status(401).json(
+            { error: "auth token missing" }
+        )
+    }
+
+    let decodedToken = null;
+
+    try{
+        decodedToken = jwt.verify(token, dbConfig.SECRET);
+    }
+    catch(error){
+        console.log("jwt error")
+    }
+    
+    if(!decodedToken || !decodedToken.id){
+        return res.status(401).json(
+            { error: "invalid token" }
+        )
+    }
+
+
+    Note.find({user_id: decodedToken.id}).then(notes =&gt; {
         response.json(notes)
     })
-    })    
-</pre>
-<p>Tarkista osoitteessa http://localhost:3001/api/notes näkyvätkö syötetyt muistiinpanot oikein.</p>
-
-<p>Muista asentaa nodemon</p>
-<pre>
-npm install --save-dev nodemon    
+})    
 </pre>
 
 <h3>Muut backendin toiminnot</h3>
 <h4>index.js</h4>
 <p>Muistiinpanon lisääminen</p>
 <pre>
-app.post('/api/notes', (request, response) =&gt; {
-    const body = request.body
+app.post('/api/notes', (req, res) =&gt; {
+    const token = getTokenFrom(req);
+    console.log(token);
+
+    if(!token){
+        return res.status(401).json(
+            { error: "auth token missing" }
+        )
+    }
+
+    let decodedToken = null;
+
+    try{
+        decodedToken = jwt.verify(token, dbConfig.SECRET);
+    }
+    catch(error){
+        console.log("jwt error")
+    }
+    
+    if(!decodedToken || !decodedToken.id){
+        return res.status(401).json(
+            { error: "invalid token" }
+        )
+    }
+
+    const body = req.body
     
     if (body.content === undefined) {
         return response.status(400).json({ error: 'content missing' })
@@ -236,6 +338,7 @@ app.post('/api/notes', (request, response) =&gt; {
     
     const note = new Note({
         content: body.content,
+        user_id: decodedToken.id,
         important: body.important || false,
         date: new Date(),
     })
@@ -243,39 +346,39 @@ app.post('/api/notes', (request, response) =&gt; {
     note.save().then(savedNote =&gt; {
         response.json(savedNote)
     })
-    })    
+})    
 </pre>
 
 <p>Yhden muistiinpanon avaaminen</p>
 <pre>
-app.get('/api/notes/:id', (request, response) =&gt; {
-    Note.findById(request.params.id).then(note =&gt; {
+app.get('/api/notes/:id', (req, response) =&gt; {
+    Note.findById(req.params.id).then(note =&gt; {
         response.json(note)
     })
-    })    
+})    
 </pre>
-<p>Muistiinpanon poistaminen onnistuu findByIdAndRemove-metodilla:</p>
+<p>Muistiinpanon poistaminen onnistuu findByIdAndDelete-metodilla:</p>
 <pre>
-    app.delete('/api/notes/:id', (request, response, next) =&gt; {
-        Note.findByIdAndRemove(request.params.id)
-          .then(result =&gt; {
-            response.status(204).end()
-          })
-          .catch(error => next(error))
-      })    
+app.delete('/api/notes/:id', (req, response, next) =&gt; {
+    Note.findByIdAndDelete(req.params.id)
+        .then(result =&gt; {
+        response.status(204).end()
+    })
+    .catch(error => next(error))
+})    
 </pre>
 
 <p>Muistiinpanon tärkeyden muuttaminen findByIdAndUpdate-metodilla:</p>
 <pre>
-app.put('/api/notes/:id', (request, response, next) =&gt; {
-    const body = request.body
+app.put('/api/notes/:id', (req, response, next) =&gt; {
+    const body = req.body
   
     const note = {
       content: body.content,
       important: body.important,
     }
   
-    Note.findByIdAndUpdate(request.params.id, note, { new: true })
+    Note.findByIdAndUpdate(req.params.id, note, { new: true })
       .then(updatedNote =&gt; {
         response.json(updatedNote)
       })
@@ -286,11 +389,13 @@ app.put('/api/notes/:id', (request, response, next) =&gt; {
 <p>Tee kansio test ja kokeile .http-tiedostojen avulla kaikkien muistiinpanojen hakemista ja uuden muistiinpanon lisäämistä.</p>
 <pre>
 GET http://localhost:3001/api/notes HTTP/1.1
-content-type: application/json    
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVlcmlra2kiLCJpZCI6IjY2MTNjMWIxMjllNzU2MTUxNWI2MGY1NSIsImlhdCI6MTcxMjU3MTA3MX0.3-LYBqE_rCmE9PjvSusd2VNn2BGCwMqt5HzUiq-SoVA
+content-type: application/json   
 </pre>
 <p>Lisääminen:</p>
 <pre>
 POST http://localhost:3001/api/notes HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVlcmlra2kiLCJpZCI6IjY2MTNjMWIxMjllNzU2MTUxNWI2MGY1NSIsImlhdCI6MTcxMjU3MTA3MX0.3-LYBqE_rCmE9PjvSusd2VNn2BGCwMqt5HzUiq-SoVA
 content-type: application/json
 
 {
@@ -299,13 +404,149 @@ content-type: application/json
     "important": false
 }    
 </pre>
+<h3>Kirjautuminen ja rekisteröityminen</h3>
+
+<h4>user.js</h4>
+<p>Tehdään models-kansioon käyttäjille oma tiedosto user.js.</p>
+
+<pre>
+const dbConfig = require('../config');
+const mongoose = require('mongoose');
+
+mongoose.connect(dbConfig.URL, {
+    //useNewUrlParser: true,
+    user: dbConfig.DATABASE_OPTIONS.user,
+    pass: dbConfig.DATABASE_OPTIONS.password,
+    authSource: "admin"
+}).then(() =&gt; {
+    console.log('successfully connected to the database');
+}).catch(err =&gt; {
+    console.log(dbConfig.URL)
+    console.log('error connecting to the database', err.message);
+    process.exit();
+});
+
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    email: String
+})
+
+userSchema.set('toJSON', {
+    transform: (document, returnedObject) =&gt; {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+    }
+})
+
+module.exports = mongoose.model('User', userSchema)     
+</pre>
+
+<h4>index.js</h4>
+
+<h5>rekisteröityminen</h5>
+
+<pre>
+app.post('/api/register', (req, res) =&gt; {
+    const user = req.body
+    
+    if (user.username === undefined || user.email === undefined || user.password === undefined) {
+        return response.status(400).json({ error: 'content missing' })
+    }
+    
+    const saltRounds = 10;
+    console.log(user);
+        
+    bcrypt.hash(user.password, saltRounds)
+        .then((passwordHash) =&gt; {
+
+            const newUser = new User({
+                username: user.username,
+                password: passwordHash,
+                email: user.email,
+            })
+            
+            newUser.save().then(savedUser =&gt; {
+                res.json(savedUser)
+                console.log("register toimii")
+            })
+
+        })
+})    
+</pre>
+<p>Tee tests-kansioon testi rekisteröitymisesta, kokeile toimintaa.</p>
+
+<h5>kirjautuminen</h5>
+
+<pre>
+app.post('/api/login', (req, res) =&gt; {
+    const body = req.body;
+    console.log(body);
+
+    User.find( {username: body.username} ).then(dbuser =&gt; {
+        console.log(dbuser)
+
+        if (dbuser.length == 0) {
+            return res.status(401).json(
+                { error: "invalid username or password" }
+            )
+        }
+        const tempUser = dbuser[0];
+        bcrypt.compare(body.password, tempUser.password)
+            .then((passwordCorrect) => {
+                if (!passwordCorrect) {
+                    return res.status(401).json(
+                        { error: "invalid username or password" }
+                    )
+                } 
+
+                //token
+                const userForToken = {
+                    username: tempUser.username,
+                    id: tempUser.id
+                } 
+
+                const token = jwt.sign(userForToken, dbConfig.SECRET)
+
+                //console.log(token);
+
+                res.status(200).send({
+                    token,
+                    username: tempUser.username,
+                    role: "regularuser"
+                })
+            })
+    })
+    .catch((err) =&gt; {
+        console.log('login failed')
+        res.status(500).json(
+            { error: err }
+        )
+    })
+
+}); 
+</pre>
+<p>Tee tests-kansioon testi rekisteröitymisesta ja kirjautumisesta, kokeile toimintaa.</p>
+
+<pre>
+POST http://localhost:3001/api/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "tester1",
+    "password": "salasana",
+    "email": "tester1@test.com"
+}      
+</pre>
 
 <h3>Frontend</h3>
 <p>Ei korvata vanhaa notesbackend-versiota vaan tehdään kopio joka käyttää MongoDB:tä. Tee itsellesi uusi kansio notesmongofront ja kopioi sinne notesfront jota käytettiin MySQL-tietokannan kanssa. Kommentoi pois kirjautuminen ja rekisteröityminen, tämän version tarkoituksena on vain pystyä lisäämään uusia muistiinpanoja ja poistamaan olemassa olevia.</p>
 
 <ul>
     <li>notesService.js: vaihda baseUrl muotoon api/notes</li>
-    <li>Kommentoi tai poista käytöstä kirjautuminen ja rekisteröityminen</li>
+    <li>userService.js: vaihda samaan tapaan login ja register muotoon api/login ja api/register</li>
+    <li>Muuta polut vite.config.js-tiedostossa.</li>
     <li>Testaa sovelluksen toimintaa
         <ul>
             <li>kaikkien muistiinpanojen hakeminen</li>

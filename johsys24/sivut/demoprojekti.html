@@ -1,0 +1,150 @@
+<html lang="fi">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../../style/css/style.css">
+        
+        <title>Johdatus systeemityöhön 5 osp</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1>Johdatus systeemityöhön 5 osp</h1>
+            </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+                        
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+                <article class="markdown-body">
+
+<h2>GitHub ja projektityöskentely</h2>
+
+<p>Demoprojektissa tehtävänantona on <a href="asunnonvuokraus.pdf" target="_blank">vuokraussovelluksen</a> yhden sprintin suunnittelu ja toteuttaminen ryhmässä.</p>
+
+<h3>Projektiryhmät</h3>
+
+<p>Kun ensimmäinen ilmoittautuu ryhmässä hän nimeää ryhmän (mielellään ryhmä1, ryhmä2 jne), seuraavat liittyvät kyseiseen tiimiin. 
+</p>
+
+<!--
+https://classroom.github.com/a/fFQhdTpd
+
+-->
+
+<h3>Käsitteitä</h3>
+
+<p>Peruskäsitteitä ovat Scrum, Sprint ja Backlog. <a href="https://www.youtube.com/watch?v=iJ_sl6J8PRg" target="_blank">What is Scrum? | Scrum under 3 minutes</a></p>
+
+<h2>GitHub Projects</h2>
+
+<p>Käytämme projektinhallinnassa GitHubin omaa työkalua Projects.</p>
+
+<h3>Projektiseinä</h3>
+<p>Yksi ryhmästä luo uuden projektin välilehdellä Projects. </p>
+<p><img src="../kuvat/project1.png" alt="GitHub Project"></p>
+<p>Valitse malliksi Board.</p>
+<p><img src="../kuvat/project2.png" alt="GitHub Project"></p>
+
+<p>Projektiseinällä kuvataan tehtävät mitä ryhmän on tarkoitus saada sprintin aikana tehtyä.
+</p>
+
+<h4>Project Backlog</h4>
+<ul>
+    <li>Tänne lisätään ryhmän päättämät toiminnallisuudet joita tuotteelle on tarkoitus saada tehtyä
+    </li>
+    <li>Kaikkia toimintoja ei välttämättä saada tehtyä projektin sprinttien aikana
+    </li>
+    <li>User storyt järjestetään tärkeysjärjestykseen, huomioikaa että osa toiminnoista pitää toteuttaa tietyssä järjestyksessä
+    </li>
+    <li>Pyritään kirjoittamaan <a href="https://www.youtube.com/watch?v=apOvF9NVguA" target="_blank">User Storyt</a> kuvaaviksi ja ymmärrettäviksi.
+    <ul>
+        <li>kuka</li>
+        <li>mitä</li>
+        <li>miksi</li>
+    </ul>
+    </li>
+</ul>
+<h4>Current Sprint</h4>
+
+<ul>
+    <li>Sprintin aikana toteutettavaksi valitut tehtävät</li>
+</ul>
+
+<h4>In Progress
+</h4>
+<ul>
+    <li>Meneillään olevat tehtävät siirretään tähän sarakkeeseen, merkitään kuka työtä on tekemässä
+    </li>
+    <li>Tässä vaiheessa määritä Assignees-kohdassa kenelle tehtävä on määritetty.</li>
+</ul>
+
+<h4>Done</h4>
+<ul>
+    <li>Valmiit tehtävät siirretään tähän sarakkeeseen
+    </li>
+</ul>
+
+<h4>
+    Daily
+</h4>
+
+<ul>
+    <li>Daily-sarakkeessa kuvataan lyhyt merkintä päiväpalaverista.
+<ul>
+<li>    päiväys, tunnit</li>
+    <li>ketkä paikalla</li>
+    <li>mitä kukakin tekemässä</li>
+
+</ul>
+        </li>
+</ul>
+
+<p><a href="../kuvat/project3.png"><img src="../kuvat/project3.png" alt="GitHub Project"></a></p>
+<p>Lisätä Backlog-sarakkeelle alussa tehtäviä mitä projekti sisältäisi.</p>
+
+<h2>Suunnitelma</h2>
+
+<ul>
+    <li>tietokantakaavio</li>
+    <li>1 wireframe / projektin jäsen, siitä toiminnosta minkä olet tekemässä. Ulkoasusuunnitelman voi tehdä Adobe XD:llä tai <a href="https://www.figma.com/" target="_blank">Figmalla</a>.</li>
+</ul>
+
+<h2>Toteutus</h2>
+
+<ul>
+    <li>Toteutetaan MVC-mallin mukaisesti, käytä pohjana <a href="https://github.com/otredu/news_2021" target="_blank">news 2021-repoa</a>.</li>
+<li>Tietokanta jonkun opiskelijan cPanel-tunnusten alle</li>
+<li>Code-välilehdelle tulee kansiot docs (tänne tietokantakaavio ja wireframe) ja mvc. Lisätkää myös <a href="https://www.markdownguide.org/basic-syntax/">readme.md</a> jossa kerrotaan projektin yleiset asiat (projektin aihe, koska tehty, ketkä ovat ryhmän jäsenet, käytetyt tekniikat).</li>
+<li>Ryhmässä tehtävänseuranta käyttäen myös MS Excel-työkirjaa. Voitte käyttää pohjana <a href="tyoajanseuranta.xlsx" target="_blank">tätä esimerkkiä</a>.</li>
+</ul>
+
+<h3>GitHub branch</h3>
+<ul>
+
+    <li>Käytetään <a href="https://otredu.github.io/github/projektityo.html" target="_blank">otredun ohjetta</a> GitHubin kanssa työskennellessä</li>
+    <ul>
+        <li>kloonaa repo</li>
+<li>haaran luominen omalla nimellä</li>
+<li>pull request kun tarkoitus lisätä main-haaraan</li>
+    </ul>
+</ul>
+
+<h3>Sprintin lopuksi</h3>
+
+<p>Sprintin lopuksi julkaistaan versio cPanelin alle. Testataan laaditut user storyt ja tehdään lyhyt sprintin muistio (ks. <a href="sprint_muistio_malli.pdf" target="_blank">esimerkki</a>).</p>
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

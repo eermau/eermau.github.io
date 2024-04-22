@@ -1,0 +1,20 @@
+Verkkokauppa 2 osp
+
+Sähköinen kaupankäynti
+- teoriaa ja esimerkkejä
+
+Wordpress
+- XAMPP ja paikallinen työskentely
+- Wordpress asennus ja konfigurointi
+- cPanelin alle siirtäminen
+- Elementor-editori
+- Teemat ja mukauttaminen
+
+
+
+Harjoitustyö
+- wordpress-sivusto
+- yhteydentotto/tarjouspyyntölomake
+- verkkokauppa WooCommerce
+- julkaiseminen cPanel
+- liittäminen portfolioon

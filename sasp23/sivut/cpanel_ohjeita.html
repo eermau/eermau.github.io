@@ -1,16 +1,16 @@
-<html>
+<html lang="fi">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    <title>CPanel</title>
+    <title>cPanel</title>
 </head>
 
 <body>
     <div class="wrapper">
         <header>
-            <h1>Sähköisten asiointipalveluiden toteuttaminen</h1><a class="titlelink" href="../index.html">Etusivulle</a>
+            <h1>Sähköisten asiointipalveluiden toteuttaminen</h1>
         </header>
         <div id="container">
 
@@ -35,9 +35,21 @@
                     <p><img width="450" src="../kuvat/cpanel_phpmyadmin_export.png" /></p>
                     <p>Kun tuot tietokantaasi tietoja valitse Tuonti (Import) tai kopioi SQL-tiedoston sisältämät käskyt suoraan SQL-ikkunaan.</p>
                     <p><img width="450" src="../kuvat/cpanel_phpmyadmin_import.png" /></p>
+                    
+                    <h4>Tietokantatunnukset</h4>
+                    <p>Kun teet tietokannan cPanelin alle määrittele tietokantayhteys näin:</p>
+                    <ul>
+                        <li>host: tunnuksesi.treok.io</li>
+                        <li>db: tekemäsi tietokanta (tunnus_tietokanta)</li>
+                        <li>user: tekemäsi käyttäjä (tunnus_tietokanta)</li>
+                        <li>password: generoimasi salasana</li>
+                    </ul>
+                    <p>Huom: kun siirrät sivuston cPanelin alle on host hyvä määritellä localhost-nimellä.</p>
+                    
                     <h4>Remote MySQL</h4>
+                    <p>Otettaessa yhteys paikallisesti php:lla web-hotellissasi olevaan tietokantaan meidän pitää sallia IP-osoitteesi (whitelist).</p>
                     <p><img width="450" src="../kuvat/remote_mysql.png" /></p>
-                    <p>cPanelille tulee sallia ulkoinen yhteys MySQL-tietokantaan</p>
+                    <p>cPanelille tulee sallia ulkoinen yhteys MySQL-tietokantaan:</p>
                     <ul>
                         <li>Valitse Remote MySQL</li>
                         <li>Kirjoita oma IP-osoitteesi Host-kohtaan (<a href="https://whatismyipaddress.com/"
@@ -46,13 +58,31 @@
                         <li>Kirjoita kommentti-kohtaan esim. "koulu"</li>
                     </ul>
 
-                    <h4>Tietokantatunnukset</h4>
-                    <p>Cpanelin käyttäminen connection.php:ssa</p>
+                    <h3>Domain</h3>
+                    <p>Siirrettäessä web-sovellus cPanelin alle tehdään sille oma alidomain.</p>
                     <ul>
-                        <li>host: tunnuksesi.treok.io</li>
-                        <li>db: tekemäsi tietokanta (tunnus_tietokanta)</li>
-                        <li>user: tekemäsi käyttäjä (tunnus_tietokanta)</li>
-                        <li>password: generoimasi salasana</li>
+                        <li>kirjaudu aluksi cPaneliin tunnuksillasi</li>
+                        <li>valitse kohda Domains / Domains</li>
+                        <li>tee uusi alidomain (Create A New Domain), nimeä esimerkiksi testi.tunnuksesi.treok.io, valitse Document Root-kohdassa haluamasi kansio (esimerkiksi testi)
+                            <p><img src="../kuvat/domains1.png" alt=""></p>
+                        </li>
+                        <li>kokeile mitä tapahtuu kun menet oikeaan osoitteeseen? Jos puuttuu index.php / index.html niin tulee virheilmoitus! Tehdään vielä index.html ja testataan sitten</li>
                     </ul>
-                    <h4>Domain</h4>
-                    <p>Kun siirretään web-sovellus cPanelin alle niin tehdään sille aluksi oma domain.</p>
+                    <h4>index.html</h4>
+                    <p>Lisää uusi tiedosto (index.html tai index.php) ja kirjoita sille hieman sisältöä.</p>
+                    <p><img src="../kuvat/domains2.png" alt=""></p>                    
+<p>Esimmerkki index.html-tiedoston sisällöstä:</p>
+<pre>
+&lt;h1&gt; Hello World ! &lt;/h1&gt;
+</pre>                    
+                    
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+    kevät 2023
+  </div>
+</body>
+
+</html>
