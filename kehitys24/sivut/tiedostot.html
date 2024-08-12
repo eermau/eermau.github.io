@@ -1,0 +1,224 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+  <h1>Tiedosto ja luokat</h1>
+  
+  
+  <h4>Käyttöliittymä</h4>
+  
+  <p>Tarkoitus on opetella lukemaan ja kirjoittamaan tiedoston tietoja ja hyödyntämään tässä omaa apuluokkaa. Ohjelmassa tallennetaan csv-tiedostoon henkiöitä, tallentaminen tapahtuu painikkeen avulla. Tämän jälkeen voidaan lukea tiedoston sisältö sarakkeittain Text-ohjaimiin. 
+  
+  <p><img src="../kuvat/tiedostot_7.png" width="500" />
+  <p>  Laadi aluksi yksinkertainen lomake jonka avulla voidaan syöttää henkilön tiedot tiedostoon. 
+  
+  <ul>
+	<li>Muuta Canvasin ominaisuus Screen Space Camera, raahaa Main Camera kohtaan Render Camera.</li>
+	<li>Nimeä ohjaimet järkevästi.</li>
+	<li>Säädä koko Scale-asetuksen avulla sopivaksi.</li>
+	<li>Esimerkki käyttöliittymästä:
+		<p><img src="../kuvat/tiedostot_5.png" />
+	<p><img src="../kuvat/tiedostot_4.png" />
+	</li>
+  </ul>
+  
+  <h4>FileController.cs</h4>
+  <p>FileController-luokan avulla voidaan tallettaa tiedostoon talteen syötteet. Tallennetaan ;-merkein erottuun csv-tiedostoon tiedot jotta ne on helposti luettavissa uudestaan.
+  <ul>
+  <li>Lisää uusi tyhjä Game Object, nimeä FileController. Lisää tämän jälkeen uusi skripti FileController.cs, raahaa tämä skripti Game objektille.</li>
+  
+	<li>Ryhdytään seuraavaksi kirjoittamaan skriptiä. Lisää aluksi kirjastot mukaan
+<pre>
+using UnityEngine.UI;
+using System.IO;
+using TMPro;</pre>	
+</li>
+		
+	<li>Lisää luokalle kaksi julkista muuttujaa joiden avulla saadaan selville mitä käyttäjä on kirjoittanut.
+	
+<pre>
+public TMP_InputField inputNimi;
+public TMP_InputField inputOsoite;</pre>	
+Lisää editorissa kentille käyttöliittymän InputField-kentät.
+<p><img src="../kuvat/tiedostot_1.png" />
+	</li>
+	<li>Lisätään julkinen aliohjelma SaveData()
+<pre>
+public void SaveData()
+{
+	string fileName = "Data.csv";
+	string path = "Assets/";
+	// haetaan kirjoitettavat tiedot:
+	string osoite = inputOsoite.text;
+	string nimi = inputNimi.text;
+	string aika = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+	// luodaan tiedosto
+	StreamWriter writer = new StreamWriter(path + fileName, true);
+	// kirjoitetaan rivi tekstiä, erotinmerkkinä ;
+	string rivi = nimi + ";" + osoite + ";" + aika;
+	writer.WriteLine(rivi);
+	Debug.Log(rivi);
+	writer.Close();
+}</pre>	
+	</li>
+	<li>Lisää painikkeelle toiminta. 
+<p><img src="../kuvat/tiedostot_2.png" />
+	<ul>
+		<li>Paina +-nappia painikkeella</li>
+		<li>Valitse Editor And Runtime</li>
+		<li>Raahaa FileController objektiksi</li>
+		<li>Määritä oikea funktio suoritettavaksi.</li>
+	</ul>
+	 </li>
+  </ul>
+  
+<h4>Apuluokka</h4>  
+  
+  
+ Tehdään seuraavaksi luokka jota käytetään tietueen tiedon käsittelyssä. C#-koodissa kirjoitetaan usein luokkien setterien ja getterien sijaan ns. auto properties -muuttujia. 
+<ul>
+	<li>Julkisia muuttujia joita voidaan asettaa suoraan luokan ulkopuolelta.</li>
+	<li>Toinen vaihtoehto on tehdä yksityiset (private) muuttujat joita kutsutaan julkisten apuohjelmien kautta (getNimi, setNimi jne).</li>
+	<li>Lisätietoa: <a href="http://johnstejskal.com/wp/getters-setters-and-auto-properties-in-c-explained-get-set/">johnstejskal.com getters-setters and auto properties explained</a></li>
+</ul>
+ 
+<p>Lisää samaan skriptiin uusi luokka:
+<pre>
+public class Henkilo {
+    public string nimi { get; set; }
+    public string osoite { get; set; }
+    public string aika { get; set; }
+
+}</pre> 
+ 
+<h4>Tiedoston lukeminen</h4>  
+  <ol>
+  <li>Tehdään käyttöliittymälle lisäys tiedoston lukemista varten. Lisää sopivat ohjaimet. Nimeä järkevästi.
+		<p><img src="../kuvat/tiedostot_6.png" />
+		<p><img src="../kuvat/tiedostot_3.png" />
+
+
+
+  </li>
+  <li>Tiedoston lukeminen - ReadData()
+<pre>
+public void ReadData()
+{
+	string fileName = "Data.csv";
+	string path = "Assets/";
+	string row = "";
+	int rows = 0;
+	// luetaan tiedosto läpi rivi kerrallaan
+	StreamReader file = new StreamReader(path + fileName);
+	while ((row = file.ReadLine()) != null)
+	{
+		rows++;
+		Debug.Log(rows + "\t" + row);
+	}
+
+	file.Close();
+}</pre> 
+  Kokeile toimintaa, näkyvätkö konsolissa nyt lisäämäsi henkilöt.
+  </li>
+  
+<li>Lisätään myös julkisia muuttujia joita tarvitaan tiedoston lukemiseen.
+<pre>
+public TMP_Text txtReadOsoite;
+public TMP_Text txtReadNimi;
+public TMP_Text txtReadAika;
+// lista henkilöille
+List&lt;Henkilo&gt; listHenkilot;
+</pre>
+<p><img src="../kuvat/tiedostot_8.png" />
+</li>
+
+  <li>Lisätään uusi lista ReadData()-metodin alkuun johon henkilöt sijoitetaan
+    <pre>
+// tyhjennetään Henkilot
+listHenkilot = new List&lt;Henkilo&gt;();
+</pre>
+</li>
+<li>Lisätään tiedostonkäsittelyyn lisää toimintaa. Yritetään lukea row-rivin tiedot pilkottuna uuteen Henkilo-luokan olioon (tämä ReadData():n while-silmukan sisälle).
+<pre>
+try
+{
+	// puretaan rivi ;-merkkien kohdalta
+	string[] fields = row.Split(';');
+	// esitellään uusi Henkilo
+	Henkilo h = new Henkilo();
+	// asetetaan kentät
+	h.nimi = fields[0];
+	h.osoite = fields[1];
+	h.aika = fields[2];
+	// lisätään henkilö listaan
+	listHenkilot.Add(h);
+
+}
+catch (System.Exception e)
+{
+	Debug.Log(e.Message.ToString());
+}</pre>
+<p>Jos kokeilet tässä vaiheessa niin henkilöt ehkä näkyvät. Mikäli tiedot eivät näy eikä virhettä ole konsolissa niin syy voi olla Text-objektien Trucate-ominaisuus (aseta Overflow).
+<p><img src="../kuvat/tiedostot_9.png" />
+<p>Järjestetään vielä lista nimen mukaiseen järjestykseen:</li>
+<li>
+  <pre>// järjestetään lista 
+listHenkilot.Sort((x, y) =&gt; x.nimi.CompareTo(y.nimi)); 
+// Lopuksi käydään henkilöt läpi ja asetetaan näkyviin: 
+// käydään läpi henkilöt ja sijoitetaan näkyviin 
+for (int i = 0; i &lt; listHenkilot.Count; i++) { 	
+ Henkilo x = listHenkilot[i];
+	Debug.Log(i + "\t" + x.nimi);
+ txtReadAika.text += x.aika + "\n";	
+ txtReadNimi.text += x.nimi + "\n";
+ txtReadOsoite.text += x.osoite + "\n";
+}  </pre>
+</li>
+  </ol>
+  
+  
+  <h4>Lisäyksiä</h4>
+  
+  <h5>Lomakkeen tyhjennys</h5>
+  <ul>
+  <li>Kun käyttäjä painaa Tallenna-painiketta niin lomakkeen tietojen tulisi tyhjentyä.</li>
+  </ul>
+  
+  <h5>Lisäkenttä</h5>
+  
+  <ul>
+	<li>Lisää uusi kenttä lomakkeelle.</li>
+	<li>Lisää kentän tiedon tallentaminen mukaan tiedostonkäsittelyyn (tallentaminen ja lukeminen).</li>
+  </ul>
+  
+  <h5>Luku-kenttien tyhjentäminen</h5>
+  <ul>
+  <li>Kun avataan tiedosto niin kentät pitäisi tyhjentää.</li>
+  </ul>
+  
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

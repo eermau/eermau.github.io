@@ -1,0 +1,174 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+  <h1>Hello Unity</h1>
+
+<h4>Uusi projekti</h4>
+
+<p>Luo uusi projekti ja nimeä se haluamallasi tavalla, muista käyttää 2D-pohjaa.</p>
+
+<h4>Kansiot</h4>
+
+<ul>
+<li>Valitse Assets ja lisää uusi alikansio Scripts</li>
+<li>Lisää myös uusi alikansio Images, ladataan tänne kuva (hiiren oikea / Import Asset..), nimeä character
+<p><img src="../kuvat/hello_1.png" /></p>
+</li>
+</ul>
+
+<h4>Hahmo</h4>
+<ul>
+<li>
+Hierarchy-ikkuna / hiiren oikea / Create Empty</li>
+<li>Nimeä Character, lisää Inspector-ikkunassa uusi Sprite Renderer</li>
+
+<li>Raahaa Assets / Images -kansiosta kuva Sprite-kohtaan</li>
+
+<li>Kokeile mitä Inspector-ikkunan toiminnot tekevät:
+<ul>
+<li>Position</li>
+<li>Rotation</li>
+<li>Scale</li>
+<li>Color</li>
+<li>Flip</li>
+</ul>
+<li>Lisätään Assets / Scripts -kansioon uusi C# Script, nimeä se CharacterHandler.</li>
+
+<li>Lisää Update()-metodille koodiksi:
+<pre>if (Input.GetKeyDown(KeyCode.LeftArrow))
+{
+    Vector3 position = this.transform.position;
+    position.x--;
+    this.transform.position = position;
+}</pre>
+</li>
+<li>Tarkoitus on liittää tämä skripti Character-oliolle (object). Silloin this-määre viittaa kyseiseen olioon: katsotaan mikä on olion nykyinen sijainti, vähennetään sijainnin x-koordinaattia yhdellä ja laitetaan uusi sijainti oliolle.
+</li>
+<li>Raahaa CharacterHandler-skripti Inspector-ikkunassa Character-oliolle.
+
+<p><img src="../kuvat/hello_2.png" /></p>
+</li>
+
+<li>Aja sovellus Play-napilla ja testaa toimiiko liikkuminen. Jos hahmo kävelee vasemmalle niin voit pysäyttää sovelluksen ja lisätä liikkumisen myös oikealle, ylös- ja alaspäin. </li>
+</ul>
+
+<p>Jos haluat kääntää koodissa hahmon voit kokeilla SpriteRenderer-komponentin muokkaamista näin:
+    <pre>this.GetComponent&lt;SpriteRenderer&gt;().flipX = true;</pre>    
+    </p>
+    
+<h5>Pommi</h5>
+<ul>
+<li>Lisätään toinen objekti, pommi. Paina hiiren oikea / Create Empty, nimeä Bomb. Lisää Images-kansioon kuva pommista. Lisää Bomb-objektille uusi Sprite Renderer ja raahaa kuva Spriteksi. (Jos kuva näyttää liian isolta tai pieneltä voit säätää sitä kuvan ominaisuuksista Pixels Per Unit tai muokkaamalla kuvaa halutun kokoiseksi.)</li>
+</ul>
+
+<h4>Törmäys</h4>
+<ul>
+<li>Tällä hetkellä ei ole käytössä mitään fyysisiä sääntöjä jotka määrittelisivät objektien toimintaa. Jotta pelaaja ja pommi ymmärtäisivät kosketuksen täytyy lisätä uusia komponentteja Insepector-ikkunassa:
+</li>
+<li>Valitse pelaaja ja lisää Component / Physics 2D / Rigid Body 2D sekä Component / Physics 2D / Box Collider 2D. Ota painovoima pois pelaajalta (Gravity Scale: 0).
+</li>
+<li>Valitse pommi ja lisää sille Component / Physics 2D / Box Collider 2D. Kokeile ajaa ohjelma ja testaa toimiiko törmäys.
+</li>
+<li>(Jos törmäys toimii niin voit kokeilla laittaa isTrigger-valintaruudun päälle, silloin tämä objekti toimii vain merkkinä törmäykselle mutta hahmo voi kävellä sen läpi.)
+</li>
+<li>Törmäys vaatii hieman koodia hahmollemme. Lisää CharacterHandler-skriptiin seuraavat metodit:
+
+<pre>
+void OnCollisionEnter2D(Collision2D colInfo)
+{
+    print("Törmäys " + gameObject.name + " ja " + colInfo.collider.name);
+}
+ 
+void OnCollisionStay2D(Collision2D colInfo)
+{
+    print(gameObject.name + " ja " + colInfo.collider.name + " törmäävät.");
+}
+ 
+void OnCollisionExit2D(Collision2D colInfo)
+{
+    print(gameObject.name + " ja " + colInfo.collider.name + " eivät törmää enää.");
+}
+</pre>
+
+</li>
+</ul>
+<p>Jos haluttaisiin törmäyksien (Collision) sijaan katsoa onko tapahtunut Trigger-tapahtuma niin käytettäisiin OnTriggerEnder, OnTriggerStay ja OnTriggerExit -metodeja.</p>
+<h4>Teksti</h4>
+
+<ul>
+<li>Lisätään teksti: Component / UI / Text TextMeshPro, kirjoita tekstiksi tässä vaiheessa "Osumia: 0". Voit kokeilla säätää tekstikentän väriä ja fonttia. Muuta Text-objektin nimeksi txtScoreText. Voit tuplaklikata Canvas-objektia nähdäksesi UI-elementtien alueen ja palata takaisin kameran näkymään tuplaklikkaamalla MainCamera-objektia.
+</li>
+
+<li>Seuraavaksi lisätään hahmolle (Character) koodissa tekstikenttä ja tämän tekstikentän arvoksi asetetaan kehitysympäristössä äsken tehty ScoreText.
+<p>Lisää kaksi attribuuttia CharacterHandler-luokalle:
+<pre>
+public class CharacterHandler : MonoBehaviour
+{
+    public TextMeshProUGUI txtViesti;
+    private int osumat;
+</pre>
+<p>Text-objektista tulee virheilmoitus kun kirjastoa ei ole vielä määritelty. Lisää siis alkuun myös:
+<pre>using TMPro;</pre>
+</li>
+<li>Raahaa txtScoreText-teksti julkisen txtViesti-muuttujan arvoksi.
+<p><img src="../kuvat/hello_3.png" /></p></li>
+
+<li>Lopuksi lisätään toimintaa törmäykselle:
+<pre>void OnCollisionEnter2D(Collision2D colInfo)
+{
+	osumat++;
+	txtViesti.text = "Osumia: " + osumat;
+}
+</pre>
+</li>
+
+</ul>
+
+<h4>Lisäyksiä</h4>
+
+<ul>
+	<li>Kun hahmo osuu pommiin niin aseta hahmon sijainniksi uudelleen alkupiste (esimerkiksi x:0 y:0).</li>
+
+	<li>Esteet
+		<ul>
+			<li>Lisää Assets / Create / Sprites / Square -valikosta neliö. </li>
+			<li>Raahaa neliö Hierarchy-ikkunaan ja nimeä järkevästi. </li>
+			<li>Lisää neliölle Box Collider 2D jotta hahmo voi törmätä siihen.</li>
+			<li>Muodosta neliöiden avulla esteitä tai seiniä pelialueelle.</li>
+		</ul>
+	</li>
+	</ul>
+
+<h4>Lähteitä ja linkkejä</h4>
+<ul>
+<li><a href="http://gigi.nullneuron.net/gigilabs/unity3d-moving-an-object-with-keyboard-input/">Tutorial: Moving an Object with Keyboard Input</a></li>
+<li><a href="https://www.binpress.com/unity-3d-collisions-basics/">Binpress.com: Unity3D Collisions Basics</a></li>
+</ul>
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+<h1>Avaruuden sankari</h1>
+
+<h4>Tehtävän kuvaus</h4>
+<p>Tarkoitus on tehdä pieni Space Invaders-tyyppinen ammuskelupeli. Pelaaja ohjaa alusta joko oikealta vasemmalle tai ylhäältä alas. Pelaaja kerää pisteitä ampumalla vastustajia, kun pelaaja kuolee näytetään lopetusruutu. Lopetusikkunalla kerrotaan pelaajan pisteet sekä kaikkien aikojen paras tulos. Peli voi myös perustua painovoimaan. 
+<ul>
+<li>GameController
+<ul>
+<li>Kokeillaan tässä pelissä samaa ideaa kuin Ping Pong-sovelluksessa. On yksi pääluokka jonka sisällä luodaan alus ja vastustajat. 
+</li>
+</ul>
+</li>
+<li>Alus ja liikkuminen
+<ul>
+<li>Tehdään pelaajan alus joka voi liikkua ylös ja alas (tai oikealle ja vasemmalle)
+</li>
+</ul>
+</li>
+<li>Ampuminen
+<ul>
+<li>Katso miten Ruby's 2D RPG:ssä tehtiin ampuminen. Tarkoitus on, että aluksella pystyisi ampumaan kohti vihollisia.
+</li>
+</ul>
+</li>
+<li>Viholliset
+<ul>
+<li>Viholliset ilmestyvät satunnaisesti ruudun toiseen reunaan ja liikkuvat kohti pelaajaa.
+</li>
+</ul>
+<li>Liikkuva tausta
+<ul><li>Tarkoitus on kokeilla miten saadaan taustalle esimerkiksi tähtikartta joka liikkuu pelin kulun ajan.
+
+<li><a href="https://www.youtube.com/watch?v=IgZQjGyB9zg">Youtube: Liikkuva tausta</a></li>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+
+<h4>1. Suunnittelu</h4>
+<p>Tässä harjoituksessa on tehtävänä ensin tehdä kevyt suunnitelma.
+
+<ol>
+	<li>MS Word-asiakirja jossa ylätunnisteessa oma nimi, sivunumero yms. Tähän asiakirjaan kootaan suunnittelun aikana tehtävä sisältö.</li>
+	<li>Yleiskuvaus: kerro lyhyesti millainen sinun pelisi olisi. Mitä olet lähdössä tekemään.</li>
+	<li>Yksinkertainen mockup pelistä. Sinun ei tarvitse käyttää pirtoohjelmaa vaan tee Unityssa ulkoasu aloitus-, lopetus- ja pelinäkymästä. Mieti mitä mahdollisia valmiita Asset Storen assetteja hyödyntäisit.</li>
+	<li>Luokkakaavio pelin luokista. Tässä harjoituksessa palautetaan mieleen miten luokkakaavio piirretään. Käytetään Vision kaaviota "Staattinen UML-rakenne".
+		<ul>
+			<li>Ensin luokat kaaviolle.</li>
+			<li>Luokkien muuttujat (attribuutit)</li>
+			<li>Luokkien toiminnot (metodit)</li>
+			<li>Luokkien väliset yhteydet. Yhteyksissä kannattaa käyttää Koostetta (Composition) tai Kytkentää (Assosiation), yhteys on silloin kun toinen luokka, esimerkiksi GameManager, käyttää toista luokkaa. (Lisätietoa esimerkiksi <a href="https://creately.com/blog/diagrams/class-diagram-relationships/">Class Diagram Relationships</a>).</li>
+		</ul>
+	<p><img src="../kuvat/luokkakaavio_avaruuspeli.png" width="500" />
+	</li>
+	<li>Esittele suunnitelma ennen toteuttamisen aloittamista!</li>
+</ol>
+
+<hr />
+<h4>2. Toteutus</h4>
+
+<h5>Liikkuminen</h5>
+
+<p>Kun olet tehnyt kevyen suunnitelman niin kannattaa aloittaa pelaajan koodaamisesta
+<ul>
+<li>hahmo (itse piirretty, asset -paketista tai googlen kuvahausta)</li>
+<li>skripti hahmolle</li>
+<li>miten hahmo liikkuisi esim. vasemmalle - oikealle</li>
+</ul>
+<p>Hahmon liikkuessa voi lähteä miettimään ampumista tai vastustajia
+
+<h5>Ammus</h5>
+
+<p>Ammus kannattaa toteuttaa samaan tapaan kuin Ruby's 2D RPG:ssä. Ammus tarvitsee oman skriptin, liitä tämä ammuksen prefabille. Lisää ammukselle RigidBody2D, älä laita Kinematic vaan Dynamic ja Mass arvolle 0.
+<ol>
+<li>Aseta ammukselle private-attribuutti rigidbody:
+<pre>Rigidbody2D rigidbody2d;</pre></li>
+<li>RigidBody asetetaan Awake()-metodissa:
+<pre>
+void Awake()
+{
+	rigidbody2d = GetComponent&lt;Rigidbody2D&gt;();
+}
+</pre>
+</li>
+<li>Lisätään ammukselle metodi joka käynnistää liikkeen
+<pre>
+public void Shoot(Vector2 direction, float force)
+{
+	rigidbody2d.AddForce(direction * force);
+}
+</pre>
+</li>
+<li>Osuminen tarkistetaan OnCollisionEnter2D-metodissa:
+<pre>
+void OnCollisionEnter2D(Collision2D other)
+{
+	Debug.Log("Osuttiin " + other.gameObject);
+	Destroy(gameObject);
+}
+</pre>
+</li>
+<li>Pelaaja suorittaa ampumisen, pelaaja-luokassa tehdään uuden ammuksen luonti.
+<ul>
+	<li>Lisää aluksi uusi GameObject:
+<pre>
+public GameObject laserPrefab;
+Rigidbody2D rigidbody2d;
+</pre>
+<p>Rigidbody2D määritellään samaan tapaan kuin ammuksella Awake() tai Start()-metodissa. Raahaa laserPrefab:n kohdalle editorissa ammuksesi Prefabs-kansiosta.</p>
+</li>
+
+<li>
+<pre>void Shoot()
+{
+GameObject laser = Instantiate(laserPrefab, rigidbody2d.position + Vector2.up * 1.5f, Quaternion.identity);
+
+LaserController projectile = laser.GetComponent&lt;LaserController&gt;();
+projectile.Shoot(new Vector2(0,1), 0.2f);
+
+}</pre>
+</li>
+
+<li>Kun painetaan välilyöntiä niin ammutaan, lisää Update()-metodille:
+<pre>
+if (Input.GetKeyDown(KeyCode.Space))
+{
+	Shoot();
+}
+</pre>
+</li>
+
+</ol>
+
+<h5>Vastustajien luominen</h5>
+
+<p>Vastustajia voi tehdä monella tapaa, kokeile hakea verkosta erilaisia ratkaisuja ja mieti mikä voisi toimia sinun pelissäsi.
+
+<p>Yksi yksinkertainen malli: <a href="EnemySpawnScript.html" target="_blank">EnemySpawnScript.cs</a>
+
+<h5>Tekstin päivittäminen</h5>
+<ol>
+	<li>Tässä ohjelmassa teksti ei ole sidottu mihinkään Prefab-objektiin vaan ammuksen pitäisi osata kertoa GameManagerille koska pisteitä lisätään. Lisää aluksi tuttuun tapaan skenelle uusi Canvas ja TMP_Text.</li>
+	<li>Lisää GameManager:lle julkinen TMP_Text-muuttuja, raahaa editorissa TMP_Text-kenttä tämän arvoksi.
+<pre>
+using TMPro;
+</pre>
+Esittele muuttujat:
+<pre>
+public TMP_Text txtScore;
+public int score;
+</pre>
+<p>Raahaa Text-objekti julkisen muuttujan kohdalle Inspector-ikkunassa:<p><img src="../kuvat/space_text.png" />
+	</li>
+<li>Lisää GameManagerille julkinen aliohjelma joka kasvattaa pisteitä:
+<pre>
+public void AddScore()
+{
+	this.score += 1;
+	this.txtScore.text = "Score ny: " + score;
+}
+</pre>
+</li>	
+<li>Ammus osuu vastustajaan ja silloin pisteiden pitäisi kasvaa. Lisää aluksi uusi muuttuja ammukselle:
+<pre>
+public GameManager gm;
+</pre> 
+<p>Raahaa GameManager tähän muuttujaan editorissa (sinun tarvitsee ehkä tehdä GameManagerista Prefab jos se ei vielä ollut).
+<p>Aseta gm <b>Awake()</b>-metodissa:
+<pre>
+ gm = GameObject.Find("GameManager").GetComponent&lt;GameManager&gt;();
+</pre> 
+Kun osutaan vastustajaan niin kutsutaan gm:n AddScore()-aliohjelmaa:
+<pre>
+gm.AddScore();
+</pre>
+</li>	
+</ol>
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>
