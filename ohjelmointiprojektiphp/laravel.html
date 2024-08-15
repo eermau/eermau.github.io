@@ -1,42 +1,45 @@
 <html lang="fi">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href="../../style/css/style.css">
-        <title>Laravel</title>
-    </head>
-    <body>
-        <div class="wrapper">
-            <header>
-                <h1>Laravel</h1>
-                <div id="divHeadLink">
-                    <a href="https://eermau.github.io/">eermau.github.io</a>
-                </div>
-            </header>
-            <div id="container">
-                <div id="main" role="main">
-                    <article class="markdown-body">
-                        <h1>Laravel</h1>
-                        <h2>Yleistä</h2>
 
-                        <ul>
-                            <li>Tee itsellesi private GitHub-repo
-                                <p><img src="./kuvat/laravel_1.png" alt=""></p>
-                            </li>
-                            <li>Asenna Software Centerin kautta XAMPP ja Composer</li>
-                            <li>Käynnistä XAMPP ja luo phpMyAdminin avulla uusi tietokanta nimeltä "laravel"
-                                <p><img src="./kuvat/laravel_2.png" alt=""></p>
-                                <p><img src="./kuvat/laravel_3.png" alt=""></p>
-                            </li>
-                        </ul>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Laravel</title>
+</head>
 
-                        
-                        <h2>Tutoriaali</h2>
-                        <p>Käydään läpi tutoriaali <a href="https://bootcamp.laravel.com/blade/installation" target="_blank">Build Chirper with Blade</a>.</p>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Laravel</h1>
+            <div id="divHeadLink">
+                <a href="https://eermau.github.io/">eermau.github.io</a>
+            </div>
+        </header>
+        <div id="container">
+            <div id="main" role="main">
+                <article class="markdown-body">
+                    <h1>Laravel</h1>
+                    <h2>Yleistä</h2>
 
-                        <h3>Tietokantayhteys</h3>
-                        <p>.env-tiedostossa määritelty tietokantayhteys:</p>
-<pre>
+                    <ul>
+                        <li>Tee itsellesi private GitHub-repo
+                            <p><img src="./kuvat/laravel_1.png" alt=""></p>
+                        </li>
+                        <li>Asenna Software Centerin kautta XAMPP ja Composer</li>
+                        <li>Käynnistä XAMPP ja luo phpMyAdminin avulla uusi tietokanta nimeltä "laravel"
+                            <p><img src="./kuvat/laravel_2.png" alt=""></p>
+                            <p><img src="./kuvat/laravel_3.png" alt=""></p>
+                        </li>
+                    </ul>
+
+
+                    <h2>Tutoriaali</h2>
+                    <p>Käydään läpi tutoriaali <a href="https://bootcamp.laravel.com/blade/installation"
+                            target="_blank">Build Chirper with Blade</a>.</p>
+
+                    <h3>Tietokantayhteys</h3>
+                    <p>.env-tiedostossa määritelty tietokantayhteys:</p>
+                    <pre>
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -44,35 +47,45 @@ DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=    
 </pre>
-<p>Aja migrations-tiedostot, tarkista luotiinko tietokantaan taulut oikein.</p>
-<pre>
+                    <p>Aja migrations-tiedostot, tarkista luotiinko tietokantaan taulut oikein.</p>
+                    <pre>
 php artisan migrate
 </pre>
 
-<h3>Installing Laravel Breeze</h3>
-<ul>
-    <li>avaa toinen terminal</li>
-    <li><pre>cd chirper</pre></li>
-    <li><pre>composer require laravel/breeze --dev</pre></li>
-    <li><pre>php artisan breeze:install blade</pre></li>
-    <li><pre>npm run dev</pre></li>
-</ul>
+                    <h3>Installing Laravel Breeze</h3>
+                    <ul>
+                        <li>avaa toinen terminal</li>
+                        <li>
+                            <pre>cd chirper</pre>
+                        </li>
+                        <li>
+                            <pre>composer require laravel/breeze --dev</pre>
+                        </li>
+                        <li>
+                            <pre>php artisan breeze:install blade</pre>
+                        </li>
+                        <li>
+                            <pre>npm run dev</pre>
+                        </li>
+                    </ul>
 
-<h3>Creating Chirps</h3>
+                    <h3>Creating Chirps</h3>
 
 
-                        <h2>Linkkejä</h2>
+                    <h2>Linkkejä</h2>
 
-                        <ul>
-                            <li><a href="https://getcomposer.org/download/">Composer Download</a></li>
-                            <li><a href="https://otredu.github.io/frameworks/laravel/" target="_blank">otredu laravel-demo</a></li>
-                        </ul>
-                    </article>
-                </div>
+                    <ul>
+                        <li><a href="https://getcomposer.org/download/">Composer Download</a></li>
+                        <li><a href="https://otredu.github.io/frameworks/laravel/" target="_blank">otredu
+                                laravel-demo</a></li>
+                    </ul>
+                </article>
             </div>
         </div>
-        <div class="current-section"></div>
-    </body>
+    </div>
+    <div class="current-section"></div>
+</body>
+
 </html>
 
 
