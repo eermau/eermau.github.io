@@ -311,15 +311,10 @@ private void OnTriggerEnter2D(Collider2D col)
 </ul>
 
 <hr />
-<h2>3. Uusi taso</h2>
-<ul>
-	<li>Lisää ovi sopivaan kohtaan ensimmäiselle tasollesi.</li>
-	<li>Kun hahmo osuu oviaukkoon avataan toinen taso. Luo toinen taso uudeksi Sceneksi.</li>
-</ul>
 
 <hr />
 
-<h2>4. Pisteiden kerääminen</h2>
+<h2>3. Pisteiden kerääminen</h2>
 <ul>
 <li>Tee hedelmä, tähti tms. kerättävä objekti jota hahmosi tulisi kerätä pelikentältä. Tee tästä objektista Prefab. Lisää hedelmälle jokin tag, esimerkiksi "fruit".
 </li>
@@ -351,7 +346,7 @@ private void OnTriggerEnter2D(Collider2D col)
 
 <hr />
 
-<h2>5. Pisteet näkyviin</h2>
+<h2>4. Pisteet näkyviin</h2>
 <p><img src="../kuvat/tasohyppely_ulkoasu.png" width="400" />
 <ul>
 <li>Lisää hierarchy-ikkunaan uusi Text-elementti (hiiren oikea / UI / Text - TextMeshPro).</li>
@@ -381,7 +376,7 @@ txtScore.text = "Pisteet:" + score;
 </ul>
 <hr />
 
-<h2>6. PlayerPrefs</h2>
+<h2>5. PlayerPrefs</h2>
 <ul>
 <li>Tarkoitus on välittää tieto yhdeltä Sceneltä toiselle. Tämä onnistuu PlayerPrefs:n avulla.
 </li> 
@@ -425,7 +420,14 @@ public void Start()
 
 </ul>
 <hr />
-<h2>7. Tiedoston tallennus</h2>
+<h2>Extra</h2>
+<h3>Uusi taso</h3>
+<ul>
+	<li>Lisää ovi sopivaan kohtaan ensimmäiselle tasollesi.</li>
+	<li>Kun hahmo osuu oviaukkoon avataan toinen taso. Luo toinen taso uudeksi Sceneksi.</li>
+</ul>
+
+<h3>Tiedoston tallennus</h3>
 <ul>
 <li>Tallenna pisteet myös tiedostoon, tarkoitus on lukea pisteet High Score-taulukkoon.</li> 
 
