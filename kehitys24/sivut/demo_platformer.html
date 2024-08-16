@@ -19,12 +19,12 @@
                 
                 <article class="markdown-body">
 <h1>Tasohyppely</h1>
-<h4>Perustoiminnot</h4>
+<h2>Perustoiminnot</h2>
 
 <p>Tarkoitus on laatia pohja tasohyppelylle jossa hahmo voi pomppia tasolta toiselle.
 
 <p><img src="../kuvat/tasohyppely_1.png" width="400"/>
-<h5>Player</h5>
+<h3>Player</h3>
 <ul>
 <li>Lisää kansiot Prefabs, Scenes, Sprites, Scripts</li>
 <li>Lisää kansioon Scenes uusi Scene Game ja lisää se Hierarchy-ikkunaan. Poista alkuperäinen SampleScene.
@@ -39,7 +39,7 @@
 </li>
 <li>Lisää hahmolle RigidBody2D, lisää myös BoxCollider2D</li>
 </ul>
-<h5>Lattia</h5>
+<h3>Lattia</h3>
 <ul>
 <li>Raahaa neliö uudestaan Hierarchy-ikkunalle. Nimeä se esim. Floor, lisää tälle BoxCollider2D ja anna jokin sopiva väri. Lisää lattialle myös RigidBody2D ja aseta Dynamic-asetuksen sijaan Kinematic. </li>
 <p>Tee lattiasta Prefab raahaamalla se Prefabs-kansioosi.
@@ -48,7 +48,7 @@
 </li>
 </ul>
 
-<h5>PlayerController</h5>
+<h3>PlayerController</h3>
 <ul>
 <li>Lisää Scripts-kansioon uusi skripti PlayerController. Lisää skripti Player Prefabille.
 <pre>
@@ -82,7 +82,7 @@ void Start()
 <li>Testaa hahmon toimintaa tässä kohtaa, nyt pitäisi pystyä liikkumaan oikealle ja vasemmalle.</li>
 </ul>
 
-<h5>Flip</h5>
+<h3>Flip</h3>
 <ul>
 <li>Tehdään liikkumisesta joustavampaa, lisää aluksi uusi yksityinen attribuutti
 
@@ -120,7 +120,7 @@ void FixedUpdate()
 </pre>
 </li>
 </ul>
-<h5>GroundCheck</h5>
+<h3>GroundCheck</h3>
 
 <ul>
 <li>Lisää PlayerlController-luokalle seuraavat muuttujat:
@@ -163,7 +163,7 @@ Raahaa nyt tämä GameObject julkisen muuttujan arvoksi.
 </li>
 
 </ul>
-<h5>Hyppääminen</h5>
+<h3>Hyppääminen</h3>
 <ul>
 <li>
 Lisää vielä attribuutti extraJumps:
@@ -199,7 +199,7 @@ rb = GetComponent&lt;Rigidbody2D&gt;();
 </pre>
 </li>
 </ul>
-<h5>Jumittaminen</h5>
+<h3>Jumittaminen</h3>
 <ul>
 <li>Hahmo jää helposti kiinni lattiaan hypätessään. Pelaajan RigidBodylle pitää asettaa kitkaton materiaali.</li>
 <li>Lisää uusi PhysicsMaterial2D (Assets / Create / 2D / PhysicsMaterial2D ). Nimeä järkevästi ja aseta Friction -ominaisuus nollaksi. 
@@ -209,7 +209,7 @@ rb = GetComponent&lt;Rigidbody2D&gt;();
 
 </ul>
 
-<h5>Kamera</h5>
+<h3>Kamera</h3>
 <p>Voit kokeilla siirtää Main Camera-objektin pelaajalle, kamera seuraa pelaajaa ja voit esimerkiksi laajentaa tasoa nyt helposti suuremmaksi. </p>
 <ul>
 	<li>Raahaa kamera ja säädä sen sijaintia sopivaksi.</li>
@@ -218,7 +218,7 @@ rb = GetComponent&lt;Rigidbody2D&gt;();
 
 <hr />
 
-<h4>1.Lopetusikkuna ja aloita uudestaan</h4>
+<h2>1.Lopetusikkuna ja aloita uudestaan</h2>
 <p>Kun pelaaja tippuu pitäisi pelin päättyä. Lisätään Update()-metodiin tarkistus: jos y-koordinaatti on riittävän alhalla (riippuu peli-ikkunastasi) niin peli päättyy ja näytetään Game Over-scene.
 <ul>
 <li>lisää uusi Scene kansioon Scenes - lisätään teksti ja painike
@@ -281,7 +281,7 @@ Lisätään toiminto painikkeelle:
 <hr />
 
 
-<h4>2. Spike</h4>
+<h2>2. Spike</h2>
 <p>Laadi jokin tuli, piikki, lima tai muu ektoplasma johon astuminen on vahingollista hahmolle ja aiheuttaa pelin päättymisen.
 <p><img src="../kuvat/spike_2.png" width="300" />
 <ul>
@@ -311,7 +311,7 @@ private void OnTriggerEnter2D(Collider2D col)
 </ul>
 
 <hr />
-<h4>3. Uusi taso</h4>
+<h2>3. Uusi taso</h2>
 <ul>
 	<li>Lisää ovi sopivaan kohtaan ensimmäiselle tasollesi.</li>
 	<li>Kun hahmo osuu oviaukkoon avataan toinen taso. Luo toinen taso uudeksi Sceneksi.</li>
@@ -319,7 +319,7 @@ private void OnTriggerEnter2D(Collider2D col)
 
 <hr />
 
-<h4>4. Pisteiden kerääminen</h4>
+<h2>4. Pisteiden kerääminen</h2>
 <ul>
 <li>Tee hedelmä, tähti tms. kerättävä objekti jota hahmosi tulisi kerätä pelikentältä. Tee tästä objektista Prefab. Lisää hedelmälle jokin tag, esimerkiksi "fruit".
 </li>
@@ -351,7 +351,7 @@ private void OnTriggerEnter2D(Collider2D col)
 
 <hr />
 
-<h4>5. Pisteet näkyviin</h4>
+<h2>5. Pisteet näkyviin</h2>
 <p><img src="../kuvat/tasohyppely_ulkoasu.png" width="400" />
 <ul>
 <li>Lisää hierarchy-ikkunaan uusi Text-elementti (hiiren oikea / UI / Text - TextMeshPro).</li>
@@ -381,7 +381,7 @@ txtScore.text = "Pisteet:" + score;
 </ul>
 <hr />
 
-<h4>6. PlayerPrefs</h4>
+<h2>6. PlayerPrefs</h2>
 <ul>
 <li>Tarkoitus on välittää tieto yhdeltä Sceneltä toiselle. Tämä onnistuu PlayerPrefs:n avulla.
 </li> 
@@ -425,7 +425,7 @@ public void Start()
 
 </ul>
 <hr />
-<h4>7. Tiedoston tallennus</h4>
+<h2>7. Tiedoston tallennus</h2>
 <ul>
 <li>Tallenna pisteet myös tiedostoon, tarkoitus on lukea pisteet High Score-taulukkoon.</li> 
 
@@ -451,14 +451,14 @@ writer.Close();
 <!---
 Vihje: valitse objekti Hierarchy-ikkunasta, paina F-kirjainta ja näyttö fokusoi tämän (kätevä esim. Canvas yms. objektien kanssa).
 >
-<h5>High scores</h5>
+<h3>High scores</h3>
 
 <ul>
 	<li>Luetaan tiedosto ja tulostetaan sen tiedot näkyviin.</li> 
 -->
 
 <hr />
-<h4>Lähteitä ja linkkejä</h4>
+<h2>Lähteitä ja linkkejä</h2>
 <p>Pääasiallinen lähde tälle demolle on youtube-video jossa käydään sama asia läpi.
 <ul>
 <li><a href="https://www.youtube.com/watch?v=QGDeafTx5ug">2D Double / Triple Jump Platformer Controller</a></li>
