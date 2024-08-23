@@ -33,6 +33,7 @@ Voimme hypätä eteenpäin yleisistä asioista. Siirry kohtaan Player character 
 						tutoriaalia. Tutoriaali on Unity Technologies tuotantoa ja edustaa siten virallista
 						ohjelmointitapaa.
 					<ul>
+						<li>Tutoriaali vaatii vähintään version LTS 2022.3, varmista että sinulla on tämä asennettuna.</li>
 						<li>Avaa tutoriaali täältä: <a href="https://learn.unity.com/course/2d-beginner-adventure-game"
 								target="_blank">https://learn.unity.com/course/2d-beginner-adventure-game</a></li>
 
@@ -82,7 +83,21 @@ Voimme hypätä eteenpäin yleisistä asioista. Siirry kohtaan Player character 
 						<li>Uusi kansio Scripts ja sinne PlayerController.cs</li>
 					</ul>
 
+					<hr>
+					<h3>Create Input Actions for player character movement</h3>
+					<h4>4.Adjust your Player Controller script</h4>
+					<ul>
+						<li>Nyt materiaalissa kirjoitusvirhe, pitäisi olla näin:
+<pre>
+if (LeftAction.IsPressed())
+{
+	horizontal = -1.0f;
+}	
+</pre>
 
+						</li>
+					</ul>
+					<hr>
 					<h3>Create Input Actions for player character movement</h3>
 					<h4>5.Configure a Value Input Action</h4>
 					<p>Lisää Up/Down/Left/Right Composite alasvetovalikosta</p>
