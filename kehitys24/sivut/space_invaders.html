@@ -110,12 +110,14 @@ public void Shoot(Vector2 direction, float force)
 }
 </pre>
 </li>
-<li>Osuminen tarkistetaan OnCollisionEnter2D-metodissa:
+<li>Osuminen tarkistetaan OnTriggerEnter2D-metodissa:
 <pre>
-void OnCollisionEnter2D(Collision2D other)
+void OnTriggerEnter2D(Collider2D other)
 {
-	Debug.Log("Osuttiin " + other.gameObject);
-	Destroy(gameObject);
+	if (other.tag == "Enemy") {
+		Debug.Log("Osuttiin " + other.gameObject);
+		Destroy(gameObject);	
+	}
 }
 </pre>
 </li>
@@ -124,7 +126,7 @@ void OnCollisionEnter2D(Collision2D other)
 	<li>Lisää aluksi uusi GameObject:
 <pre>
 public GameObject laserPrefab;
-Rigidbody2D rigidbody2d;
+Rigidbody2D rb;
 </pre>
 <p>Rigidbody2D määritellään samaan tapaan kuin ammuksella Awake() tai Start()-metodissa. Raahaa laserPrefab:n kohdalle editorissa ammuksesi Prefabs-kansiosta.</p>
 </li>
@@ -132,7 +134,7 @@ Rigidbody2D rigidbody2d;
 <li>
 <pre>void Shoot()
 {
-GameObject laser = Instantiate(laserPrefab, rigidbody2d.position + Vector2.up * 1.5f, Quaternion.identity);
+GameObject laser = Instantiate(laserPrefab, rb.position + Vector2.up * 1.5f, Quaternion.identity);
 
 LaserController projectile = laser.GetComponent&lt;LaserController&gt;();
 projectile.Shoot(new Vector2(0,1), 0.2f);
