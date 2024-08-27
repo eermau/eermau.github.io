@@ -161,19 +161,19 @@ if (Input.GetKeyDown(KeyCode.Space))
 
 <h5>Tekstin päivittäminen</h5>
 <ol>
-	<li>Tässä ohjelmassa teksti ei ole sidottu mihinkään Prefab-objektiin vaan ammuksen pitäisi osata kertoa GameManagerille koska pisteitä lisätään. Lisää aluksi tuttuun tapaan skenelle uusi Canvas ja TMP_Text.</li>
-	<li>Lisää GameManager:lle julkinen TMP_Text-muuttuja, raahaa editorissa TMP_Text-kenttä tämän arvoksi.
+	<li>Tässä ohjelmassa teksti ei ole sidottu mihinkään Prefab-objektiin vaan ammuksen pitäisi osata kertoa pelaajalle koska pisteitä lisätään. Lisää aluksi tuttuun tapaan skenelle uusi Canvas ja TMP_Text.</li>
+	<li>Lisää pelaajalle julkinen TMP_Text-muuttuja, raahaa editorissa TMP_Text-kenttä tämän arvoksi.
 <pre>
 using TMPro;
 </pre>
-Esittele muuttujat:
+Esittele pelaajan skriptissä muuttujat:
 <pre>
 public TMP_Text txtScore;
 public int score;
 </pre>
 <p>Raahaa Text-objekti julkisen muuttujan kohdalle Inspector-ikkunassa:<p><img src="../kuvat/space_text.png" />
 	</li>
-<li>Lisää GameManagerille julkinen aliohjelma joka kasvattaa pisteitä:
+<li>Lisää PlayerController-skriptiin julkinen aliohjelma joka kasvattaa pisteitä:
 <pre>
 public void AddScore()
 {
@@ -184,17 +184,8 @@ public void AddScore()
 </li>	
 <li>Ammus osuu vastustajaan ja silloin pisteiden pitäisi kasvaa. Lisää aluksi uusi muuttuja ammukselle:
 <pre>
-public GameManager gm;
+GameObject.Find("Player").GetComponent&lt;PlayerController&gt;().AddScore();
 </pre> 
-<p>Raahaa GameManager tähän muuttujaan editorissa (sinun tarvitsee ehkä tehdä GameManagerista Prefab jos se ei vielä ollut).
-<p>Aseta gm <b>Awake()</b>-metodissa:
-<pre>
- gm = GameObject.Find("GameManager").GetComponent&lt;GameManager&gt;();
-</pre> 
-Kun osutaan vastustajaan niin kutsutaan gm:n AddScore()-aliohjelmaa:
-<pre>
-gm.AddScore();
-</pre>
 </li>	
 </ol>
 
