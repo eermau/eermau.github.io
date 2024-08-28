@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    
+
     <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
 </head>
 
@@ -16,39 +16,43 @@
         <div id="container">
 
             <div id="main" role="main">
-                
+
                 <article class="markdown-body">
-  <h1>Yleisiä ongelmia</h1>
+                    <h1>Yleisiä ongelmia</h1>
 
-  <ul>
-	<li>Projektien koko</li>
-	<li>Awake() vs Start()</li>
-  </ul>
+                    <h2>Projektien koko</h2>
 
-<h5>Projektien koko</h5>
+                    <p>Projektikansiot ovat n. 50Mt, näistä kuitenkin lähes kaikki on Library-kansiossa. Voit ottaa
+                        tämän kansion pois kun otat varmuuskopion tai siirrät projektin muualle. Kun seuraavan kerran
+                        avaat projektin niin Library-kansio luodaan uudestaan. Huom: joudut avaamaan Scenen uudestaan.
 
-<p>Projektikansiot ovat n. 50Mt, näistä kuitenkin lähes kaikki on Library-kansiossa. Voit ottaa tämän kansion pois kun otat varmuuskopion tai siirrät projektin muualle. Kun seuraavan kerran avaat projektin niin Library-kansio luodaan uudestaan. Huom: joudut avaamaan Scenen uudestaan.
+                    <p><img src="../kuvat/kansiorakenne.png" />
+                        <p>.gitignore-tiedostoon laitetaan vain yksinkertaisesti näin:
+                            <pre>Library</pre>
+                        </p>
 
-<p><img src="../kuvat/kansiorakenne.png" />
-  
-<h5>Awake() vs Start()</h5>
+                    <h2>Awake() vs Start()</h2>
 
-<p>Molempia metodeja voidaan käyttää hieman samaan tapaan. Näissä alustetaan muuttujia ja tehdään asioita jotka halutaan tapahtuvan ennen kuin objekti näytetään pelaajalle. Lue lisää: <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html">docs.unity3d.com</a>.
+                    <p>Molempia metodeja voidaan käyttää hieman samaan tapaan. Näissä alustetaan muuttujia ja tehdään
+                        asioita jotka halutaan tapahtuvan ennen kuin objekti näytetään pelaajalle. Lue lisää: <a
+                            href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html">docs.unity3d.com</a>.
 
-<ul>
-<li>Start() -metodia kutsutaan kerran mutta ei varmasti tiedetä missä järjestyksessä eri objektit sitä kutsuvat.</li>
+                    <ul>
+                        <li>Start() -metodia kutsutaan kerran mutta ei varmasti tiedetä missä järjestyksessä eri
+                            objektit sitä kutsuvat.</li>
 
-<li>Awake() tehdään sen jälkeen kun kaikki objektit on alustettu -> toisten GameObjectien kyselyt yms. kannattaa tehdä täällä</li>
-</ul>
+                        <li>Awake() tehdään sen jälkeen kun kaikki objektit on alustettu -> toisten GameObjectien
+                            kyselyt yms. kannattaa tehdä täällä</li>
+                    </ul>
 
 
-</article>
-</div>
-</div>
-</div>
-<div class="current-section">
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
 
-</div>
+    </div>
 </body>
 
 </html>
