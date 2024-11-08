@@ -1,0 +1,25 @@
+INNER JOIN vs WHERE-ehto
+
+Tehtävä 33
+
+select k1.nimi, k2.nimi from lennot inner join kaupungit k1 on k1.id=mista_id inner join kaupungit k2 on k2.id=minne_id
+
+SELECT A.nimi, B.nimi FROM Kaupungit A, Kaupungit B, Lennot L WHERE L.mista_id=A.id AND L.minne_id=B.id;
+
+https://stackoverflow.com/questions/1018822/inner-join-on-vs-where-clause
+
+
+Funktiot WHERE-lauseessa -> HAVING
+
+HAVING toimii yhdessä GROUP BY-lauseen kanssa
+
+Tehtävä 38
+
+select k.nimi from kurssit k left join suoritukset s on s.kurssi_id=k.id group by k.nimi having count(arvosana) > 0 
+
+
+Tehtävä 39
+
+select k.nimi from kurssit k left join suoritukset s on s.kurssi_id=k.id group by k.nimi having count(arvosana) = 0
+
+https://learnsql.com/blog/aggregate-functions-in-where-clause/
