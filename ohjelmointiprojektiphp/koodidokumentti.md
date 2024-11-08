@@ -23,19 +23,19 @@ Lisää englanniksi kommentit user storyyn liittyviin kooditiedostoihin. Voit te
 
 Tiedoston alkuun kommenttilohko:
 
-/**
-* userManagement.php
-* Controller for user functionalities
-*/
+    /**
+    * userManagement.php
+    * Controller for user functionalities
+    */
 
 Funktion alkuun kommenttilohko:
 
-/**
-* registerController()
-* Handles registration. Forwards user
-* to login-page or back to register-page
-* in case of an error.
-*/
+    /**
+    * registerController()
+    * Handles registration. Forwards user
+    * to login-page or back to register-page
+    * in case of an error.
+    */
 
 ## Testaus
 Liitä tähän user storyyn liittyvät systeemitestauksen testitapaukset MS Excel-taulukostanne mukaan dokumenttiin.
