@@ -6,11 +6,14 @@ Koodidokumentti kuvaa yhden user storyn toteutuksen. Projektin päätteeksi tehd
 ## Kuvaus
 Kuvaa user storyn toiminta. Liitä esimerkiksi projektiseinältä kuva tehtävästä tai kerro sanallisesti mitä toiminnallisuus mahdollistaa käyttäjälle.
 
-![Kuva käyttöliittymästä](./kuvat/ui_example.png)
 Lisää kuva käyttöliittymästä.
+
+![Kuva käyttöliittymästä](./kuvat/ui_example.png)
+
 
 ## Sekvenssikaavio
 Laadi sekvenssikaavio jossa kuvaat user storyn toiminnan.
+
 ![Sekvenssikaavio](./kuvat/sekvenssi_example.png)
 
 ## Arkkitehtuurikaavio
