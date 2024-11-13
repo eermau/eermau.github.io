@@ -1,4 +1,4 @@
-INNER JOIN vs WHERE-ehto
+1. INNER JOIN vs WHERE-ehto
 
 Tehtävä 33
 
@@ -9,7 +9,7 @@ SELECT A.nimi, B.nimi FROM Kaupungit A, Kaupungit B, Lennot L WHERE L.mista_id=A
 https://stackoverflow.com/questions/1018822/inner-join-on-vs-where-clause
 
 
-Funktiot WHERE-lauseessa -> HAVING
+2. Funktiot WHERE-lauseessa -> HAVING
 
 HAVING toimii yhdessä GROUP BY-lauseen kanssa
 
