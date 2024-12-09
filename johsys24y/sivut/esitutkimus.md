@@ -23,7 +23,7 @@ olisi käyttäjilleen?
 
 ### Toiminnalliset vaatimukset
 
-![Use Case -kaavio](../kuvat/use_case_esimerkki.png)
+![Use Case -kaavio](./kuvat/use_case_esimerkki.png)
 
 ### Ei-toiminnalliset vaatimukset
 
@@ -40,15 +40,15 @@ Liitä tänne kuvat tekemästäsi käyttöliittymäehdotuksesta. Tarvittaessa ja
 kuvaan, jotta ne ovat luettavia. Pyri kertomaan esimerkiksi otsikoiden avulla mistä asiasta kuvassa on
 kysymys.
 
-![UI-suunnitelma](../kuvat/xd_demo1.png)
+![UI-suunnitelma](./kuvat/xd_demo1.png)
 
 ## Tietokantasuunnitelma
 
 Liitä tähän kohtaan laatimasi ER-kaavio ja tietokantakaavio.
 
-![ER-kaavio](../kuvat/esimerkki_er.png)
+![ER-kaavio](./kuvat/esimerkki_er.png)
 
-![Tietokantakaavio](../kuvat/esimerkki_db.png)
+![Tietokantakaavio](./kuvat/esimerkki_db.png)
 
 ## Riskit
 
