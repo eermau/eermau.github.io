@@ -6,6 +6,8 @@ Sprint alkoi xx.x ja päättyi xx.x.
 
 Sprintin julkaistu versio löytyy osoitteesta [sprint1.tunnus.treok.io](http://sprint1.tunnus.treok.io).
 
+Testitapaukset löytyvät ryhmän GitHub-repon kansiosta <code>documents/sprint1</code>.
+
 Mikäli ajankäyttöä seurattu Excel-taulukolla kannattaa kuvata se tässä kohdassa.
 
 ![Ajankäyttö sprint 1](../kuvat/sprint_markdown_sprint_muistio_ajankaytto.png)
