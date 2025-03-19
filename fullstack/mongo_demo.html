@@ -19,35 +19,18 @@
 <h2>MongoDB</h2>
 <p>MongoDB on dokumenttitietokanta ja NoSQL-tietokanta. NoSQL-tietokantaan tallennetaan tietoa toisella tapaa kuin relaatiotietokantaan. NoSQL-tietokanta on tullut vaihtoehdoksi perinteiselle relaatiotietokannalle tallennuskapasiteetin ja tietokoneiden tehokkuuden kasvettua vuosien saatossa. NoSQL-tietokantaa ei käytetä SQL-kyselyiden kautta vaan sinne lisätään ja poistetaan uusia dokumentteja. Tässä demossa käytetään lähteenä Helsingin yliopiston Fullstack-kurssin osiota <a href="https://fullstackopen.com/osa3/tietojen_tallettaminen_mongo_db_tietokantaan" target="_blank">Tietojen tallentaminen MongoDB-tietokantaan</a>.
 </p>
-<h4>Linkkejä</h4>
-<li><a href="https://en.wikipedia.org/wiki/Document-oriented_database" target="_blank">Wikipedia: Document oriented database</a></li>
-<li><a href="https://www.mongodb.com/nosql-explained" target="_blank">MongoDB: NoSQL Explainded</a></li>
-<li><a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a></li>
+<ul>
+    <li>Ohje <a href="atlasdatabase.html">MongoDB Atlas-palvelun käyttöön</a></li>
 
-<p>
-Käytetään <a href="https://www.mongodb.com/atlas/database" target="_blank">MongoDB Atlas</a>-palvelua tietokannallemme. Luo uusi tili, käytä mielellään edu.tampere.fi-tunnustasi. Huom: mikäli koululta ei saada yhteyttä toimimaan voidaan MongoDB tehdä Dockerin avulla.
+</ul>
+
+<p>Huom: mikäli koululta ei saada yhteyttä toimimaan voidaan MongoDB tehdä Dockerin avulla.</p>
 
 <ul>
     <li><a href="https://otredu.github.io/docker/mongodb.html" target="_blank">Mongodb ja mongo-express (localhost)
     </a> (otredu)</li>
 </ul>
 </p>
-
-
-<p>Valitse <i>Databases</i> / <i>Build</i>, valitse <i>Shared</i>. Cloud Provider & Region-kohdassa anna olla oletusvaihtoehdot (aws, Stockholm). Valitse alhaalta <i>Create Cluster</i> / Create.</p>
-<p><img width="500" src="./kuvat/mongo_create_database.png" /></p>
-
-
-<p>Valitse käyttäjätunnus ja salasana, laita nämä itsellesi talteen! Tämä on käyttäjätunnus tietokannallesi, ei MongoDB-palveluun.</p>
-<p><img width="500" src="./kuvat/mongo_username.png" /></p>
-
-<p>Valitse <i>Network Access</i> / <i>Allow Access From Anywhere</i></p>
-<p><img width="500"  src="./kuvat/mongo_ip_access.png" /></p>
-
-<p>Nyt voidaan yhdistää tietokantaan <i>Connect</i>-painikkeella. Valitse <i>Connect your application</i>.</p>
-
-<p>Mongo-tietokantaan yhdistäminen tapahtuu osoitteen avulla. Kopioi se itsellesi talteen, tarvitsemme sitä hetken päästä.</p>
-<p><img width="500" src="./kuvat/mongo_connect_cluster.png" /></p>
 
 <h3>Yhdistäminen</h3>
 
@@ -61,10 +44,26 @@ npm install mongoose
 <p>Tehdään ensin testitiedosto jolla kokeillaan miten lisätään uusi dokumentti/tietue.</p>
 <h4>Notes-testi</h4>
 <p>Tee uusi tiedosto mongo.js ja testataan sen avulla yhteyttä Mongo-tietokantaan.</p>
-<p>Otetaan käyttöön mongoose-kirjasto:</p>
+<p>Otetaan käyttöön mongoose-kirjasto ja yhdistetään config-tiedoston avulla tietokantaan.</p>
 <pre>
 const mongoose = require('mongoose')
+const dbConfig = require('./config');
+
+ mongoose.Promise = global.Promise;
+
+ mongoose.connect(dbConfig.url, {
+     useNewUrlParser: true,
+     user: dbConfig.user,
+     pass: dbConfig.pwd,
+     authSource: "admin"
+ }).then(() =&gt; {
+     console.log('successfully connected to the database');
+ }).catch(err =&gt; {
+     console.log('error connecting to the database', err);
+     process.exit();
+ });
 </pre>
+<!--
 <p>Annetaan argumenttina salasana, jos salasanaa ei tule niin virheilmoitus:</p>
 <pre>
 if (process.argv.length&lt;3) {
@@ -79,6 +78,7 @@ const url =
 
 mongoose.connect(url)
 </pre>
+-->
 <p>Kun yhteys on tehty laaditaan skeema ja model. Lisätietoa mongoosejs-sivustolla (<a href="https://mongoosejs.com/docs/guide.html">skeemasta</a> ja <a href="https://mongoosejs.com/docs/models.html">modelista</a>).</p>
 <pre>
 const noteSchema = new mongoose.Schema({
