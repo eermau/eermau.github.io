@@ -1,0 +1,66 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        <div id="container">
+            <div id="main" role="main">
+                <article class="markdown-body">
+
+                    <h1>Tietovisa</h1>
+                    <h2>Yleistä</h2>
+                    <p>Tehtävänä on suunnitella ja toteuttaa yksinkertainen tietovisa. Pelissä on erilaisia tietovisoja
+                        jotka sisältävät monivalintakysymyksiä. Pelattuaan pelin käyttäjältä pyydetään nimi ja tulokset
+                        tallennetaan tietokantaan.
+                    </p>
+                    <p><img src="db_structure.png" alt="Tietokannan rakenne"></p>
+                    <p>Voit käyttää tietokantana <a href="react_quiz.sql">react_quiz.sql</a>-tiedostoa.</p>
+
+                    <h2>Etusivu</h2>
+                    <p>
+                        Etusivulla näytetään esittelyteksti ja painike Aloita peli joka ohjaa sivulle Pelin
+                        aloittaminen. Etusivulla esitetään tietovisojen parhaat tulokset taulukossa. Tulokset
+                        ryhmitellään eri kestojen (lyhyt, normaali, pitkä) mukaan.
+                    </p>
+                    <h2>Pelin aloittaminen</h2>
+                    <p>
+                        Pelin aloitus tapahtuu valitsemalla haluttu tietovisa alasvetovalikosta. Käyttäjä valitsee myös
+                        pelin pituuden (lyhyt - 5 kysymystä, normaali - 10 kysymystä tai pitkä - 15 kysymystä). Peli
+                        käynnistyy painamalla 'Pelaamaan!' -painiketta.
+                    </p>
+                    <h2>
+                        Tietovisan pelaaminen
+                    </h2>
+                    <p>Tietovisan aikana näytetään haluttu määrä kysymyksiä yksitellen. Jos pelaaja vastaa oikein niin
+                        näytetään lyhyt animaatio. Mikäli pelaaja vastaa väärin niin oikea vastaus animoidaan ennen
+                        siirtymistä seuraavaan kysymykseen.
+                    </p>
+                    <h2>High score-taulukko
+                    </h2>
+                    <p>Kun peli päättyy näytetään parhaat tulokset taulukossa. Pelaajan tulos korostetaan tulosjoukossa.
+                        Jos tuloksia on yli 20 niin näytetään sivutus (20 tulosta / sivu).
+                    </p>
+                    <p>Mieti sopiva tapa esittää taulukon tiedot ja suodattaminen eri kestojen mukaisesti.</p>
+                    <p>
+                        Peliä pelataan pääsääntöisesti mobiililaitteella joten sovelluksen tulee huomioida
+                        responsiivisuus (Google Chrome Dimensions: iPhone SE).
+                    </p>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
