@@ -1,0 +1,236 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    <title>Johdatus systeemityöhön 5 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Johdatus systeemityöhön 5 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+
+
+                    </div>
+                    
+                </div>
+                <article class="markdown-body">
+                    <h1>SQL-kielestä</h1>
+
+                    <h2>SELECT</h2>
+                    <h3>Tietojen hakeminen</h3>
+                    <p>SELECT-komennolla haetaan taulun tai taulujen tietoja.</p>
+
+                    <pre>SELECT kentät FROM taulu</pre>
+                    <p>Esimerkiksi:
+                    <pre>SELECT etunimi, sukunimi, kotikunta FROM opiskelijat</pre>
+                    </p>
+
+                    <table>
+                        <tr>
+                            <th>etunimi</th>
+                            <th>sukunimi</th>
+                            <th>kotikunta</th>
+                        </tr>
+                        <tr>
+                            <td>aku</td>
+                            <td>ankka</td>
+                            <td>ankkalinna</td>
+                        </tr>
+                        <tr>
+                            <td>roope</td>
+                            <td>ankka</td>
+                            <td>ankkalinna</td>
+                        </tr>
+                        <tr>
+                            <td>mikki</td>
+                            <td>hiiri</td>
+                            <td>ankkalinna</td>
+                        </tr>
+                        <tr>
+                            <td>milla</td>
+                            <td>magia</td>
+                            <td>noitavuori</td>
+                        </tr>
+                    </table>
+
+                    <p>Jos halutaan hakea tietty kenttä kerran tuloksista käytetään DISTINCT määrettä.
+                    <pre>SELECT DISTINCT kotikunta FROM opiskelijat</pre>
+                    </p>
+
+                    <table>
+                        <tr>
+                            <th>kotikunta</th>
+                        </tr>
+                        <tr>
+                            <td>ankkalinna</td>
+                        </tr>
+                        <tr>
+                            <td>noitavuori</td>
+                        </tr>
+                    </table>
+
+                    <p>Tulosjoukkoa voi järjestää yhden tai useamman kentän avulla ORDER BY (desc|asc) määreen avulla.
+                    <pre>SELECT * FROM opiskelijat ORDER BY sukunimi, etunimi</pre>
+                    </p>
+
+                    <h3>Tietojen rajaaminen</h3>
+
+                    <p>Yleensä ei haluta kaikkia tietoja vaan rajataan tuloksia hakuehtojen perusteella.
+                    <pre>SELECT * FROM opiskelijat WHERE etunimi="aku"</pre>
+                    </p>
+
+                    <table>
+                        <tr>
+                            <th>vertailu</th>
+                            <th>syntaksi</th>
+                        </tr>
+                        <tr>
+                            <td>yhtä suuri kuin</td>
+                            <td>=</td>
+                        </tr>
+                        <tr>
+                            <td>eri suuri kuin</td>
+                            <td>&lt;&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>pienempi kuin</td>
+                            <td>&lt;</td>
+                        </tr>
+                        <tr>
+                            <td>suurempi kuin</td>
+                            <td>&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>LIKE (teksti)</td>
+                            <td>LIKE '%linna%'</td>
+                        </tr>
+                    </table>
+
+                    <p>Useita ehtoja voi yhdistää AND ja OR -operaattorien kanssa.</p>
+
+                    <h3>Funktiot</h3>
+
+                    <p>Funktioiden avulla voidaan hakea tuloksista esimerkiksi suurin, pienin, keskiarvo tai lukumäärä.
+                        Funktiolla saataville kentille kannattaa käyttää aliasta jotta tulos helpommin ymmärrettävissä.
+                    </p>
+                    <p>Yleisimmät funktiot</p>
+                    <table>
+                        <tr>
+                            <th>toiminto</th>
+                            <th>esimerkki</th>
+                        </tr>
+                        <tr>
+                            <td>lukumäärä</td>
+                            <td>SELECT COUNT(opiskelijaID) AS lkm FROM opiskelijat</td>
+                        </tr>
+                        <tr>
+                            <td>suurin</td>
+                            <td>SELECT MAX(ika) AS vanhin FROM opiskelijat</td>
+                        </tr>
+                        <tr>
+                            <td>summa</td>
+                            <td>SUM</td>
+                        </tr>
+                        <tr>
+                            <td>keskiarvo</td>
+                            <td>AVG</td>
+                        </tr>
+                        <tr>
+                            <td>merkkijonon pituus</td>
+                            <td>LENGTH</td>
+                        </tr>
+                        <tr>
+                            <td>jakojäännös</td>
+                            <td>%</td>
+                        </tr>
+                    </table>
+
+                    <h3>JOIN</h3>
+
+                    <p>Kun haetaan kahdesta tai useammasta taulusta tietoja tarvitaan JOIN-kyselyä.</p>
+
+                    <table>
+                        <tr>
+                            <th>tyyppi</th>
+                            <th>kuvaus</th>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.w3schools.com/sql/sql_join_inner.asp" target="_balnk">INNER
+                                    JOIN</a></td>
+                            <td>haetaan kahden taulun yhteisiä tietoja</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.w3schools.com/sql/sql_join_left.asp" target="_blank">LEFT JOIN</a>
+                            </td>
+                            <td>haetaan kaikki vasemman puolen tiedot ja ne oikeasta taulusta jotka yhteisiä.</td>
+                        </tr>
+                    </table>
+
+                    <p>Esimerkki: kaikki asiakkaiden tilaukset</p>
+
+                    <pre>
+SELECT asiakas.nimi, tilaus.summa FROM asiakas 
+INNER JOIN tilaus ON asiakas.asiakasID=tilaus.asiakasID    
+</pre>
+
+
+                    <h3>GROUP BY</h3>
+
+                    <p>Ryhmittelemällä GROUP BY -operaattorin avulla saadaan haettua esimerkiksi tietyn yrityksen
+                        asiakasmäärä. GROUP BY liittyy yleensä kyselyyn jossa käytetään funktioita.</p>
+                    <p>Esimerkki</p>
+                    <pre>
+SELECT asiakas.nimi, sum(tilaus.summa) FROM asiakas 
+INNER JOIN tilaus ON asiakas.asiakasID=tilaus.asiakasID
+GROUP BY asiakas.nimi
+</pre>
+
+                    <h3>Alikysely</h3>
+
+                    <p>Alikyselyä tarvitaan kun esimerkiksi halutaan esimerkiksi hyödyntää saman taulun sisältöä
+                        kyselyssä.</p>
+                    <p>Esimerkki: haetaan tuote jossa hinta taulun pienin hinta:</p>
+                    <pre>
+SELECT nimi FROM tuotteet 
+WHERE hinta = (SELECT MIN(hinta) FROM tuotteet)
+</pre>
+
+                    <h2>INSERT</h2>
+                    <p>INSERT-kysely lisää uuden tietueen, mikäli taululla on autoincrement pääavain niin sitä ei
+                        tarvitse lisätä kenttien joukkoon.</p>
+                    <pre>
+INSERT INTO asiakas (nimi, puhelin) VALUES ('testi', '040-1231234') 
+</pre>
+
+                    <h2>UPDATE</h2>
+                    <p>UPDATE-kysely päivittää kenttien tietoja, oleellista muistaa WHERE-ehto!</p>
+                    <pre>
+UPDATE asiakas SET nimi='testi2', puhelin='050-1231234' 
+WHERE asiakasID=10    
+</pre>
+
+                    <h2>DELETE</h2>
+                    <p>DELETE-kysely poistaa tietueen, oleellista muistaa WHERE-ehto!</p>
+                    <pre>
+DELETE FROM asiakas WHERE asiakasID=10    
+</pre>
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="current-section">
+
+    </div>
+</body>
+
+</html>
