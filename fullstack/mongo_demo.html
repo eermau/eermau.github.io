@@ -269,7 +269,7 @@ const getTokenFrom = req =&gt; {
 Haetaan notesit tietokannasta:    
 </p>
 <pre>
-app.get('/api/notes', (req, response) =&gt; {
+app.get('/api/notes', (req, res) =&gt; {
     const token = getTokenFrom(req);
     console.log(token);
 
@@ -296,7 +296,7 @@ app.get('/api/notes', (req, response) =&gt; {
 
 
     Note.find({user_id: decodedToken.id}).then(notes =&gt; {
-        response.json(notes)
+        res.json(notes)
     })
 })    
 </pre>
@@ -333,7 +333,7 @@ app.post('/api/notes', (req, res) =&gt; {
     const body = req.body
     
     if (body.content === undefined) {
-        return response.status(400).json({ error: 'content missing' })
+        return res.status(400).json({ error: 'content missing' })
     }
     
     const note = new Note({
@@ -344,25 +344,25 @@ app.post('/api/notes', (req, res) =&gt; {
     })
     
     note.save().then(savedNote =&gt; {
-        response.json(savedNote)
+        res.json(savedNote)
     })
 })    
 </pre>
 
 <p>Yhden muistiinpanon avaaminen</p>
 <pre>
-app.get('/api/notes/:id', (req, response) =&gt; {
+app.get('/api/notes/:id', (req, res) =&gt; {
     Note.findById(req.params.id).then(note =&gt; {
-        response.json(note)
+        res.json(note)
     })
 })    
 </pre>
 <p>Muistiinpanon poistaminen onnistuu findByIdAndDelete-metodilla:</p>
 <pre>
-app.delete('/api/notes/:id', (req, response, next) =&gt; {
+app.delete('/api/notes/:id', (req, res, next) =&gt; {
     Note.findByIdAndDelete(req.params.id)
         .then(result =&gt; {
-        response.status(204).end()
+        res.status(204).end()
     })
     .catch(error => next(error))
 })    
@@ -370,7 +370,7 @@ app.delete('/api/notes/:id', (req, response, next) =&gt; {
 
 <p>Muistiinpanon tärkeyden muuttaminen findByIdAndUpdate-metodilla:</p>
 <pre>
-app.put('/api/notes/:id', (req, response, next) =&gt; {
+app.put('/api/notes/:id', (req, res, next) =&gt; {
     const body = req.body
   
     const note = {
@@ -380,7 +380,7 @@ app.put('/api/notes/:id', (req, response, next) =&gt; {
   
     Note.findByIdAndUpdate(req.params.id, note, { new: true })
       .then(updatedNote =&gt; {
-        response.json(updatedNote)
+        res.json(updatedNote)
       })
       .catch(error =&gt; next(error))
   })
@@ -452,7 +452,7 @@ app.post('/api/register', (req, res) =&gt; {
     const user = req.body
     
     if (user.username === undefined || user.email === undefined || user.password === undefined) {
-        return response.status(400).json({ error: 'content missing' })
+        return res.status(400).json({ error: 'content missing' })
     }
     
     const saltRounds = 10;
@@ -541,7 +541,7 @@ content-type: application/json
 </pre>
 
 <h3>Frontend</h3>
-<p>Ei korvata vanhaa notesbackend-versiota vaan tehdään kopio joka käyttää MongoDB:tä. Tee itsellesi uusi kansio notesmongofront ja kopioi sinne notesfront jota käytettiin MySQL-tietokannan kanssa. Kommentoi pois kirjautuminen ja rekisteröityminen, tämän version tarkoituksena on vain pystyä lisäämään uusia muistiinpanoja ja poistamaan olemassa olevia.</p>
+<p>Ei korvata vanhaa notesbackend-versiota vaan tehdään kopio joka käyttää MongoDB:tä. Tee itsellesi uusi kansio notesmongofront ja kopioi sinne notesfront jota käytettiin MySQL-tietokannan kanssa. <!--Kommentoi pois kirjautuminen ja rekisteröityminen, tämän version tarkoituksena on vain pystyä lisäämään uusia muistiinpanoja ja poistamaan olemassa olevia.--></p>
 
 <ul>
     <li>notesService.js: vaihda baseUrl muotoon api/notes</li>
