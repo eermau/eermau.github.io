@@ -1,0 +1,89 @@
+/* div-elements */
+header, footer {
+    background-color: #3652AD;
+    color:#FE7A36;
+    height: 80px;
+    padding: 10px;
+}
+
+.divMain {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.divElokuvat {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.divElokuva {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: gray;
+    margin:5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.pagination {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+}
+
+footer {
+    padding-top: 20px;
+    text-align: center;
+}
+
+/* ui elements */
+h1 {
+    text-align: center;
+}
+
+body {
+    color: #3652AD;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.imgElokuva {
+    width: 200px;
+    border-radius: 5px;
+}
+
+#imgLogo {
+    width: 80px;
+}
+
+#btnkirjaudu {
+    padding: 10px;
+    margin-top: 15px;
+    float:right
+}
+
+.button {
+    background-color: #E9F6FF ;
+    color: #3652AD;
+    border-color: #3652AD;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.button:hover {
+    background-color: #FE7A36;
+    color: black;
+}
+
+/* for mobile devices */
+@media only screen and (max-width: 750px) {
+    .divElokuvat {
+        display: block;
+    }
+
+  }

@@ -1,0 +1,53 @@
+Johdatus systeemityöhön
+--------------------------------------------------------
+Tietokannat 30t
+- phpMyAdmin, cPanel
+- SQL (select, delete, insert, update, inner join, left join, count)
+- SQL Mooc
+- kaaviot (ER, tietokanta)
+- suunnitteluharjoitus
+
+Suunnittelu 5t
+
+Web-käyttöliittymä
+- web-käyttöliittymä, single page application
+- html semantic elements (header, footer, nav, section, article)
+- navigointi sivustolla
+- kuvakkeet (https://fonts.google.com/icons)
+- menu (megamenu)
+- responsiivinen, menu, 
+- XD (figma)
+- värit (pun/vih, 3-5 väriä riittävä)
+- saavutettavuus (https://wave.webaim.org/)
+- responsiivisuus
+- XD-harjoitus
+
+Rautalankamalli (Wireframe
+- XD-demo
+- Oman tietokannan käyttöliittymä
+
+https://www.youtube.com/watch?v=3C_22eBWpjg
+
+Tyyliopas
+- logo, värit, fontit
+- esimerkki painikkeesta
+- esimerkki otsikosta ja leipätekstistä
+
+
+Suunnitteluharjoitus 10t
+- esitutkimus
+- kaaviot
+
+Systeemitestaus 5t
+- testitapaukset ja testaaminen
+- testitapauspohjan laatiminen
+
+Projektissa työskentely ja GitHub 15t
+- scrum, agile, sprint
+- user story
+- kanban
+- GitHub-branches
+- GitHub-projektiseinä
+- demoprojekti
+
+Viimeistely 10t
