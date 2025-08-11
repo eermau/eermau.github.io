@@ -1,0 +1,200 @@
+<html lang="fi">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="../../style/css/style.css">
+
+	<title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<header>
+			<h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+		</header>
+		<div id="container">
+
+			<div id="main" role="main">
+
+				<article class="markdown-body">
+					<h1>Unity Learn: Ryby's 2D RPG</h1>
+
+					<!--
+Lataa materiaali zip-paketissa
+
+Tämän jälkeen luo uusi projekti Unityssa. 
+
+Voimme hypätä eteenpäin yleisistä asioista. Siirry kohtaan Player character and movement: 3. Create a new scene.
+
+-->
+					<h2>Aluksi</h2>
+					<p>Tänään ja huomenna tarkoitus on kokeilla Unity Learn-sivuston aloittelijoille tarkoitettua
+						tutoriaalia. Tutoriaali on Unity Technologies tuotantoa ja edustaa siten virallista
+						ohjelmointitapaa.
+					<ul>
+						<li>Tutoriaali vaatii vähintään version LTS 2022.3, varmista että sinulla on tämä asennettuna.</li>
+						<li>Avaa tutoriaali täältä: <a href="https://learn.unity.com/course/2d-beginner-adventure-game"
+								target="_blank">https://learn.unity.com/course/2d-beginner-adventure-game</a></li>
+
+						<li>Kirjaudu Unity-tunnuksillasi sivustolle jotta etenemisi tallentuu automaattisesti.</li>
+					</ul>
+
+					<h2>Osatehtävistä</h2>
+
+					<h3>Welcome to 2D Beginner</h3>
+					<h4>5. Play the example game</h4>
+					<ul>
+						<li>tässä kohtaa luo uusi 2D projekti</li>
+						<li>avaa materiaali Asset Storesta. Sinun pitää valita ensin Import.
+							<p><img src="../kuvat/ruby_install_1.png" width="400px" alt=""></p>
+							Tämän jälkeen uudestaan Import
+							<p><img src="../kuvat/ruby_install_2.png" height="400px" alt=""></p>
+							<p>Kun näet kansion UnityTechnologies on materiaali asennettu. Testaa lopullista peliä ja
+								sen jälkeen jatketaan tutoriaalia eteenpäin.</p>
+							<p><img src="../kuvat/ruby_install_3.png" width="400px" alt=""></p>
+						</li>
+					</ul>
+
+					<h3>Set up a 2D player character</h3>
+
+					<h4>2.Before you begin</h4>
+
+					<ul>
+						<li>Nyt tehdään uusi 2D-projekti, voit myös käyttää äsken tehtyä missä assetit hieman eri
+							kansioissa.</li>
+
+					</ul>
+
+					<h4>3.Create a new scene</h4>
+					<ul>
+						<li>Aloita uusi Scene</li>
+
+					</ul>
+
+					<h4>4.Create a player character with a sprite</h4>
+					<ul>
+						<li>Hae Ruby-pelaajahahmo StarterAsset-kansiosta.</li>
+
+					</ul>
+
+					<h4>6.Create a new script</h4>
+					<ul>
+						<li>Uusi kansio Scripts ja sinne PlayerController.cs</li>
+					</ul>
+
+					<hr>
+					<h3>Create Input Actions for player character movement</h3>
+					<h4>4.Adjust your Player Controller script</h4>
+					<ul>
+						<li>Nyt materiaalissa kirjoitusvirhe, pitäisi olla näin:
+<pre>
+if (LeftAction.IsPressed())
+{
+	horizontal = -1.0f;
+}	
+</pre>
+
+						</li>
+					</ul>
+					<hr>
+					<h3>Create Input Actions for player character movement</h3>
+					<h4>5.Configure a Value Input Action</h4>
+					<p>Lisää Up/Down/Left/Right Composite alasvetovalikosta</p>
+					<p><img src="../kuvat/ruby_binging.png" width="50%" alt=""></p>
+					<!--
+
+
+<h3>1. Setting Up the Unity Editor</h3>
+<ul>
+	<li>Luo projekti C-asemalle tai muistitikulle.</li>
+	<li>Uusi asia on Asset Storen käyttäminen ja valmiiden assettien importointi projektiin.
+	
+<ul>
+<li>avaa Asset Store, hae esim. ruby tutorial</li>
+<li>paina Import-napista, valitse Install/Upgrade</li>
+<li>paina lopuksi avautuneesta ikkunasta alhaalta Import</li>
+
+<li>[Nyt projekti hajoaa]</li>
+
+<li>Sulje Unity ja mene resurssinhallinnassa oikeaan kansioon, poista Packages -kansio ja käynnistä Unity uudestaan (luo json-tiedoston uudestaan ja nyt pitäisi toimia).</li>
+</ul>	
+	</li>
+</ul>
+<h3>2. Main Character and First Script</h3>
+<ul>
+	<li>lisää uusi Scene ja nimeä se Main Scene</li>
+<li>tallenna Ruby.png koneellesi ja raahaa se Sprites-kansioon</li>
+<li>Raahaa Ruby.png Hierachy-ikkunaan jotta siitä syntyy GameObject</li>
+<li>Lisätään uusi kansio Scripts ja sitten uusi skripti RubyController.cs</li>
+<li>lisää Update()-metodiin koodirivit, tallenna</li>
+<li>Raahaa RubyController.cs Ruby:n uudeksi komponentiksi, kokeile toimintaa</li>
+	<li></li>
+</ul>
+<h3>3. Character Controller and Keyboard Input</h3>
+<ul>
+	<li>Lisätään hahmolle koodia jotta saadaan Ruby reagoimaan nuolinäppäimiin.</li>
+	<li></li>
+</ul>
+<h3>4. World Design - Tilemaps</h3>
+<ul>
+	<li>Tallenna aluksi Tile.png omalle koneellesi</li>
+<li>avaa Window / 2D / Tile Palette. (Tässä kohtaa saattaa olla, että asennuksesta ei löydy Tile-kohtaa. Lisää tämä Window / Package Manager -ikkunasta. Etsi 2D Tilemap Editor ja asenna se Install-painikkeella.)</li>
+<li>luo uusi paletti nimeltä GamePalette, tallenna Tiles-kansioon</li>
+<li>raahaa FirstTile GamePaletten sisälle</li>
+<li>Tässä kestää selvästi kauemmin kuin aiemmissa kohdissa</li>
+	<li></li>
+</ul>
+<h3>5. Decorating the World</h3>
+<ul>
+	<li>Tässä tulee vähän uutta asiaa</li>
+	<li></li>
+</ul>
+<h3>6. World Interactions - Blocking Movement</h3>
+<ul>
+	<li>Lisätään Rigidbody 2D Rubylle
+<li>Ja toinen MetalBox-objektille</li>
+<li>Muutetaan BoxColliderin kokoa</li>
+	<li></li>
+</ul>
+<h3>7. World Interactions - Collectibles</h3>
+<ul>
+	<li>jos currentHealth antaa lopussa virheilmoituksen niin sinun täytyy käydä muuttamassa Rubyn currentHealth-muuttuja julkiseksi (lisää public-sana muuttujan alkuun).
+</li>
+</ul>
+
+<h3>8. World Interactions - Damage Zones and Enemies</h3>
+<h3>9. Sprite Animation</h3>
+<ul>
+	<li>Jos Samples ei näy niin lisää se asetuksista oikealta ylänurkasta (Show Samples)</li>
+	<li>Jos ja kun tulee virheilmoitus eikä ohjelma enää käänny niin animator on määrittelemättä.  lisää RubyController.cs:n Start()-metodiin tämä rivi:<code>
+animator = GetComponent&lt;Animator&gt;();</code></li>
+	<li></li>
+</ul>
+<h3>10. World Interactions - Projectile</h3>
+<h3>11. Camera - Cinemachine</h3>
+<h3>12. Visual Styling - Particles</h3>
+<h3>13. Visual Styling - UI - Head-Up Display</h3>
+
+<ul>
+	<li>Jos et saa pivot-palloa siirrettyä niin sinun tulee muuttaa 
+		Center -> Pivot-asetukselle.
+		<p><img src="../kuvat/ruby_1.png" /></p>
+	</li>
+</ul>
+
+<h3>14. World Interactions - Dialogue Raycast</h3>
+<h3>15. Audio</h3>
+<h3>16.Build, Run, Distribute</h3>
+-->
+
+				</article>
+			</div>
+		</div>
+	</div>
+	<div class="current-section">
+
+	</div>
+</body>
+
+</html>

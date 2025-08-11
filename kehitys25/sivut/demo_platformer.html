@@ -1,0 +1,477 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+<h1>Tasohyppely</h1>
+<h2>Perustoiminnot</h2>
+
+<p>Tarkoitus on laatia pohja tasohyppelylle jossa hahmo voi pomppia tasolta toiselle.
+
+<p><img src="../kuvat/tasohyppely_1.png" width="400"/>
+<h3>Player</h3>
+<ul>
+<li>Lisää kansiot Prefabs, Scenes, Sprites, Scripts</li>
+<li>Lisää kansioon Scenes uusi Scene Game ja lisää se Hierarchy-ikkunaan. Poista alkuperäinen SampleScene.
+</li>
+
+<li>Lisää Sprites-kansioon neliö (Assets / Create / 2D / Sprites / Square)</li>
+<li>Raahaa neliö Hierarchy-ikkunaan ja nimeä se Player-nimiseksi. Aseta väri sopivaksi.</li>
+<li>Raahaa Player nyt Prefabs-kansioon.</li>
+<li>Avaa Prefab ja piirrä sille silmät ja suu
+<p><img src="../kuvat/platformer_1_player.png" width="100" />
+
+</li>
+<li>Lisää hahmolle RigidBody2D, lisää myös BoxCollider2D</li>
+</ul>
+<h3>Lattia</h3>
+<ul>
+<li>Raahaa neliö uudestaan Hierarchy-ikkunalle. Nimeä se esim. Floor, lisää tälle BoxCollider2D ja anna jokin sopiva väri. Lisää lattialle myös RigidBody2D ja aseta Dynamic-asetuksen sijaan Kinematic. </li>
+<p>Tee lattiasta Prefab raahaamalla se Prefabs-kansioosi.
+<li>Nyt voit piirtää Scenelle lattioita joilla kohta on tarkoitus hypellä.
+<p><img src="../kuvat/platformer_2.png" width="400" />
+</li>
+</ul>
+
+<h3>PlayerController</h3>
+<ul>
+<li>Lisää Scripts-kansioon uusi skripti PlayerController. Lisää skripti Player Prefabille.
+<pre>
+public class PlayerController : MonoBehaviour
+{<span class="korostus">
+public float speed;
+public float jumpforce;
+public float moveInput;
+private Rigidbody2D rb;</span>
+</pre>
+</li>
+<li>Lisää Start()-metodiin rb:n alustaminen:
+<pre>
+void Start()
+{<span class="korostus">
+  rb = GetComponent&lt;Rigidbody2D&gt;();</span>
+}
+</pre></li>
+
+<li>FixedUpdate() eroaa Update()-metodista siten, että tätä voidaan kutsua useita kertoja framen aikana riippuen asetuksista. Update() tapahtuu kerran yhden framen aikana.
+
+<pre><span class="korostus">void FixedUpdate()
+{
+  // oikea nuoli = 1, vasen nuoli = -1
+  moveInput = Input.GetAxis("Horizontal");
+  rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+}</span>
+</pre></li>
+
+
+<li>Testaa hahmon toimintaa tässä kohtaa, nyt pitäisi pystyä liikkumaan oikealle ja vasemmalle.</li>
+</ul>
+
+<h3>Flip</h3>
+<ul>
+<li>Tehdään liikkumisesta joustavampaa, lisää aluksi uusi yksityinen attribuutti
+
+<pre><span class="korostus">
+private bool facingRight = true;</span>
+</pre>
+</li>
+<li>Tehdään Flip()-aliohjelma. Jos hahmo oli äsken katsonut oikealle niin nyt ei katsota:
+<pre>
+<span class="korostus">void Flip() {
+  facingRight = !facingRight;
+  Vector3 Scaler = transform.localScale;
+  Scaler.x = Scaler.x * -1;
+  transform.localScale = Scaler;
+}</span>
+</pre>
+<li>Samalla vaihdetaan myös x-arvo päinvastaiseksi.
+<p>Flip()-metodia kutsutaan kun hahmo olisi liikkumassa:
+<pre>
+void FixedUpdate()
+{
+  // oikea nuoli = 1, vasen nuoli = -1
+  moveInput = Input.GetAxis("Horizontal");
+  rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+<span class="korostus">
+  if (!facingRight && moveInput &gt; 0) {
+    // jos ei katsota oikeaan ja painettu oikealle
+    Flip();
+  }
+  else if (facingRight && moveInput &lt; 0) {
+    // tai jos katsotaan oikealle ja painettu vasemmalle
+    Flip();
+  }</span>
+}
+</pre>
+</li>
+</ul>
+<h3>GroundCheck</h3>
+
+<ul>
+<li>Lisää PlayerlController-luokalle seuraavat muuttujat:
+<pre><span class="korostus">// onko hahmo maassa?
+private bool isGrounded;
+// tarkistus onko maa jalkojen kohdalla
+public Transform groundCheck;
+// tarkistettavan alueen säde
+public float checkRadius;
+public LayerMask whatIsGround;</span>
+</pre>
+</li>
+<li>isGrounded asetetaan FixedUpdate()-metodissa:
+<pre>
+void FixedUpdate()
+{
+<span class="korostus">isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);</span>
+</pre>
+</li>
+<li>Avaa Player Prefab ja lisää uusi tyhjä GameObject, nimeä se GroundCheck. Siirrä tämä objekti hahmon jalkoihin, sitä käytetään tarkistamaan onko hahmo nyt maassa vai ei. Kannattaa valita vielä värikäs kuvake (Icon) Properties-ikkunasta muutoin näkymättömälle objektille.
+<p><img src="../kuvat/platformer_4a.png" />
+<p><img src="../kuvat/platformer_4b.png" />
+<p>Jos ikoni ei näy niin tarkista Gizmos-alasvetovalikko.
+</li>
+<li>
+Raahaa nyt tämä GameObject julkisen muuttujan arvoksi.
+<p><img src="../kuvat/platformer_4c.png" />
+
+</li>
+
+<li>Aseta checkRadius-muuttujan arvoksi esimerkiksi 0.5.</li>
+
+<li>Jos GroundCheck on Default-layerilla niin kaikki on "maata" ja hahmo pystyy hyppimään rajattomasti. Tarvitaan oma layer joka määrittelee milloin ollaan kosketuksissa maahan.
+<ul>
+	<li>Lisää uusi layer "Ground"</li>
+	<li>Aseta GroundCheck tälle uudelle Ground-layerille.<p><img src="../kuvat/platformer_4d.png" /></li>
+<li>Aseta lattia (ja mahdollisesti muut elementit jotka ovat "maata" samalle layerille.</li>
+<li>Aseta "What is Ground"-muuttujan avulla se Ground-layer.<p><img src="../kuvat/platformer_4e.png" /></li>
+	</ul>
+</li>
+
+</ul>
+<h3>Hyppääminen</h3>
+<ul>
+<li>
+Lisää vielä attribuutti extraJumps:
+<pre>
+public int extraJumps;
+private int extraJumpValue = 2;
+</pre>
+</li>
+<li>Update()-metodissa voidaan hypätä:
+<pre>
+void Update() {<span class="korostus">
+// jos ollaan maassa niin nollataan hypyt:
+if (isGrounded == true) {
+extraJumps = extraJumpValue;
+}
+if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps &gt; 0) {
+rb.velocity = Vector2.up * jumpforce;
+extraJumps--;
+}
+else if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps == 0 && isGrounded == true) {
+rb.velocity = Vector2.up * jumpforce;
+}</span>
+}
+</pre>	
+</li>
+<li>Alusta extraJumps Start()-metodissa:
+<pre>
+void Start()
+{
+<span class="korostus">extraJumps = extraJumpValue;</span>
+rb = GetComponent&lt;Rigidbody2D&gt;();
+}
+</pre>
+</li>
+</ul>
+<h3>Jumittaminen</h3>
+<ul>
+<li>Hahmo jää helposti kiinni lattiaan hypätessään. Pelaajan RigidBodylle pitää asettaa kitkaton materiaali.</li>
+<li>Lisää uusi PhysicsMaterial2D (Assets / Create / 2D / PhysicsMaterial2D ). Nimeä järkevästi ja aseta Friction -ominaisuus nollaksi. 
+<p><img src="../kuvat/platformer_3.png" />
+</li>
+<li>Tämän jälkeen raahaa tämä luistava materiaali pelaajan RigidBody2D:n Physics Materialiksi.</li>
+
+</ul>
+
+<h3>Kamera</h3>
+<p>Voit kokeilla siirtää Main Camera-objektin pelaajalle, kamera seuraa pelaajaa ja voit esimerkiksi laajentaa tasoa nyt helposti suuremmaksi. </p>
+<ul>
+	<li>Raahaa kamera ja säädä sen sijaintia sopivaksi.</li>
+	<li>Aja ohjelma ja testaa toimintaa.</li>
+</ul>
+
+<hr />
+
+<h2>1.Lopetusikkuna ja aloita uudestaan</h2>
+<p>Kun pelaaja tippuu pitäisi pelin päättyä. Lisätään Update()-metodiin tarkistus: jos y-koordinaatti on riittävän alhalla (riippuu peli-ikkunastasi) niin peli päättyy ja näytetään Game Over-scene.
+<ul>
+<li>lisää uusi Scene kansioon Scenes - lisätään teksti ja painike
+<p><img src="../kuvat/game_over_1.png" width="400" />
+</li>
+
+<li>Hierarchy-ikkuna, hiiren oikea, UI / Text - TextMeshPro. Ilmestyy valtava Canvas ja Text-objekti</li>
+<li>Tuplaklikkaa Canvas-objektia ja säädä teksti sopivaan muotoon.</li>
+<li>Lisää Canvas-objektille uusi Button, anna teksti esimerkiksi "Aloita uudestaan".</li>
+</ul>
+
+<p>Scenen lisääminen mukaan projektille
+<ul>
+<li>Avaa File / Build Settings...</li>
+<li>Lisää molemmat scenet mukaan projektille</li>
+<li><img src="../kuvat/game_over_2.png" width="300"/></li>
+</ul>
+
+<p>Scenen vaihtaminen pelissä kun hahmo tippuu:
+<ul>
+<li><pre>
+using UnityEngine.SceneManagement;
+</pre></li>
+<li>Lisää FixedUpdate()-metodiin if-lause:
+<pre>
+ if (rb.transform.position.y &lt; -10)
+ {
+    SceneManager.LoadScene("GameOver");
+ }</pre></li>
+</ul>
+</li>
+<p>GameOverScript:
+<ul>
+<li>Lisää uusi skripti GameOverScript</li>
+<li>Lisää alkuun: <pre>using UnityEngine.SceneManagement;</pre></li>
+<li>Skripti sisältää vain yhden aliohjelman.
+<pre>
+public class GameOverScript : MonoBehaviour
+{<span class="korostus">
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Game");
+    }</span>
+}
+</pre></li>
+</ul>	
+<p>GameOver-scene, GameOverController:
+<ul>
+<li>Lisää uusi tyhjä GameObject (hiiren oikea / Create Empty), nimeä se esim. GameOverController</li>
+</li>Lisää GameOverController-objektille uusi komponentti GameOverScript (raahaamalla tai Add Component-painikkeen avulla).</li>
+<li>
+Lisätään toiminto painikkeelle:
+- paina +-merkkiä On Click() -listassa
+<p><img src="../kuvat/game_over_3.png" />
+
+
+</li>
+</ul>
+
+<hr />
+
+
+<h2>2. Spike</h2>
+<p>Laadi jokin tuli, piikki, lima tai muu ektoplasma johon astuminen on vahingollista hahmolle ja aiheuttaa pelin päättymisen.
+<p><img src="../kuvat/spike_2.png" width="300" />
+<ul>
+	<li>Tee uusi Prefab esimerkiksi kolmiosta. 
+		<ul>
+			<li>Aseta väri</li>
+			<li>Lisää PolygonCollider2D. Voit kokeilla säätää Edit Collider-attribuutilla rajoja halutuksi. Aseta isTrigger jotta tärmätessä aktivoituisi Trigger-tapahtuma.</li>
+			<li>Lisää tag joka kuvaa elementtiä, esim. "spike".
+			<p><img src="../kuvat/spike_1.png" />
+			</li>
+		</ul>
+	</li>
+	<li>Lisää PlayerController-skriptille toiminto OnTriggerEnter2D
+<pre>	
+private void OnTriggerEnter2D(Collider2D col)
+{
+	if (col.gameObject.tag == "spike")
+	{
+		// osuttiin piikkiin - pelin pitäisi päättyä
+		Debug.Log("spike: " + col.gameObject.name);
+	}
+}	
+</pre>	
+<p>Kun pelaaja osuu piikkiin pitäisi pelin päättyä.
+	</li>
+			<li>Raahaa muutamia esteitä kentällesi.</li>
+</ul>
+
+<hr />
+
+<h2>3. Pisteiden kerääminen</h2>
+<ul>
+<li>Tee hedelmä, tähti tms. kerättävä objekti jota hahmosi tulisi kerätä pelikentältä. Tee tästä objektista Prefab. Lisää hedelmälle jokin tag, esimerkiksi "fruit".
+</li>
+<li>Lisää pelaajalle luokan alkuun int -tyyppinen muuttuja score.
+<pre>
+public int score;
+</pre>
+</li>
+<li>Lisää objektille BoxCollider, aseta isTrigger päälle (true). Jatka PlayerController-skriptin OnTriggerEnter2D:n koodia, nyt pitäisi kasvattaa pisteitä ja tulostaa pisteiden määrä konsolissa.
+
+<pre>
+private void OnTriggerEnter2D(Collider2D col)
+{
+	if (col.gameObject.tag == "spike")
+	{
+		// osuttiin piikkiin - pelin pitäisi päättyä
+		Debug.Log("spike: " + col.gameObject.name);
+	}<span class="korostus">
+	if (col.gameObject.tag  == "fruit") {
+		// kasvata pisteitä yhdellä
+		Debug.Log("score: " + score);
+		// poista törmätty objekti
+		col.gameObject.SetActive(false);
+	}</span>
+}
+</pre>
+</li> 
+</ul>
+
+<hr />
+
+<h2>4. Pisteet näkyviin</h2>
+<p><img src="../kuvat/tasohyppely_ulkoasu.png" width="400" />
+<ul>
+<li>Lisää hierarchy-ikkunaan uusi Text-elementti (hiiren oikea / UI / Text - TextMeshPro).</li>
+<li>Syntyy valtava Canvas, voit vaihtaa tuplaklikkaamalla Canvas ja Main Camera-näkymien välillä.</li>
+
+<li>Siirrä Text-elementti sopivaan kohtaan ja kirjoita tekstiksi tässä vaiheessa esimerkiksi "Pisteet:0"</li>
+<li>
+PlayerController.cs: Lisää uusi julkinen muuttuja
+<pre>
+public TextMeshProUGUI txtScore;
+</pre>
+Tarvittaessa lisää kirjasto
+<pre>
+using TMPro;
+</pre>
+</li>
+<li>Raahataan Text-elementti editorissa julkisen muuttujan kohdalle. Nyt muuttuja viittaa tähän käyttöliittymän Text-objektiin.
+<p><img src="../kuvat/tasohyppely_txtscore.png" />
+
+</li>
+
+<li>Lopuksi päivitetään pisteet näkyviin Text-objektille kun pisteet kasvavat.
+<pre>
+txtScore.text = "Pisteet:" + score;
+</pre>
+</li>
+</ul>
+<hr />
+
+<h2>5. PlayerPrefs</h2>
+<ul>
+<li>Tarkoitus on välittää tieto yhdeltä Sceneltä toiselle. Tämä onnistuu PlayerPrefs:n avulla.
+</li> 
+<li>Windows-ympäristössä PlayerPrefs tallennetaan rekisteriin osoitteessa HKCU\Software\[company name]\[product name]. Tätä ei tarvitse käydä katsomassa rekisteristä vaan luotetaan sen menevän oikeaan osoitteeseen.
+</li> 
+<li>PlayerPrefs tallentaa tietyllä avaimella (key) jonkin tiedon (value). 
+</li> 
+<li>Start()-metodissa voit asettaa esimerkiksi avaimelle PlayerScore arvon nolla:
+<pre>PlayerPrefs.SetInt("PlayerScore", 0);</pre>
+</li> 
+<li>Kun hahmo kuolee voidaan asettaa nykyinen pistemäärä muistiin.
+<pre>PlayerPrefs.SetInt("PlayerScore", score);</pre>
+</li> 
+<li>GameOver-ikkunalla voit hakea vastaavasti PlayerScore-tiedon seuraavasti:
+
+<pre>int score = PlayerPrefs.GetInt("PlayerScore");</pre>
+</li> 
+<li>Näytä GameOver-ikkunalla pelaajan keräämät pisteet, toimitaan samaan tapaan kuin aikaisemmin:
+
+
+<ul>
+	<li>Lisää Text-objekti ja kirjoita sen tekstiksi esimerkiksi "Pisteet: 0"</li>
+	<li>Lisää GameOverScript-skriptille julkinen muuttuja
+	<pre>public TextMeshProUGUI txtScore;</pre>
+	</li>
+	<li>Raahaa editorissa Text-objekti GameOverScript-skriptin txtScore-muuttujalle arvoksi, silloin koodissa tehty muutos vaikuttaisi juuri tähän käyttöliittymän objektiin.</li>
+	<li>Lisää GameOverScriptille Start()-metodi jota kutsutaan kun tämä käynnistyy:
+<pre>
+public void Start()
+{<span class="korostus">
+  int score = PlayerPrefs.GetInt("PlayerScore");
+  txtScore.text = "Pisteet:" + score;</span>
+}
+</pre>
+	</li>
+</ul>
+
+</li> 
+
+<li>PlayerPrefs soveltuu tilanteisiin kun halutaan säilyttää pientä tietomäärää tallessa. Ongelma on se, että tietotyyppejä on vain int, string ja float. Esimerkiksi sijainti vaatii jo kaksi-kolme float-muuttujaa. Yksi vaihtoehto on käyttää JSON-tietoa ja tallettaa se string-muuttujassa.</li> 
+
+</ul>
+<hr />
+<h2>Extra</h2>
+<h3>Uusi taso</h3>
+<ul>
+	<li>Lisää ovi sopivaan kohtaan ensimmäiselle tasollesi.</li>
+	<li>Kun hahmo osuu oviaukkoon avataan toinen taso. Luo toinen taso uudeksi Sceneksi.</li>
+</ul>
+
+<h3>Tiedoston tallennus</h3>
+<ul>
+<li>Tallenna pisteet myös tiedostoon, tarkoitus on lukea pisteet High Score-taulukkoon.</li> 
+
+<li>Tarvitset kirjaston
+<pre>using System.IO;</pre>
+ </pre></li> 
+<li>Tiedoston kirjoittaminen on hyvin helppoa. </li> 
+
+<pre>
+string  fileName = "Scores.csv";
+string path = "Assets/Resources/" + fileName;
+StreamWriter writer = new StreamWriter(path, true);
+writer.WriteLine(score);
+writer.Close();
+</pre>
+
+<li>Yritä tallentaa päiväys, kellonaika ja pistemäärä csv-tiedostoon. Csv-tiedostossa kannattaa käyttää ';'-merkkiä erottamassa eri soluja. Päiväyksen saat näin: <code>System.DateTime.Now</code>.
+<pre>string row = score + "; " + System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");</pre>
+</li> 
+
+
+</ul>
+<!---
+Vihje: valitse objekti Hierarchy-ikkunasta, paina F-kirjainta ja näyttö fokusoi tämän (kätevä esim. Canvas yms. objektien kanssa).
+>
+<h3>High scores</h3>
+
+<ul>
+	<li>Luetaan tiedosto ja tulostetaan sen tiedot näkyviin.</li> 
+-->
+
+<hr />
+<h2>Lähteitä ja linkkejä</h2>
+<p>Pääasiallinen lähde tälle demolle on youtube-video jossa käydään sama asia läpi.
+<ul>
+<li><a href="https://www.youtube.com/watch?v=QGDeafTx5ug">2D Double / Triple Jump Platformer Controller</a></li>
+<li><a href="https://loekvandenouweland.com/content/use-unity-button-to-change-between-scenes.html">Use Unity Button to Change Between Scenes</a></li>
+</ul>
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

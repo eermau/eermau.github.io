@@ -1,0 +1,261 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+<h1>Blender-demo</h1>
+<h2>Tuoli</h2>
+<p>Tehdään yhdessä tuoli Blenderillä</p>
+<ul>
+    <li>Mesh-objektien lisääminen ja muokkaaminen</li>
+    <li>Loop Cut</li>
+    <li>Edit ja Object-mode</li>
+</ul>
+<p><img src="../kuvat/blender_demo_tuoli1.png" alt="Tuoli-demo"></p>
+<h2>Sekalaisia ohjeita</h2>
+<h5>Ympäristö</h5>
+
+<ul>
+    <li>Kannattaa asentaa viimeisin versio Blenderistä (nyt 4.1)</li>
+    <li>Lähtökohta sovelluksella ollut animoinnissa ja tv-tuotannossa</li>
+</ul>
+
+
+<p>Aloitus</p>
+<ul>
+    <li>Aloitusnäkymästä kannattaa yleensä valita General (tai File / New / General).</li>
+    <li>Aseta Undo Steps mahdollisimman suureksi (256) valitsemalla Edit / Preferences / System / Undo Steps
+<p><img src="../kuvat/blender_undo_steps.png" alt="Undo Steps"></p>
+
+    </li>
+</ul>
+
+<p>Liikkuminen</p>
+<ul>
+
+<li>Blenderin akseleissa Y on syvyysakseli, X ja Z horisontaalinen ja vertikaalinen (Unityssä Z syvyysakseli).</li>
+<li>Voit klikata kirjainta ja perspektiivi muuttuu
+    <p><img src="../kuvat/blender_axis.png" alt="Axis"></p>
+</li>
+<li>Hiiren rulla pohjassa kääntäminen, shift+rulla panoroi, rulla zoomaa</li>
+<li>Jos eksyt niin valitse objekti Scene Collection / Collection / Cube ja tämän jälkeen View / Frame Selected (tai vaihtoehtoisesti View / Frame All)
+    <p><img src="../kuvat/blender_scene_collection.png" alt="Scene Collection"></p>
+    <p><img src="../kuvat/blender_frame_selected.png" alt="Frame Selected"></p>
+</li>
+</ul>
+
+<p>Tiedosto</p>
+
+<ul>
+    <li>tiedostomuoto .blend</li>
+    <li>File / Save Incremental on hyvä vaihtoehto työstettäessä laajaa työtä, tallennusversio saa aina oman numeron.</li>
+<li>Link ja Append, suositus Append niin ei tee muutoksia toiseen blend-tiedostoon vaan tuo tähän projektiin.
+</li>
+<li>Kun viedään työ Unity:lle niin Export ja fbx-muoto.</li>
+</ul>
+
+
+
+
+<h4>Object Mode ja Edit Mode</h4>
+
+<ul>
+    <li>Edit Mode: valintavaihtoehdot Vertex, Edge ja Face
+    </li>
+</ul>
+
+<p>Muokkaaminen</p>
+
+Object Mode: siirrä 3d-kursori shift+hiiren oikea
+
+<ul>
+    <li>S ja hiiren liikutus (Scale) muuttaa kokoa
+    </li>
+    <li>G-liikuttaa
+    </li>
+    <li>R-rotate, pyörittää objektia (hiiren vasen pysäyttää)
+    </li>
+</ul>
+
+<p>
+Edit Mode:
+Raahaamalla hiirella voit valita kaikki Vertex-pisteet (myös Ctrl+A)</p>
+<p>
+Item / Transform-valikko (N)
+- View valikossa 3D-cursorin sijainti ja pyöritys</p>
+
+<p>Uuden objektin lisääminen</p>
+<ul>
+    <li>Add / Mesh / Cube
+    </li>
+</ul>
+<p>
+Liikuttaminen
+- Object mode, G-nappi (Ctrl-napilla snap to grid), hiiren vasemmalla asettaa</p>
+<p>
+Edit Mode (Tab vaihtaa Edit/Object moden välillä)
+Valinta: A valitsee kaikki</p>
+<p>
+Move-työkalu, jos haluat Ctrl-napilla pitää kiinni gridsissä.</p>
+
+<p>
+G, liikuttaa, paina Z niin liikkuu vain Z-akselissa</p>
+
+<ul>
+    <li>Alt+S palauttaa alkuperäinen koon</li>
+    <li>Alt+G alkuperäinen sijainti</li>
+    <li>Alt+R alkuperäinen rotaatio</li>
+</ul>
+
+
+
+<p>Näkymän jakaminen:</p>
+<ul>
+    <li>Ylävalikossa kun kursori muuttuu nuoleksi paina hiiren oikea, valitse Vertical split ja näytöltä kohta missä jaetaan näkymä.</li>
+    <li>Takaisin poistaminen jälleen näkymien välissä hiiren oikea ja Join areas, valitse kumpi näkymä jyrää toisen.
+        <p><img src="../kuvat/blender_join_areas.png" alt="Join Areas"></p>
+    </li>
+</ul>
+
+<p>Globalin vieressä Transform Pivot Point, yleensä Median point käytössä</p>
+
+
+
+<p>Poista ja lisää face: </p>
+<ul>
+    <li>Edit Mode, Valinta, X, remove Face
+    </li>
+    <li>Edit Mode, Valinta, F tekee uuden </li>
+</ul>
+
+<hr>
+
+<p>VR/3D kävely objektissa</p>
+<ul>
+    <li>Blender Preferences, Keymap, kirjoita navigation ja valitse View navigation, aseta pikanäpäin (Shift+F)
+        <p><img src="../kuvat/blender_navigation.png" alt="Navigation"></p>
+    </li>
+</ul>
+
+<hr>
+
+<p>Normaalit</p>
+<ul>
+    <li>Display Face Normals as Lines</li>
+    <li>Edit Mode, oikealta Show Overlays ja Normals / Display Normals
+        <p><img src="../kuvat/blender_normals.png" alt="Normals"></p>
+    </li>
+    <li>Mesh / Normals / Flip </li>
+</ul>
+
+<p>Loop cut</p>
+<ul>
+    <li>Edit Mode, Ctrl+R, valitaan leikkauskohta ja tämän jälkeen vielä säätö (jos keskeltä niin hiiren oikea nappi)</li>
+</ul>
+
+<p>Modifiers</p>
+<ul>
+    <li>Oikealla jakoavain, Add Modifier, valitse Generate / Mirror, tehdään tuolille puolet ja toinen tulee mirror-toiminnon kautta</li>
+    <li>Uusi loop cut Ctrl+R, hiiren rullalla toinen valinta</li>
+    <li>S ja X niin skaalataan X-akselin mukaan</li>
+</ul>
+
+<p>Valitse Edit Mode, Face Select ja valitse jalkojen alareunat, tämän jälkeen E ja voit kasvattaa jalat.</p>
+
+
+<p>Apply Scale</p>
+<ul>
+    <li>Object Mode, Ctrl+A, Apply Scale hyväksyy muutokset</li>
+</ul>
+
+<p>Measure-työkalu</p>
+<ul>
+    <li>Ctrl-nappi pohjassa saa helposti mitattua objektien kokoa (x-napilla voi poistaa)</li>
+</ul>
+
+<p>Värin vaihtaminen</p>
+<ul>
+    <li>Material Properties ja valitse Base Color</li>
+    <li><p><img src="../kuvat/blender_base_color.png" alt=""></p></li>
+    <li>Jotta näet värin vaihda oikeasta yläkulmasta Viewport Shading.</li>
+    <li>Lisätietoa: <a href="https://www.youtube.com/watch?v=MRbPSkpAJFI" target="_blank">Youtube: How to Change the Color of an Object in Blender</a></li>
+</ul>
+
+<p>Archimesh</p>
+<ul>
+    <li>lisää uusi lisäosa (Blender Preferences, kirjoita archi)</li>
+    <li>Add Mesh / Archimesh / Door, Object Mode ja uusi valikko Create josta voi säätää ominaisuuksia</li>
+    <li>Lisää Room, lisää seiniä ja säädä kokoja</li>
+</ul>
+
+
+<p>Boolean</p>
+<ul>
+    <li>Generate / Boolean</li>
+    <li>Difference, Object, pipetillä valinta, tämän jälkeen Apply-alasvetovalikosta</li>
+</ul>
+
+
+<p>Knife-tool</p>
+<ul>
+    <li>Knife-tool (K) pintojen siistimisessä, klikkaa Vertex, toinen Vertex ja Enter, kaikista pinnoista nelikulmaisia.</li>
+</ul>
+
+
+<h3>Ulkoiset lähteet</h3>
+Skannaus
+PolyCam, LiDAR
+
+<p>Polyhaven: tekstuurit</p>
+
+<ul>
+    <li><a target="_blank" href="https://polyhaven.com/">polyhaven.com</a></li>
+    <li>File / Append blend-materiaali</li>
+    <li>Valitse kohde, oikealla alareunassa punainen maapallo (Material), valitse materiaali ja tämän jälkeen z-napilla Material Preview.</li>
+    <li>Materiaalit löytyvät Materials-kansiosta, huonekalut yms. mallit kansiosta Model.</li>
+</ul>
+
+<p></p>
+
+
+<p>SketchFab: ilmaisia malleja</p>
+
+<ul>
+    <li><a target="_blank" href="https://sketchfab.com/">sketchfab.com</a></li>
+    <li>Vaatii tunnukset, .glb-tiedostomuoto hyvä koska siinä mukana tekstuurit samassa tiedostossa.</li>
+</ul>
+
+<p>BlenderKit</p>
+
+<ul>
+    <li><a href="https://www.blenderkit.com/" target="_blank">blenderkit.com</a></li>
+    <li>Lataa ja asenna lisäosa Blenderissä Blender Preferences, Add ons, Install</li>
+</ul>
+
+
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

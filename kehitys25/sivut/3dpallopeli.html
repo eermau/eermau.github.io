@@ -1,0 +1,181 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+
+<h5>Yleistä</h5>
+
+<p>Tässä demossa laaditaan ensimmäinen 3d-peli. Tarkoitus on tehdä peli jossa liikutetaan palloa ja kerätään pisteitä. Tutustutaan erioihin 2d ja 3d pelien välillä.
+<p><img src="../kuvat/3dpallopeli_1.png" width="600" />
+<h5>3D Objektit</h5>
+<ul>
+	<li>Aloita uusi projekti, valitse nyt 3d-projekti.</li>
+	<li>Lisää uusi taso (GameObject / 3d Object / Plane), nimä 'Ground'. Varmista, että tason sijainti on (0,0,0). Tee tason kooksi Scale-attribuuteilla 2 x 1 x 2.</li>
+	<li>Voit ottaa Scene-ikkunan Gizmos-valikosta gridin pois näkyvistä</li>
+	<li>Lisää pelihahmoksi Sphere, nimeä 'Player'. Nosta pallo 0.5 ylöspäin jotta se ei ole haudattuna tasoon.</li>
+	<li>Lisää kansio 'Materials', lisää sinne uusi materiaali (hiiren oikea / Material), nimeä Background. Kohdasta 'Albido' voit määrittää materiaalin värin.</li>
+	<li>Raahaa seuraavaksi Background objektin Ground päälle ja tason värin tulisi muuttua.</li>
+	<li>Valitse Directional Light ja säädä sen Rotation x ja y -arvojen avulla valaistus haluamaksesi (vaihda Scenen näkymä Scenen ja Gamen välillä jos et näe eroa).</li>
+</ul>
+
+<h5>Pelaajan liikuttaminen</h5>
+
+<ul>
+	<li>Lisää aluksi Rigidbody Player-objektille. Samalla objektille ilmestyy myös Sphere Collider.</li>
+	<li>Lisää Script-kansio ja lisää sinne PlayerController.
+<p>Lisää attribuutti Rigidbody:
+<pre>private Rigidbody rb;
+</pre>
+Start()-metodissa alustetaan Rigidbody:
+<pre>
+    void Start()
+    {
+        rb = GetComponent&lt;Rigidbody&gt;();
+    }
+	
+</pre>
+Liikuttaminen tapahtuu FixedUpdate-metodissa
+<pre>
+void FixedUpdate() {
+ float moveHorizontal = Input.GetAxis("Horizontal");
+ float moveVertical = Input.GetAxis("Vertical");
+ Vector3 move = new Vector3(moveHorizontal, 0, moveVertical);
+ rb.AddForce(move);
+}
+</pre>
+Kokeile toimintaa. Liikkuu melko hitaasti? Lisää vielä <code>public float speed</code> ja kerro liike sillä.
+	</li>
+</ul>
+
+
+<h5>Kamera</h5>
+
+<ul>
+	<li>Lisää kameralle uusi skripti, CameraController. Tarkoitus on koodissa säätää sitä miten kamera seuraa pelaajaa.</li>
+	<li>
+Tarkoitus on, että kamera on tietyn välimatkan päässä pelaajasta. Tämä välimatka (offset) pysyy samana koko ajan. Kun pelaaja liikkuu niin liikutetaan myös kameraa.		
+<pre>
+public class CameraController : MonoBehaviour
+{
+public GameObject player;
+private Vector3 offset;
+
+void Start()
+{
+	offset = transform.position - player.transform.position;        
+}
+// LateUpdate tehdään muiden Update()-metodien jälkeen
+void LateUpdate()
+{
+	transform.position = player.transform.position + offset;
+}
+}
+</pre>	
+</li>
+</ul>
+
+<p>Toinen vaihtoehto on käyttää Cinemachine-lisäosaa. Voit asentaa sen Window / Package Manager -valikon kautta.</p>
+<ul>
+	<li>Lisää hierarchy-ikkunalle uusi Virtaul Camera</li>
+	<li>Aseta Virtual Cameran attribuuteista Follow ja Target osoittamaan pelaajaan. Muuta Body / Follow Offset -muuttujan Y-arvo sopivaksi.
+		<p><img src="../kuvat/cinemachine.png" alt="Cinemachine-attribuutit"></p>
+	</li>
+</ul>
+<h5>Seinä</h5>
+
+<ul>
+	<li>Lisää uusi Gameobject, nimeä se Wall.</li>
+	<li>Lisää uusi Cube (GameObject / 3d / Cube) ja nimeä se West Wall, siirrä tämä Wall GameObjectin sisälle. Tee seinästä sopivan kokoinen.</li>
+	<li>Tee kopioimalla toinen seinä ja siirrä se paikalleen. Tämän jälkeen tee jälkimmäiset kaksi seinää samaan tapaan. Kokeile pelin toimintaa. Sopiva koko on esimerkiksi 20.5 x 0.5f.
+	<p><img src="../kuvat/3dpallopeli_3.png" /></li>
+</ul>
+
+
+<h5>Pisteet</h5>
+
+<ul>
+	<li>Lisää peliin uusi Cube, nimeä esim. PickUp.</li>
+	<li>Muuta sen kokoa: nosta Position y-akselista 0.5, muuta Scale 0.5 x 0.5 x 0.5 ja Rotation 45 x 45 x 45. Kuution pitäisi nyt olla ilmassa ja kyljellään.
+	<p><img src="../kuvat/3dpallopeli_2.png" width="150" />
+	</li>
+	<li>Lisää skripti Rotator ja lisää kuutiollesi:
+<pre>
+void Update()
+{
+// muutetaan Rotation-attribuutteja
+transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);        
+}	
+</pre>Testaa toimintaa, kuution pitäisi pyöriä kauniisti.
+	</li>
+	<li>Lisää uusi kansio Prefabs ja tee pistekuutiostasi Prefab.</li>
+	<li>Lisää uusi tyhjä Game object ja nimeä se PickUps, tehdään tästä äiti kaikille pisteille. Raahaa piste tämän äidin sisälle.</li>
+	<li>Lisää pisteitä sopiva määrä ja asettele pelikentällesi.</li>
+	<li>Lisää PickUp-prefabille sopiva väri.</li>
+	<li>Lisää pisteille tag "pickup" ja aseta niille päälle isTrigger. Tämän jälkeen lisää OnTriggerEnter-metodi pelaajalle:
+<pre>
+void OnTriggerEnter(Collider col) {
+if (col.gameObject.tag == "pickup") {
+col.gameObject.SetActive(false);
+}
+}
+</pre>	
+	</li>
+</ul>
+
+<h4>Lisäykset</h4>
+
+
+<h5>Ajan näyttäminen</h5>
+
+<ul>
+	<li>Lisää pelille yksinkertainen käyttöliittymä jossa näytetään juokseva kellonaika (alkaa 0:00 ja mittaisi kauanko menee pelin läpipelaamiseen) ja pisteet.</li>
+	<ul>
+	<li>Ajan esittämisestä löytyy esimerkki Timer-esimerkki <a href="tietovisa.html">tietovisan</a> yhteydessä. Nyt tarkoitus lähteä nollasta ja näyttää tarkempi aika.</li>
+	<li>Lisää näkyviin laskuri joka kasvaa aina kun pelaaja kerää pisteen.</li>
+	</ul>
+	<li>Voit ankkuroida Text-objektin vasempaan tai oikeaan yläreunaan (Anchor, huomaa Shift ja Alt-painikkeiden käyttö).
+	<p><img src="../kuvat/3dpallopeli_4.png" />
+	</li>
+
+</ul>
+
+<h5>Pelin lopettaminen</h5>
+
+<ul>
+	<li>Kun pelaaja on kerännyt kaikki pisteet tulisi pelin päättyä. Pisteiden tullessa täyteen siirry Game over-skenelle, näytä täällä pelaajan käyttämä aika. Yritä saada näkyviin myös kaikkien aikojen nopein aika.</li>
+
+</ul>
+
+
+<h5>Käytetty lähde</h5>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=RFlh8pTf4DU&list=PLX2vGYjWbI0Q-s4_lX0h4i2zbZqlg4OfF">Unity 5 - Roll a Ball  game</a></li>
+</ul>
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

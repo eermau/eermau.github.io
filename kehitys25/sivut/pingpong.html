@@ -1,0 +1,344 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+  <h1>Ping pong</h1>
+  
+<h4>Yleistä</h4>  
+<ol>
+<li>Aloita uusi projekti, nimeä esimerkiksi PingPong, muista valita 2D-projekti.
+
+</li>
+<li>Lisää Assets / Scenes-kansioon uusi Scene, nimeä se nimellä Game. Voit poistaa SampleScene-objektin.
+</li>
+<li>Lisää Hierarchy-ikkunassa uusi tyhjä GameObject, nimeä ne GameManager.
+</li>
+<li>Lisää uusi kansio Scripts, lisää tänne C#-skirptit GameManager.cs, Ball.cs ja Paddle.cs (tarkenteita .cs ei tarvitse kirjoittaa). Voit avata nämä tuplaklikkaamalla ja varmistaa, että kaikki aukeavat oikein. Tarkista, että luokkien (class) nimi on GameManager, Ball ja Paddle.
+</li>
+<li>Lisää uusi kansio Sprites ja lisää tänne ympyrä (Assets / Create / Sprites / Circle) ja neliö (Assets / Create / Sprites / Square).
+</li>
+<li>Raahaa ympyrä Hierarchy-ikkunaan ja tehdään siitä näin peliin oma objekti. Nimeä ympyrä palloksi (Ball).
+<p><img src="../kuvat/pingpong_1.png" /></p>
+</li>
+</ol>
+<h4>Collider</h4>  
+<ol>
+<li>Lisää Ball-objektille Inspector-ikkunassa uusi komponentti, Circle Collider 2D (Component / Physics 2D / Circle Collider 2D). Valitse törmäyskomponentille Is Trigger -valinta päälle.
+</li>
+<li>Lisää Ball-objektille myös Rigidbody 2D-komponentti (Component / Physics 2D / Rigidbody 2D). Valitse Body Type-kohdassa Kinematic.
+</li>
+<li>Tehdään seuraavaksi maila (Paddle): raahaa Square Hierarchy-ikkunaan ja nimeä objekti nimellä Paddle. Raahaa neliö vähän oikealle ja muokkaa sen kokoa jotta se muistuttaisi mailaa.
+
+<li>Lisää Paddle-objektille Rigidbody 2D, aseta Body Type Kinematic. Lisää myös Box Collider 2D, aseta Is Trigger päälle.
+<p><img src="../kuvat/pingpong_3.png" /></p>
+</li>
+<li>Lisätään mailalle tagi jotta myöhemmin tiedämme ohjata mailaa koodissa: Inspector-ikkunassa valitse Tag ja Add Tag, anna uudeksi tagiksi "Paddle". Klikkaa uudestaan ja varmista että Tag-kohdassa on nyt Paddle.
+<p><img src="../kuvat/pingpong_2.png" /></p>
+</li>
+<li>Lisää pallolle Tagiksi "Ball".
+</li>
+</ol>
+<h4>Skriptin aloittaminen</h4>
+<ol>
+<li>Valitse GameManager Hierarchy-ikkunassa. Raahaa GameManager-skripti uudeksi komponentiksi.
+</li>
+<li>Lisätään vähän koodia:
+<pre>
+public class GameManager : MonoBehaviour
+{
+    <span class="korostus">public Ball ball;
+    public Paddle paddle;</span>
+</pre>	
+Tarkista näkyvätkö nyt muuttujat oikein GameManager-objektilla.
+
+<li>Seuraavaksi liitetään Ball.cs -skripti Ball-objektille ja Paddle.cs-skripti Paddle-objektille. Valitse Ball ja raahaa skripti sille. Toista Paddle-objektille.</li>
+<li>Prefab: tee uusi kansio Prefabs. Prefab on uudelleenkäytettävä valmis olio. Tehdään Game Objecteista Ball ja Paddle tällaisia Prefabeja raahaamalla ne tähän kansioon. 
+</li>
+<li>Tämän jälkeen voit poistaa Ball ja Paddle-oliot Hierarchy-ikkunasta (voimme luoda nyt nämä oliot koodissa).</li>
+<li>Raahaa Ball-prefab ja Paddle-prefab GameManagerin vastaaville muuttujille.
+
+<li>Lisätään pelin aloittaminen GameManager.cs-skriptin Start()-metodiin:
+<pre>
+void Start()
+{
+	<span class="korostus">Instantiate(ball);
+	Instantiate(paddle);</span>
+}
+</pre>
+<p>Testaa ajaa ohjelma. Näkyykö näytöllä nyt pallo ja maila.
+</li>
+</ol>
+<h4>Maila</h4>
+<ol>
+<li>Paddle.cs -skriptille pitää seuraavaksi lisätä Init()-metodi jossa alustetaan oikean tai vasemman mailan sijainti:
+<pre>
+public class Paddle : MonoBehaviour
+{
+<span class="korostus">
+    public void Init(bool isRightPaddle) {
+        Vector2 pos = Vector2.zero;
+
+        if (isRightPaddle)
+        {
+            // maila oikealle
+            pos = new Vector2 (GameManager.topRight.x, 0);
+        }
+        else
+        {
+            // maila vasemmalle:
+            pos = new Vector2(GameManager.bottomLeft.x, 0);
+        }
+        // muuttaa sijainnin uudeksi:
+        transform.position = pos;
+    }
+
+</span>
+}
+</pre>
+</li>
+<li>Siten GameManager-luokassa luodaan kaksi mailaa ja määritellään pelialueen vasen alareuna ja oikea yläreuna.
+<pre>
+public class GameManager : MonoBehaviour
+{
+    // esitellään julkiset muuttujat
+    public Ball ball;
+    public Paddle paddle;
+<span class="korostus">
+    public static Vector2 bottomLeft;
+    public static Vector2 topRight;
+</span>
+    // Start is called before the first frame update
+    void Start()
+    {
+        <span class="korostus">bottomLeft = Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
+        topRight = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+        // luodaan pallo
+        Instantiate(ball);
+
+        // luodaan kaksi mailaa
+        Paddle paddle1 = Instantiate(paddle) as Paddle;
+        Paddle paddle2 = Instantiate(paddle) as Paddle;
+        // lisätään mailalle kohta boolean-arvo
+        // joka kertoo onko se oikea vai vasen
+        paddle1.Init(true);
+        paddle2.Init(false);</span>
+    }
+
+}
+</pre>
+</li>
+
+<li>Aja ohjelma ja katso miltä sovellus näyttää. Mailat ovat ihan reunassa, jotta ne saadaan vähän keskemmälle meidän pitää muuttaa sijaintia:
+<pre>
+if (isRightPaddle)
+ {
+  // maila oikealle
+  pos = new Vector2 (GameManager.topRight.x, 0);
+  <span class="korostus">pos -= Vector2.right * transform.localScale.x;</span>
+ }
+</pre>
+<p>Tee vastaava asia myös else-lauseessa.
+</li>
+<li>
+Seuraavaksi yritetään liikuttaa mailaa ylös ja alas. Tarvitaan muuttujia mailalle:
+<pre>
+public class Paddle : MonoBehaviour
+{
+private float speed;
+private float height;
+private string input;
+public bool isRight;	
+</pre>
+<p>Start()-metodissa alustetaan korkeus ja nopeus. 
+<pre>
+void Start()
+{
+height = transform.localScale.y;
+//speed = 5f;
+}	
+</pre>	
+<p>Lopuksi alustetaan isRight Init()-metodissa:
+<pre>
+isRight = isRightPaddle;
+</pre>	
+</li>
+<li>
+Seuraavaksi määritellään input-syöte. Tämä tapahtuu Edit / Project Settings-valikosta. Valitse  kohta Input manager ja valmiiksi määritelty  Horizontal	. Muuta Size -> 2. Muuta sitten nimi Horizontal -> PaddleLeft. Muuta Vertical -> PaddleRight. Asetetaan lisäksi näille oikeat painikkeet, aseta vasemmalle esimerkiksi 'w' ja 's', ota Alt Negative ja Alt Positive pois käytöstä. Toista oikealle mailalle.
+<p><img src="../kuvat/pingpong_4.png" /></p></li>
+<li>Meidän pitää kertoa seuraavaksi mailalle kumpi on oikea input-muuttujan arvo. Jos maila on oikea niin asetetaan input = "PaddleRight";, muuten asetetaan input = "PaddleLeft";.
+<pre>
+ if (isRightPaddle)
+{
+	<span class="korostus">input = "PaddleRight";</span>
+	// maila oikealle
+	pos = new Vector2(GameManager.topRight.x, 0);
+	pos -= Vector2.right * transform.localScale.x;
+	// vasemmalla: pos -= Vector2.left * transform.localScale.x;
+}
+</pre>
+<p>Kokeile toimintaa, tarvitaan myös vasen maila eli lisää else-lause jossa asetetaan vasemman mailan nimi.
+</li>
+<li>
+<p>Aseta myös Game Objektin nimeksi input-muuttujan arvo (Paddle.cs, Init()-metodi):
+<pre>// muuttaa sijainnin uudeksi:
+transform.position = pos;
+<span class="korostus">transform.name = input;</span>
+</pre>
+<p>Voit ajaa ohjelman ja tarkistaa että Hieararchy-ikkunaan ilmestyy oikealla nimellä kaksi mailaa.	
+</li>
+<li>
+Paddle.cs -tiedoston Update()-metodissa muutetaan objektin sijaintia seuraavasti:
+<pre>
+void Update()
+{<span class="korostus">
+float move = Input.GetAxis(input) * Time.deltaTime * speed;
+transform.Translate (move * Vector2.up);</span>
+}</pre>
+	</li>
+<li>Muuta mailan speed-attribuutti seuraavasti:
+<pre><span class="korostus">[SerializeField]</span>
+private float speed;	
+</pre>	
+<p>Nyt speed-arvoa voidaan muuttaa editorissa suoraan käsin. Kokeile muuttaa kentän arvoa (esim. 15) editorissa ja testaa toimintaa.
+
+</li>
+<li>Mailan liikkeen estäminen ruudun ulkopuolelle. Update() -metodissa ennen mailan liikuttamista tarkistetaan pitääkö liike pysäyttää:
+<pre>
+float move = Input.GetAxis(input) * Time.deltaTime * speed;
+// estetään mailan meneminen ruudun alle
+// jos liike on alas ja y on tiettyä arvoa pienempi
+<span class="korostus">if (transform.position.y &lt; GameManager.bottomLeft.y + height / 2 && move &lt; 0) {
+move = 0;
+}
+else if (transform.position.y &gt; GameManager.topRight.y - height / 2 && move &gt; 0) {
+move = 0;
+}</span>
+transform.Translate(move * Vector2.up);
+</pre>    	
+</li></ol>
+<h4>Pallo</h4>
+<ol>
+<li>Pallon liikuttaminen menee suurin piirtein samaan tapaan kuin mailakin:
+<pre>
+public class Ball : MonoBehaviour
+{
+	<span class="korostus">[SerializeField]
+	private float speed;
+	private float radius;
+	private Vector2 direction;	</span>
+</pre>
+<p>Esittele muuttujat ja anmna speed-muuttujalle arvo editorissa.
+</li>
+<li>Start()-metodissa alustetaan muuttuajt:
+<pre>
+void Start()
+{<span class="korostus">
+// aloitussuunta suoraan
+direction = Vector2.one.normalized;    
+radius = transform.localScale.x / 2;</span>
+}</pre>
+</li>
+<li>
+Update()-metodissa hoidetaan pallon liike. Tulee 	
+<pre>
+void Update()
+{<span class="korostus">
+// liikutetaan palloa
+transform.Translate (direction * speed * Time.deltaTime);
+if (transform.position.y &lt; GameManager.bottomLeft.y + radius && direction.y &lt; 0)
+{
+direction.y = -direction.y;
+}
+if (transform.position.y &gt; GameManager.topRight.y - radius && direction.y &gt; 0)
+{
+direction.y = -direction.y;
+}</span>
+</pre>
+<p>Lisäksi pitää tarkistaa voittiko jompi kumpi pelaaja:
+<pre>
+// tarkistetaan voittiko pelaaja
+if (transform.position.x &lt; GameManager.bottomLeft.x + radius && direction.x &lt; 0)
+{
+Debug.Log("Oikea pelaaja voitti!");
+}
+else if (transform.position.x &gt; GameManager.topRight.x - radius && direction.x &gt; 0)
+{
+Debug.Log("Vasen pelaaja voitti!");
+}
+</pre>
+</li>
+<li>
+	Viimeinen asia on mailan osuminen palloon. Kun maila osuu niin vaihdetaan suunta päinvastaiseen. Lisää koodi Ball.cs-tiedostoosi:
+<pre>
+void OnTriggerEnter2D(Collider2D other) {
+	if (other.tag == "Paddle") {
+		// tarkistetaan onko maila oikea vai vasen
+		bool isRight = other.GetComponent&lt;Paddle&gt;().isRight;
+		if (isRight == true && direction.x &gt; 0) {
+			direction.x = -direction.x;
+		}
+		if (isRight == false && direction.x &lt; 0) {
+			direction.x = -direction.x;
+		}
+	}
+}	
+</pre>	
+</li>
+
+</ol>
+<h4>Lisäyksiä</h4>
+
+<ul>
+	<li>Kun peli päättyy niin pysäytä aika pallon Update()-metodissa:
+<pre>
+Time.timeScale = 0;
+// lopetetaan skriptin suoritus
+enabled = false; 
+</pre>	
+</li>
+<li>Kun pallo osuu mailaan niin kasvata speed-ominaisuutta yhdellä.</li>
+<li>Ääniefektien lisääminen. Etsi sopiva ääni pallon osumiseen ja toinen pelin voittamiseen.
+<ul>
+	<li>Lisää Assets-kansion alle alikansio Sounds.</li>
+	<li>Etsi sopiva ilmainen ääniefekti, raahaa / kopioi se Sounds-kansioosi.</li>
+	<li>Lisää pallolle uusi komponentti, Audio Source. Valitse AudioClip-ominaisuudeksi oma äänitiedostosi.</li>
+	<li>Lisää koodi <a href="https://docs.unity3d.com/ScriptReference/AudioSource.Play.html">dokumentaation mukaan</a>.</li>
+</ul>
+
+</li>
+
+
+</ul>
+<h4>Lähteitä ja linkkejä</h4>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=1oY--Zk9b6w">Ping Pong-tutoriaali</a></li>
+<li><a href="https://docs.unity3d.com/ScriptReference/AudioSource.Play.html">Unity3D documentation: AudioSource</a></li>
+
+</ul>
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>

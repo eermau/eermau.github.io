@@ -1,0 +1,49 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style.css">
+    
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+                
+                <article class="markdown-body">
+  <h1>Staattiset muuttujat</h1>
+  
+ 
+  
+  <p>Staattiset muuttujat ovat keino välittää muuttujien kautta tietoa koko sovelluksesi sisällä. 
+  <ul>
+<li>Lisää uusi GameObject -> nimeä Globals</li>
+<li>Lisää tee uusi skripti -> Globals.cs</li>
+<li>isää skriptin sisälle vain tarvitsemasi globaalit staattiset muuttujat
+<pre>public class Globals : MonoBehaviour
+{
+    public static int pisteet;
+}</pre></li>
+<li>Voit käyttää nyt pisteitä suoraan toisessa luokassa näin:
+<pre>Globals.pisteet = 0;</pre> 
+</li>
+</ul>
+
+
+</article>
+</div>
+</div>
+</div>
+<div class="current-section">
+
+</div>
+</body>
+
+</html>
