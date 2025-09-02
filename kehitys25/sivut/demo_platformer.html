@@ -37,6 +37,7 @@
 <p><img src="../kuvat/platformer_1_player.png" width="100" />
 
 </li>
+<li>Mikäli objektit eivät näy oikein tarkista Advanced / Order in Layer, oletuksena 0 mutta voit asettaa esim. silmille arvon 1.</li>
 <li>Lisää hahmolle RigidBody2D, lisää myös BoxCollider2D</li>
 </ul>
 <h3>Lattia</h3>
@@ -64,7 +65,10 @@ private Rigidbody2D rb;</span>
 <pre>
 void Start()
 {<span class="korostus">
-  rb = GetComponent&lt;Rigidbody2D&gt;();</span>
+  rb = GetComponent&lt;Rigidbody2D&gt;();
+  speed = 2f;
+  jumpforce = 2f;
+</span>
 }
 </pre></li>
 
