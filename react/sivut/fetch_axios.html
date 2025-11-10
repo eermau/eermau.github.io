@@ -1,0 +1,48 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>Ominaisuus</th>
+      <th>fetch</th>
+      <th>axios</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Automaattinen JSON-parsaus</td>
+      <td>Ei</td>
+      <td>Kyllä (res.data)</td>
+    </tr>
+    <tr>
+      <td>404/500 heittää virheen automaattisesti</td>
+      <td>Ei</td>
+      <td>Kyllä</td>
+    </tr>
+    <tr>
+      <td>Timeout</td>
+      <td>Tarvitsee manuaalisen AbortController</td>
+      <td>Helppo: axios.get(url, { timeout: 5000 })</td>
+    </tr>
+    <tr>
+      <td>Interceptorit (automaattinen tokenin lisäys)</td>
+      <td>Ei</td>
+      <td>Kyllä</td>
+    </tr>
+    <tr>
+      <td>Pyyntöjen peruutus</td>
+      <td>Mahdollinen</td>
+      <td>Hyvin tuettu</td>
+    </tr>
+    <tr>
+      <td>Yhteensopivuus Node + selain</td>
+      <td>Riippuu Node-versiosta (18+)</td>
+      <td>Toimii molemmissa heti</td>
+    </tr>
+    <tr>
+      <td>Kirjaston koko</td>
+      <td>Ei lisää painoa</td>
+      <td>Lisää ~20KB</td>
+    </tr>
+  </tbody>
+</table>
+
