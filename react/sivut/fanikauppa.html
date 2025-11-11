@@ -1,0 +1,78 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+
+                    <h2>Harjoitus 2: fanikauppa</h2>
+                    <h3>Yleistä</h3>
+
+                    <p>Tehtävänä on laatia kuvitteellisen verkkokaupan prototyyppi. Verkkokauppa voi olla esimerkiksi bändin tai urheiluseuran fanituotteita myyvä verkkokauppa (mukit, lippalakit, T-paidat, julisteet yms.). Voit valita aiheen vapaasti mutta huomioi sisällössä se, että harjoitus julkaistaan osaksi portfoliotasi.</p>
+
+                    <h3>Toiminnot</h3>  
+
+<ul>
+    <li>Tuotteiden selailu
+        <p>Asiakas voi selata tuotteita verkkokaupassasi. Tuotteita tulee olla vähintään kolme kappaletta. Tuotteiden tietoja ovat tuotekuva, tuotteen nimi, lyhyt kuvaus sekä hinta. Muista lisätä tuotteelle myös id-kenttä.</p> </li>
+    <li>Lisääminen ostoskoriin
+        <p>Kun tuote lisätään ostoskoriin asiakkaalta tulee pyytää kappalemäärä. Ostoskorin tiedot päivittyvät ja asiakas näkee ostoskorinsa sisällön muuttuneen.</p></li>
+        <li>Ostoskorin muuttaminen
+            <p>Voit näyttää ostoskorin koko ajan sivulla tai avata sen esimerkiksi nappia painettaessa. Ostoskorissa näytetään teksti "Ostoskorisi on tyhjä" tai käyttäjän lisäämät tuotteet. On tärkeää näyttää käyttäjälle koko ostoskorin kokonaishinta. Ostoskorissa voi muuttaa kappalemäärää tai poistaa kokonaan tietyn tuotteen. Ostoskorissa tulee olla myös painike kaikkien tuotteiden poistamiseksi (Tyhjennä ostoskori).</p>
+        </li>
+        <li>Yhteystiedot
+            <p>Ostoskorissa tulee olla painike <b>Tilaa</b>. Painettaessa nappia asiakkaalta pyydetään hänen yhteystietonsa (sähköpostiosoite, puhelinnumero, lähiosoite, postinumero sekä postitoimipaikka). Tilaus vahvistetaan painamalla painiketta <b>Lähetä tilaus</b> jolloin asiakasta kiitetään tilauksesta ja ostoskorin tiedot tyhjennetään.</p>
+        </li>
+</ul>
+
+                    <h3>Edistyneet toiminnot</h3>
+<ul>
+    <li>Alennus
+        <p>Lisää toiminto alennuksen laskemiseksi tiettyjen ehtojen mukaan</p>
+        <ul>
+            <li>Kokonaissumma yli 100€, alennus 2.5%</li>
+            <li>Kokonaissumma yli 250€, alennus 4%</li>
+            <li>Kokonaissumma yli 500€, alennus 6%</li>
+        </ul>
+    </li>
+</ul>
+                    <h3>Julkaiseminen portfolioon</h3>
+<p>Lisätään fanikauppa osaksi portfoliotasi. Tehdään portfolio-repossa alikansio <i>fanikauppa</i> jonka alle kopioidaan build-versio. Jotta sivu osaa ladata js ja css-tiedostot oikein tulee vite.config.js-tiedostoon lisätä rivi kertomaan oikean polun:</p>
+<pre> base: '/fanikauppa/',</pre>
+<p>Tee seuraavaksi build suorittamalla komento:</p>
+<pre> npm run build</pre>
+<p>Build luodaan kansioon <i>dist</i>. Kopioi dist-kansion sisältö portfolio-reposi <i>fanikauppa</i>-kansioon.</p>
+<p>Portfoliossa linkitä fanikaupan index.html-sivu:</p>
+<pre>
+&lt;h1&gt;Portfolio&lt;/h1&gt;
+&lt;h2&gt;Fanikauppa&lt;/h2&gt;
+&lt;p&gt;Reactilla tehty kuvitteellinen verkkokauppa.&lt;/a&gt;
+&lt;a href="./fanikauppa/index.html"&gt;Fanikauppa&lt;/a&gt;    
+</pre>
+<p>Huom. jos käytät <i>react-router</i>:ia niin lisää basename-attribuutiksi oikea kansio:</p>
+<pre>&lt;BrowserRouter basename='/fanikauppa'&gt;</pre>
+                </article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>

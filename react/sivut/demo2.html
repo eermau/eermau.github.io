@@ -1,0 +1,72 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+                    <h2>React-demoja</h2>
+                    <h3>Demo 2</h3>
+                    <p>Tämä demo käy läpi Full Stack open-kurssin <a
+                            href="https://fullstackopen.com/osa1/komponentin_tila_ja_tapahtumankasittely" target="_blank">osan 1 kohdan Komponentin tila ja tapahtumankäsittely</a>.</p>
+<h4>Tilamuuttuja</h4>
+                            <p>Tila (state) on Reactin ominaisuus jolla voidaan määritellä komponentin eliaikana päivittyvä tieto. Tilamuuttujalla on kaksi alkota joista ensimmäinen on muuttuja ja toinen funktio jolla muuttujaa voidaan päivittää.</p>
+                            <p>Lisää demot-projektissa <i>components</i>-kansioon uusi tiedosto <i>Counter.jsx</i>.</p>
+                            <p>useState-funktio tulee importata tiedoston alussa: </p>
+                            <pre>import { useState } from 'react'</pre>
+                            <p>Tilamuuttuja(t) määritellään komponentin alussa. Tilamuuttujan alkuarvo määrittää muuttujan tyypin (esimerkiksi 0, "", false, []).</p>
+<pre>
+import { useState } from "react";
+
+const Counter = () =&gt; {
+    const [counter, setCounter] = useState(0);
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Counter: {counter}&lt;/p&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default Counter;    
+</pre>
+<p>Nyt alkuarvo tulostuu sivulle. Kun halutaan päivittää muuttujaa <i>counter</i> meidän tulee kutsua setCounter-funktiota. Tehdään painike joka kasvattaa muuttujaa:</p>   
+<pre>&lt;button onClick={() =&gt; setCounter(counter + 1)}&gt;Add&lt;/button&gt;</pre>
+<p>Kokeile lisätä painike muuttujan arvon vähentämistä ja nollausta varten.</p>        
+
+<h4>Ehdollinen renderöinti</h4>
+<p>Tilan avulla voidaan helposti hallita käyttöliittymää piilottamalla ja näyttämällä komponentti tai <i>div</i>-elementti tilamuuttujan mukaisesti.</p>
+<p>Lisää <i>demot</i>-projektissa App.jsx-tiedostolle tilamuuttuja <i>showPets</i>.</p>
+<pre>
+function App() {
+  const [showPets, setShowPets] = useState(false);    
+</pre>
+<p>Lisätään koodia Pets-komponentin ympärille. Jos showPets on <i>true</i> niin näytetään Pets-komponentti:</p>
+<pre>{showPets && &lt;Pets pets={pets} /&gt;}</pre>
+<p>Kokeile toimintaa. Lisää tämän jälkeen painike jolla voidaan muuttaa tilamuuttujan boolean-arvo päinvastaiseksi.</p>
+<pre>&lt;button onClick={()=&gt;setShowPets(!showPets)}&gt;Show Pets&lt;/button&gt;</pre>
+<p>Olisi näppärää jos teksti vaihtuisi myös. Voit kirjoittaa <i>Show Pets</i>-tekstin tilalle lyhyen ehtolauseen joka hyödyntää tilamuuttujaa:</p>
+<pre>{showPets ? "Hide Pets" : "Show Pets"}</pre>
+                </article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>

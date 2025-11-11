@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../../style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
 
     <title>Fullstack-kehitys</title>
 </head>
@@ -18,30 +18,37 @@
             <div id="main" role="main">
 
                 <article class="markdown-body">
-<h2>React-demoja</h2>
-<h3>Demo 1</h3>
-<p>Tämä demo käy läpi Full Stack open-kurssin <a href="https://fullstackopen.com/osa1/reactin_alkeet" target="_blank">osan 1 kohdan Reactin alkeet</a>.</p>
-<h4>Projektin luonti</h4>
-<p>Tehdään Github-repon sisälle projektikansio demoille. Neljä demo tulevat kaikki tämän saman React-projektin sisälle. Avaa konsoli repon juurihakemistossa ja aja seuraava projektin luontikäsky:</p>
-<pre>
+                    <h2>React-demoja</h2>
+                    <h3>Demo 1</h3>
+                    <p>Tämä demo käy läpi Full Stack open-kurssin <a
+                            href="https://fullstackopen.com/osa1/reactin_alkeet" target="_blank">osan 1 kohdan Reactin
+                            alkeet</a>.</p>
+                    <h4>Projektin luonti</h4>
+                    <p>Tehdään Github-repon sisälle projektikansio demoille. Neljä demo tulevat kaikki tämän saman
+                        React-projektin sisälle. Avaa konsoli repon juurihakemistossa ja aja seuraava projektin
+                        luontikäsky:</p>
+                    <pre>
 npm create vite@latest demot -- --template react
 </pre>
-<p>Tämän jälkeen siirrytään kansioon ja käynnistetään reactin development server:</p>
-<pre>
+                    <p>Tämän jälkeen siirrytään kansioon ja käynnistetään reactin development server:</p>
+                    <pre>
 cd demot
 npm install
 npm run dev
 </pre>
-<p>Lähdekooditiedostot ovat src-kansiossa. App.jsx sisältää App-komponentin jonka sisälle teemme demojen tehtävät. Lisää alikansio components alikomponenteille.</p>
-<p><img src="../kuvat/demot1.png" alt=""></p>
-<p>node_modules-kansio sisältää Reactin asennettuja kirjastoja ja sitä ei haluta mukaan GitHub-repoon. Lisätään repon juurihakemistoon .gitignore-tiedosto:</p>
-<pre>
+                    <p>Lähdekooditiedostot ovat src-kansiossa. App.jsx sisältää App-komponentin jonka sisälle teemme
+                        demojen tehtävät. Lisää alikansio components alikomponenteille.</p>
+                    <p><img src="../kuvat/demot1.png" alt=""></p>
+                    <p>node_modules-kansio sisältää Reactin asennettuja kirjastoja ja sitä ei haluta mukaan
+                        GitHub-repoon. Lisätään repon juurihakemistoon .gitignore-tiedosto:</p>
+                    <pre>
 node_modules
 </pre>
-<p>Kun olet käynnistänyt development serverin voit avata selaimessa osoitteen <a href="http://localhost:5173/" target="_blank">http://localhost:5173/</a>.</p>
+                    <p>Kun olet käynnistänyt development serverin voit avata selaimessa osoitteen <a
+                            href="http://localhost:5173/" target="_blank">http://localhost:5173/</a>.</p>
 
-<p>Muutetaan App-komponentti yksinkertaisemmaksi:</p>
-<pre>
+                    <p>Muutetaan App-komponentti yksinkertaisemmaksi:</p>
+                    <pre>
 import { useState } from 'react'
 import './App.css'
 
@@ -60,8 +67,8 @@ function App() {
 
 export default App    
 </pre>
-<p>Muokkaa myös App.css-tiedostoa:</p>
-<pre>
+                    <p>Muokkaa myös App.css-tiedostoa:</p>
+                    <pre>
 .App-header {
   background-color: white;
   color: black;
@@ -77,9 +84,10 @@ body {
   place-items: start;
 }    
 </pre>
-<h4>Muuttujat</h4>
-<p>Reactissa muuttujat esitellään JavaScriptin tapaan. Kun viittaat muuttujaan return-osassa muuttuja ympäröidään aaltosuluilla.</p>
-<pre>
+                    <h4>Muuttujat</h4>
+                    <p>Reactissa muuttujat esitellään JavaScriptin tapaan. Kun viittaat muuttujaan return-osassa
+                        muuttuja ympäröidään aaltosuluilla.</p>
+                    <pre>
 function App() {
   const name = "Musti";
   const age = 10;
@@ -99,15 +107,16 @@ function App() {
   )
 }
 </pre>
-<h4>React-komponentti</h4>
-<p>Yleensä halutaan tehdä pienempiä komponentteja joita kutsutaan esimerkiksi App.jsx-tiedostossa. Komponentti tulee tuoda (import) sitä käyttävässä komponentissa.</p>
+                    <h4>React-komponentti</h4>
+                    <p>Yleensä halutaan tehdä pienempiä komponentteja joita kutsutaan esimerkiksi App.jsx-tiedostossa.
+                        Komponentti tulee tuoda (import) sitä käyttävässä komponentissa.</p>
 
-<ul>
-  <li>Tee kansio components ja lisää sinne tiedosto Pet.jsx</li>
-  <li>Tallenna <a href="../kuvat/demo_pet.png">kuva</a> lemmikistä assets-kansioon.</li>
-</ul>
+                    <ul>
+                        <li>Tee kansio components ja lisää sinne tiedosto Pet.jsx</li>
+                        <li>Tallenna <a href="../kuvat/demo_pet.png">kuva</a> lemmikistä assets-kansioon.</li>
+                    </ul>
 
-<pre>
+                    <pre>
 import imgPet from '../assets/demo_pet.png'
 
 const Pet = () => {
@@ -126,21 +135,23 @@ const Pet = () => {
 
 export default Pet;  
 </pre>
-<p>App.jsx-tiedostolla tuodaan komponentti mukaan: </p>
-<pre>import Pet from './components/Pet.jsx'</pre>
-<p>Kutsutaan App.jsx-tiedostolla return-osassa Pet-komponenttia:</p>
-<pre>
+                    <p>App.jsx-tiedostolla tuodaan komponentti mukaan: </p>
+                    <pre>import Pet from './components/Pet.jsx'</pre>
+                    <p>Kutsutaan App.jsx-tiedostolla return-osassa Pet-komponenttia:</p>
+                    <pre>
 &lt;div className="App-body"&gt;
 &lt;h2&gt;Demo 1&lt;/h2&gt;
 &lt;Pet /&gt;
 &lt;/div&gt;  
 </pre>
-<h4>Tietojen välitys - props</h4>
-<p><img src="../kuvat/demot1_2.png" alt=""></p>
-<p>Äskeinen komponentti tulostaa aina samat tiedot. Toimivampi komponentti saisi tiedot syötteenä ja osaisi tulostaa lemmikin tiedot näkyviin. Annetaan seuravaksi Pets-komponentille parametrit eli propsit syötteenä. Muuta App.jsx-tiedostoa seuraavasti:</p>
-<pre> &lt;Pet name="Musti" age="2" /&gt;</pre>
-<p>Pet.jsx-tiedostossa parametri propsin avulla voidaan tulostaa lemmikin tiedot:</p>
-<pre>
+                    <h4>Tietojen välitys - props</h4>
+                    <p><img src="../kuvat/demot1_2.png" alt=""></p>
+                    <p>Äskeinen komponentti tulostaa aina samat tiedot. Toimivampi komponentti saisi tiedot syötteenä ja
+                        osaisi tulostaa lemmikin tiedot näkyviin. Annetaan seuravaksi Pets-komponentille parametrit eli
+                        propsit syötteenä. Muuta App.jsx-tiedostoa seuraavasti:</p>
+                    <pre> &lt;Pet name="Musti" age="2" /&gt;</pre>
+                    <p>Pet.jsx-tiedostossa parametri propsin avulla voidaan tulostaa lemmikin tiedot:</p>
+                    <pre>
 const Pet = (props) =&gt; {
 
     return (
@@ -153,8 +164,10 @@ const Pet = (props) =&gt; {
     );
 }; 
 </pre>
-<p>props on olio joka voidaan <a href="https://www.w3schools.com/react/react_es6_destructuring.asp" target="_blank">purkaa osiksi</a> aaltosulkujen avulla. Usein on selkeämpää käyttää komponentilla muuttujia kuin props-oliota:</p>
-<pre>
+                    <p>props on olio joka voidaan <a href="https://www.w3schools.com/react/react_es6_destructuring.asp"
+                            target="_blank">purkaa osiksi</a> aaltosulkujen avulla. Usein on selkeämpää käyttää
+                        komponentilla muuttujia kuin props-oliota:</p>
+                    <pre>
 const Pet = ({name, age}) =&gt; {
 
     return (
@@ -167,9 +180,10 @@ const Pet = ({name, age}) =&gt; {
     );
 };  
 </pre>
-<h4>Olio</h4>
-<p>Komponentille välitettävä tieto on usein olio jossa on sisällä erilaisia muuttujia. App.jsx lähettääkin seuraavaksi komponentille olion. Määrittele ensin App.jsx-tiedostossa olio näin:</p>
-<pre>
+                    <h4>Olio</h4>
+                    <p>Komponentille välitettävä tieto on usein olio jossa on sisällä erilaisia muuttujia. App.jsx
+                        lähettääkin seuraavaksi komponentille olion. Määrittele ensin App.jsx-tiedostossa olio näin:</p>
+                    <pre>
 import imgPet from './assets/demo_pet.png'
 const pet1 = {
   name: "Musti",
@@ -177,8 +191,8 @@ const pet1 = {
   img: imgPet
 }  
 </pre>
-<p>Lisätään tiedostoon Pet.jsx toinen komponentti PetObject. Nyt annetaan syötteenä olio.</p>
-<pre>
+                    <p>Lisätään tiedostoon Pet.jsx toinen komponentti PetObject. Nyt annetaan syötteenä olio.</p>
+                    <pre>
 const PetObject = ({pet}) =&gt; {
     return (
         &lt;div className='pet'&gt;
@@ -189,18 +203,21 @@ const PetObject = ({pet}) =&gt; {
     );
 };  
 </pre>
-<p>Kun Pet.jsx-tiedosto sisältääkin kaksi komponenttia niin exportataan ne molemmat: </p>
-<pre>export {Pet, PetObject};</pre>
-<p>App.jsx-tiedostolla importataan Pet.jsx-tiedostosta kaksi komponenttia, muuta import-lausetta näin:</p>
-<pre>import {Pet, PetObject} from './components/Pet.jsx'</pre>
-<p>App.jsx kutsuu nyt PetObject-komponenttia pet1-oliolla:</p>
-<pre>
+                    <p>Kun Pet.jsx-tiedosto sisältääkin kaksi komponenttia niin exportataan ne molemmat: </p>
+                    <pre>export {Pet, PetObject};</pre>
+                    <p>App.jsx-tiedostolla importataan Pet.jsx-tiedostosta kaksi komponenttia, muuta import-lausetta
+                        näin:</p>
+                    <pre>import {Pet, PetObject} from './components/Pet.jsx'</pre>
+                    <p>App.jsx kutsuu nyt PetObject-komponenttia pet1-oliolla:</p>
+                    <pre>
 &lt;PetObject pet={pet1} /&gt;
 </pre>
 
-<h4>Map ja taulukollinen olioita</h4>
-Käytetyt kuvat (<a href="../kuvat/demo_pet.png">kuva1</a>, <a href="../kuvat/demo_pet2.png">kuva2</a>, <a href="../kuvat/demo_pet3.png">kuva3</a>)
-<pre>
+                    <h4>Map ja taulukollinen olioita</h4>
+                    <p>Taulukon läpikäynti return-osassa tapahtuu map-rakenteen avulla. Map käy läpi taulukon ja palauttaa tuloksena uuden taulukon. Tee App.jsx:n alkuun taulukko joka sisältää useampia olioita.</p>
+                    Käytetyt kuvat (<a href="../kuvat/demo_pet.png">kuva1</a>, <a
+                        href="../kuvat/demo_pet2.png">kuva2</a>, <a href="../kuvat/demo_pet3.png">kuva3</a>)
+                    <pre>
 import imgPet from './assets/demo_pet.png'
 import imgPet2 from './assets/demo_pet2.png'
 import imgPet3 from './assets/demo_pet3.png'
@@ -227,8 +244,8 @@ const pet4 = {
 const pets = [pet1, pet2, pet3, pet4];  
 </pre>
 
-<p>Taulukon käsittelyssä </p>
-<pre>
+                    <p>Erotetaan Pets-komponenttiin taulukon läpikäynti. Jokaisesta lemmikistä luodaan Pet-komponentti. Lisää Pet.jsx-tiedostoon uusi komponentti Pets:</p>
+                    <pre>
 const Pets = ({pets}) =&gt; {
     return (
         &lt;div className='pets'&gt;
@@ -238,14 +255,20 @@ const Pets = ({pets}) =&gt; {
         &lt;/div&gt;
     );
 };</pre>
-
+<p>App.jsx-tiedostossa tulee tuoda Pets-komponentti ja kutsua sitä PetObject-komponentin sijaan näin:</p>
+<pre>
+&lt;h2&gt;Demo 1&lt;/h2&gt;
+&lt;Pets pets={pets} /&gt;    
+</pre>
+<p><img src="../kuvat/demot1_3.png" alt=""></p>
                 </article>
             </div>
         </div>
     </div>
-    <div class="current-section">
-
-    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
 </body>
 
 </html>
