@@ -10,9 +10,11 @@
 
 <body>
     <div class="wrapper">
+        <a href="../index.html">
         <header>
             <h1>Fullstack-kehitys</h1>
         </header>
+        </a>
         <div id="container">
 
             <div id="main" role="main">
@@ -255,12 +257,15 @@ const Pets = ({pets}) =&gt; {
         &lt;/div&gt;
     );
 };</pre>
+<p>Kun tehdään map niin tämän lapsi tarvitsee key-attribuutin. Myöhemmin pyritään käyttämään uniikkia id-tietoa mutta tässä vaiheessa riittää indeksin hyödyntäminen key-attribuuttina.</p>
 <p>App.jsx-tiedostossa tulee tuoda Pets-komponentti ja kutsua sitä PetObject-komponentin sijaan näin:</p>
 <pre>
 &lt;h2&gt;Demo 1&lt;/h2&gt;
 &lt;Pets pets={pets} /&gt;    
 </pre>
 <p><img src="../kuvat/demot1_3.png" alt=""></p>
+
+
                 </article>
             </div>
         </div>

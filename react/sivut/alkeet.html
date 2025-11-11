@@ -10,9 +10,11 @@
 
 <body>
     <div class="wrapper">
+        <a href="../index.html">
         <header>
             <h1>Fullstack-kehitys</h1>
         </header>
+        </a>
         <div id="container">
 
             <div id="main" role="main">
@@ -21,7 +23,65 @@
 
                     <h2>Harjoitus 1: alkeet</h2>
                     <p>Harjoituksia yhden React-projektin alla.</p>
-                </article>
+
+<h3>Harjoitus 1</h3>
+
+<p>Aloita uusi React-projekti <i>alkeet</i>. Lisää <i>src</i>-kansion alle alikansio <i>components</i>. Tehtävänä on luoda Student.jsx-tiedosto jossa on komponentti Student. Näytä komponentissa yhden opiskelijan tiedot.</p>
+<p><img src="../kuvat/alkeet_1.png" alt=""></p>
+
+<h3>Harjoitus 2</h3>
+
+<p>Lisää Student.jsx-tiedostolle komponentti <i>Students</i>. Students saa taulukollisen olioita jotka tulostat Student-komponentin avulla. Lisää <i>css</i>-tyylitiedostoon tyylimäärittely jossa Student-komponentin tiedot näytetään gridin tai flexin avulla.</p>
+<p><img src="../kuvat/alkeet_2.png" alt=""></p>
+
+<h3>Harjoitus 3</h3>
+
+<p>Lisää <i>components</i>-kansioon tiedosto Table.jsx. Toteuta Table-komponentti joka saa parametrina taulukollisen kursseja. Tulosta return-osassa <i>table</i> jossa opiskelijan rivi (<i>tr</i>) luodaan <i>map</i>-funktion sisällä.</p>
+<p><img src="../kuvat/alkeet_3.png" alt=""></p>
+<p>Lisää taulukko <i>courses</i> tiedostolle <i>App.jsx</i>:
+</p>
+<pre>
+const courses = [
+  {
+    name: "React",
+    teacher: "Eerikki Maula",
+    class: "S4035"
+  },
+  {
+    name: "PHP",
+    teacher: "Anna Metsäpelto",
+    class: "S2023"
+  }
+  ,
+  {
+    name: "Wordpress",
+    teacher: "Mika Salo",
+    class: "S4034"
+  }
+]    
+</pre>
+
+<h3>Harjoitus 4</h3>
+
+<p>Lisää uusi tiedosto <i>Skills.jsx</i> jossa toteutat komponentin <i>Skills</i>. Tarkoitus on pystyä syöttämään taulukkoon uusia merkkijonoja jotka edustavat oppimiasi taitoja. Tulosta taulukon sisältö <i>map</i>-funktion avulla näkyviin.</p>
+<p><img src="../kuvat/alkeet_4.png" alt=""></p>
+<p>Katso mallia demosta kaksi.</p>
+
+<h3>Harjoitus 5</h3>
+
+<p>Lisää harjoituksille painike jonka avulla voit näyttää tai piilottaa kyseisen harjoituksen. Määrittele <i>App.jsx</i>-tiedostossa tilamuuttuja jokaiselle tekemällesi harjoitukselle. Voit vaihtoehtoisesti tehdä piilotuksen tapahtumaan harjoituksen otsikkoa klikkaamaalla.</p>
+<p>Katso mallia demosta kaksi.</p>
+
+
+<h3>Harjoitus 6</h3>
+
+<p><img src="../kuvat/alkeet_6.png" alt=""></p>
+<p>Laadi komponentti Links jossa voidaan lisätä uusia link-olioita. Linkillä tulee olla teksti sekä url-osoite. Lisää myös satunnaisluku id-kentäksi. </p>
+
+<p>Lisää lopuksi tykkäyksien yhteismäärän laskeminen <i>reduce</i>-funktion avulla.</p>
+<p>Katso mallia demosta kaksi.</p>
+
+</article>
             </div>
         </div>
     </div>

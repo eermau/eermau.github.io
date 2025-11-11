@@ -10,9 +10,11 @@
 
 <body>
     <div class="wrapper">
+        <a href="../index.html">
         <header>
             <h1>Fullstack-kehitys</h1>
         </header>
+        </a>
         <div id="container">
 
             <div id="main" role="main">
@@ -44,8 +46,10 @@ export default Counter;
 </pre>
 <p>Nyt alkuarvo tulostuu sivulle. Kun halutaan päivittää muuttujaa <i>counter</i> meidän tulee kutsua setCounter-funktiota. Tehdään painike joka kasvattaa muuttujaa:</p>   
 <pre>&lt;button onClick={() =&gt; setCounter(counter + 1)}&gt;Add&lt;/button&gt;</pre>
+<p><img src="../kuvat/demot2_1.png" alt=""></p>
 <p>Kokeile lisätä painike muuttujan arvon vähentämistä ja nollausta varten.</p>        
 
+<hr>
 <h4>Ehdollinen renderöinti</h4>
 <p>Tilan avulla voidaan helposti hallita käyttöliittymää piilottamalla ja näyttämällä komponentti tai <i>div</i>-elementti tilamuuttujan mukaisesti.</p>
 <p>Lisää <i>demot</i>-projektissa App.jsx-tiedostolle tilamuuttuja <i>showPets</i>.</p>
@@ -59,7 +63,102 @@ function App() {
 <pre>&lt;button onClick={()=&gt;setShowPets(!showPets)}&gt;Show Pets&lt;/button&gt;</pre>
 <p>Olisi näppärää jos teksti vaihtuisi myös. Voit kirjoittaa <i>Show Pets</i>-tekstin tilalle lyhyen ehtolauseen joka hyödyntää tilamuuttujaa:</p>
 <pre>{showPets ? "Hide Pets" : "Show Pets"}</pre>
-                </article>
+
+<hr>
+<h4>Friends</h4>
+
+<p>Seuraavaksi kokeillaan muuttujan lisäämistä taulukkoon. Lisää <i>components</i>-kansioon Friends.jsx-tiedosto.</p>
+<pre>
+const Friends = () =&gt; {
+    const [name, setName] = useState("");
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;New Friend&lt;/h2&gt;
+            &lt;form action="" &gt;
+                &lt;input type="text" value={name} onChange={e =&gt; setName(e.target.value)} /&gt;
+                &lt;button type="submit"&gt;Lisää&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default Friends;    
+</pre>
+<p>Lomakkeella syötetty nimi tallennetaan name-tilamuuttujaan. Lisää App.jsx-tiedostossa Friends-komponentti:</p>
+<pre>&lt;Friends /&gt;</pre>
+
+<p>Kaveri on tarkoitus lisätä taulukkoon joten tälle tarvitaan Friends-komponentille oma tilamuuttuja:</p>
+<pre>const [friends, setFriends] = useState([]); </pre>
+
+<p>Lomake kutsuu submitHandler-funktiota jossa uusi nimi lisätään concat-funktiolla friends-taulukon jatkeeksi.</p>
+<pre>
+const submitHandler = (e, name) =&gt; {
+        e.preventDefault();
+        setFriends(friends.concat(name))
+        console.log(friends);
+        setName("");
+    }    
+</pre>
+<p>Lisää lomakkeelle kutsu funktiolle:</p>
+<pre>&lt;form action="" onSubmit={e =&gt; submitHandler(e, name)} &gt;</pre>
+
+<h4>FriendsList</h4>
+<p>Taulukon tulostaminen tehdään omaan Komponenttiin <i>FriendsList</i>. Lisää tämä komponentti Friends.jsx-tiedostoon, et tarvitse sitä App.jsx-tiedostolla joten sen exportointi ei ole tarpeen.</p>
+
+<pre>
+const FriendsList = ({friends}) =&gt; {
+    return (
+        &lt;ul&gt;
+            {friends.map((f,i) =&gt; &lt;li key={i}&gt;{f} &lt;/li&gt;)}
+        &lt;/ul&gt;
+    )
+}    
+</pre>
+
+<p>FriendsList saa parametrina taulukon. Lisää Friends-komponentille listan näyttäminen mukaan:</p>
+<pre>
+&lt;h2&gt;Friends&lt;/h2&gt;
+&lt;FriendsList friends={friends} /&gt;    
+</pre>
+
+
+<h4>Olioiden käsittely</h4>
+<p>Tehdään <i>friends</i>-taulukon sisältämistä tiedoista hieman monimutkaisempia. Taulukko sisältäisi olioita joilla on nimi, id ja pisteet. Kun ystävä listään tälle arvotaan id.</p>
+<pre>setFriends(friends.concat({name: name, points: 0, id: Math.floor(Math.random()*1000000)}));</pre>
+<p><i>FriendsList</i>-komponentilla näytetään olion tiedot mapin sisällä:</p>
+<pre>&lt;li key={f.id}&gt;nimi: {f.name} pisteet: {f.points}</pre>
+<p>Pisteen lisäämistä varten tarvitaan funktio <i>addPoint</i>. Tilamuuttujaa ei voi muuttaa vaan se täytyy korvata uudella taulukolla. Tästä syystä tehdään aputaulukko <i>tempFriends</i> jossa oikealla id:llä oleva ystävä päivitetään. Lisää <i>addPoint</i>-funktio Friends-komponentille.</p>
+<pre>
+const addPoint = id =&gt; {
+    const tempFriends = friends.map(f =&gt; {
+        if(id === f.id)
+            f = {...f, points: f.points + 1}
+        return f
+    })
+    setFriends(tempFriends)
+}    
+</pre>
+<p>Pisteen lisäämien tapahtuu FriendsList-komponentilla. Viedään <i>addPoint</i> toiselle komponentille:</p>
+<pre>&lt;FriendsList friends={friends} addPoint={addPoint}/&gt;</pre>
+<p>Jotta <i>FriendsList</i> osaa käyttää sitä täytyy funktio tuoda mukaan: </p>
+<pre>const FriendsList = ({friends, addPoint}) =&gt; {</pre>
+<p>Lisää vielä painike <i>li</i>-elementin sisälle:</p>
+<pre>&lt;button onClick={e=&gt;addPoint(f.id)}&gt;lisää piste&lt;/button&gt;</pre>
+
+<h4>Reduce</h4>
+
+<p><i>Friends</i>-komponentilla voidaan näyttää kokonaispisteet <i>reduce</i>-funktion avulla. Tehdään aputaulukko <i>points</i> ja lasketaan siitä kokonaispisteet <i>reduce</i>-funktiolla:</p>
+<pre>
+const points = friends.map(f =&gt; f.points)
+const totalPoints = points.reduce((a, b) =&gt; a + b, 0)    
+</pre>
+<p>Näytä return-osassa <i>totalPoints</i></p>
+<pre>&lt;p&gt;Total points: {totalPoints}&lt;/p&gt;</pre>
+<p><img src="../kuvat/demot2_2.png" alt=""></p>
+
+
+</article>
             </div>
         </div>
     </div>
