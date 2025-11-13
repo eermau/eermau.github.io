@@ -1,0 +1,79 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Ohjelmistoprosessin työvälineet</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+            <header>
+                <h1>Ohjelmistoprosessin työvälineet</h1>
+            </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+
+                    <h2>Yksikkötestaus ja JEST-demo</h2>
+                    <h3>Ympäristön asentaminen</h3>
+                    <p>Tee GitHub-repoon kansio <i>jest</i>. Siirry kansioon ja alusta uusi node.js-projekti.</p>
+                    <pre>npm init</pre>
+                    <p>Asenna JEST, <i>--save-dev</i> tallettaa jest-kirjaston <i>package.json</i>-tiedostoon talteen.
+                    </p>
+                    <pre>npm install --save-dev jest</pre>
+
+                    <h3>Testin luonti</h3>
+                    <p>Lisää kandio <i>demot</i> ja luo sinne tiedosto <i>sum.js</i> sekä <i>sum.test.js</i>. Tehdään JavaScript-ohjelma yhteen tiedostoon ja sitä testaavat yksikkötestit toiseen.</p>
+                
+                    <p><i>sum.js</i>:</p>
+<pre>
+const sum = (a, b) =&gt; {
+    return a + b;
+}
+
+module.exports = sum;   
+</pre>
+<p><i>sum.test.js</i>-tiedostossa otetaan käyttöön sum-funktio ja laaditaan kolme testiä yhteenlaskulle:</p>
+<pre>
+const sum = require('./sum');
+
+test('yhteenlasku 1+2=3', () =&gt; {
+    expect(sum(1, 2)).toBe(3);
+});
+
+test('yhteenlasku 0+2=2', () =&gt; {
+    expect(sum(0, 2)).toBe(2);
+});
+
+test('yhteenlasku -1+2=1', () =&gt; {
+    expect(sum(-1, 2)).toBe(1);
+});    
+</pre>
+<p>Lisää <i>package.json</i>-tiedostoon oikea testauskomento:</p>
+<p><img src="../kuvat/jest_1.png" alt=""></p>
+<pre>
+  "scripts": {
+    "test": "jest --coverage"
+  },    
+</pre>
+<p>Aja testit komentokehotteessa:</p>
+<pre> npm run test</pre>        
+<p><img src="../kuvat/jest_2.png" alt=""></p>        
+                </article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>
