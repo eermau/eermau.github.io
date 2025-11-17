@@ -1,0 +1,97 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+                    <a href="json.html">osa 1</a> | <a href="notesdemo1.html">osa 2</a>
+                    <h2>Notes-demo (1/2)</h2>
+                    <h3>JSON-palvelin</h3>
+<p>Luo kansio notesdemo ja sen alle kansio jsondb. Luo uusi tiedosto <i>db.json</i> ja kopioi sen sisällöksi <a href="https://fullstackopen.com/osa2/palvelimella_olevan_datan_hakeminen" target="_blank">notes-taulukko</a>.</p>
+<p>Siirry kansioon jsondb ja luo sinne uusi projekti. Asenna json-server mukaan projektille.</p>
+<pre>
+cd notesdemo/jsondb
+npm init
+npm i json-server --save-dev
+</pre>
+<p>Lisää <i>package.json</i>-tiedostoon käynnistyskomento:</p>
+<pre>
+"scripts": {
+    "startdev": "npx json-server --port=3001 --watch db.json"
+},
+</pre>
+<p>Nyt voit käynnistää json-palvelimen komennolla:</p>
+<pre>
+npm run startdev    
+</pre>
+<p>Tarkista sovelluksen toimivuus <a href="http://localhost:3001/notes" target="_blank">http://localhost:3001/notes</a>.</p>
+
+<h3>REST-testit tietokannalle</h3>
+<h4>GET</h4>
+<p>Teemme yksinkertaiset testit tietokannan käsittelemiseksi. Asenna VSCoden lisäosa REST Client jotta voit lähettää editorin kautta HTTP kutsuja JSON-palvelimelle.</p>
+<p><img src="../kuvat/rest_client.png" alt=""></p>
+<p>Tee oma alikansio testeille (notesdemo / tests). Luo uusi tiedosto <i>notes_get.http</i> ja kopioi sen sisällöksi seuraava HTTP-pyyntö:</p>
+<pre>GET http://localhost:3001/notes HTTP/1.1
+</pre>
+<p>Testaa pyyntöä Send request-painikkeen avulla.</p>
+<p><img src="../kuvat/rest_1.png" alt=""></p>
+<h4>POST</h4>
+<p>Tiedon lisääminen tapahtuu POST-pyynnön avulla. Tee toinen tiedosto <i>notes_post.http</i> joka sisältää uuden notes-muistiinpanon:</p>
+<pre>
+POST http://localhost:3001/notes HTTP/1.1
+content-type: application/json
+
+{
+    "content": "REST-testi",
+    "date": "2026-01-14T10:00:00.098Z",
+    "important": false
+}    
+</pre>
+
+<h4>DELETE</h4>
+<p>Poistaminen saa parametrina poistettavan muistiinpanon id:n.</p>
+<pre>
+DELETE http://localhost:3001/notes/1 HTTP/1.1
+</pre>
+
+<h4>PUT</h4>
+<p>Muutettaessa sisältää tulee kertoa id sekä json-tieto uusista tiedoista.</p>
+
+<pre>
+PUT http://localhost:3001/notes/3 HTTP/1.1
+content-type: application/json
+
+{
+    "content": "Päivitetty sisältö",
+    "date": "2026-01-12T18:00:00.091Z",
+    "important": false
+}    
+</pre>
+
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>

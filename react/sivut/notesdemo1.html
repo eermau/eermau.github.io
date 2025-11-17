@@ -1,0 +1,68 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+                    <a href="json.html">osa 1</a> | <a href="notesdemo1.html">osa 2</a>
+                    <h2>Notes-demo (2/2)</h2>
+                    <h3>Projekti</h3>
+<p>Tehdään React-frontend jonka avulla hallitaan json-palvelimen tietokantaa. Siirry <i>notesdemo</i>-kansioon ja luo uusi React-projekti:</p>
+
+<pre>
+npm create vite@latest notesfront -- --template react
+cd notesfront
+npm i
+npm install axios --save
+npm run dev
+</pre>
+<p>Asensimme <i>axios</i>-kirjaston tietokannan käsittelyä varten React-sovelluksessa. Tietokannan käsittely onnistuu myös <i>fetch</i>-kutsujen avulla.</p>
+
+<pre>
+import { useState } from 'react'
+import axios from 'axios'
+import './App.css'
+
+function App() {
+  const promise = axios.get('http://localhost:3001/notes')
+  console.log(promise)
+  return (
+    &lt;&gt;
+    &lt;h1&gt;Notes-demo&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default App    
+</pre>
+<p><i>axios</i> palauttaa <i>promisen</i> joka voi olla joko <i>pending</i> (ei ole vielä tapahtunut), <i>fulfilled</i> (onnistunut) tai <i>rejected</i> (hylätty).</p>
+<p><img src="../kuvat/notesdemo_1.png" alt=""></p>
+<p>Viesti näkyy kahdesti koska Reactin StrictMode kutsuu render-funktiota kahdesti.</p>
+
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>
