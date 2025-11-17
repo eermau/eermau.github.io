@@ -1,0 +1,118 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Ohjelmistoprosessin työvälineet</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Ohjelmistoprosessin työvälineet</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+
+                    <h2>JavaScript -asioita</h2>
+
+    <h3>Funktio</h3>
+
+                    <p>Funktio esitellään JavaScript-kielessä näin:</p>
+<pre>
+function summa(a, b) {
+    return a + b;
+}    
+</pre>
+<p>Fuktio saa kaksi parametria ja palauttaa lukujen summan. Toinen tapa kirjoittaa funktio on käyttämällä <a href="https://www.w3schools.com/js/js_es6.asp" target="_blank">ES6</a>-notaatiota:</p>
+<pre>
+const summa = (a, b) => {
+    return a + b;
+}
+</pre>
+<p>Tai vielä lyhyemmin:</p>
+<pre>
+const summa = (a, b) => a + b;
+</pre> 
+
+<h3>for/of-silmukka</h3>
+<p>for/of -silmukan avulla voidaan helposti käydä läpi taulukon alkiot.</p>
+<pre>
+let luvut = [1, 2, 3];
+for (let luku of luvut) {
+    console.log(luku);
+}   
+</pre>
+<p>Sama asia forEach-silmukalla:</p>
+<pre>
+let luvut = [1, 2, 3];
+luvut.forEach(luku =&gt; console.log(luku));    
+</pre>
+<h3>Spread ... operaattori</h3>
+<p>Operaattorilla ... kopioidaan taulukkon sisältö yksittäisiksi alkioiksi. Tästä on hyötyä tilanteissa joissa halutaan esimerkiksi kopioida taulukon sisältö.</p>
+<pre>
+let luvut = [1, 2, 3];
+let luvut2 = [...luvut, 4, 5];    
+</pre>
+<h3>Ehtolause</h3>
+<p>JavaScriptin <a href="https://www.w3schools.com/js/js_conditionals.asp" target="_blank">ehtolause</a> jossa on kaksi vaihtoehtoa if/else voidaan kirjoittaa ?-merkin avulla lyhyesti näin:</p>
+<pre>
+let ika = 15;
+ika &gt;= 18 ? console.log("Aikuinen") : console.log("Alaikäinen");    
+</pre>
+<h3>map</h3>               
+<p>Map käy läpi taulukon ja palauttaa ehdon täyttäneet alkiot uutena taulukkona.</p>
+<p>Taulukon lukujen kaksinkertaiset arvot:</p>
+<pre>
+let luvut = [1, 2, 3, 4, 5];
+let luvut2 = luvut.map((luku) =&gt; luku * 2);
+console.log(luvut2);// 2, 4, 6, 8, 10
+</pre>
+<p>Yksi käyttötarkoitus on lisätä tai muuttaa taulukon sisältämien olioiden arvoja.</p>
+<pre>
+const opiskelijat = [
+    {"nimi": "Pekka", "opiskelijanumero": 1234}, 
+    {"nimi": "Maija", "opiskelijanumero": 1235}, 
+    {"nimi": "Matti", "opiskelijanumero": 1236}
+]
+// tauluun alkiot sekä uusi pisteet-tieto
+const muutetut = opiskelijat.map(opiskelija =&gt; {
+    return {
+        ...opiskelija,
+        pisteet: 0
+    }
+})
+
+console.log(muutetut);    
+</pre>
+<h3>filter</h3>
+<p>Filter palauttaa ehdon täyttävät alkiot uutena taulukkona.</p>
+<pre>
+let luvut = [1, 2, 3, 4, 5];
+let luvut2 = luvut.filter((luku) =&gt; {
+    if (luku &gt;= 3) {
+        return luku;
+    } 
+});
+console.log(luvut2);// 4, 5    
+</pre>
+
+
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>
