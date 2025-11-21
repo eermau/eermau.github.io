@@ -20,7 +20,7 @@
             <div id="main" role="main">
 
                 <article class="markdown-body">
-                    <a href="json.html">osa 1</a> | <a href="notesdemo1.html">osa 2</a>
+                    <a href="json.html">backend</a> | <a href="notesdemo1.html">frontend</a>
                     <h2>Notes-demo (2/2)</h2>
                     <h3>Projekti</h3>
 <p>Tehdään React-frontend jonka avulla hallitaan json-palvelimen tietokantaa. Siirry <i>notesdemo</i>-kansioon ja luo uusi React-projekti:</p>
@@ -52,8 +52,117 @@ function App() {
 export default App    
 </pre>
 <p><i>axios</i> palauttaa <i>promisen</i> joka voi olla joko <i>pending</i> (ei ole vielä tapahtunut), <i>fulfilled</i> (onnistunut) tai <i>rejected</i> (hylätty).</p>
-<p><img src="../kuvat/notesdemo_1.png" alt=""></p>
+<p><img src="../kuvat/notesdemo_1.png" alt="" width="400px"></p>
 <p>Viesti näkyy kahdesti koska Reactin StrictMode kutsuu render-funktiota kahdesti.</p>
+
+<p>Muutetaan sovellusta siten, että otetaan mukaan tilamuuttuja <i>notes</i> johon tallennamme muistiinpanot:</p>
+<pre>
+import { useState } from 'react'
+import axios from 'axios'
+import './App.css'
+
+function App() {
+  // tilamuuttuja muistiinpanoille
+  const [notes, setNotes] = useState([])
+
+  // haetaan notes:
+  axios.get('http://localhost:3001/notes')
+    .then(response =&gt; {
+      const notes = response.data
+      console.log(notes)
+      // tallennus tilamuuttujaan:
+      setNotes(notes);
+  })
+  return (
+    &lt;&gt;
+    &lt;h1&gt;Notes-demo&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default App
+</pre>
+<p>Kun katsot konsoliin niin muistiinpanoja haetaan koko ajan. Tehdään siis lisäys jossa muistiinpanojen haku muutetaan funktioksi <i>startHook</i> ja tätä kutsutaan vain kerran silloin kun sovellus latautuu:</p>
+<pre>
+import { use, useState, useEffect } from 'react'    
+</pre>
+<p>startHook:</p>
+<pre>
+const startHook = () => {
+// haetaan notes:
+axios.get('http://localhost:3001/notes')
+    .then(response => {
+    const notes = response.data
+    console.log(notes)
+    // tallennus tilamuuttujaan:
+    setNotes(notes);
+})    
+}
+
+useEffect(startHook, [])    
+</pre>
+<h4>Muistiinpanojen näyttäminen</h4>
+<p>Tee <i>components</i>-alikansioon uusi tiedosto <i>Notes.jsx</i> ja sinne komponentti <i>Notes</i>. Näytä komponentissa muistiinpanot listassa:</p>
+<p><img src="../kuvat/notesdemo_2.png" alt=""></p>
+<p>Muotoile tärkeät ja normaalit muistiinpanot eri näköisiksi. Tee App.css-tiedostoon tarvittavat tyylimäärittelyt. Notes-komponentilla voit vaihtaa luokan tyylin nimeä näin:</p>
+<pre>&lt;li className={note.important ? "important" : "normal"}&gt;</pre>
+<p><img src="../kuvat/notesdemo_3.png" alt=""></p>
+
+<h3>Muistiinpanon lisääminen</h3>
+<p>Lisää <i>App.jsx</i>-tiedostolle funktio addNote jonka avulla voidaan lisätä uusi muistiinpano. Koska osoite esiintyy useita kertoja koodin sisällä, se kannattaa erottaa omaan muuttujaan <i>baseURL</i>.</p>
+<pre>const baseURL = 'http://localhost:3001/notes';</pre>
+<p><i>addNote</i>-funktio:</p>
+<pre>
+const addNote = (e, newNote, newImportance) =&gt; {
+    e.preventDefault();
+    const note = {
+        content: newNote,
+        date: new Date().toISOString(), 
+        important: newImportance
+    };
+    axios.post(baseURL, note).then(response =&gt; {
+        console.log(response.data)
+    })
+}    
+</pre>
+<p>Tee uusi tiedosto <i>NotesForm.jsx</i> kansioon <i>components</i>. NotesForm lisää uuden muistiinpanon käyttäen addNote-funktiota.</p>
+<p><img src="../kuvat/notesdemo_4.png" alt=""></p>
+<pre>
+import { useState } from "react";
+
+const NotesForm = ({ addNote }) =&gt; {
+    const [newNote, setNewNote] = useState("");
+    const [newImportance, setNewImportance] = useState(false);
+
+    return (
+        &lt;div className='divForm'&gt;
+            &lt;h2&gt;Uusi muistiinpano&lt;/h2&gt;
+            &lt;form onSubmit={e =&gt; addNote(e, newNote, newImportance)}&gt;
+                Muistiinpano:
+                &lt;input onChange={e =&gt; setNewNote(e.target.value)}
+                    name="note"
+                    value={newNote}
+                    type="text" /&gt;
+
+                Tärkeä?
+                &lt;input onChange={e =&gt; setNewImportance(!newImportance)}
+                    type="checkbox"
+                    name="importance"
+                    checked={newImportance} /&gt;
+                &lt;input type="submit" value="Tallenna" /&gt;
+            &lt;/form&gt;
+
+        &lt;/div&gt;
+    )
+}
+
+export default NotesForm;    
+</pre>
+<p>Kun muistiinpano lisätään niin se menee tietokantaasi. Tulos näkyy kuitenkin vast kun sivu päivittyy uudelleen. Lisää <i>addNote</i>-funktiolle <i>console.log</i>-rivin alle <i>then</i>-haaraan <i>notes</i>-tilaamuuttujan päivitys:</p>
+<pre>setNotes(notes.concat(response.data));</pre>
+<h3>Muistiinpanon poistaminen</h3>
+
+<h3>Muistiinpanon tärkeyden muuttaminen</h3>
 
 </article>
             </div>

@@ -65,7 +65,33 @@ test('yhteenlasku -1+2=1', () =&gt; {
 </pre>
 <p>Aja testit komentokehotteessa:</p>
 <pre> npm run test</pre>        
-<p><img src="../kuvat/jest_2.png" alt=""></p>        
+<p><img src="../kuvat/jest_2.png" alt=""></p>      
+
+<h4>Poikkeuksen heittäminen</h4>
+
+<p>Funktio toimii nyt oikeilla arvoilla mutta on hyvä varautua virhetilanteisiin (= poikkeuksiin). Kun funktio kohtaa poikkeuksen se heittää virheen, koodissa voidaan varautua tähän.</p>
+
+<p><i>sum.js</i>-tiedostossa tarkistetaan alussa ovatko syötteet lukuja:</p>
+<pre>
+if (typeof a !== 'number' || typeof b !== 'number') {
+    throw new Error('Virheellinen syöte!');
+}    
+</pre>
+
+<p><i>sum.test.js</i>-testitiedostossa testataan toimiiko poikkeuksen heittäminen jos jompi kumpi syöte on virheellinen tai jos syötteet puuttuvat kokonaan:</p>
+<pre>
+test('virheellinen syöte', () =&gt; {
+    expect(() =&gt; sum(1, 'b')).toThrow('Virheellinen syöte!');
+})
+
+test('virheellinen syöte', () =&gt; {
+    expect(() =&gt; sum('a', 2)).toThrow('Virheellinen syöte!');
+})
+
+test('virheellinen syöte', () =&gt; {
+    expect(() =&gt; sum()).toThrow('Virheellinen syöte!');
+})    
+</pre>
                 </article>
             </div>
         </div>
