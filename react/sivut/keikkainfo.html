@@ -1,0 +1,99 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+
+                    <h2>Keikkainfo</h2>
+                    <h3>Yleistä</h3>
+
+<p>Laaditaan web-sovellus jolla voidaan hallita keikkojen tietoja. Sivustolla näytetään keikat sekä lomake jonka avulla voidaan lisätä uusi keikka. Katso mallia notesdemo-harjoituksesta.
+</p>
+<h4>
+Tietokanta</h4>
+
+<p>
+Luo uusi kansio <i>giginfo</i> ja tämän alle kansio <i>jsondb</i>. Luo <i>db.json</i> -tiedosto johon lisäät 1-2 keikkaa. Keikan tietoja olisivat artistin nimi, artistin musiikkityyli/genre, mainoskuva keikasta/artistista, kuvaus, keikan päivä, alkamisaika, linkki artistin kotisivuille sekä keikkapaikan osoite (lähiosoite, postinumero, postitoimipaikka). Luo uusi <i>npm</i>-projekti ja asenna kansioon json-server mukaan.
+</p>
+<p>
+Tee REST-testi jolla haet kaikki keikat (<i>get_gigs.http</i>) sekä voit lisätä uuden keikan (<i>post_gig.http</i>).
+</p>
+<h4>
+Projekti</h4>
+
+<p>
+Luo uusi React-projekti (<i>gigfront</i>). Lisää alikansio <i>components</i> projektin komponenteille.</p>
+
+<h3>Toiminnallisuudet</h3>
+<h4>Keikat</h4>
+<p>
+Laadi komponentti Gigs tiedostoon Gigs.jsx jossa näytetään keikat.</p>
+
+<h4>
+Keikan lisääminen</h4>
+<p>
+Laadi komponentti GigsForm tiedostoon GigsForm.jsx. Komponentilla on lomake uuden keikan lisäämistä varten.
+</p>
+<h4>
+Suodatus</h4>
+
+<p>
+Lisää toiminnallisuus keikkojen hakemista varten. Käyttäjän tulisi voida voida suodattaa keikkoja seuraavasti:</p>
+
+<ul>
+    <li>näytä tulevat keikat</li>
+    <li>näytä menneet keikat</li>
+    <li>näytä tietyn musiikkityylin keikat</li>
+    <li>näytä tietyn paikkakunnan (= postitoimipaikka) keikat</li>
+</ul>
+
+<h4>Keikan poistaminen</h4>
+
+<p>Käyttäjän tulisi voida poistaa keikka tietokannasta.</p>
+
+
+<h3>Edistyneet omainaisuudet</h3>
+
+<h4>Keikan muokkaaminen</h4>
+<p>Lisää toiminnallisuus keikan muokkaamista varten.</p>
+
+<h4>React Router</h4>
+
+<p>
+Ota käyttöön React Router muuta sovellus käyttämään sitä.</p>
+<ul>
+    <li><a href="https://www.w3schools.com/react/react_router.asp" target="_blank">w3schools: React Router</a></li>
+    <li><a href="https://fullstackopen.com/osa7/react_router#react-router" target="_blank">Fullstack MOOC: React Router</a></li>
+</ul>
+
+
+
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>

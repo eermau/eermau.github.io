@@ -1,0 +1,209 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+
+                    <h2>Migrations</h2>
+                    <h3>Yleistä</h3>
+<p>Migraatiotyökalulla voidaan toteuttaa tietokanta siten, että muutokset ovat hallittuja ja ne on helppo toistaa uudestaan. Tällä kurssilla käytämme <i>Knex</i>-työkalua migraatioiden tekemisessä <i>MySQL</i>-tietokantaan.</p>
+
+<h3>Docker</h3>
+
+<p>Tehdään paikallinen Docker-ympäristö tietokannalle. Tee itsellesi alikansio <i>docker</i> ja tallenna sinne tiedosto <i>docker-compose.yml</i></p>
+<pre>
+version: '3.1'
+
+ services:
+   db:
+     image: mysql:8.0.27
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: mypass123
+     ports:
+       - 3306:3306
+
+   phpmyadmin:
+     image: phpmyadmin
+     restart: always
+     ports:
+       - 8081:80    
+</pre>
+<p>Avaa kansiossa komentokehote (terminal) ja suorita komento</p>
+<pre> docker-compose up -d</pre>
+<p>Näet phpMyAdmin-sivun osoitteessa <a href="http://localhost:8081">http://localhost:8081</a>. Käyttäjätunnus on <i>root</i> ja salasana yllä määritelty <i>mypass123</i>.</p>
+<p>Lisää phpMyAdminin avulla itsellesi tietokanta <i>notesdeno_db</i>.</p>
+
+<h3>Knex</h3>
+<p>Tehdään tietokannan migraatiot projektin alle. Lisää notesdemo-projektille alikansio <i>database</i>. Avaa komentokehote tässä kansiossa.</p>
+<pre>
+npm init
+npm install knex --save    
+</pre>
+<p>Tehdään seuraavaksi <i>knexfile.js</i> suorittamalla komento</p>
+<pre>npx knex init</pre>
+<p>Korvataan oletustiedot käyttämällämme Docker-ympäristön tiedoilla</p>
+<pre>
+module.exports = {
+   development: {
+      client: 'mysql2',
+      connection: {
+        user: 'root',
+        password: 'mypass123',
+        database: 'notesdemo_db'
+      }
+    }
+}    
+</pre>
+<p>Asenna <i>mysql2</i></p>
+<pre>npm install mysql2 --save</pre>
+
+<h4>Taulujen luonti</h4>
+<p>Luo uusi migraatio-tiedosto suorittamalla komento</p>
+<pre>npx knex migrate:make create_notesdb</pre>
+
+<p>Määritellään aluksi <i>users</i>-taulu:</p>
+<pre>
+exports.up = function(knex, Promise) {
+    return knex.schema
+    .createTable('users', t =&gt; {
+        t.increments('id').primary()
+        t.string('username').notNullable().unique()
+        t.string('email').notNullable().unique()
+        t.string('password').notNullable()
+        t.timestamps(false, true)
+    })
+  };
+  
+  exports.down = function(knex, Promise) {
+    return knex.schema
+    .dropTableIfExists('users')
+  };    
+</pre>
+<p>Kokeile ajaa migraatio:</p>
+<pre>npx knex migrate:latest</pre>
+<p>Tietokannassa tulisi nyt olla taulu users sekä migraatioille luodut taulut.</p>
+<p><img src="../kuvat/notesdemo_7.png" alt=""></p>
+<p>Voit peruuttaa muutokset suorittamalla komennon</p>
+<pre>npx knex migrate:rollback</pre>
+<p>Lisätään mukaan toinen taulu <i>notes</i>. Taulussa <i>notes</i> on luotu relaatio <i>users</i>-tauluun. Taulujen luonti ja poistaminen tulee tehdä oikeassa järjestyksessä. Koska notes tarvitsee users-taulua tulee notes tehdä ensin. Samoin ensin tulee poistaa notes ja sitten vasta users.</p>
+<pre>
+exports.up = function(knex, Promise) {
+  return knex.schema
+  .createTable('users', t=&gt; {
+    t.increments('id').primary()
+    t.string('username').notNullable().unique()
+    t.string('email').notNullable().unique()
+    t.string('password').notNullable()
+    t.timestamps(false, true)
+  })
+  .createTable('notes', t =&gt; {
+      t.increments('id').primary()
+      t.string('content').notNullable()
+      t.datetime('date').notNullable()
+      t.boolean('important').notNullable()
+      t.integer('user_id').unsigned().references('id').inTable('users').notNull()
+      .onDelete('cascade')
+  })
+};
+
+exports.down = function(knex) {
+  return knex.schema
+  .dropTableIfExists('notes')
+  .dropTableIfExists('users')
+};    
+</pre>
+
+<h4>Seeds</h4>
+<p>Tietokantaan voidaan lisätä tietoja ajamalla sinne <i>seed</i>-tiedostot. Luodaan uusi tyhjä tiedosto:</p>
+
+<pre>npx knex seed:make 01_users</pre>
+<p>Tiedoston sisällöksi tulee kaksi testikäyttäjää</p>
+<pre>
+exports.seed = function(knex, Promise) {
+  return knex('users').del()
+    .then(function () {
+      return knex('users').insert([
+        {id: 1, username: 'tester1', email: 'tester1@test.com', password: "salasana"},
+        {id: 2, username: 'tester2', email: 'tester2@test.com', password: "salasana"},
+      ]);
+    });
+};
+</pre>
+<p>Nyt salasanat eivät ole vielä salattu. Asennetaan <i>bcryptjs</i>-kirjasto jonka avulla voidaan korvata "salasana" salatulla merkkijonolla.</p>
+
+<pre>
+npm install bcryptjs --save
+</pre>
+<p>Lisää tiedoston alkuun salaus ja korvaa "salasana" muuttujalla hashedPassword.</p>
+<pre>
+const testPassword = "salasana"
+
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
+var hashedpassword = bcrypt.hashSync(testPassword, salt);    
+</pre>
+<p>seed-tiedosto ajetaan näin:</p>
+<pre>npx knex seed:run</pre>
+<p>Lisää toinen tiedosto <i>02_notes</i> ja lisää siellä kolme muistiinpanoa. <i>seed</i>-tiedostot ajetaan aakkosjärjestyksessä, suunnittele nimeäminen tietokannan rakenteen mukaisesti.</p>
+<pre>
+exports.seed = function(knex) {
+  // Deletes ALL existing entries
+  return knex('notes').del()
+    .then(function () {
+      // Inserts seed entries
+      return knex('notes').insert([
+        {
+          id: 1,
+          content: "Keep it fast - optimize assets, minimize requests, use caching",
+          date: new Date("2025-11-10T17:30:31.000Z"),
+          important: true,
+          user_id: 1
+        },
+        {
+          id: 2,
+          content: "Make it accessible - semantic HTML, proper contrast, keyboard-friendly",
+          date: new Date("2025-11-10T18:39:34.000Z"),
+          important: false,
+          user_id: 1
+        },
+        {
+          id: 3,
+          content: "Design for all devices - responsive layout, fluid elements, test on real screens",
+          date: new Date("2025-11-10T19:20:14.000Z"),
+          important: true,
+          user_id: 2
+        }
+      ]);
+    });
+};    
+</pre>
+
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2025</p>
+    </footer>
+</body>
+
+</html>
