@@ -20,9 +20,252 @@
             <div id="main" role="main">
 
                 <article class="markdown-body">
-                    <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">frontend</a>
+                    <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a>
                     <h2>Notes-demo 2 (1/2)</h2>
                     <h3>Projekti</h3>
+<p>Tarkoituksena on tehdä backend joka toimii frontendin ja tietokannan välissä. Käytetään node/express-kirjastoa webbiserversin toteutukseen. Lisämateriaalia löytyy <a href="https://fullstackopen.com/osa3/node_js_ja_express#yksinkertainen-web-palvelin">Full Stack open</a>-kurssin osasta 3.</p>
+
+<p>Tee notesdemo-kansion alle uusi kansio <i>notesback</i>, suorita siellä <i>npm init</i>. Asenna tämän jälkeen tarvittavat kirjastot:</p>
+<pre>
+npm install express --save
+npm install mysql2 --save
+npm install knex --save    
+</pre>
+<p>Lisää <i>.gitignore</i> jossa </p>
+<pre>
+node_modules/
+.env
+dist/
+build/    
+</pre>
+<p>Tee <i>notesback</i>-kansion juureen tiedosto <i>index.js</i>:</p>
+<pre>
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) =&gt; {
+  res.send('&lt;h1&gt;Hello World!&lt;/h1&gt;')
+})
+
+const PORT = 3001
+app.listen(PORT, () =&gt; {
+  console.log(`Server running on port ${PORT}`)
+})    
+</pre>
+<p>Kokeile käynnistää webbiserveri:</p>
+<pre>node index.js</pre>
+<p>Nyt osoitteessa <a href="http://localhost:3001" target="_blank">http://localhost:3001</a> toimii backend. Jos kokeilet tehdä muutoksia <i>Hello World</i>-tekstiin se ei päivity. Jotta päivitykset tulisivat automaattisesti käyttöön lisää kirjasto <i>nodemon</i>:</p>
+<pre>
+npm install nodemon --save-dev
+</pre>
+<p>Käynnistä palvelin uudestaan:</p>
+<pre>npx nodemon index.js</pre>
+<p>Lisää käynnistyskomento <i>package.json</i>-tiedostoon jotta voit käynnistää sen jatkossa helposti komennolla <i>npm start</i>.</p>
+<pre>"start": "npx nodemon index.js",</pre>
+
+<h3>Tietokantayhteys</h3>
+<p>Aikaisemmin on tehty tietokanta Docker-ympäristöön. Käynnistä Docker ja varmista että tietokanta on olemassa. <i>index.js</i>-tiedostossa määritellään yhteys tietokantaan <i>knex</i>:n avulla:</p>
+<pre>
+const options = {
+    client: 'mysql2',
+    connection: {
+        host: '127.0.0.1',
+        user: 'root',
+        password: 'mypass123',
+        database: 'notesdemo_db'
+    }
+}
+const knex = require('knex')(options);    
+</pre>
+
+<p>Lisää <i>index.js</i>-tiedoston loppuun /GET -kysely jolla haetaan kaikki musitiinpanot:</p>
+
+<pre>
+app.get('/notes', (req, res) =&gt; {
+    knex('notes').select('*')
+        .then((rows) =&gt; {
+            console.log(rows);
+            res.json(rows);
+        })
+        .catch((err) =&gt; {
+            console.log('SELECT * NOTES failed')
+            res.status(500).json(
+                { error: err }
+            )
+        })
+})    
+</pre>
+<p>Testaa näkyvätkö muistiinpanot osoitteessa <a href="http://localhost:3001/notes" target="_blank">http://localhost:3001/notes</a>.</p>
+<p>Lisää kansio <i>tests</i> REST-testeille. Tee tiedosto <i>notes_get.http</i> joka sisällöksi seuraava HTTP-pyyntö:</p>
+<pre>GET http://localhost:3001/notes HTTP/1.1</pre>
+
+<h4>env</h4>
+<p>Ensimmäisessä esimerkissä tietokantayhteys on määritelty suoraan index.js-tiedostossa. Yhteyden tiedot riippuvat ympäristöstä ja ne tulee erottaa <i>.env</i>-tiedostoon. Luo backendin juureen uusi tiedosto <i>.env</i>:</p>
+<pre>
+DB_HOST = localhost
+DB_USER = root
+DB_PASS = mypass123
+DB_DATABASE = notesdemo_db
+DB_TYPE = mysql2
+DB_PORT = 3306
+SECRET = tosisalainensalasanainen
+PORT = 3001    
+</pre>
+<p>Kannattaa kopioida <i>.env</i> myös tiedostoon <i>.env-local</i> koska käytössä oleva <i>env</i>-tiedosto ei tallennu GitHub-repoosi.</p>
+<p>Asenna käyttöön <i>dotenv</i></p>
+<pre>npm install dotenv --save</pre>
+<p>Luo alikansio <i>utils</i> ja sinne tiedosto <i>config.js</i>. Tiedostossa luetaan <i>.env</i> ja haetaan tiedot muuttujiin. <i>SECRET</i> tulee käyttöön vasta myöhemmin autentikaation myötä.</p>
+<pre>
+require('dotenv').config()
+
+let PORT = process.env.PORT
+let SECRET = process.env.SECRET
+
+let DATABASE_OPTIONS = {
+    client: process.env.DB_TYPE,
+    connection: {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_DATABASE
+    }
+}
+
+module.exports = {
+    DATABASE_OPTIONS,
+    PORT,
+    SECRET
+}    
+</pre>
+<p><i>index.js</i>-tiedostossa poista kovakoodattu tietokantayhteys sekä portti. Käytetään <i>config.js</i>-tiedoston lukemia tietoja:</p>
+<pre>
+const config = require('./utils/config')
+const options = config.DATABASE_OPTIONS;
+const PORT = config.PORT;
+</pre>
+<p>Debuggausta varten voit kehitysvaiheessa lisätä <i>index.js</i>-tiedostoon rivin <i>knex.on('query', console.log);</i>.</p>
+
+<h3>POST</h3>
+<p>Uuden muistiinpanon lisääminen tapahtuu kutsumalla <i>app.post</i>-metodia:</p>
+<pre>
+app.post('/notes', (req, res) =&gt; {
+   const note = req.body;
+   console.log(note);
+})    
+</pre>
+<p>Lisää <i>tests</i>-kansioon REST-testi muistiinpanon lisäämiselle:</p>
+<pre>
+POST http://localhost:3001/notes HTTP/1.1
+content-type: application/json
+
+{
+    "content": "REST-testi",
+    "date": "2026-01-10T17:30:31.098Z",
+    "important": false
+}    
+</pre>
+<p>Muistiinpano tulee <i>json</i>-muodossa. Lisaä <i>app.use(express.json());</i> backendin index.js-tiedostoon. Kun ajat nyt testin niin muistiinpano tulostuu <i>console.log</i>:n avulla konsoliin:</p>
+<p><img src="../kuvat/notesdemo2_1.png" alt=""></p>
+<p>Muistiinpano pitäisi seuraavaksi tallettaa tietokantaan.</p>
+<pre>
+const newNote = {
+    content: note.content,
+    important: note.important,
+    date: new Date(note.date),
+    user_id: 1 /* TÄMÄ KORJATAAN KIRJAUTUMISEN JÄLKEEN */
+}
+
+knex('notes').insert(newNote)
+    .then(id_arr =&gt; {
+        console.log(id_arr);
+        newNote.id = id_arr[0];
+        res.json(newNote);
+    })    
+</pre>
+<p>Suorita testi ja varmista onnistuuko muistiinpanon tallennus.</p>
+<p><img src="../kuvat/notesdemo2_2.png" alt=""></p>
+<p>Lisää <i>catch</i>-haara <i>.then</i>-osion jälkeen, katso mallia muistiinpanojen hakemisesta. Yleinen virhetilanne ovat puuuttuvat tiedot. Ennen lisäämistä varmistetaan että note sisältää oikeat tiedot. Virhetilanteessa palautetaan <i>400</i>-virhe.</p>
+<pre>
+if (note.content === undefined || note.date === undefined || note.important === undefined) {
+    return res.status(400).json(
+        { error: "check json-data" }
+    )
+}    
+</pre>
+
+<h3>DELETE</h3>
+<p>Poistaminen tapahtuu <i>app.delete</i>-metodin avulla. Poistettava id saadaan parametrina.</p>
+<pre>
+app.delete('/notes/:id', (req, res) =&gt; {
+    const id = req.params.id;
+    console.log(id);
+})    
+</pre>
+<p>Lisää REST-testi joka poistaa muistiinpanon.</p>
+<pre>
+DELETE http://localhost:3001/notes/4 HTTP/1.1
+</pre>
+<p>Varmista tuleeko konsoliin oikea id. Tämän jälkeen lisätään varsinainen poistaminen funktiolle:</p>
+<pre>
+knex('notes').where('id', '=', id).del()
+    .then(status =&gt; {
+        console.log("delete ok")
+        res.status(204).end();
+    })    
+</pre>
+<p>Lisää jälleen <i>catch</i>-haara.</p>
+
+<h3>PUT</h3>
+
+<p>Muistiinpanon muokkaaminen tapahtuu <i>app.put</i>-metodilla. Pyyntö saa <i>json</i>-tietona päivitettävän muistiinpanon sekä parametrina id:n.</p>
+<pre>
+app.put('/notes/:id', (req, res) =&gt; {
+    const id = req.params.id;
+    const note = req.body;
+
+    const updatedNote = {
+      content: note.content,
+      important: note.important,
+      date: new Date(note.date)
+    }
+
+    knex('notes').update(updatedNote).where('id', '=', id)
+        .then((response) =&gt; {
+            console.log(response)
+            res.status(204).end();
+        })
+})    
+</pre>
+<p>Tee REST-testi <i>put_notes.http</i> joka muokkaa muistiinpanoa.</p>
+<pre>
+PUT http://localhost:3001/notes/5 HTTP/1.1
+Content-Type: application/json
+
+{
+    "content": "Muutettu muistiinpano",
+    "date": "2026-01-10T17:30:31.098Z",
+    "important": true
+}    
+</pre>
+<p>Lisää jälleen <i>catch</i>-haara sekä varmista että <i>note</i> sisältää oikeat tiedot.</p>
+
+
+<h3>Frontend</h3>
+
+<p>Voit käynnistää nyt <i>notesdemo</i>:n aiemmin tehdyn frontendin. JSON-serverin sijaan tarkoitus on käyttää backendin välittämiä tietoja. Saat kuitenkin konsoliin CORS-virheilmoituksen (Cross-origin resource sharing):</p>
+<p><img src="../kuvat/notesdemo2_3.png" alt=""></p>
+
+<p>Ongelma on se, että selaimen JavaScript on portissa 5173 ja tietokannan portti on 3001, niiden <i>Origin</i> on eri. Lisätietoa: <a href="https://fullstackopen.com/osa3/sovellus_internetiin#same-origin-policy-ja-cors" target="_blank">Fullstack MOOC: CORS</a>.</p>
+
+<p>Otetaan backendissä käyttöön Noden <i>cors</i>-middleware:</p>
+<pre>npm install cors --save</pre>
+<p>Lisää <i>index.js</i>-tiedostoon </p>
+<pre>
+const cors = require('cors')
+app.use(cors())    
+</pre>
+
+<p>Seuraavaksi toteutetaan <a href="notesdemo2b.html">autentikaatio</a> notesdemoon.</p>
 
 </article>
             </div>

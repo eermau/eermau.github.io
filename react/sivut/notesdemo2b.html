@@ -1,0 +1,268 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+                    <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a>
+                    <h2>Notes-demo 2 (2/2)</h2>
+
+<h3>Käyttäjän lisääminen</h3>
+<p>Sovelluksestamme puuttuu vielä kirjautuminen ja rekisteröityminen. Ensimmäiseksi toteutetaan backendiin mahdollisuus luoda uusi käyttäjä. Uuden käyttäjän salasana salataan ja sitä varten tarvitaan kirjasto <i>bcryptjs</i>.</p>
+<pre>npm install bcryptjs --save
+</pre>
+<p>Ota <i>bcryptjs</i> käyttöön tiedostossa <i>index.js</i></p>
+<pre>const bcrypt = require('bcryptjs')</pre>
+<p>Lisää backendin <i>index.js</i>-tiedostoon /register -toiminto:</p>
+<pre>
+app.post('/register', (req, res) =&gt; {
+    const user = req.body;
+    const saltRounds = 10;
+    console.log(user);
+     
+    bcrypt.hash(user.password, saltRounds)
+        .then((passwordHash) =&gt; {
+            const newUser = {
+                username: user.username,
+                password: passwordHash, 
+                email: user.email
+            }
+            knex('users').insert(newUser)
+                .then(() =&gt; {
+                    console.log("register onnistui")
+                    res.status(204).end()
+                })
+        })
+})    
+</pre>
+<p>Testaa käyttäjän lisäämistä REST-testillä (<i>post_register.http</i>):</p>
+<pre>
+POST http://localhost:3001/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "tester5",
+    "password": "salasana",
+    "email": "test@test.com"
+}    
+</pre>
+
+<h3>Kirjautuminen</h3>
+<p>Kirjautuminen tarkistaa löytyykö tietokannasta käyttäjä ja vastaako salasana tietokannan salasanaan. Tämän jälkeen luodaan JSON Web Token, tähän käytetään <i>jwt</i>-kirjastoa. JWT allekirjoitetaan käyttäen salausavainta (SECRET). JWT tallennetaan selaimen muistiin ja se lähetetään aina jokaisen kutsun yhteydessä backendille. Käyttäjän id tallennetaan JWT:n sisälle, ei lähetetä puhtaana json-datana.</p>
+<p>Asenna jwt-kirjasto</p>
+<pre>npm install jsonwebtoken --save</pre>
+<p>Ota <i>jwt</i> käyttöönn tiedostossa <i>index.js</i></p>
+<pre>const jwt = require('jsonwebtoken')</pre>
+
+<p>Lisää /login-toiminto backendin <i>index.js</i>-tiedostoon:</p>
+<pre>
+app.post('/login', (req, res) =&gt; {
+    const user = req.body;
+    console.log(user);
+
+    knex('users').select('*').where('username', '=', user.username)
+        .then((dbuser) =&gt; {
+            if (dbuser.length == 0) {
+                return res.status(401).json(
+                    { error: "invalid username or password" }
+                )
+            }
+            const tempUser = dbuser[0];
+            bcrypt.compare(user.password, tempUser.password)
+                .then((passwordCorrect) =&gt; {
+                    if (!passwordCorrect) {
+                        return res.status(401).json(
+                            { error: "invalid username or password" }
+                        )
+                    } 
+
+                    //token
+                    const userForToken = {
+                        username: tempUser.username,
+                        id: tempUser.id
+                    } 
+
+                    const token = jwt.sign(userForToken, config.SECRET)
+
+                    console.log(token);
+
+                    res.status(200).send({
+                        token,
+                        username: tempUser.username
+                    })
+                })
+        })
+})    
+</pre>
+
+<p>Testaa kirjautumista REST-testillä (<i>post_login.http</i>):</p>
+<pre>
+POST http://localhost:3001/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "tester1",
+    "password": "salasana"
+}    
+</pre>
+<p>Kirjautuminen palauttaa tokenin ja käyttäjänimen.</p>
+
+<h3>Frontend</h3>
+
+<h4>Rekisteröityminen</h4>
+<p>Luo uusi tiedosto <i>Register.jsx</i> kansioon <i>components</i>. Laadi lomake jonka avulla käyttäjä voi rekisteröityä notesdemon käyttäjäksi.</p>
+<p><img src="../kuvat/notesdemo2_4.png" alt=""></p>
+<p>Lisää funktio <i>registerHandler</i> tiedostolle <i>App.jsx</i></p>
+<pre>
+const registerHandler = (e, userdata) =&gt; {
+  e.preventDefault();
+  console.log(userdata);
+  axios.post('http://localhost:3001/register', userdata)
+    .then(response =&gt; {
+      console.log(response.data)
+      setMessage("Rekisteröityminen onnistui")
+    })
+}    
+</pre>
+
+<h4>Kirjautuminen</h4>
+<p>Tee seuraavaksi komponentti <i>Login</i> tiedostoon <i>Login.jsx</i>. Lisää samaan tapaan <i>loginHandler</i>-funktio tiedostolle <i>App.jsx</i>. URL-osoitteet voi määritellä muuttujiin <i>loginURL</i> ja <i>registerURL</i>.</p>
+<p><img src="../kuvat/notesdemo2_5.png" alt=""></p>
+<pre>
+const loginHandler = (e, userdata) =&gt; {
+    e.preventDefault();
+    axios.post(loginURL, userdata)
+    .then(response =&gt; {
+        console.log(response.data)
+    })
+}    
+</pre>
+<p>Kokeile kirjautumista ja tarkista tulostaako <i>console.log</i> saadun tokenin oikein.</p>
+<p>Frontendin tulee säilyttää tieto käyttäjästä muistissa. Lisää uusi tilamuuttuja:</p>
+<pre>const [user, setUser] = useState(null);
+</pre>
+<p>Asetetaan <i>user</i> kirjautumisen then-haarassa:</p>
+<pre>setUser(response.data)  //HUOM! tämä sisältää olion: {token, username}</pre>
+<p>Käyttäjän tulee pysyä kirjautuneena vaikka selainta päivitettäisiin. Tieto tokenista täytyy asettaa myös selaimen muistiin.</p>
+<pre>
+window.localStorage.setItem('notesdemouser', JSON.stringify(response.data))
+</pre>
+<p>Tarkistus ollaanko kirjauduttu vai ei tarvitsee oman hookin. Tehdään <i>userHook</i> joka tarkistaa löytyykö selaimen muistista <i>notesdemouser</i>.</p>
+<pre>
+const userHook = () =&gt; {
+    const loggedUserJSON = window.localStorage.getItem('notesdemouser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+    }
+  }    
+</pre>
+<p>Muuta vanha <i>startHook</i> ja lisää <i>userHook</i></p>
+<pre>
+useEffect(userHook, []);
+useEffect(startHook, [user]);    
+</pre>
+<p><i>startHook</i>:in alussa tarkistetaan onko käyttäjä olemassa. Jos ei ole kirjauduttu ei haeta notes-tietoja</p>
+<pre>
+if (user === null) {
+    return;
+}    
+</pre>
+<h4>Logout</h4>
+<p>Lisää painike uloskirjautumiselle <i>App.jsx</i>-tiedostoon. Painike kutsuu <i>logoutHandler</i>-funktiota joka tyhjentää <i>notesdemouser</i>-tiedon selaimesta.</p>
+<pre>
+const logoutHandler = () =&gt; {
+    setUser(null)
+    window.localStorage.removeItem('notesdemouser')
+}    
+</pre>
+
+<h4>Käyttöliittymän ulkoasu</h4>
+
+<p>Nyt moni asia jo toimii mutta käyttöliittymä ei toimi ihan niin kuin pitäisi. Piilotetaan <i>Notes</i> ja <i>NotesForm</i> jos käyttäjä ei ole kirjautunut. Kun käyttäjä kirjautuu piilotetaan <i>Login</i> ja <i>Register</i>. </p>
+
+<div class="twoimages">
+<p>Kirjautumaton:<img src="../kuvat/notesdemo2_7.png" alt=""></p>
+<p>Kirjautunut:<img src="../kuvat/notesdemo2_6.png" alt=""></p>
+</div>
+
+<h3>Autentikaatio</h3>
+
+<p>Viimeinen asia on backendin autentikaatio. Backendissä tulee tietää kuka on kirjautunut: kenen muistiinpanot näytetään, kuka on käyttäjä joka luo uuden muistiinpanon tai muokkaa olemassa olevaa. Jokainen pyyntö sisältää tokenin joka sisältää käyttäjän id:n.</p>
+
+<h4></h4>
+<pre>
+const getTokenFrom = req =&gt; {
+    const authorization = req.get('authorization');
+    //console.log(authorization);
+    if(authorization && authorization.toLowerCase().startsWith('bearer ')){
+        return authorization.substring(7)
+    } else {
+        return null
+    }
+}    
+</pre>
+
+<pre>
+const token = getTokenFrom(req);
+console.log(token);
+
+if(!token){
+    return res.status(401).json(
+        { error: "auth token missing" }
+    )
+}
+
+let decodedToken = null;
+
+try{
+    decodedToken = jwt.verify(token, config.SECRET);
+}
+catch(error){
+    console.log("jwt error")
+}
+
+if(!decodedToken || !decodedToken.id){
+    return res.status(401).json(
+        { error: "invalid token" }
+    )
+}    
+</pre>
+
+<pre>
+GET http://localhost:3001/notes HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWQiOjEsImlhdCI6MTYwMjE0NTY5OX0.lNsfJVKobqhpf8ZYU0-WopwWxwF1aPsQYjCD_U9c9Xo    
+</pre>
+
+<pre>where('user_id', '=', decodedToken.id)
+</pre>
+
+<pre>note.user_id = decodedToken.id;
+</pre>
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2026</p>
+    </footer>
+</body>
+
+</html>

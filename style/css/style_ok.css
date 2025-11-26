@@ -133,6 +133,17 @@ button:hover {
     text-shadow: 0 0 .65px #333, 0 0 .65px #333;
 }
 
+.twoimages {
+    display: flex;
+    text-align: center;
+}
+
+.twoimages img {
+    margin-right: 20px;
+    padding: 5px;
+
+}
+
 
 @media only screen and (max-width: 825px) {
 
