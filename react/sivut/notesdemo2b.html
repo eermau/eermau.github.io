@@ -202,15 +202,16 @@ const logoutHandler = () =&gt; {
 <p>Kirjautunut:<img src="../kuvat/notesdemo2_6.png" alt=""></p>
 </div>
 
-<h3>Autentikaatio</h3>
+<h3>Autentikaatio - backend</h3>
 
-<p>Viimeinen asia on backendin autentikaatio. Backendissä tulee tietää kuka on kirjautunut: kenen muistiinpanot näytetään, kuka on käyttäjä joka luo uuden muistiinpanon tai muokkaa olemassa olevaa. Jokainen pyyntö sisältää tokenin joka sisältää käyttäjän id:n.</p>
+<p>Viimeinen asia on autentikaatio, tarkistetaan milloin käyttäjä on kirjautunut. Backendissä tulee tietää kuka on kirjautunut: kenen muistiinpanot näytetään, kuka on käyttäjä joka luo uuden muistiinpanon tai muokkaa olemassa olevaa. Jokainen pyyntö sisältää tokenin joka sisältää käyttäjän id:n.</p>
 
-<h4></h4>
+<h4>Apufunktio</h4>
+<p>Lisätään apufunktio joka lukee <i>authorization</i>-tiedon pyynnöstä. Funktio purkaa tokenin ja palauttaa sen.</p>
 <pre>
 const getTokenFrom = req =&gt; {
     const authorization = req.get('authorization');
-    //console.log(authorization);
+    console.log(authorization);
     if(authorization && authorization.toLowerCase().startsWith('bearer ')){
         return authorization.substring(7)
     } else {
@@ -218,7 +219,8 @@ const getTokenFrom = req =&gt; {
     }
 }    
 </pre>
-
+<h4>Muistiinpanojen hakeminen</h4>
+<p>Tee ensimmäisenä lisäys tokenin käsittelystä /GET -pyynnölle. Lisää seuraava koodi <i>app.get</i>-metodin alkuun. Luetaan token pyynnöstä ja annetaan virheilmoitus mikäli se puuttuu. Tämän jälkeen puretaan token käyttäen <code>jwt.verify</code> funktiota. Frontend lähettää tokenissa olion jonka sisällä on käyttäjän nimi ja id.</p>
 <pre>
 const token = getTokenFrom(req);
 console.log(token);
@@ -244,17 +246,112 @@ if(!decodedToken || !decodedToken.id){
     )
 }    
 </pre>
-
+<p>Lisää REST-testi <i>get_auth_notes.http</i> jossa on mukana token (id:1). Varmista, että backend löytää käyttäjän muistiinpanot.</p>
 <pre>
 GET http://localhost:3001/notes HTTP/1.1
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWQiOjEsImlhdCI6MTYwMjE0NTY5OX0.lNsfJVKobqhpf8ZYU0-WopwWxwF1aPsQYjCD_U9c9Xo    
 </pre>
-
+<p>Nyt tulee näkyviin vielä kaikki muistiinpanot koska <i>knex.select</i> ei rajoita tietoja. Lisää ehto mukaan:</p>
 <pre>where('user_id', '=', decodedToken.id)
 </pre>
+<p>Aja testi uudelleen ja varmista että nyt tulevat näkyviin vain yhden käyttäjän muistiinpanot.</p>
 
+<h4>Muut toiminnot</h4>
+<p>Kirjautuneen käyttäjän muita toimintoja ovat muistiinpanon lisääminen, muokkaaminen ja poistaminen. Lisää yllä oleva tokenin tarkistus myös näille toiminnoille. Muistiinpanon lisäämisessä korjaa nyt käyttäjän id:</p>
 <pre>note.user_id = decodedToken.id;
 </pre>
+
+<h3>Autentikaatio - frontend</h3>
+
+<p>Backend toimii nyt oikein mutta frontend ei vielä lähetä <i>tokenia</i>. Kirjautuneen käyttäjän pyyntöihin tulee lisätä <i>Authorization: bearer</i>-teksti sekä <i>token</i> joka sisältää käyttäjän nimen ja id:n. </p>
+<p>Lisää uusi kansio <i>services</i> ja sinne tiedostot <i>notesService.js</i> sekä <i>userService.js</i>. Siirretään <i>notesService</i>:n sisälle <i>axios</i>-kutsun tekeminen.</p>
+<pre>
+import axios from 'axios';
+
+const baseUrl = 'http://localhost:3001/notes'
+
+let token = null;
+
+const setToken = newToken =&gt; {
+  token = newToken
+}
+
+const makeHeader = () =&gt; {
+        let header =  {headers: {Authorization: `bearer ${token}`}}
+        return header;
+}
+
+const getAll = () =&gt; {
+    const request = axios.get(baseUrl, makeHeader())
+    return request.then(response =&gt; response.data)
+}
+
+const add = (newNote) =&gt; {
+    const request = axios.post(baseUrl, newNote, makeHeader())
+    return request.then(response =&gt; response.data)
+}
+
+const update = (id, updatedNote) =&gt; {
+    const request = axios.put(`${baseUrl}/${id}`, updatedNote, makeHeader())
+    return request.then(response =&gt; response.data)
+}
+
+const remove = (id) =&gt; {
+    return axios.delete(`${baseUrl}/${id}`, makeHeader())
+}
+
+export default {
+    getAll: getAll,
+    add: add,
+    update: update,
+    remove: remove,
+    setToken: setToken
+}    
+</pre>
+<p>Ota <i>App.jsx</i>-tiedostolla uusi <i>notesService</i> käyttöön:</p>
+<pre>
+import notesService from './services/notesService'    
+</pre>
+<p>Poista tarpeeton <i>baseURL</i> ja muuta <i>axios</i>-kutsut käyttämään uutta <i>notesService</i>:a. Uusi tapa palauttaa suoraan <i>response.data</i>:n joten muuta <i>App.jsx</i>-tiedostolla <i>response.data</i> muotoon <i>response</i>. Esimerkkinä muistiinpanon lisääminen:</p>
+<pre>
+notesService.add(note).then(response =&gt; {
+    setMessage("Muistiinpano lisätty");
+    setNotes(notes.concat(response))   
+})    
+</pre>
+<p>notesServicelle tulee kertoa token. Lisää <i>loginHandler</i>-funktiolle <i>setUser</i>-rivin viereen</p>
+<pre>notesService.setToken(response.data.token)</pre>
+<p>(kun olet lisännyt userServicen niin <i>response.token</i>)</p>
+<p><i>userHook</i>-funktiota kutsutaan selaimen päivittyessä, täälläkin tulee välittää tieto tokenista <i>notesServicelle</i>:</p>
+<pre>
+notesService.setToken(user.token)
+</pre>
+
+<h4>userService</h4>
+<p>Lisää toiminnot <i>login</i> ja <i>register</i> tiedostolle <i>userService</i>. Tämä on yksinkertaisempi sillä emme tarvitse tietoa tokenista eikä siten ole tarvetta <i>makeHeader</i>-funktion kutsumiselle.</p>
+
+<pre>
+import axios from 'axios';
+const registerURL = 'http://localhost:3001/register';
+const loginURL = 'http://localhost:3001/login';
+
+const login = (userdata) =&gt; {
+    const request = axios.post(loginURL, userdata)
+    return request.then(response =&gt; response.data)
+}
+
+const register = (userdata) =&gt; {
+    const request = axios.post(registerURL, userdata)
+    return request.then(response =&gt; response.data)
+}
+
+
+export default {
+    register: register,
+    login: login
+}    
+</pre>
+
 </article>
             </div>
         </div>
