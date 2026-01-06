@@ -1,0 +1,104 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Ohjelmistoprosessin työvälineet</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+            <header>
+                <h1>Ohjelmistoprosessin työvälineet</h1>
+            </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+
+                    <h2>JEST-demo 2</h2>
+                    <p>Kerrataan JavaScript-asioita ja käydään läpi uusia asioita mm. reduce, map ja filter. Lisää <i>demot</i>-kansioon uusi .js-tiedosto jossa kokeillaan tämän demon asioita.</p>
+                    <h3>Taulukko</h3>
+<p>Esitellään kaksi taulukkoa:</p>
+                    <pre>
+const games = ["Super Mario Bros", "Metroid", "Donkey Kong", "Zelda"];
+const games2 = ["Metroid II", "Super Mario World"];
+                    </pre>
+                    <p>Lisää funktio printGames(arr) joka tulostaa taulukon sisällön sekä indeksin:</p>
+<pre>
+0: Super Mario Bros
+1: Metroid
+2: Donkey Kong
+3: Zelda
+4: Donkey Kong Country    
+</pre>
+<h3>Taulukon muuttaminen</h3>
+<p>Kokeillaan taulukon muuttamista:</p>
+<ul>
+    <li>push</li>
+    <li>pop</li>
+    <li>concat</li>
+    <li><a href="https://www.w3schools.com/react/react_es6_spread.asp" target="_blank">spread</a></li>
+</ul>
+<p>Kokeile miten eroaa taulukon yhdistäminen spread-operaattorilla ja ilman sitä:</p>
+<pre>
+const joinGames = [games, games2];    
+const joinGames2 = [...games, ...games2];    
+</pre>
+
+<h3>Oliotaulu</h3>
+<p>Tehdään monimutkaisempi taulukko joka sisältää kaksi oliota:</p>
+<pre>
+const book = {
+    title: "The Lord of the Rings",
+    author: "J.R.R. Tolkien",
+    pages: 1178
+};
+
+const book2 = {
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    pages: 295
+};
+
+const books = [book, book2];    
+</pre>
+<h4>map</h4>
+<p>map palauttaa taulukon ja suorittaa jokaiselle alkuperäisen taulukon alkiolle funktion. mapin käyttö on nuolifunktion avulla varsin tehokasta. </p>
+
+<p>Otsikot omaan tauluun:</p>
+<pre>
+const arrTitles = books.map(b =&gt; b.title);
+</pre>
+<p>Uusi olio uuteen tauluun:</p>
+<pre>
+const libraryBooks = books.map(b =&gt; {
+    let newBook = { ...b, reservations: 0, loans: 0 }
+    return newBook;
+});    
+</pre>
+<h4>filter</h4>
+<p>Filter palauttaa taulukon jonka muodostavat ne alkuperäisen taulukon alkiot jotka täyttävät tietyn ehdon.</p>
+<pre>
+const shortBooks = libraryBooks.filter(b =&gt; b.pages &lt; 500);
+</pre>
+<h4>reduce</h4>
+<p>Reducen avulla voidaan helposti hakea esimerkiksi summa taulukon sisältä.</p>
+<pre>let totalPages = books.reduce((total, b) =&gt; total + b.pages, 0);</pre>
+
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2026</p>
+    </footer>
+</body>
+
+</html>
