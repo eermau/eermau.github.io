@@ -88,7 +88,7 @@ export default Friends;
 <p>Lomakkeella syötetty nimi tallennetaan name-tilamuuttujaan. Lisää App.jsx-tiedostossa Friends-komponentti:</p>
 <pre>&lt;Friends /&gt;</pre>
 
-<p>Kaveri on tarkoitus lisätä taulukkoon joten tälle tarvitaan Friends-komponentille oma tilamuuttuja:</p>
+<p>Kaveri on tarkoitus lisätä taulukkoon joten tälle tarvitaan Friends-komponentille (Friends.jsx) oma tilamuuttuja:</p>
 <pre>const [friends, setFriends] = useState([]); </pre>
 
 <p>Lomake kutsuu submitHandler-funktiota jossa uusi nimi lisätään concat-funktiolla friends-taulukon jatkeeksi.</p>
@@ -130,7 +130,8 @@ const FriendsList = ({friends}) =&gt; {
 <pre>&lt;li key={f.id}&gt;nimi: {f.name} pisteet: {f.points}</pre>
 <p>Pisteen lisäämistä varten tarvitaan funktio <i>addPoint</i>. Tilamuuttujaa ei voi muuttaa vaan se täytyy korvata uudella taulukolla. Tästä syystä tehdään aputaulukko <i>tempFriends</i> jossa oikealla id:llä oleva ystävä päivitetään. Lisää <i>addPoint</i>-funktio Friends-komponentille.</p>
 <pre>
-const addPoint = id =&gt; {
+const addPoint = (e, id) =&gt; {
+    e.preventDefault();
     const tempFriends = friends.map(f =&gt; {
         if(id === f.id)
             f = {...f, points: f.points + 1}
@@ -144,7 +145,7 @@ const addPoint = id =&gt; {
 <p>Jotta <i>FriendsList</i> osaa käyttää sitä täytyy funktio tuoda mukaan: </p>
 <pre>const FriendsList = ({friends, addPoint}) =&gt; {</pre>
 <p>Lisää vielä painike <i>li</i>-elementin sisälle:</p>
-<pre>&lt;button onClick={e=&gt;addPoint(f.id)}&gt;lisää piste&lt;/button&gt;</pre>
+<pre>&lt;button onClick={e=&gt;addPoint(e, f.id)}&gt;lisää piste&lt;/button&gt;</pre>
 
 <h4>Reduce</h4>
 
