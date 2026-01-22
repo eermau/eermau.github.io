@@ -1,0 +1,126 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+                    <a href="notesphp.html">backend</a> | <a href="notesphp2.html">frontend</a>
+                    <h2>Notes PHP (2/2)</h2>
+                    <h3>Frontend</h3>
+
+                    <h4>notesService.js</h4>
+
+<p>Määritellään url-osoite</p>
+<pre>const baseUrl = 'http://localhost:8888/api/notes'</pre>
+
+
+<h4>notesService.js</h4>
+
+<p>Määritellään url-osoitteet</p>
+<pre>
+const registerURL = 'http://localhost:8888/api/register';
+const loginURL = 'http://localhost:8888/api/login';
+const meURL = 'http://localhost:8888/api/me';
+</pre>
+<p>
+Tieto kirjautumisesta käsitellään istunnon kautta. PHP tarvitsee header-tietoon asetuksen 'withCredentials'
+</p>
+<pre>
+const makeHeader = () =&gt; {
+    //let header =  {headers: {Authorization: `bearer ${token}`}}
+    let header = { withCredentials: true }
+    return header;
+}
+</pre>
+<p>Tarkistetaan kirjautuminen me-toiminnon avulla:</p>
+<pre>
+const me = () =&gt; {
+    const request = axios.get(meURL, makeHeader())
+    return request.then(response =&gt; response.data)
+}  
+</pre>
+<h4>App.jsx</h4>
+<p>Se onko käyttäjä kirjautunut käsitellään me-toiminnon kautta</p>
+<pre>
+const userHook = () =&gt; {
+userService.me()
+  .then(response =&gt; {
+	console.log("me", response)
+	if (response.id === null) {
+	  setUser(null)
+	}
+	else {
+	  setUser(response)
+	}
+  })
+  .catch(error =&gt; {
+	if (error.response && error.response.status === 401) {
+	  // not logged in = normal state
+	  setUser(null)
+	} else {
+	  console.error("Unexpected error in /api/me:", error)
+	}
+  })
+}
+</pre>
+
+<h3>Julkaisu cPanelin avulla</h3>
+
+<h4>Yleistä</h4>
+<ul>
+    <li>tee build React-projektistasi, varmista oikeat polut tätä ennen service-tiedostoissasi.</li>
+    <li>tee cPanelissa alidomain</li>
+    <li>siirrä alidomainin juurihakemistoon buildin tiedostot</li>
+    <li>tee alikansio <i>/api</i> ja siirrä tänne backendin PHP-tiedostot.</li>
+</ul>
+<h4>.htaccess</h4>
+<p>Juurihakemiston .htaccess</p>
+<pre>
+RewriteEngine On
+
+# Älä koske API-pyyntöihin
+RewriteRule ^api(/.*)?$ - [L]
+
+# React SPA routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
+</pre>
+
+<p>/api -kansion .htaccess:</p>
+<pre>
+RewriteEngine On
+
+# Kaikki API-pyynnöt index.php:lle
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+</pre>
+
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2026</p>
+    </footer>
+</body>
+
+</html>

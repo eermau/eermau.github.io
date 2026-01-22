@@ -1,0 +1,381 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+        <header>
+            <h1>Fullstack-kehitys</h1>
+        </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+                    <a href="notesphp.html">backend</a> | <a href="notesphp2.html">frontend</a>
+                    <h2>Notes PHP (1/2)</h2>
+                    <h3>Backend</h3>
+<p>
+
+Tehdään PHP:lla toimiva backend joka toimii notesdemon kanssa. Lisää kansio phpback notesdemon alapuolelle.
+</p>
+
+<p>
+Laadi kansiorakenne
+</p>
+<pre>
+phpback / helpers
+- helpers.php
+
+phpback / models
+- connection.php
+- note.php
+- user.php
+
+phpback / controlelrs
+- notesManagement.php
+- usersManagement.php
+</pre>
+
+<h4>helpers.php</h4>
+<pre>
+&lt;?php
+
+function getRoute($uri) {
+    $segments = explode('/', trim($uri, '/'));
+    $route = null;
+    if (count($segments) &gt; 1) {
+        $route = "/" . strtolower($segments[0]) . "/" . strtolower($segments[1]); // /api/notes
+    }
+    else {
+        $route = "/" . strtolower($segments[0]);
+    }
+
+    return $route;
+}
+
+function getId($uri) {
+    $segments = explode('/', trim($uri, '/'));
+    $id = $segments[2] ?? null;
+    return $id;
+}
+
+function respond($statusCode, $data = null)
+{
+    $allowedOrigins = [
+        "http://localhost:5173",
+        "https://alidomain.tunnus.treok.io"
+    ];
+
+    if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
+        header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+        header("Access-Control-Allow-Credentials: true");
+    }
+
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+    // 200 = OK, 201 = Created, 204 = No content
+    // 400 = Bad request, 401 = Unauthorized, 403 = Forbidden, 404 = Not found
+    // 500 = Internal server error
+    http_response_code($statusCode);
+
+    // Kaikissa muissa paitsi 204-tilanteissa lähetetään JSON
+    if ($statusCode !== 204) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    exit;
+}
+</pre>
+
+<h3>models</h3>
+<h4>connection.php</h4>
+<pre>
+&lt;?php
+function connectDB(){
+    static $connection;
+    if(!isset($connection)) {
+        $connection = connect();
+    }      
+    return $connection;
+}
+
+function connect() {
+    
+    $host = getenv('DB_HOST', true) ?: "localhost";
+    $port = getenv('DB_PORT', true) ?: 3306; 
+    $dbname = getenv('DB_NAME', true) ?: "notesdemo_db"; 
+    $user = getenv('DB_USERNAME', true) ?: "root"; 
+    $password = getenv('DB_PASSWORD', true) ?: "mypass123"; 
+   
+    $connectionString = "mysql:host=$host;dbname=$dbname;port=$port;charset=utf8";
+
+    try {       
+            $pdo = new PDO($connectionString, $user, $password);
+            $pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+    } catch (PDOException $e){
+            echo "Virhe tietokantayhteydessä: " . $e-&gt;getMessage();
+            die();
+    }
+}
+</pre>
+<h4>note.php</h4>
+<pre>
+&lt;?php
+require_once "connection.php";
+
+function addNote(string $content, $date, $important, int $userid): int
+{
+    $pdo = connectDB();
+    $important = $important ? 1 : 0; // mysql boolean
+    $stmt = $pdo-&gt;prepare('INSERT INTO notes (content, `date`, important, user_id) VALUES (?, ?, ?, ?)');
+    $stmt-&gt;execute([$content, $date, $important, $userid]);
+    $last_id = $pdo-&gt;lastInsertId();
+    return $last_id;
+}
+
+function getNotes(int $userid): array
+{
+    $pdo = connectDB();
+    $sql = "SELECT * FROM notes WHERE user_id = ?";
+    $stmt = $pdo-&gt;prepare($sql);
+    $stmt-&gt;execute([$userid]);
+    return $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+}
+
+function deleteNote(int $id): void
+{
+    $pdo = connectDB();
+    $stmt = $pdo-&gt;prepare('DELETE FROM notes WHERE id = ?');
+    $stmt-&gt;execute([$id]);
+}
+
+function updateNote(int $id, string $content, bool $important): void
+{
+    $pdo = connectDB();
+    $important = $important ? 1 : 0; // mysql boolean
+    $stmt = $pdo-&gt;prepare('UPDATE notes SET content = ?,important = ? WHERE id = ?');
+    $stmt-&gt;execute([$content, $important, $id]);
+}
+</pre>
+
+<h4>user.php</h4>
+<pre>
+&lt;?php
+require_once "connection.php";
+
+function isEmailTaken(string $email) {
+    $pdo = connectDB();
+    $stmt = $pdo-&gt;prepare('SELECT * FROM users WHERE email = ?');
+    $stmt-&gt;execute([$email]);
+    return $stmt-&gt;fetch(PDO::FETCH_ASSOC);
+}
+
+function registerUser(string $username, string $email, string $password) {
+    $pdo = connectDB();
+
+    if (isEmailTaken($email)) {
+        throw new Exception('Email already exists.');
+    }
+
+    $stmt = $pdo-&gt;prepare('INSERT INTO users (username, email, password) VALUES (?, ?, ?)');
+    $stmt-&gt;execute([$username, $email, password_hash($password, PASSWORD_DEFAULT)]);
+}
+
+function login(string $username, string $password) {
+    $pdo = connectDB();
+    $stmt = $pdo-&gt;prepare('SELECT * FROM users WHERE username = ?');
+    $stmt-&gt;execute([$username]);
+    $user = $stmt-&gt;fetch(PDO::FETCH_ASSOC);
+    
+    if (!$user) {
+        return false;
+    }
+    else if (!password_verify($password, $user['password'])) {
+        return false;
+    }
+    else {
+        return $user;
+    }
+}
+</pre>
+
+<h3>controllers</h3>
+<h4>notesManagement.php</h4>
+<pre>
+&lt;?php
+require_once "./models/note.php";
+
+function updateNoteController()
+{
+    if (!isset($_SESSION['userid'])) {
+        respond(401, ['message' =&gt; 'Not logged in']);
+    }
+    // viesti request bodyssa:
+    $note = json_decode(file_get_contents('php://input'));
+    if (isset($note-&gt;id, $note-&gt;content, $note-&gt;important) && !is_null($note-&gt;id) && !is_null($note-&gt;content) && !is_null($note-&gt;important)) {
+        $id = $note-&gt;id;
+        $content = $note-&gt;content;
+        $important = $note-&gt;important;
+        try {
+            updateNote($id, $content, $important);
+            respond(204); // 204 no content
+        } catch (Exception $e) {
+            respond(500, ['message' =&gt; $e-&gt;getMessage()]);
+        }
+    } else {
+        respond(400, ['message' =&gt; 'Provided JSON is invalid.']);
+    }
+}
+
+function deleteNoteController(int $id)
+{
+    if (!isset($_SESSION['userid'])) {
+        respond(401, ['message' =&gt; 'Not logged in']);
+    }
+    if (isset($id) && !is_null($id)) {
+        try {
+            deleteNote($id);
+            respond(204); // 204 no content
+        } catch (Exception $e) {
+            respond(500, ['message' =&gt; $e-&gt;getMessage()]);
+        }
+    } else {
+        respond(400, ['message' =&gt; 'Provided JSON is invalid.']);
+    }
+}
+
+function addNoteController()
+{
+    if (!isset($_SESSION['userid'])) {
+        respond(401, ['message' =&gt; 'Not logged in']);
+    }
+    try {
+        $note = json_decode(file_get_contents('php://input'));
+        if (isset($note-&gt;content,$note-&gt;important) && !is_null($note-&gt;content) && !is_null($note-&gt;important)) {
+            $content = $note-&gt;content;
+            $important = $note-&gt;important;
+            $date = date("Y-m-d");
+            $userid = $_SESSION['userid'];
+
+            try {
+                $id = addNote($content,$date, $important, $userid);
+                $data = array('content' =&gt; $content,'date' =&gt; $date, 'important' =&gt; $important, 'id' =&gt; $id);
+                respond(201, $data); // 201 created
+            } catch (Exception $e) {
+                respond(500, ['message' =&gt; $e-&gt;getMessage()]);
+            }
+        }
+    } catch (Exception $e) {
+        respond(500, ['message' =&gt; $e-&gt;getMessage()]);
+    }
+}
+
+function getNotesController()
+{
+    if (!isset($_SESSION['userid'])) {
+        respond(401, ['message' =&gt; 'Not logged in']);
+    }
+    try {
+        $userid = $_SESSION['userid'];
+        $notes = getNotes($userid);
+        if (is_null($notes)) {
+            respond(500, ['message' =&gt; 'Internal server error, please contact the administrator.']);
+        } else {
+            respond(200, $notes);
+        }
+    } catch (Exception $e) {
+        respond(500, ['message' =&gt; $e-&gt;getMessage()]);
+    }
+}
+</pre>
+<h4>usersManagement.php</h4>
+<pre>
+&lt;?php
+require_once "./models/user.php";
+
+function registerController() {
+    $user = json_decode(file_get_contents('php://input'));
+    if (isset($user-&gt;username, $user-&gt;email, $user-&gt;password) && !is_null($user-&gt;username) && !is_null($user-&gt;email) && !is_null($user-&gt;password)) {
+        $username = $user-&gt;username;
+        $password = $user-&gt;password;
+        $email = $user-&gt;email;
+        try {
+            registerUser($username, $email, $password);
+            respond(201, ['user' =&gt; $user]);
+        } catch (Exception $e) {
+            respond(500, ['message' =&gt; $e-&gt;getMessage()]);
+        }
+    } else {
+        respond(400, ['message' =&gt; 'Provided JSON is invalid.']);
+    }
+}
+
+function loginController() {
+    $user = json_decode(file_get_contents('php://input'));
+    //echo json_encode(['useri' =&gt; $user]);
+    if (isset($user-&gt;username, $user-&gt;password) && !is_null($user-&gt;username) && !is_null($user-&gt;password)) {
+        $username = $user-&gt;username;
+        $password = $user-&gt;password;
+        try {
+            $user = login($username, $password);
+            if ($user === false) {
+                respond(401, ['message' =&gt; 'Invalid credentials.']);
+                return;
+            }
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['userid'] = $user['id'];
+            $_SESSION['session_id'] = session_id();
+            respond(200, ['user' =&gt; $user]);
+        } catch (Exception $e) {
+            respond(500, ['message' =&gt; $e-&gt;getMessage()]);
+        }
+    } else {
+        respond(400, ['message' =&gt; 'Provided JSON is invalid.']);
+    }
+}
+
+function logoutController() {
+    session_unset();
+    session_destroy();
+    respond(200,['message' =&gt; 'Logged out']);
+}
+
+function meController() {
+    if (isset($_SESSION['userid'])) {
+        respond(200, [
+            'id' =&gt; $_SESSION['userid'],
+            'username' =&gt; $_SESSION['username']
+        ]);
+    } else {
+        // toinen tapa olisi lähettää 401
+        // siitä virheilmoitus frontin konsolissa
+        respond(200, [
+            'id' =&gt; null,
+            'username' =&gt; null
+        ]);
+    }
+}
+</pre>
+</article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2026</p>
+    </footer>
+</body>
+
+</html>
