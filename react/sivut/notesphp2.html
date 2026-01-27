@@ -51,7 +51,7 @@ const makeHeader = () =&gt; {
 <p>Tarkistetaan kirjautuminen me-toiminnon avulla:</p>
 <pre>
 const me = () =&gt; {
-    // get: url + config
+    // get: url, config
     const request = axios.get(meURL, makeHeader())
     return request.then(response =&gt; response.data)
 }  
