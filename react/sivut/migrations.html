@@ -31,7 +31,7 @@
 <pre>
 version: '3.1'
 
- services:
+services:
    db:
      image: mysql:8.0.27
      restart: always
@@ -147,6 +147,8 @@ exports.seed = function(knex, Promise) {
     });
 };
 </pre>
+<p>Kokeile ajaa tiedosto näin:</p>
+<pre>npx knex seed:run</pre>
 <p>Nyt salasanat eivät ole vielä salattu. Asennetaan <i>bcryptjs</i>-kirjasto jonka avulla voidaan korvata "salasana" salatulla merkkijonolla.</p>
 
 <pre>
