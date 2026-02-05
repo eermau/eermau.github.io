@@ -65,6 +65,7 @@ module.exports = {
    development: {
       client: 'mysql2',
       connection: {
+        host: 'localhost',
         user: 'root',
         password: 'mypass123',
         database: 'notesdemo_db'
@@ -198,6 +199,8 @@ exports.seed = function(knex) {
 };    
 </pre>
 
+<p>Jos haluat ajaa vain tietyn <i>seed</i>-tiedoston niin se onnistuu näin:</p>
+<pre>npx knex seed:run --specific=filename.js</pre>
 </article>
             </div>
         </div>

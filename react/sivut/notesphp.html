@@ -32,17 +32,20 @@ Tehdään PHP:lla toimiva backend joka toimii notesdemon kanssa. Lisää kansio 
 Laadi kansiorakenne
 </p>
 <pre>
+phpback
+  index.php
+
 phpback / helpers
-- helpers.php
+  helpers.php
 
 phpback / models
-- connection.php
-- note.php
-- user.php
+  connection.php
+  note.php
+  user.php
 
 phpback / controlelrs
-- notesManagement.php
-- usersManagement.php
+  notesManagement.php
+  usersManagement.php
 </pre>
 
 <h4>helpers.php</h4>
@@ -367,6 +370,69 @@ function meController() {
         ]);
     }
 }
+</pre>
+<h4>index.php</h4>
+<p>Sijoita index.php juurihakemistoon. Täällä käsitellään reititys ja ohjataan pyyntö oikeaan paikkaan.</p>
+<pre>
+&lt;?php
+session_start();
+
+require_once "./helpers/helpers.php";
+require_once './controllers/notesManagement.php';
+require_once './controllers/usersManagement.php';
+
+// GET, POST, DELETE, OPTIONS, PUT
+$method = $_SERVER['REQUEST_METHOD']; 
+$uri = explode("?", $_SERVER["REQUEST_URI"])[0];
+
+$route = getRoute($uri); // /api/notes
+$id = getId($uri); // /api/notes/1
+
+if ($method === 'OPTIONS') {
+    respond(200);
+    exit();
+}
+
+switch ($route) {
+    case "/api/me":
+        meController();
+        break;
+        
+    case "/api/register":
+        registerController();
+        break;
+
+    case "/api/login":
+        loginController();
+        break;
+
+    case "/api/logout":
+        logoutController();
+        break;
+
+    case "/api/notes":
+        switch ($method) {
+            case 'GET':
+                getNotesController();
+                break;
+
+            case 'POST':
+                addNoteController();
+                break;
+
+            case 'DELETE':
+                if ($id) deleteNoteController($id);
+                break;
+
+            case 'PUT':
+                if ($id) updateNoteController($id);
+                break;
+        }
+        break;
+
+    default:
+        respond(404);
+}    
 </pre>
 </article>
             </div>
