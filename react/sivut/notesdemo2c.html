@@ -21,11 +21,15 @@
 
                 <article class="markdown-body">
 
-                    <h2>Keikkainfo</h2>
-                    <h3>Yleistä</h3>
-
-npx express-generator --no-view --git
-
+                    <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a>  | <a href="notesdemo2c.html">middlewares</a>
+                    <h2>Notes-demo 2 (3/3)</h2>
+                    <h3>Middleware backend</h3>
+                    <p>Viimeinen versio backendistä notesdemolle jossa otettu käyttöön middlewaret.</p>
+                    <p><img src="../kuvat/notesdemo_mwback.png" alt=""></p>
+<p>Asenna ensimmäiseksi express</p>
+<pre>npx express-generator --no-view --git</pre>
+<p>Asenna tämän jälkeen tarvittavat kirjastot</p>
+<pre>
 npm install
 npm install cors --save
 npm install nodemon --save-dev
@@ -34,15 +38,17 @@ npm install mysql2 --save
 npm install knex --save
 npm install bcryptjs --save
 npm install jsonwebtoken --save
-npm install ajv --save
-
-Varmista, että .gitignore sisältää ainakin seuraavat tiedostot:
+npm install ajv --</pre>
+<p>
+Varmista, että .gitignore sisältää ainakin seuraavat tiedostot:</p>
+<pre>
 node_modules/
 *.env
-build/
+build/</pre>
 
-
-
+<p>Lisää .env:</p>
+<h5>.env</h5>
+<pre>
 PORT=3001
 DB_USER=root
 DB_PASS=mypass123
@@ -53,12 +59,14 @@ DB_DATABASE=notesdemo_db
 SECRET=tosisalainensalasanainen
 
 DEBUG=notesmiddleware:*
+</pre>
 
-
-require('dotenv').config()
-
-Lisää kansio utils ja sinne tiedosto config.js
-
+<p>Ota dotenv käyttöön app.js-tiedostossa:</p>
+<pre>require('dotenv').config()</pre>
+<p>
+Lisää kansio utils ja sinne tiedosto config.</p>
+<h5>config.js</h5>
+<pre>
 let PORT = process.env.PORT
 let SECRET = process.env.SECRET
 
@@ -77,23 +85,25 @@ module.exports = {
   PORT,
   SECRET
 }
+</pre>
+<p>Lisää scripts tiedostoon package.json:</p>
+<pre>"startdev": "nodemon ./bin/www"  </pre>
 
-
-    "startdev": "nodemon ./bin/www"  
-
-npm run startdev
-
-Lisää kansioon utils tiedosto dbConnection.js
-
+<p>Käynnistä backend:</p>
+<pre>npm run startdev</pre>
+<p>
+Lisää kansioon utils tiedosto dbConnection.</p>
+<h5>dbConnection.js</h5>
+<pre>
 const config = require('./config.js')
 const options = config.DATABASE_OPTIONS;
 const db = require('knex')(options)
 module.exports = db;
-
-
-
-login.js
-
+</pre>
+<h3>Routers</h3>
+<h5>
+login.js</h5>
+<pre>
 var express = require('express');
 var router = express.Router();
 const knex = require('../utils/dbConnection');
@@ -144,11 +154,11 @@ router.post('/', (req, res, next) =&gt; {
 })
 
 module.exports = router;
+</pre>
+<h5>
+register.js</h5>
 
-
-register.js
-
-
+<pre>
 var express = require('express');
 var router = express.Router();
 const knex = require('../utils/dbConnection');
@@ -182,8 +192,10 @@ router.post('/', (req, res, next) =&gt; {
 })
 
 module.exports = router;
-
-
+</pre>
+<p>Reititys notes-tiedoille</p>
+<h5>notesRouter.js</h5>
+<pre>
 var express = require('express');
 var router = express.Router();
 const knex = require('../utils/dbConnection');
@@ -277,10 +289,12 @@ router.put('/:id', (req, res, next) =&gt; {
 })
 
 module.exports = router;
-
-
-Lisää kansio middleware ja sinne tiedosto auth.js
-
+</pre>
+<h3>Middlewares</h3>
+<h5>auth.js</h5>
+<p>
+Lisää kansio middleware ja sinne tiedosto auth.js</p>
+<pre>
 const jwt = require('jsonwebtoken')
 const config = require('../utils/config')
 
@@ -322,25 +336,31 @@ const isAuthenticated = (req, res, next) =&gt; {
 }
 
 module.exports = isAuthenticated;
-
-Ota käyttöön 
-
+</pre>
+<p>
+Ota käyttöön app.js-tiedostolla</p>
+<pre>
 var isAuthenticated = require('./middleware/auth');
-
-Muuta routerit
-
+</pre>
+<p>
+Muuta routerit</p>
+<pre>
 app.use('/', indexRouter);
 app.use('/notes', isAuthenticated, notesRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-
+</pre>
+<p>
 Lisää cors
-
+</p>
+<pre>
 const cors = require('cors')
 app.use(cors())
-
-Lisää middleware-kansioon tiedosto validate.js
-
+</pre>
+<h4>Tietojen validointi scheman avulla</h4>
+<p>Lisää middleware-kansioon tiedosto validate.js</p>
+<h5>validate.js</h5>
+<pre>
 const Ajv = require('ajv');
 var ajv = new Ajv(); // options can be passed, e.g. {allErrors: true}
 
@@ -367,10 +387,11 @@ const validateSchema = (schema) =&gt; {
 }
 
 module.exports = validateSchema;
-
-
-Tee uusi kansio schemas ja luo sinne tiedosto userSchema.json
-
+</pre>
+<p>
+Tee uusi kansio schemas ja luo sinne tiedosto userSchema.json</p>
+<h5>userSchema.json</h5>
+<pre>
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "user",
@@ -404,9 +425,10 @@ Tee uusi kansio schemas ja luo sinne tiedosto userSchema.json
         "password"
     ]
 }
-
-notesSchema.json
-
+</pre>
+<h5>
+notesSchema.json</h5>
+<pre>
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "note",
@@ -434,8 +456,10 @@ notesSchema.json
         "important"
     ]
 }
+</pre>
 
-
+<p>Ota käyttöön app.js-tiedostolla</p>
+<pre>
 var userSchema = require('./schemas/userSchema.json');
 var notesSchema = require('./schemas/notesSchema.json');
 var validateSchema = require('./middleware/validate');
@@ -443,7 +467,7 @@ var validateSchema = require('./middleware/validate');
 app.use('/register', validateSchema(userSchema), registerRouter);
 app.use('/login', loginRouter);
 app.use('/notes', isAuthenticated, validateSchema(notesSchema), notesRouter);
-
+</pre>
                 </article>
             </div>
         </div>
