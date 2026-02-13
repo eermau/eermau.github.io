@@ -62,7 +62,7 @@ npm install nodemon --save-dev
 <pre>npx nodemon index.js</pre>
 <p>Lisää käynnistyskomento <i>package.json</i>-tiedostoon jotta voit käynnistää sen jatkossa helposti komennolla <i>npm start</i>.</p>
 <pre>"start": "npx nodemon index.js",</pre>
-
+<hr>
 <h3>Tietokantayhteys</h3>
 <p>Aikaisemmin on tehty tietokanta Docker-ympäristöön. Käynnistä Docker ja varmista että tietokanta on olemassa. <i>index.js</i>-tiedostossa määritellään yhteys tietokantaan <i>knex</i>:n avulla:</p>
 <pre>
@@ -249,7 +249,7 @@ Content-Type: application/json
 </pre>
 <p>Lisää jälleen <i>catch</i>-haara sekä varmista että <i>note</i> sisältää oikeat tiedot.</p>
 
-
+<hr>
 <h3>Frontend</h3>
 
 <p>Voit käynnistää nyt <i>notesdemo</i>:n aiemmin tehdyn frontendin. JSON-serverin sijaan tarkoitus on käyttää backendin välittämiä tietoja. Saat kuitenkin konsoliin CORS-virheilmoituksen (Cross-origin resource sharing):</p>
