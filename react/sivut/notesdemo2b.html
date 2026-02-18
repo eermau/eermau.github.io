@@ -264,15 +264,25 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZ
 
 <h4>Muut toiminnot</h4>
 <p>Kirjautuneen käyttäjän muita toimintoja ovat muistiinpanon lisääminen, muokkaaminen ja poistaminen. Lisää yllä oleva tokenin tarkistus myös näille toiminnoille. Muistiinpanon lisäämisessä korjaa nyt käyttäjän id:</p>
-<pre>   
-const newNote = {
+<pre>const newNote = {
     content: note.content,
     important: note.important,
     date: new Date(note.date),
     user_id: decodedToken.id /* TÄMÄ KORJATAAN KIRJAUTUMISEN JÄLKEEN */
 }
 </pre>
+<p>Voit kokeilla <i>post_aut_note.http</i>-testillä onnistuuko viestin lisääminen:</p>
+<pre>
+POST http://localhost:3001/notes HTTP/1.1
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWQiOjEsImlhdCI6MTYwMjE0NTY5OX0.lNsfJVKobqhpf8ZYU0-WopwWxwF1aPsQYjCD_U9c9Xo    
 
+{
+    "content": "Auth-testi",
+    "date": "2026-02-10T17:30:31.098Z",
+    "important": false
+}        
+</pre>
 <h3>Autentikaatio - frontend</h3>
 
 <p>Backend toimii nyt oikein mutta frontend ei vielä lähetä <i>tokenia</i>. Kirjautuneen käyttäjän pyyntöihin tulee lisätä <i>Authorization: bearer</i>-teksti sekä <i>token</i> joka sisältää käyttäjän nimen ja id:n. </p>
