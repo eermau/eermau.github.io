@@ -128,12 +128,19 @@ content-type: application/json
 <h4>Rekisteröityminen</h4>
 <p>Luo uusi tiedosto <i>Register.jsx</i> kansioon <i>components</i>. Laadi lomake jonka avulla käyttäjä voi rekisteröityä notesdemon käyttäjäksi.</p>
 <p><img src="../kuvat/notesdemo2_4.png" alt=""></p>
+<p>Lisätään kirjautumista ja rekisteröitymistä varten osoitteet <i>App.jsx</i>-tiedoston alkuun:  
+</p>
+<pre>
+const loginURL = 'http://localhost:3001/login'
+const registerURL = 'http://localhost:3001/register'    
+</pre>
+
 <p>Lisää funktio <i>registerHandler</i> tiedostolle <i>App.jsx</i></p>
 <pre>
 const registerHandler = (e, userdata) =&gt; {
   e.preventDefault();
   console.log(userdata);
-  axios.post('http://localhost:3001/register', userdata)
+  axios.post(registerURL, userdata)
     .then(response =&gt; {
       console.log(response.data)
       setMessage("Rekisteröityminen onnistui")
