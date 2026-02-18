@@ -259,7 +259,7 @@ GET http://localhost:3001/notes HTTP/1.1
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWQiOjEsImlhdCI6MTYwMjE0NTY5OX0.lNsfJVKobqhpf8ZYU0-WopwWxwF1aPsQYjCD_U9c9Xo    
 </pre>
 <p>Nyt tulee näkyviin vielä kaikki muistiinpanot koska <i>knex.select</i> ei rajoita tietoja. Lisää <i>where</i>-ehto mukaan nykyiselle <i>select</i>-lauseelle:</p>
-<pre>knex('users').select('*').where('username', '=', user.username)</pre>
+<pre>knex('notes').select('*').where('user_id', '=', decodedToken.id)</pre>
 <p>Aja testi uudelleen ja varmista että nyt tulevat näkyviin vain yhden käyttäjän muistiinpanot.</p>
 
 <h4>Muut toiminnot</h4>
