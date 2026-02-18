@@ -264,7 +264,13 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZ
 
 <h4>Muut toiminnot</h4>
 <p>Kirjautuneen käyttäjän muita toimintoja ovat muistiinpanon lisääminen, muokkaaminen ja poistaminen. Lisää yllä oleva tokenin tarkistus myös näille toiminnoille. Muistiinpanon lisäämisessä korjaa nyt käyttäjän id:</p>
-<pre>note.user_id = decodedToken.id;
+<pre>   
+const newNote = {
+    content: note.content,
+    important: note.important,
+    date: new Date(note.date),
+    user_id: decodedToken.id; /* TÄMÄ KORJATAAN KIRJAUTUMISEN JÄLKEEN */
+}
 </pre>
 
 <h3>Autentikaatio - frontend</h3>
