@@ -214,7 +214,7 @@ const logoutHandler = () =&gt; {
 <p>Viimeinen asia on autentikaatio, tarkistetaan milloin käyttäjä on kirjautunut. Backendissä tulee tietää kuka on kirjautunut: kenen muistiinpanot näytetään, kuka on käyttäjä joka luo uuden muistiinpanon tai muokkaa olemassa olevaa. Jokainen pyyntö sisältää tokenin joka sisältää käyttäjän id:n.</p>
 
 <h4>Apufunktio</h4>
-<p>Lisätään apufunktio joka lukee <i>authorization</i>-tiedon pyynnöstä. Funktio purkaa tokenin ja palauttaa sen.</p>
+<p>Lisätään <i>index.js</i>-tiedostolle apufunktio joka lukee <i>authorization</i>-tiedon pyynnöstä. Funktio purkaa tokenin ja palauttaa sen.</p>
 <pre>
 const getTokenFrom = req =&gt; {
     const authorization = req.get('authorization');
