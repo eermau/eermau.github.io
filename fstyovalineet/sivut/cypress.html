@@ -47,8 +47,8 @@ npm i cypress --save-dev
 <h3>Testaaminen</h3>
 <p>Avaa kansio Specs ja lisää uusi testitiedosto <i>home.cy.js</i>. Ensimmäinen testi avaa nettisivun:</p>
 <pre>
-describe('Notesdemo-test-demo', () =&lt; {
-    it('Visits notesdemo-test-page', () =&lt; {
+describe('Notesdemo-test-demo', () =&gt; {
+    it('Visits notesdemo-test-page', () =&gt; {
         cy.visit('https://notestest.eermau.treok.io/')
     })
 }) 
@@ -63,15 +63,15 @@ describe('Notesdemo-test-demo', () =&lt; {
 </pre>
 <p>Nyt testin voi kirjoittaa suoraan näin:</p>
 <pre>
-describe('Notesdemo-test-demo', () =&lt; {
-    it('Visits notesdemo-test-page', () =&lt; {
+describe('Notesdemo-test-demo', () =&gt; {
+    it('Visits notesdemo-test-page', () =&gt; {
         cy.visit('/')
     })
     })    
 </pre>
 <p>Lisää sisäänkirjautuminen omaksi apumetodiksi. Lisää tiedostoon <i>support/commands.js</i>:</p>
 <pre>
-Cypress.Commands.add('login', (username, password) =&lt; {
+Cypress.Commands.add('login', (username, password) =&gt; {
     cy.visit('/')
     
     cy.get('input[id=lusername]').type(username)
@@ -90,8 +90,8 @@ Cypress.Commands.add('login', (username, password) =&lt; {
     const password="salasana";
     const test_message = "Cypress testing";
   
-    describe('The Home Page', () =&lt; {
-    it('successfully loads', () =&lt; {
+    describe('The Home Page', () =&gt; {
+    it('successfully loads', () =&gt; {
       cy.visit('/') // defaults to baseURL in config-file
       
       cy.login(username, password)
@@ -114,22 +114,22 @@ Cypress.Commands.add('login', (username, password) =&lt; {
 <p>Äskeisillä esimerkeillä voidaan testata käyttöliittymää mutta se ei varmista onko haluttu muutos tehty. Tee aluksi itsellesi oma testikäyttäjä rekisteröitymisen kautta jotta testisi eivät sotke toisen testaajan testejä.</p>
 
 <pre>
-describe('Notesdemo basic tests', () =&lt; {
-    beforeEach(() =&lt; {
+describe('Notesdemo basic tests', () =&gt; {
+    beforeEach(() =&gt; {
         cy.visit('/') // defaults to baseURL in config-file
         cy.login(username, password)
         })
     
     // tähän väliin tehdään testit
     
-    afterEach(()=&lt; {
+    afterEach(()=&gt; {
         cy.get('button[id=btnLogout]').click()
     })
     })    
 </pre>
 <p>Uuden tärkeän muistiinpanon lisääminen</p>
 <pre>
-it('add new important', () =&lt; {
+it('add new important', () =&gt; {
     cy.get('input[id=important]').click()
     cy.get('input[id=content]').type(`${test_message} important{enter}`)
     cy.get("li").contains("Cypress testing important").and('have.class', 'important')
@@ -137,14 +137,14 @@ it('add new important', () =&lt; {
 </pre>
 <p>Uuden normaalin muistiinpanon lisääminen</p>
 <pre>
-it('add new basic', () =&lt; {
+it('add new basic', () =&gt; {
     cy.get('input[id=content]').type(`${test_message} normal{enter}`)
     cy.get("li").contains("Cypress testing normal").and('have.class', 'normal')
     })    
 </pre>
-<p>Muistiinpanon tärkeyden muuttaminen important -&lt; normal</p>
+<p>Muistiinpanon tärkeyden muuttaminen important -&gt; normal</p>
 <pre>
-it('change importance', () =&lt; {
+it('change importance', () =&gt; {
     cy.get("li").contains("Cypress testing important").click()
     cy.get("li").contains("Cypress testing important").and('have.class', 'normal')
     })
@@ -152,11 +152,11 @@ it('change importance', () =&lt; {
 </pre>
 <p>Poistetaan muistiinpanot jotka important mutta tyyli normal ja normaali jonka tyyli normal.</p>
 <pre>
-it('delete important', () =&lt; {
+it('delete important', () =&gt; {
     cy.get("li").contains("Cypress testing important").and('have.class', 'normal').find('button').click()
     cy.get("li").contains("Cypress testing important").should('not.exist')
     })
-    it('delete normal', () =&lt; {
+    it('delete normal', () =&gt; {
     cy.get("li").contains("Cypress testing normal").and('have.class', 'normal').find('button').click()
     cy.get("li").contains("Cypress testing normal").should('not.exist')
     })    
