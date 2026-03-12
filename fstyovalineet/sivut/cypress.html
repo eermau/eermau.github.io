@@ -55,11 +55,11 @@ describe('Notesdemo-test-demo', () =&gt; {
 </pre>
 <p>Lisätään osoite <i>cypress.config.js</i>-tiedostoon</p>
 <pre>
-    module.exports = defineConfig({
-        e2e: {
-          baseUrl: 'https://notestest.eermau.treok.io/',
-        },
-      });    
+module.exports = defineConfig({
+    e2e: {
+        baseUrl: 'https://notestest.eermau.treok.io/',
+    },
+    });    
 </pre>
 <p>Nyt testin voi kirjoittaa suoraan näin:</p>
 <pre>
@@ -67,7 +67,7 @@ describe('Notesdemo-test-demo', () =&gt; {
     it('Visits notesdemo-test-page', () =&gt; {
         cy.visit('/')
     })
-    })    
+})    
 </pre>
 <p>Lisää sisäänkirjautuminen omaksi apumetodiksi. Lisää tiedostoon <i>support/commands.js</i>:</p>
 <pre>
@@ -82,32 +82,32 @@ Cypress.Commands.add('login', (username, password) =&gt; {
     // we are logged in!
     cy.contains('tester1')
 
-    })    
+})    
 </pre>
 <p>Lisätään login-kutsu mukaan testitiedostoon <i>home.cy.js</i></p>
 <pre>
-    const username="tester1";
-    const password="salasana";
-    const test_message = "Cypress testing";
-  
-    describe('The Home Page', () =&gt; {
-    it('successfully loads', () =&gt; {
-      cy.visit('/') // defaults to baseURL in config-file
-      
-      cy.login(username, password)
-  
-    })
-  })    
+const username="tester1";
+const password="salasana";
+const test_message = "Cypress testing";
+
+describe('The Home Page', () =&gt; {
+it('successfully loads', () =&gt; {
+    cy.visit('/') // defaults to baseURL in config-file
+    
+    cy.login(username, password)
+
+})
+})    
 </pre>
 <p>Kirjautumisen pitäisi mennä läpi. Seuraavaksi kokeillaan lisätä uusi muistiinpano.</p>
 <pre>
-    cy.get('input[id=important]').click()
-    cy.get('input[id=content]').type(`${test_message}{enter}`)  
+cy.get('input[id=important]').click()
+cy.get('input[id=content]').type(`${test_message}{enter}`)  
 </pre>
 </p>
 <p>Lopuksi kirjaudutaan vielä ulos</p>
 <pre>
-    cy.get('button[id=btnLogout]').click()
+cy.get('button[id=btnLogout]').click()
 </pre>
 
 <h3>Kehittyneemmät testit</h3>
@@ -125,7 +125,7 @@ describe('Notesdemo basic tests', () =&gt; {
     afterEach(()=&gt; {
         cy.get('button[id=btnLogout]').click()
     })
-    })    
+})    
 </pre>
 <p>Uuden tärkeän muistiinpanon lisääminen</p>
 <pre>
@@ -133,22 +133,21 @@ it('add new important', () =&gt; {
     cy.get('input[id=important]').click()
     cy.get('input[id=content]').type(`${test_message} important{enter}`)
     cy.get("li").contains("Cypress testing important").and('have.class', 'important')
-    })      
+})      
 </pre>
 <p>Uuden normaalin muistiinpanon lisääminen</p>
 <pre>
 it('add new basic', () =&gt; {
     cy.get('input[id=content]').type(`${test_message} normal{enter}`)
     cy.get("li").contains("Cypress testing normal").and('have.class', 'normal')
-    })    
+})    
 </pre>
 <p>Muistiinpanon tärkeyden muuttaminen important -&gt; normal</p>
 <pre>
 it('change importance', () =&gt; {
     cy.get("li").contains("Cypress testing important").click()
     cy.get("li").contains("Cypress testing important").and('have.class', 'normal')
-    })
-  
+})
 </pre>
 <p>Poistetaan muistiinpanot jotka important mutta tyyli normal ja normaali jonka tyyli normal.</p>
 <pre>
@@ -159,7 +158,7 @@ it('delete important', () =&gt; {
     it('delete normal', () =&gt; {
     cy.get("li").contains("Cypress testing normal").and('have.class', 'normal').find('button').click()
     cy.get("li").contains("Cypress testing normal").should('not.exist')
-    })    
+})    
 </pre>
 
 <h3>Harjoitukset</h3>
