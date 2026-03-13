@@ -45,7 +45,11 @@ npm i cypress --save-dev
 <p>Anna konfiguraatiotiedostojen olla oletusasetuksilla ja valitse seuraavassa vaiheessa selaimeksi Chrome.</p>
 <p><img src="../kuvat/cypress_2.png" alt=""></p>
 <h3>Testaaminen</h3>
-<p>Avaa kansio Specs ja lisää uusi testitiedosto <i>home.cy.js</i>. Ensimmäinen testi avaa nettisivun:</p>
+<p>Valitse <i>Create new spec</i></p>
+<p><img src="../kuvat/cypress_4.png" alt=""></p>
+<p>Anna nimeksi <i>home.cy.js</i></p>
+<p><img src="../kuvat/cypress_3.png" alt=""></p>
+<p>Korvaa VSCodessa tiedoston sisällöksi notesdemon avaaminen:</p>
 <pre>
 describe('Notesdemo-test-demo', () =&gt; {
     it('Visits notesdemo-test-page', () =&gt; {
@@ -53,7 +57,7 @@ describe('Notesdemo-test-demo', () =&gt; {
     })
 }) 
 </pre>
-<p>Lisätään osoite <i>cypress.config.js</i>-tiedostoon</p>
+<p>Jotta osoitetta ei tarvitse kertoa joka kerta niin lisätään osoite <i>cypress.config.js</i>-tiedostoon</p>
 <pre>
 module.exports = defineConfig({
     e2e: {
@@ -99,6 +103,7 @@ it('successfully loads', () =&gt; {
 })
 })    
 </pre>
+<p>Huom. jotta kaikki eivät käytä samaa <i>tester1</i>-tunnusta on hyvä rekisteröidä oma testitunnus (esim. tester100) ja korvata <i>tester1</i> tällä tunnuksella.</p>
 <p>Kirjautumisen pitäisi mennä läpi. Seuraavaksi kokeillaan lisätä uusi muistiinpano.</p>
 <pre>
 cy.get('input[id=important]').click()
@@ -109,7 +114,7 @@ cy.get('input[id=content]').type(`${test_message}{enter}`)
 <pre>
 cy.get('button[id=btnLogout]').click()
 </pre>
-
+<hr>
 <h3>Kehittyneemmät testit</h3>
 <p>Äskeisillä esimerkeillä voidaan testata käyttöliittymää mutta se ei varmista onko haluttu muutos tehty. Tee aluksi itsellesi oma testikäyttäjä rekisteröitymisen kautta jotta testisi eivät sotke toisen testaajan testejä.</p>
 
@@ -160,7 +165,7 @@ it('delete important', () =&gt; {
     cy.get("li").contains("Cypress testing normal").should('not.exist')
 })    
 </pre>
-
+<hr>
 <h3>Harjoitukset</h3>
 <ol>
     <li>Lisää testi jolla testataan rekisteröityminen oikeilla ja väärillä tiedoilla.</li>
