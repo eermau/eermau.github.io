@@ -77,20 +77,21 @@ const logout = () =&gt; {
     return request.then(response =&gt; response.data)
 }  
 </pre>
-<p>Login ja register toimivat samaan tapaan kuin ennen mutta lisätään makeHeader-funktion avulla header-tieto</p>
+<p>Login ja register toimivat samaan tapaan kuin ennen mutta lisätään makeHeader-funktion avulla header-tieto:</p>
 <pre>
-  const login = (newNote) =&gt; {
-    const request = axios.post(loginURL, newNote, makeHeader())
+  const login = (userdata) =&gt; {
+    const request = axios.post(loginURL, userdata, makeHeader())
     return request.then(response =&gt; response.data)
 }  
-
-const register = (newNote) =&gt; {
-  const request = axios.post(registerURL, newNote, makeHeader())
+</pre>
+<pre>
+const register = (userdata) =&gt; {
+  const request = axios.post(registerURL, userdata, makeHeader())
   return request.then(response =&gt; response.data)
 }
 </pre>
 <h4>App.jsx</h4>
-<p>Se onko käyttäjä kirjautunut käsitellään me-toiminnon kautta</p>
+<p>Kirjautuneen käyttäjän tarkistaminen käsitellään me-toiminnon kautta</p>
 <pre>
 const userHook = () =&gt; {
 userService.me()
@@ -125,6 +126,7 @@ const logoutHandler = () =&gt; {
     .catch(error =&gt; console.log(error))
 }  
 </pre>
+<hr>
 <h3>Julkaisu cPanelin avulla</h3>
 
 <h4>Yleistä</h4>
