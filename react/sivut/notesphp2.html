@@ -129,8 +129,13 @@ const logoutHandler = () =&gt; {
 
 <h4>Yleistä</h4>
 <ul>
-    <li>tee build React-projektistasi, varmista oikeat polut tätä ennen service-tiedostoissasi.</li>
-    <li>tee cPanelissa alidomain</li>
+  <li>tee cPanelissa alidomain (esim. notes.tunnus.treok.io)</li>
+  <li>tee build React-projektistasi, varmista oikeat polut tätä ennen service-tiedostoissasi.
+<p>Esimerkiksi:</p>
+<pre>const baseUrl = 'https://notes.tunnus.treok.io/api/notes'</pre>
+
+    </li>
+    <li>backendissä muuta <i>respond</i>-funktiossa allowedOrigins-muuttujan arvo.</li>
     <li>siirrä alidomainin juurihakemistoon buildin tiedostot</li>
     <li>tee alikansio <i>/api</i> ja siirrä tänne backendin PHP-tiedostot.</li>
 </ul>
