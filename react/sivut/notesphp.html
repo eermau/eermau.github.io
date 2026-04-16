@@ -237,7 +237,7 @@ function updateNoteController()
             respond(500, ['message' =&gt; $e-&gt;getMessage()]);
         }
     } else {
-        respond(400, ['message' =&gt; 'Provided JSON is invalid.']);
+        respond(400, ['message' =&gt; 'Provided JSON is invalid.', 'data' =&gt; $note]);
     }
 }
 
@@ -278,6 +278,9 @@ function addNoteController()
             } catch (Exception $e) {
                 respond(500, ['message' =&gt; $e-&gt;getMessage()]);
             }
+        }
+        else {
+            respond(400, ['message' =&gt; 'Provided JSON is invalid.', 'data' =&gt; $note]);
         }
     } catch (Exception $e) {
         respond(500, ['message' =&gt; $e-&gt;getMessage()]);
@@ -320,7 +323,7 @@ function registerController() {
             respond(500, ['message' =&gt; $e-&gt;getMessage()]);
         }
     } else {
-        respond(400, ['message' =&gt; 'Provided JSON is invalid.']);
+        respond(400, ['message' =&gt; 'Provided JSON is invalid.', 'data' =&gt; $user]);
     }
 }
 
@@ -344,7 +347,7 @@ function loginController() {
             respond(500, ['message' =&gt; $e-&gt;getMessage()]);
         }
     } else {
-        respond(400, ['message' =&gt; 'Provided JSON is invalid.']);
+        respond(400, ['message' =&gt; 'Provided JSON is invalid.', 'data' =&gt; $user]);
     }
 }
 
