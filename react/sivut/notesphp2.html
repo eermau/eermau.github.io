@@ -129,20 +129,38 @@ const logoutHandler = () =&gt; {
 <hr>
 <h3>Julkaisu cPanelin avulla</h3>
 
-<h4>Yleistä</h4>
+<h4>Alidomain</h4>
 <ul>
-  <li>tee cPanelissa alidomain (esim. notes.tunnus.treok.io). Aseta <i>Force HTTPS Redirect</i> päälle, voit tehdä tämän hetken päästä kun alidomainissa sisältöä.</li>
-  <li>tee build React-projektistasi, varmista oikeat polut tätä ennen service-tiedostoissasi.
+  <li>kirjaudu cPaneliin ja avaa kohta Domains</li>
+  <li>valitse Create a new Domain ja luo alidomain (esim. notes.tunnus.treok.io). </li>
+  <li>Aseta <i>Force HTTPS Redirect</i> päälle, voit tehdä tämän hetken päästä kun alidomainissa sisältöä.
+  <p><img src="../kuvat/cpanel_domains_notes.png" alt=""></p></li>
+ 
+</ul>
+<h4>React build</h4>
+<ul>
+  <li>Varmista oikeat polut tätä ennen service-tiedostoissasi.
 <p>Esimerkiksi:</p>
 <pre>const baseUrl = 'https://notes.tunnus.treok.io/api/notes'</pre>
 
     </li>
-    <li>backendissä muuta <i>respond</i>-funktiossa allowedOrigins-muuttujan arvo.</li>
-    <li>siirrä alidomainin juurihakemistoon buildin tiedostot</li>
-    <li>tee alikansio <i>/api</i> ja siirrä tänne backendin PHP-tiedostot.</li>
+    <li>Tee build React-projektistasi: <pre>npm run build</pre></li>
+    <li>Backendissä muuta <i>respond</i>-funktiossa allowedOrigins-muuttujan arvo.</li>
+    <li>Siirrä alidomainin juurihakemistoon buildin tiedostot.
+<ul><li>
+  tee paikallisista tiedostoista zip-tiedosto
+</li>
+<li>siirrä tiedostot cPanelin alidomain juurihakemistoon</li>
+<li>pura zip-tiedosto (Extract)</li>
+</ul>
+
+    </li>
+    <li>Tee alikansio <i>/api</i> ja siirrä tänne puolestaan backendin PHP-tiedostot.</li>
 </ul>
 <h4>.htaccess</h4>
-<p>Juurihakemiston .htaccess</p>
+<p>Ota näkyviin piilotetut tiedostot. </p>
+<p><img src="../kuvat/cpanel_domain_hidden_files.png" alt=""></p>
+<p>Tämän jälkeen lisää juurihakemiston .htaccess</p>
 <pre>
 RewriteEngine On
 
