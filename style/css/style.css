@@ -33,8 +33,33 @@ article {
 header {
     background: linear-gradient(135deg, #1d3557, #274c77);
     color: white;
-    padding: 25px 35px;
+    padding: 40px 35px;
 }
+
+.unity {
+    background-color: #2caba9;
+    background-image: url('../images/banner_peliohjelmointi.png');
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+}
+
+.unitycolor {
+    background-color: #2caba9;
+}
+
+footer {
+    max-width: 960px;
+    margin: 0 auto 30px;
+    min-height: 40px;
+    border-radius: 0 0 12px 12px;
+    color: white;
+    text-align: center;
+    padding: 15px 15px;
+}
+
 
 header h1 {
     margin: 0;
@@ -93,7 +118,6 @@ a {
 
 a:hover {
     color: #1d3557;
-    text-decoration: underline;
 }
 
 /* ---------- Listat ---------- */
