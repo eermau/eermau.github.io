@@ -1,148 +1,228 @@
-body {
-    font-family: sans-serif;
-    line-height: 1.6;
+/* ---------- Perusasetukset ---------- */
+
+* {
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    color: #2b2d42;
+    background: #eef2f5;
+}
+
+/* ---------- Rakenne ---------- */
+
 .wrapper {
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #f5f7f7;
+    max-width: 960px;
+    margin: 30px auto 0;
+    background: #ffffff;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
 }
 
 article {
-    padding: 15px;
+    padding: 25px 35px;
 }
 
+/* ---------- Header ---------- */
+
 header {
-    background-color: #1d3557;
-    color: #ffffff;
-    border-radius: 5px 5px 0px 0px;
-    height: 80px;
-    padding: 20px 0px 20px 20px;
+    background: linear-gradient(135deg, #1d3557, #274c77);
+    color: white;
+    padding: 25px 35px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 #divHeadLink {
     float: right;
-    padding-right: 20px;
-    margin-top: -30px;
 }
 
 #divHeadLink a {
-    color: #457b9d
+    color: #cde7ff;
 }
 
 #divHeadLink a:hover {
-    color: #ffffff
+    color: white;
 }
+
+/* ---------- Footer ---------- */
 
 .footer {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    border-radius: 0px 0px 5px 5px;
-    height: 40px;
-    background-color: #1d3557;
-    color: #f1faee;
+    max-width: 960px;
+    margin: 0 auto 30px;
+    min-height: 40px;
+    background: #1d3557;
+    border-radius: 0 0 12px 12px;
 }
 
-pre {
-    overflow: auto;
-    color: #f1faee;
-    background-color: #457b9d;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-header:h1 {
-    color: #4cc9f0;
-}
+/* ---------- Otsikot ---------- */
 
 h2 {
-    color: #457b9d;
-
-}
-
-img {
-    max-width: 100%;
-    border-radius: 5px;
+    color: #1d3557;
+    border-bottom: 2px solid #dbe5ec;
+    padding-bottom: 8px;
+    margin-top: 0;
 }
 
 h3 {
     color: #457b9d;
+    margin-top: 2rem;
+    margin-bottom: .5rem;
 }
 
 h4 {
     color: #1d3557;
 }
 
+/* ---------- Linkit ---------- */
+
 a {
+    color: #d62839;
     text-decoration: none;
-    color: #e63946;
+    transition: all .2s ease;
 }
 
 a:hover {
-    color: #457b9d;
+    color: #1d3557;
+    text-decoration: underline;
+}
+
+/* ---------- Listat ---------- */
+
+ul {
+    padding-left: 1.4rem;
+}
+
+li {
+    margin-bottom: .3rem;
+}
+
+/* ---------- Koodiesimerkit ---------- */
+
+pre {
+    overflow: auto;
+    padding: 15px;
+    border-radius: 8px;
+    background: #274c77;
+    color: #f8f9fa;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+
+code {
+    font-family: Consolas, Monaco, monospace;
+}
+
+/* ---------- Kuvat ---------- */
+
+img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* ---------- Taulukot ---------- */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
 }
 
 th {
-    background-color: #a8dadc;
-    color: #457b9d;
-    padding: 5px;
+    background: #457b9d;
+    color: white;
+    padding: 10px;
+    text-align: left;
 }
 
 td {
-    padding: 5px;
-    color: #457b9d;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #4cc9f0;
+    padding: 10px;
+    border: 1px solid #dbe5ec;
 }
 
-input {
-    padding: 3px 5px 3px 5px;
-    margin: 3px;
-    border-radius: 3px;
-    border-width: 1px;
+tr:nth-child(even) {
+    background: #f8fafc;
 }
+
+/* ---------- Lomakkeet ---------- */
 
 form {
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #c6cccc;
+    padding: 15px;
+    background: #f4f7f9;
+    border-radius: 8px;
 }
 
-input[type=submit],
-[type=button],
-button {
-    padding: 5px 15px 5px 15px;
+input,
+select,
+textarea {
+    padding: 8px 10px;
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+    font-size: 1rem;
 }
 
-input[type=submit]:hover,
-[type=button]:hover,
-button:hover {
-    text-shadow: 0 0 .65px #333, 0 0 .65px #333;
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #457b9d;
 }
 
+/* ---------- Painikkeet ---------- */
 
-@media only screen and (max-width: 825px) {
+button,
+input[type=button],
+input[type=submit] {
+    background: #457b9d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+button:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+    background: #1d3557;
+}
+
+/* ---------- Mobiili ---------- */
+
+@media (max-width: 825px) {
 
     .wrapper {
-        width: 97%;
-        margin-left: auto;
-        margin-right: auto;
+        width: 96%;
+        margin-top: 10px;
+    }
+
+    article {
+        padding: 20px;
     }
 
     header {
-        height: auto;
+        padding: 20px;
     }
 
-    .current-section {
-        width: 100%;
+    header h1 {
+        font-size: 1.6rem;
     }
 
     #divHeadLink {
-        padding: 10px;
+        float: none;
+        margin-top: 10px;
+    }
+
+    .footer {
+        width: 96%;
     }
 }

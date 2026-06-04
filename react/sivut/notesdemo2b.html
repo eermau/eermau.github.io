@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -18,15 +17,12 @@
         </a>
         <div id="container">
 
+            <div id="main" role="main">
 
-            <article class="markdown-body">
-                <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a> | <a
-                    href="notesdemo2c.html">middlewares</a>
-                <h2>Notes-demo 2 (2/3)</h2>
-
-                <article class="">
-                    <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a>
-                    <h2>Notes-demo 2 (2/2)</h2>
+                <article class="markdown-body">
+                    <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a> | <a
+                        href="notesdemo2c.html">middlewares</a>
+                    <h2>Notes-demo 2 (2/3)</h2>
 
                     <h3>Käyttäjän lisääminen</h3>
                     <p>Sovelluksestamme puuttuu vielä kirjautuminen ja rekisteröityminen. Ensimmäiseksi toteutetaan
@@ -163,8 +159,7 @@ const registerHandler = (e, userdata) =&gt; {
                     <h4>Kirjautuminen</h4>
                     <p>Tee seuraavaksi komponentti <i>Login</i> tiedostoon <i>Login.jsx</i>. Lisää samaan tapaan
                         <i>loginHandler</i>-funktio tiedostolle <i>App.jsx</i>. URL-osoitteet voi määritellä muuttujiin
-                        <i>loginURL</i> ja <i>registerURL</i>.
-                    </p>
+                        <i>loginURL</i> ja <i>registerURL</i>.</p>
                     <p><img src="../kuvat/notesdemo2_5.png" alt=""></p>
                     <pre>
 const loginHandler = (e, userdata) =&gt; {
@@ -211,8 +206,7 @@ if (user === null) {
 </pre>
                     <h4>Logout</h4>
                     <p>Lisää painike uloskirjautumiselle <i>App.jsx</i>-tiedostoon. Painike kutsuu
-                        <i>logoutHandler</i>-funktiota joka tyhjentää <i>notesdemouser</i>-tiedon selaimesta.
-                    </p>
+                        <i>logoutHandler</i>-funktiota joka tyhjentää <i>notesdemouser</i>-tiedon selaimesta.</p>
                     <pre>
 const logoutHandler = () =&gt; {
     setUser(null)
@@ -224,8 +218,7 @@ const logoutHandler = () =&gt; {
 
                     <p>Nyt moni asia jo toimii mutta käyttöliittymä ei toimi ihan niin kuin pitäisi. Piilotetaan
                         <i>Notes</i> ja <i>NotesForm</i> jos käyttäjä ei ole kirjautunut. Kun käyttäjä kirjautuu
-                        piilotetaan <i>Login</i> ja <i>Register</i>.
-                    </p>
+                        piilotetaan <i>Login</i> ja <i>Register</i>. </p>
 
                     <div class="twoimages">
                         <p>Kirjautumaton:<img src="../kuvat/notesdemo2_7.png" alt=""></p>
@@ -257,8 +250,7 @@ const getTokenFrom = req =&gt; {
                     <p>Tee ensimmäisenä lisäys tokenin käsittelystä /GET -pyynnölle. Lisää seuraava koodi
                         <i>app.get</i>-metodin alkuun. Luetaan token pyynnöstä ja annetaan virheilmoitus mikäli se
                         puuttuu. Tämän jälkeen puretaan token käyttäen <code>jwt.verify</code> funktiota. Frontend
-                        lähettää tokenissa olion jonka sisällä on käyttäjän nimi ja id.
-                    </p>
+                        lähettää tokenissa olion jonka sisällä on käyttäjän nimi ja id.</p>
                     <pre>
 const token = getTokenFrom(req);
 console.log(token);
@@ -376,8 +368,7 @@ import notesService from './services/notesService'
                     <p>Poista tarpeeton <i>baseURL</i> ja muuta <i>axios</i>-kutsut käyttämään uutta
                         <i>notesService</i>:a. Uusi tapa palauttaa suoraan <i>response.data</i>:n joten muuta
                         <i>App.jsx</i>-tiedostolla <i>response.data</i> muotoon <i>response</i>. Esimerkkinä
-                        muistiinpanon lisääminen:
-                    </p>
+                        muistiinpanon lisääminen:</p>
                     <pre>
 notesService.add(note).then(response =&gt; {
     setMessage("Muistiinpano lisätty");
@@ -403,8 +394,7 @@ notesService.setToken(user.token)
                     <h4>userService</h4>
                     <p>Lisää toiminnot <i>login</i> ja <i>register</i> tiedostolle <i>userService</i>. Tämä on
                         yksinkertaisempi sillä emme tarvitse tietoa tokenista eikä siten ole tarvetta
-                        <i>makeHeader</i>-funktion kutsumiselle.
-                    </p>
+                        <i>makeHeader</i>-funktion kutsumiselle.</p>
 
                     <pre>
 import axios from 'axios';
@@ -429,8 +419,8 @@ export default {
 </pre>
 
                 </article>
+            </div>
         </div>
-    </div>
     </div>
     <footer>
         <p>
