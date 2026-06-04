@@ -19,19 +19,20 @@
         <div id="container">
 
 
-
-            <article class="">
-                <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a>
-                <h2>Notes-demo 2 (1/2)</h2>
+            <article class="markdown-body">
+                <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a> | <a
+                    href="notesdemo2c.html">middlewares</a>
+                <h2>Notes-demo 2 (1/3)</h2>
                 <h3>Projekti</h3>
                 <p>Tarkoituksena on tehdä backend joka toimii frontendin ja tietokannan välissä. Käytetään
                     node/express-kirjastoa webbiserversin toteutukseen. Lisämateriaalia löytyy <a
-                        href="https://fullstackopen.com/osa3/node_js_ja_express#yksinkertainen-web-palvelin">Full
-                        Stack open</a>-kurssin osasta 3.</p>
+                        href="https://fullstackopen.com/osa3/node_js_ja_express#yksinkertainen-web-palvelin">Full Stack
+                        open</a>-kurssin osasta 3.</p>
 
-                <p>Tee notesdemo-kansion alle uusi kansio <i>notesback</i>, suorita siellä <i>npm init</i>. Asenna
-                    tämän jälkeen tarvittavat kirjastot:</p>
+                <p>Tee notesdemo-kansion alle uusi kansio <i>notesback</i>, suorita siellä <i>npm init</i>. Asenna tämän
+                    jälkeen tarvittavat kirjastot:</p>
                 <pre>
+npm init
 npm install express --save
 npm install mysql2 --save
 npm install knex --save    
@@ -67,14 +68,13 @@ npm install nodemon --save-dev
 </pre>
                 <p>Käynnistä palvelin uudestaan:</p>
                 <pre>npx nodemon index.js</pre>
-                <p>Lisää käynnistyskomento <i>package.json</i>-tiedostoon jotta voit käynnistää sen jatkossa
-                    helposti komennolla <i>npm start</i>.</p>
+                <p>Lisää käynnistyskomento <i>package.json</i>-tiedostoon jotta voit käynnistää sen jatkossa helposti
+                    komennolla <i>npm start</i>.</p>
                 <pre>"start": "npx nodemon index.js",</pre>
-
+                <hr>
                 <h3>Tietokantayhteys</h3>
-                <p>Aikaisemmin on tehty tietokanta Docker-ympäristöön. Käynnistä Docker ja varmista että tietokanta
-                    on olemassa. <i>index.js</i>-tiedostossa määritellään yhteys tietokantaan <i>knex</i>:n avulla:
-                </p>
+                <p>Aikaisemmin on tehty tietokanta Docker-ympäristöön. Käynnistä Docker ja varmista että tietokanta on
+                    olemassa. <i>index.js</i>-tiedostossa määritellään yhteys tietokantaan <i>knex</i>:n avulla:</p>
                 <pre>
 const options = {
     client: 'mysql2',
@@ -277,7 +277,7 @@ Content-Type: application/json
 </pre>
                 <p>Lisää jälleen <i>catch</i>-haara sekä varmista että <i>note</i> sisältää oikeat tiedot.</p>
 
-
+                <hr>
                 <h3>Frontend</h3>
 
                 <p>Voit käynnistää nyt <i>notesdemo</i>:n aiemmin tehdyn frontendin. JSON-serverin sijaan tarkoitus

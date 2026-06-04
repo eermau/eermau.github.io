@@ -34,10 +34,11 @@
         <pre>
 const registerURL = 'http://localhost:8888/api/register';
 const loginURL = 'http://localhost:8888/api/login';
+const logoutURL = 'http://localhost:8888/api/logout';
 const meURL = 'http://localhost:8888/api/me';
 </pre>
         <p>
-          Tieto kirjautumisesta käsitellään istunnon kautta. PHP tarvitsee header-tietoon asetuksen 'withCredentials'
+          Myös userService tarvitsee nyt header-tietoon asetuksen 'withCredentials', lisää apufunktio myös tänne.
         </p>
         <pre>
 const makeHeader = () =&gt; {
@@ -61,6 +62,20 @@ const logout = () =&gt; {
     const request = axios.post(logoutURL, null, makeHeader())
     return request.then(response =&gt; response.data)
 }  
+</pre>
+        <p>Login ja register toimivat samaan tapaan kuin ennen mutta lisätään makeHeader-funktion avulla header-tieto:
+        </p>
+        <pre>
+  const login = (userdata) =&gt; {
+    const request = axios.post(loginURL, userdata, makeHeader())
+    return request.then(response =&gt; response.data)
+}  
+</pre>
+        <pre>
+const register = (userdata) =&gt; {
+  const request = axios.post(registerURL, userdata, makeHeader())
+  return request.then(response =&gt; response.data)
+}
 </pre>
         <h4>App.jsx</h4>
         <p>Se onko käyttäjä kirjautunut käsitellään me-toiminnon kautta</p>
@@ -99,6 +114,8 @@ const logoutHandler = () =&gt; {
 }  
 </pre>
         <h3>Julkaisu cPanelin avulla</h3>
+        <hr>
+        <h3>Julkaisu cPanelin avulla</h3>
 
         <h4>Yleistä</h4>
         <ul>
@@ -110,6 +127,47 @@ const logoutHandler = () =&gt; {
         <h4>.htaccess</h4>
         <p>Juurihakemiston .htaccess</p>
         <pre>
+=======
+<hr>
+<h3>Julkaisu cPanelin avulla</h3>
+
+<h4>Alidomain</h4>
+<ul>
+  <li>kirjaudu cPaneliin ja avaa kohta Domains</li>
+  <li>valitse Create a new Domain ja luo alidomain (esim. notes.tunnus.treok.io). </li>
+  <li>Aseta <i>Force HTTPS Redirect</i> päälle, voit tehdä tämän hetken päästä kun alidomainissa sisältöä.
+  <p><img src="../kuvat/cpanel_domains_notes.png" alt=""></p></li>
+ 
+</ul>
+<h4>React build</h4>
+<ul>
+  <li>Varmista oikeat polut tätä ennen service-tiedostoissasi.
+<p>Esimerkiksi:</p>
+<pre>const baseUrl = 'https://notes.tunnus.treok.io/api/notes'</pre>
+
+        </li>
+        <li>Tee build React-projektistasi:
+          <pre>npm run build</pre>
+        </li>
+        <li>Backendissä muuta <i>respond</i>-funktiossa allowedOrigins-muuttujan arvo.</li>
+        <li>Siirrä alidomainin juurihakemistoon buildin tiedostot.
+          <ul>
+            <li>
+              tee paikallisista tiedostoista zip-tiedosto
+            </li>
+            <li>siirrä tiedostot cPanelin alidomain juurihakemistoon</li>
+            <li>pura zip-tiedosto (Extract)</li>
+          </ul>
+
+        </li>
+        <li>Tee alikansio <i>/api</i> ja siirrä tänne puolestaan backendin PHP-tiedostot.</li>
+        </ul>
+        <h4>.htaccess</h4>
+        <p>Ota näkyviin piilotetut tiedostot. </p>
+        <p><img src="../kuvat/cpanel_domain_hidden_files.png" alt=""></p>
+        <p>Tämän jälkeen lisää juurihakemiston .htaccess</p>
+        <pre>
+>>>>>>> b0d9026c032b967b94df0671a9b88925ea820d1a
 RewriteEngine On
 
 # Älä koske API-pyyntöihin

@@ -1,0 +1,105 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_ok.css">
+
+    <title>Fullstack-kehitys</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+            <header>
+                <h1>Fullstack-kehitys</h1>
+            </header>
+        </a>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+
+                    <h1>Tietovisa</h1>
+                    <h2>Yleistä</h2>
+                    <h3>Tehtävä ja tietokanta</h3>
+                    <p>Tehtävänä on suunnitella ja toteuttaa yksinkertainen tietovisa. Pelissä on erilaisia tietovisoja
+                        jotka sisältävät monivalintakysymyksiä. Pelattuaan pelin pelaajkaltan pyydetään nimimerkki ja
+                        tulos voidaan tallentaa tietokantaan.
+                    </p>
+                    <p><img src="../kuvat/db_structure.png" alt="Tietokannan rakenne"></p>
+                    <p>Voit käyttää tietokannan pohjana <a href="react_quiz.sql">react_quiz.sql</a>-tiedostoa.
+                        Tietokantaa voi laajentaa tarpeen mukaan (mm. käyttäjät).</p>
+
+                    <h3>Ryhmätyöskentely</h3>
+                    <p>Käytetään omaa GitHub-repoa jossa ryhmä voi tehdä yhteisen projektin.</p>
+                    <ul>
+                        <li>Tehkää ryhmälle myös projektiseinä ja määritelkää siellä tehtävät</li>
+                        <li>Backlog, In Progress, Done ja Daily -sarakkeet</li>
+                    </ul>
+                    <p>Ryhmässä päätetään tehtävät ja hallitaan niitä projektiseinän avulla.</p>
+                    <p>Tehdään oma branch joko käyttäjälle tai tehtävälle. Kun tietty osatehtävä valmis se tuodaan
+                        main-branchin osaksi Pull Request-toiminnon avulla.</p>
+                    <hr>
+                    <h2>Toiminnot</h2>
+                    <h3>Käyttäjät</h3>
+                    <p>Tietokannassa ei ole vielä käyttäjiä. Tarkoitus on että käyttäjät voivat tehdä sisältöä
+                        tietovisasovellukselle ja toimia omien tietovisojensa ylläpitäjinä. Lisää quiz-taululle relaatio
+                        käyttäjä-tauluun.</p>
+                    <ul>
+                        <li>Kirjautumaton käyttäjä voi pelata peliä ja nähdä parhaat tulokset.</li>
+                        <li>Kirjautunut käyttäjä pystyy
+                            <ul>
+                                <li>lisäämään uusia tietovisoja, poistamaan olemassa olevia ja muokkaamaan tietovisan
+                                    nimeä.</li>
+                                <li>lisäämään tietovisalle uusia kysymyksiä tai poistamaan olemassa olevia.</li>
+                                <li>tyhjentämään valitun tietovisan high score-taulukon.</li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <p>Tee taulu tietokannan käyttäjälle (esim. admin tai user) ja mieti sopivat kentät.</p>
+                    <h3>Etusivu</h3>
+                    <p>
+                        Etusivulla näytetään esittelyteksti ja painike Aloita peli joka ohjaa sivulle Pelin
+                        aloittaminen. Etusivulla esitetään tietovisojen parhaat tulokset taulukossa. Tulokset
+                        ryhmitellään eri kestojen (lyhyt, normaali, pitkä) mukaan.
+                    </p>
+                    <h3>Pelin aloittaminen</h3>
+                    <p>
+                        Pelin aloitus tapahtuu valitsemalla haluttu tietovisa alasvetovalikosta. Käyttäjä valitsee myös
+                        pelin pituuden (lyhyt - 5 kysymystä, normaali - 10 kysymystä tai pitkä - 15 kysymystä). Peli
+                        käynnistyy painamalla 'Pelaamaan!' -painiketta.
+                    </p>
+                    <h3>
+                        Tietovisan pelaaminen
+                    </h3>
+                    <p>Tietovisan aikana näytetään haluttu määrä kysymyksiä yksitellen. Jos pelaaja vastaa oikein niin
+                        näytetään lyhyt animaatio. Mikäli pelaaja vastaa väärin niin oikea vastaus animoidaan ennen
+                        siirtymistä seuraavaan kysymykseen.
+                    </p>
+                    <p>Pelin päätteeksi näytetään tulos ja pyydetään nimimerkkiä tallennettavaksi High score-taulukkoa
+                        varten. Pelaaja voi myös valita 'Älä tallenna tulosta' mikäli hän ei halua tulostaan talteen.
+                    </p>
+                    <h3>High score-taulukko
+                    </h3>
+                    <p>Kun peli päättyy näytetään parhaat tulokset taulukossa. Pelaajan tulos korostetaan tulosjoukossa.
+                        Jos tuloksia on yli 20 niin näytetään sivutus (20 tulosta / sivu).
+                    </p>
+                    <p>Mieti sopiva tapa esittää taulukon tiedot ja suodattaminen eri kestojen mukaisesti.</p>
+                    <p>
+                        Peliä pelataan pääsääntöisesti mobiililaitteella joten sovelluksen tulee huomioida
+                        responsiivisuus (Google Chrome Dimensions: iPhone SE).
+                    </p>
+                </article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2026</p>
+    </footer>
+</body>
+
+</html>

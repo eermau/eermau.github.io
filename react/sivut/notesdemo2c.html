@@ -20,48 +20,55 @@
 
 
 
-            <article class="">
+            <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a> | <a
+                href="notesdemo2c.html">middlewares</a>
+            <h2>Notes-demo 2 (3/3)</h2>
+            <h3>Middleware backend</h3>
+            <p>Viimeinen versio backendistä notesdemolle jossa otettu käyttöön middlewaret.</p>
+            <p><img src="../kuvat/notesdemo_mwback.png" alt=""></p>
+            <p>Asenna ensimmäiseksi express</p>
+            <pre>npx express-generator --no-view --git</pre>
+            <p>Asenna tämän jälkeen tarvittavat kirjastot</p>
+            <pre>
+npm install
+npm install cors --save
+npm install nodemon --save-dev
+npm install dotenv --save
+npm install mysql2 --save
+npm install knex --save
+npm install bcryptjs --save
+npm install jsonwebtoken --save
+npm install ajv --</pre>
+            <p>
+                Varmista, että .gitignore sisältää ainakin seuraavat tiedostot:</p>
+            <pre>
+node_modules/
+*.env
+build/</pre>
 
-                <h2>Keikkainfo</h2>
-                <h3>Yleistä</h3>
+            <p>Lisää .env:</p>
+            <h5>.env</h5>
+            <pre>
+PORT=3001
+DB_USER=root
+DB_PASS=mypass123
+DB_HOST=localhost
+DB_PORT=3306
+DB_TYPE=mysql2
+DB_DATABASE=notesdemo_db
+SECRET=tosisalainensalasanainen
 
-                npx express-generator --no-view --git
+DEBUG=notesmiddleware:*
+</pre>
 
-                npm install
-                npm install cors --save
-                npm install nodemon --save-dev
-                npm install dotenv --save
-                npm install mysql2 --save
-                npm install knex --save
-                npm install bcryptjs --save
-                npm install jsonwebtoken --save
-                npm install ajv --save
-
-                Varmista, että .gitignore sisältää ainakin seuraavat tiedostot:
-                node_modules/
-                *.env
-                build/
-
-
-
-                PORT=3001
-                DB_USER=root
-                DB_PASS=mypass123
-                DB_HOST=localhost
-                DB_PORT=3306
-                DB_TYPE=mysql2
-                DB_DATABASE=notesdemo_db
-                SECRET=tosisalainensalasanainen
-
-                DEBUG=notesmiddleware:*
-
-
-                require('dotenv').config()
-
-                Lisää kansio utils ja sinne tiedosto config.js
-
-                let PORT = process.env.PORT
-                let SECRET = process.env.SECRET
+            <p>Ota dotenv käyttöön app.js-tiedostossa:</p>
+            <pre>require('dotenv').config()</pre>
+            <p>
+                Lisää kansio utils ja sinne tiedosto config.</p>
+            <h5>config.js</h5>
+            <pre>
+let PORT = process.env.PORT
+let SECRET = process.env.SECRET
 
                 let DATABASE_OPTIONS = {
                 client: process.env.DB_TYPE,
@@ -73,32 +80,34 @@
                 }
                 }
 
-                module.exports = {
-                DATABASE_OPTIONS,
-                PORT,
-                SECRET
-                }
+module.exports = {
+  DATABASE_OPTIONS,
+  PORT,
+  SECRET
+}
+</pre>
+            <p>Lisää scripts tiedostoon package.json:</p>
+            <pre>"startdev": "nodemon ./bin/www"  </pre>
 
-
-                "startdev": "nodemon ./bin/www"
-
-                npm run startdev
-
-                Lisää kansioon utils tiedosto dbConnection.js
-
-                const config = require('./config.js')
-                const options = config.DATABASE_OPTIONS;
-                const db = require('knex')(options)
-                module.exports = db;
-
-
-
-                login.js
-
-                var express = require('express');
-                var router = express.Router();
-                const knex = require('../utils/dbConnection');
-                const config = require('../utils/config.js')
+            <p>Käynnistä backend:</p>
+            <pre>npm run startdev</pre>
+            <p>
+                Lisää kansioon utils tiedosto dbConnection.</p>
+            <h5>dbConnection.js</h5>
+            <pre>
+const config = require('./config.js')
+const options = config.DATABASE_OPTIONS;
+const db = require('knex')(options)
+module.exports = db;
+</pre>
+            <h3>Routers</h3>
+            <h5>
+                login.js</h5>
+            <pre>
+var express = require('express');
+var router = express.Router();
+const knex = require('../utils/dbConnection');
+const config = require('../utils/config.js')
 
                 const bcrypt = require('bcryptjs')
                 const jwt = require('jsonwebtoken')
@@ -144,15 +153,15 @@
                 })
                 })
 
-                module.exports = router;
+module.exports = router;
+</pre>
+            <h5>
+                register.js</h5>
 
-
-                register.js
-
-
-                var express = require('express');
-                var router = express.Router();
-                const knex = require('../utils/dbConnection');
+            <pre>
+var express = require('express');
+var router = express.Router();
+const knex = require('../utils/dbConnection');
 
                 const bcrypt = require('bcryptjs')
 
@@ -182,12 +191,14 @@
                 })
                 })
 
-                module.exports = router;
-
-
-                var express = require('express');
-                var router = express.Router();
-                const knex = require('../utils/dbConnection');
+module.exports = router;
+</pre>
+            <p>Reititys notes-tiedoille</p>
+            <h5>notesRouter.js</h5>
+            <pre>
+var express = require('express');
+var router = express.Router();
+const knex = require('../utils/dbConnection');
 
                 router.get('/', (req, res, next) =&gt; {
                 const decodedTokenId = res.locals.auth.userId;
@@ -277,13 +288,15 @@
 
                 })
 
-                module.exports = router;
-
-
-                Lisää kansio middleware ja sinne tiedosto auth.js
-
-                const jwt = require('jsonwebtoken')
-                const config = require('../utils/config')
+module.exports = router;
+</pre>
+            <h3>Middlewares</h3>
+            <h5>auth.js</h5>
+            <p>
+                Lisää kansio middleware ja sinne tiedosto auth.js</p>
+            <pre>
+const jwt = require('jsonwebtoken')
+const config = require('../utils/config')
 
                 const getTokenFrom = req =&gt; {
                 const authorization = req.get('authorization');
@@ -322,28 +335,34 @@
                 next();
                 }
 
-                module.exports = isAuthenticated;
-
-                Ota käyttöön
-
-                var isAuthenticated = require('./middleware/auth');
-
-                Muuta routerit
-
-                app.use('/', indexRouter);
-                app.use('/notes', isAuthenticated, notesRouter);
-                app.use('/login', loginRouter);
-                app.use('/register', registerRouter);
-
+module.exports = isAuthenticated;
+</pre>
+            <p>
+                Ota käyttöön app.js-tiedostolla</p>
+            <pre>
+var isAuthenticated = require('./middleware/auth');
+</pre>
+            <p>
+                Muuta routerit</p>
+            <pre>
+app.use('/', indexRouter);
+app.use('/notes', isAuthenticated, notesRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+</pre>
+            <p>
                 Lisää cors
-
-                const cors = require('cors')
-                app.use(cors())
-
-                Lisää middleware-kansioon tiedosto validate.js
-
-                const Ajv = require('ajv');
-                var ajv = new Ajv(); // options can be passed, e.g. {allErrors: true}
+            </p>
+            <pre>
+const cors = require('cors')
+app.use(cors())
+</pre>
+            <h4>Tietojen validointi scheman avulla</h4>
+            <p>Lisää middleware-kansioon tiedosto validate.js</p>
+            <h5>validate.js</h5>
+            <pre>
+const Ajv = require('ajv');
+var ajv = new Ajv(); // options can be passed, e.g. {allErrors: true}
 
                 const validateSchema = (schema) =&gt; {
                 return function (req, res, next) {
@@ -367,87 +386,91 @@
                 }
                 }
 
-                module.exports = validateSchema;
+module.exports = validateSchema;
+</pre>
+            <p>
+                Tee uusi kansio schemas ja luo sinne tiedosto userSchema.json</p>
+            <h5>userSchema.json</h5>
+            <pre>
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "user",
+    "type": "object",
+    "properties": {
+        "email": {
+            "type": "string",
+            "pattern": "^\\S+@\\S+\\.\\S+$",
+            "minLength": 5,
+            "maxLength": 50
+        },
+        "username": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 32
+        },
+        "password": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 32
+        },
+        "phonenumber": {
+            "type": "string",
+            "pattern": "\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\\d{1,14}$",
+            "minLength": 8,
+            "maxLength": 32
+        }
+    },
+    "required": [
+        "username",
+        "password"
+    ]
+}
+</pre>
+            <h5>
+                notesSchema.json</h5>
+            <pre>
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "note",
+    "type": "object",
+    "properties": {
+        "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+        },
+        "date": {
+            "type": "string",
+            "pattern": "\\b[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z\\b"
+        },
+        "important": {
+            "type": "boolean"
+        },
+        "user_id": {
+            "type": "integer"
+        }
+    },
+    "required": [
+        "content",
+        "date",
+        "important"
+    ]
+}
+</pre>
 
+            <p>Ota käyttöön app.js-tiedostolla</p>
+            <pre>
+var userSchema = require('./schemas/userSchema.json');
+var notesSchema = require('./schemas/notesSchema.json');
+var validateSchema = require('./middleware/validate');
 
-                Tee uusi kansio schemas ja luo sinne tiedosto userSchema.json
-
-                {
-                "$schema": "http://json-schema.org/draft-07/schema#",
-                "title": "user",
-                "type": "object",
-                "properties": {
-                "email": {
-                "type": "string",
-                "pattern": "^\\S+@\\S+\\.\\S+$",
-                "minLength": 5,
-                "maxLength": 50
-                },
-                "username": {
-                "type": "string",
-                "minLength": 6,
-                "maxLength": 32
-                },
-                "password": {
-                "type": "string",
-                "minLength": 8,
-                "maxLength": 32
-                },
-                "phonenumber": {
-                "type": "string",
-                "pattern":
-                "\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\\d{1,14}$",
-                "minLength": 8,
-                "maxLength": 32
-                }
-                },
-                "required": [
-                "username",
-                "password"
-                ]
-                }
-
-                notesSchema.json
-
-                {
-                "$schema": "http://json-schema.org/draft-07/schema#",
-                "title": "note",
-                "type": "object",
-                "properties": {
-                "content": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 500
-                },
-                "date": {
-                "type": "string",
-                "pattern": "\\b[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z\\b"
-                },
-                "important": {
-                "type": "boolean"
-                },
-                "user_id": {
-                "type": "integer"
-                }
-                },
-                "required": [
-                "content",
-                "date",
-                "important"
-                ]
-                }
-
-
-                var userSchema = require('./schemas/userSchema.json');
-                var notesSchema = require('./schemas/notesSchema.json');
-                var validateSchema = require('./middleware/validate');
-
-                app.use('/register', validateSchema(userSchema), registerRouter);
-                app.use('/login', loginRouter);
-                app.use('/notes', isAuthenticated, validateSchema(notesSchema), notesRouter);
-
+app.use('/register', validateSchema(userSchema), registerRouter);
+app.use('/login', loginRouter);
+app.use('/notes', isAuthenticated, validateSchema(notesSchema), notesRouter);
+</pre>
             </article>
         </div>
+    </div>
     </div>
     </div>
     <footer>
