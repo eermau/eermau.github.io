@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="../../style/css/style.css">
-  
+
   <title>Demo 10: PDO</title>
 </head>
 
@@ -15,45 +16,47 @@
     </header>
     <div id="container">
 
-      <div id="main" role="main">
-        <div class="download-bar">
-          <div class="inner">
 
-            
-          </div>
-          
+      <div class="download-bar">
+        <div class="inner">
+
+
         </div>
-        <article class="markdown-body">
 
-          <h2>Demo 10</h2>
-          <p>PDO: tietokantayhteys</p>
+      </div>
+      <article class="">
 
-          <h3>Tietokanta</h3>
+        <h2>Demo 10</h2>
+        <p>PDO: tietokantayhteys</p>
 
-          <p>Lisää samariumille phpmyadminiin taulu ja tiedot lukemalla sql-tiedosto <a
-              href="./test_games.sql">test_games.sql</a>.
+        <h3>Tietokanta</h3>
 
-
-<ul>
-  <li>Kirjaudu cPaneliin (https://cpanel.tunnus.treok.io/) ja avaa MySQL Databases
-  </li>
-    <li>Tee uusi tietokanta nimeltä tunnus_sasp
-  </li>
-    <li>Tämän jälkeen tee uusi käyttäjä, tunnus_sasp, luo salasana Password Generatorin avulla, kopioi salasana itsellesi talteen!
-  </li>
-    <li>Lisää vielä tekemäsi käyttäjä tietokannalle (Add User to Database), voit antaa kaikki oikeudet (ALL PRIVILEGES).
-  </li>
-    <li>Avaa seuraavaksi cPanelin työkaluista phpMyAdmin, tuo sql-tiedosto tietokantaasi.</li>
-</ul>
+        <p>Lisää samariumille phpmyadminiin taulu ja tiedot lukemalla sql-tiedosto <a
+            href="./test_games.sql">test_games.sql</a>.
 
 
-          <h3>dbfunctions.php</h3>
+        <ul>
+          <li>Kirjaudu cPaneliin (https://cpanel.tunnus.treok.io/) ja avaa MySQL Databases
+          </li>
+          <li>Tee uusi tietokanta nimeltä tunnus_sasp
+          </li>
+          <li>Tämän jälkeen tee uusi käyttäjä, tunnus_sasp, luo salasana Password Generatorin avulla, kopioi salasana
+            itsellesi talteen!
+          </li>
+          <li>Lisää vielä tekemäsi käyttäjä tietokannalle (Add User to Database), voit antaa kaikki oikeudet (ALL
+            PRIVILEGES).
+          </li>
+          <li>Avaa seuraavaksi cPanelin työkaluista phpMyAdmin, tuo sql-tiedosto tietokantaasi.</li>
+        </ul>
 
-          <p>Tee aluksi itsellesi uusi tiedosto dbfunctions10.php demot-kansioosi
 
-            . Tehdään aluksi funktio jonka avulla voidaan ottaa yhteys tietokantaan:</p>
+        <h3>dbfunctions.php</h3>
 
-<pre>/**
+        <p>Tee aluksi itsellesi uusi tiedosto dbfunctions10.php demot-kansioosi
+
+          . Tehdään aluksi funktio jonka avulla voidaan ottaa yhteys tietokantaan:</p>
+
+        <pre>/**
  * Ottaa yhteyden tietokantaan, palauttaa 
  * pdo-olion.
  * 13.2.2023/EM
@@ -78,22 +81,22 @@ function connect() {
 }
 </pre>
 
-<h3>demo10.php</h3>
+        <h3>demo10.php</h3>
 
-<p>Kokeillaan tietokantayhteyttä
-</p>
-<pre>
+        <p>Kokeillaan tietokantayhteyttä
+        </p>
+        <pre>
   require "./dbfunctions10.php";
 
   $pdo = connect();  
 </pre>
 
-<h3>dbfunctions10.php</h3>
+        <h3>dbfunctions10.php</h3>
 
 
-<p>Funktio joka hakee kaikki pelit
-</p>
-<pre>
+        <p>Funktio joka hakee kaikki pelit
+        </p>
+        <pre>
   /**
   * Hakee kaikki pelit taulusta test_games
   */
@@ -105,15 +108,15 @@ function connect() {
      return $games;
  }  
 </pre>
-<p>Voit testata tätä taas demossasi:</p>
-<pre>
+        <p>Voit testata tätä taas demossasi:</p>
+        <pre>
   //$pdo = connect();
   $games = getAllGames();
   var_dump($games);  
 </pre>
-<p>Funktio joka poistaa pelin id:n perusteella
-</p>
-<pre>
+        <p>Funktio joka poistaa pelin id:n perusteella
+        </p>
+        <pre>
   /**
   * Poistaa pelin jonka gameid on $id
   */
@@ -126,9 +129,9 @@ function connect() {
  }  
 </pre>
 
-<p>Funktio joka hakee pelin id:n perusteella
-</p>
-<pre>
+        <p>Funktio joka hakee pelin id:n perusteella
+        </p>
+        <pre>
   /**
   * Palauttaa tietyn pelin
   */
@@ -142,10 +145,10 @@ function connect() {
  }  
 </pre>
 
-<p>Funktio joka lisää pelin
-</p>
+        <p>Funktio joka lisää pelin
+        </p>
 
-<pre>
+        <pre>
   function insertNewGame($name, $company, $release) {
     $pdo = connect();
     $sql = "INSERT INTO test_games (`name`, company, `release`) VALUES (?, ?, ?)";
@@ -155,9 +158,9 @@ function connect() {
 }
 </pre>
 
-<p>Funktio joka muokkaa tietyn id:n peliä 
-</p>
-<pre>
+        <p>Funktio joka muokkaa tietyn id:n peliä
+        </p>
+        <pre>
   function updateGame($name, $company, $release, $id) {
     $pdo = connect();
     $sql = "UPDATE test_games SET `name`=?, company=?, `release`=? WHERE gameid=?";
@@ -167,20 +170,20 @@ function connect() {
 }  
 </pre>
 
-<h3>demo10.php</h3>
-<p>Hae funktion avulla pelit ja näytä ne taulukossa. Tulokset kannattaa käydä foreach-silmukassa läpi.</p>
-<p><img src="../kuvat/demo10_1.png" alt="demo10"></p>
+        <h3>demo10.php</h3>
+        <p>Hae funktion avulla pelit ja näytä ne taulukossa. Tulokset kannattaa käydä foreach-silmukassa läpi.</p>
+        <p><img src="../kuvat/demo10_1.png" alt="demo10"></p>
 
 
-<h4>Poistaminen</h4>
-<p>Lisää linkki jolla kutsut samaa sivua ja lähetät parametrina deletedid:n.</p>
+        <h4>Poistaminen</h4>
+        <p>Lisää linkki jolla kutsut samaa sivua ja lähetät parametrina deletedid:n.</p>
 
-<pre>
+        <pre>
   echo "&lt;td&gt;&lt;a href='./demo10.php?deletedid=" . $game["gameid"] . "'&gt;poista&lt;/a&gt;&lt;/td&gt;";  
 </pre>
 
-<p>Lisää sivun alkuun tarkistus:</p>
-<pre>
+        <p>Lisää sivun alkuun tarkistus:</p>
+        <pre>
 if (isset($_GET["deletedid"])) {
   $id = $_GET["deletedid"];
   $ok = deleteGame($id);
@@ -188,41 +191,43 @@ if (isset($_GET["deletedid"])) {
   header("Location: ./demo10.php");
 }  
 </pre>
-<p>Lataamalla sivu uudestaan estetään refresh-ongelma missä aina uudelleen päivitettäessä sivua tämä funktio suoritettaisiin uudestaan.</p>
-<h4>Lisääminen</h4>
+        <p>Lataamalla sivu uudestaan estetään refresh-ongelma missä aina uudelleen päivitettäessä sivua tämä funktio
+          suoritettaisiin uudestaan.</p>
+        <h4>Lisääminen</h4>
 
-<p>Lisää linkki sivulle joka johtaa toiselle sivulle, demo10form.php:lle.</p>
+        <p>Lisää linkki sivulle joka johtaa toiselle sivulle, demo10form.php:lle.</p>
 
-<pre>&lt;a href='./demo10form.php'&gt;Lisää uusi&lt;/a&gt;</pre>
+        <pre>&lt;a href='./demo10form.php'&gt;Lisää uusi&lt;/a&gt;</pre>
 
-<h5>Lisää peli</h5>
-<form action="" method="POST">
-    <input type="hidden" name="mode" value="">
-    <label for="name">nimi</label><br>
-    <input type="text" name="name" id=""><br>
-    <label for="company">yritys</label><br>
-    <input type="text" name="company" id=""><br>
-    <label for="release">vuosi</label><br>
-    <input type="number" name="release" id=""><br>
-    <input type="submit" value="Tallenna">
-</form>
-  
+        <h5>Lisää peli</h5>
+        <form action="" method="POST">
+          <input type="hidden" name="mode" value="">
+          <label for="name">nimi</label><br>
+          <input type="text" name="name" id=""><br>
+          <label for="company">yritys</label><br>
+          <input type="text" name="company" id=""><br>
+          <label for="release">vuosi</label><br>
+          <input type="number" name="release" id=""><br>
+          <input type="submit" value="Tallenna">
+        </form>
 
-<h4>Muokkaaminen</h4>
-<p>Lisää linkki taulukolle joka johtaa form-sivulle.
 
-<pre>
+        <h4>Muokkaaminen</h4>
+        <p>Lisää linkki taulukolle joka johtaa form-sivulle.
+
+        <pre>
 echo "&lt;td&gt;&lt;a href='./demo10form.php?editedid=" . $game["gameid"] . "'&gt;muokkaa&lt;/a&gt;&lt;/td&gt;";  
 </pre>
 
-</p>
-<p>Tunnilla tehty esimerkki form-sivusta:
-<a href="demo10form.txt">demo10form.php</a></p>
-</article>
-      </div>
+        </p>
+        <p>Tunnilla tehty esimerkki form-sivusta:
+          <a href="demo10form.txt">demo10form.php</a>
+        </p>
+      </article>
     </div>
   </div>
-  <div class="current-section">
+  </div>
+  <div class="footer">
     kevät 2023
   </div>
 </body>

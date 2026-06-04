@@ -1,34 +1,36 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../../style/css/style_ok.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="../../style/css/style_ok.css">
 
-    <title>Fullstack-kehitys</title>
+  <title>Fullstack-kehitys</title>
 </head>
 
 <body>
-    <div class="wrapper">
-        <a href="../index.html">
-        <header>
-            <h1>Fullstack-kehitys</h1>
-        </header>
-        </a>
-        <div id="container">
+  <div class="wrapper">
+    <a href="../index.html">
+      <header>
+        <h1>Fullstack-kehitys</h1>
+      </header>
+    </a>
+    <div id="container">
+      <article class="">
 
-            <div id="main" role="main">
+        <h2>Migrations</h2>
+        <h3>Yleistä</h3>
+        <p>Migraatiotyökalulla voidaan toteuttaa tietokanta siten, että muutokset ovat hallittuja ja ne on helppo
+          toistaa uudestaan. Tällä kurssilla käytämme <i>Knex</i>-työkalua migraatioiden tekemisessä
+          <i>MySQL</i>-tietokantaan.
+        </p>
 
-                <article class="markdown-body">
+        <h3>Docker</h3>
 
-                    <h2>Migrations</h2>
-                    <h3>Yleistä</h3>
-<p>Migraatiotyökalulla voidaan toteuttaa tietokanta siten, että muutokset ovat hallittuja ja ne on helppo toistaa uudestaan. Tällä kurssilla käytämme <i>Knex</i>-työkalua migraatioiden tekemisessä <i>MySQL</i>-tietokantaan.</p>
-
-<h3>Docker</h3>
-
-<p>Tehdään paikallinen Docker-ympäristö tietokannalle. Tee itsellesi alikansio <i>docker</i> ja tallenna sinne tiedosto <i>docker-compose.yml</i></p>
-<pre>
+        <p>Tehdään paikallinen Docker-ympäristö tietokannalle. Tee itsellesi alikansio <i>docker</i> ja tallenna sinne
+          tiedosto <i>docker-compose.yml</i></p>
+        <pre>
 version: '3.1'
 
 services:
@@ -46,21 +48,23 @@ services:
      ports:
        - 8081:80    
 </pre>
-<p>Avaa kansiossa komentokehote (terminal) ja suorita komento</p>
-<pre> docker-compose up -d</pre>
-<p>Näet phpMyAdmin-sivun osoitteessa <a href="http://localhost:8081">http://localhost:8081</a>. Käyttäjätunnus on <i>root</i> ja salasana yllä määritelty <i>mypass123</i>.</p>
-<p>Lisää phpMyAdminin avulla itsellesi tietokanta <i>notesdeno_db</i>.</p>
+        <p>Avaa kansiossa komentokehote (terminal) ja suorita komento</p>
+        <pre> docker-compose up -d</pre>
+        <p>Näet phpMyAdmin-sivun osoitteessa <a href="http://localhost:8081">http://localhost:8081</a>. Käyttäjätunnus
+          on <i>root</i> ja salasana yllä määritelty <i>mypass123</i>.</p>
+        <p>Lisää phpMyAdminin avulla itsellesi tietokanta <i>notesdeno_db</i>.</p>
 
-<h3>Knex</h3>
-<p>Tehdään tietokannan migraatiot projektin alle. Lisää notesdemo-projektille alikansio <i>database</i>. Avaa komentokehote tässä kansiossa.</p>
-<pre>
+        <h3>Knex</h3>
+        <p>Tehdään tietokannan migraatiot projektin alle. Lisää notesdemo-projektille alikansio <i>database</i>. Avaa
+          komentokehote tässä kansiossa.</p>
+        <pre>
 npm init
 npm install knex --save    
 </pre>
-<p>Tehdään seuraavaksi <i>knexfile.js</i> suorittamalla komento</p>
-<pre>npx knex init</pre>
-<p>Korvataan oletustiedot käyttämällämme Docker-ympäristön tiedoilla</p>
-<pre>
+        <p>Tehdään seuraavaksi <i>knexfile.js</i> suorittamalla komento</p>
+        <pre>npx knex init</pre>
+        <p>Korvataan oletustiedot käyttämällämme Docker-ympäristön tiedoilla</p>
+        <pre>
 module.exports = {
    development: {
       client: 'mysql2',
@@ -73,15 +77,15 @@ module.exports = {
     }
 }    
 </pre>
-<p>Asenna <i>mysql2</i></p>
-<pre>npm install mysql2 --save</pre>
+        <p>Asenna <i>mysql2</i></p>
+        <pre>npm install mysql2 --save</pre>
 
-<h4>Taulujen luonti</h4>
-<p>Luo uusi migraatio-tiedosto suorittamalla komento</p>
-<pre>npx knex migrate:make create_notesdb</pre>
+        <h4>Taulujen luonti</h4>
+        <p>Luo uusi migraatio-tiedosto suorittamalla komento</p>
+        <pre>npx knex migrate:make create_notesdb</pre>
 
-<p>Määritellään aluksi <i>users</i>-taulu:</p>
-<pre>
+        <p>Määritellään aluksi <i>users</i>-taulu:</p>
+        <pre>
 exports.up = function(knex, Promise) {
     return knex.schema
     .createTable('users', t =&gt; {
@@ -98,14 +102,16 @@ exports.up = function(knex, Promise) {
     .dropTableIfExists('users')
   };    
 </pre>
-<p>Kokeile ajaa migraatio:</p>
-<pre>npx knex migrate:latest</pre>
-<p>Tietokannassa tulisi nyt olla taulu users sekä migraatioille luodut taulut.</p>
-<p><img src="../kuvat/notesdemo_7.png" alt=""></p>
-<p>Voit peruuttaa muutokset suorittamalla komennon</p>
-<pre>npx knex migrate:rollback</pre>
-<p>Lisätään mukaan toinen taulu <i>notes</i>. Taulussa <i>notes</i> on luotu relaatio <i>users</i>-tauluun. Taulujen luonti ja poistaminen tulee tehdä oikeassa järjestyksessä. Koska notes tarvitsee users-taulua tulee notes tehdä ensin. Samoin ensin tulee poistaa notes ja sitten vasta users.</p>
-<pre>
+        <p>Kokeile ajaa migraatio:</p>
+        <pre>npx knex migrate:latest</pre>
+        <p>Tietokannassa tulisi nyt olla taulu users sekä migraatioille luodut taulut.</p>
+        <p><img src="../kuvat/notesdemo_7.png" alt=""></p>
+        <p>Voit peruuttaa muutokset suorittamalla komennon</p>
+        <pre>npx knex migrate:rollback</pre>
+        <p>Lisätään mukaan toinen taulu <i>notes</i>. Taulussa <i>notes</i> on luotu relaatio <i>users</i>-tauluun.
+          Taulujen luonti ja poistaminen tulee tehdä oikeassa järjestyksessä. Koska notes tarvitsee users-taulua tulee
+          notes tehdä ensin. Samoin ensin tulee poistaa notes ja sitten vasta users.</p>
+        <pre>
 exports.up = function(knex, Promise) {
   return knex.schema
   .createTable('users', t=&gt; {
@@ -132,12 +138,12 @@ exports.down = function(knex) {
 };    
 </pre>
 
-<h4>Seeds</h4>
-<p>Tietokantaan voidaan lisätä tietoja ajamalla sinne <i>seed</i>-tiedostot. Luodaan uusi tyhjä tiedosto:</p>
+        <h4>Seeds</h4>
+        <p>Tietokantaan voidaan lisätä tietoja ajamalla sinne <i>seed</i>-tiedostot. Luodaan uusi tyhjä tiedosto:</p>
 
-<pre>npx knex seed:make 01_users</pre>
-<p>Tiedoston sisällöksi tulee kaksi testikäyttäjää</p>
-<pre>
+        <pre>npx knex seed:make 01_users</pre>
+        <p>Tiedoston sisällöksi tulee kaksi testikäyttäjää</p>
+        <pre>
 exports.seed = function(knex, Promise) {
   return knex('users').del()
     .then(function () {
@@ -148,25 +154,27 @@ exports.seed = function(knex, Promise) {
     });
 };
 </pre>
-<p>Kokeile ajaa tiedosto näin:</p>
-<pre>npx knex seed:run</pre>
-<p>Nyt salasanat eivät ole vielä salattu. Asennetaan <i>bcryptjs</i>-kirjasto jonka avulla voidaan korvata "salasana" salatulla merkkijonolla.</p>
+        <p>Kokeile ajaa tiedosto näin:</p>
+        <pre>npx knex seed:run</pre>
+        <p>Nyt salasanat eivät ole vielä salattu. Asennetaan <i>bcryptjs</i>-kirjasto jonka avulla voidaan korvata
+          "salasana" salatulla merkkijonolla.</p>
 
-<pre>
+        <pre>
 npm install bcryptjs --save
 </pre>
-<p>Lisää tiedoston alkuun salaus ja korvaa "salasana" muuttujalla hashedPassword.</p>
-<pre>
+        <p>Lisää tiedoston alkuun salaus ja korvaa "salasana" muuttujalla hashedPassword.</p>
+        <pre>
 const testPassword = "salasana"
 
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
 var hashedpassword = bcrypt.hashSync(testPassword, salt);    
 </pre>
-<p>seed-tiedosto ajetaan näin:</p>
-<pre>npx knex seed:run</pre>
-<p>Lisää toinen tiedosto <i>02_notes</i> ja lisää siellä kolme muistiinpanoa. <i>seed</i>-tiedostot ajetaan aakkosjärjestyksessä, suunnittele nimeäminen tietokannan rakenteen mukaisesti.</p>
-<pre>
+        <p>seed-tiedosto ajetaan näin:</p>
+        <pre>npx knex seed:run</pre>
+        <p>Lisää toinen tiedosto <i>02_notes</i> ja lisää siellä kolme muistiinpanoa. <i>seed</i>-tiedostot ajetaan
+          aakkosjärjestyksessä, suunnittele nimeäminen tietokannan rakenteen mukaisesti.</p>
+        <pre>
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('notes').del()
@@ -199,16 +207,16 @@ exports.seed = function(knex) {
 };    
 </pre>
 
-<p>Jos haluat ajaa vain tietyn <i>seed</i>-tiedoston niin se onnistuu näin:</p>
-<pre>npx knex seed:run --specific=filename.js</pre>
-</article>
-            </div>
-        </div>
+        <p>Jos haluat ajaa vain tietyn <i>seed</i>-tiedoston niin se onnistuu näin:</p>
+        <pre>npx knex seed:run --specific=filename.js</pre>
+      </article>
     </div>
-    <footer>
-        <p>
-            Ohjelmistokehittäjänä toimiminen | 2026</p>
-    </footer>
+  </div>
+  </div>
+  <footer>
+    <p>
+      Ohjelmistokehittäjänä toimiminen | 2026</p>
+  </footer>
 </body>
 
 </html>

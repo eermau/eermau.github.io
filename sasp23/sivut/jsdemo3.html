@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    
+
     <title>Javascript demo 3</title>
 </head>
 
@@ -15,21 +16,26 @@
         </header>
         <div id="container">
 
-            <div id="main" role="main">
-                
-                <article class="markdown-body">
 
 
+            <article class="">
+                <h2>Javascript-demo 3, taulukot</h2>
+                <p>Demon asiat käydään yhdessä tunnilla. Tarkoitus on tehdä yksi tiedosto johon lisätään pikku
+                    hiljaa demon osatehtävät. Aloita uusi tiedosto, tallenna se kansioon demot nimellä jsdemo3.html.
+                    Tee javascript omaan tiedostoon jsdemo3.js. Lähdemateriaalina käytetään <a
+                        href="https://www.w3schools.com/js/" target="_blank">w3schoolin javascript-materiaalia</a>.
+                <h3>1. Henkilöt</h3>
 
-                    <h2>Javascript-demo 3, taulukot</h2>
-                    <p>Demon asiat käydään yhdessä tunnilla. Tarkoitus on tehdä yksi tiedosto johon lisätään pikku hiljaa demon osatehtävät. Aloita uusi tiedosto, tallenna se kansioon demot nimellä jsdemo3.html. Tee javascript omaan tiedostoon jsdemo3.js. Lähdemateriaalina käytetään <a href="https://www.w3schools.com/js/" target="_blank">w3schoolin javascript-materiaalia</a>. 
-                    <h3>1. Henkilöt</h3>
-
-                    <p>Tee html-tiedstoon painike jolla kutsutaan javascript-funktiota listPersons(). Lisää myös div tuloksen syöttämistä varten (id esimerkiksi divPersons).</p>
-                    <pre>persons = ["aku", "hessu", "mikki"];</pre>
-<p>Esittele javascript-tiedostossa taulukko persons. Laadi funktio listPersons joka a.) luo uuden ul-elementin, b.) käy läpi persons-taulukon ja luo jokaisesta henkilöstä li-elementin, c.) lisää ul-elementin divPersons-lapseksi. </p>
-<p>Apua löydät w3schoolin materiaalista (<a href="https://www.w3schools.com/js/js_arrays.asp">taulukot</a>, <a href="https://www.w3schools.com/jsref/met_document_createelement.asp">createElement</a>)</p>
-<!--
+                <p>Tee html-tiedstoon painike jolla kutsutaan javascript-funktiota listPersons(). Lisää myös div
+                    tuloksen syöttämistä varten (id esimerkiksi divPersons).</p>
+                <pre>persons = ["aku", "hessu", "mikki"];</pre>
+                <p>Esittele javascript-tiedostossa taulukko persons. Laadi funktio listPersons joka a.) luo uuden
+                    ul-elementin, b.) käy läpi persons-taulukon ja luo jokaisesta henkilöstä li-elementin, c.) lisää
+                    ul-elementin divPersons-lapseksi. </p>
+                <p>Apua löydät w3schoolin materiaalista (<a
+                        href="https://www.w3schools.com/js/js_arrays.asp">taulukot</a>, <a
+                        href="https://www.w3schools.com/jsref/met_document_createelement.asp">createElement</a>)</p>
+                <!--
     function listPersons() {
     let ul = document.createElement("ul");
     for (let i = 0; i < persons.length; i++) {
@@ -42,24 +48,26 @@
 
 }
 -->
-<h3>2. Lisää henkilö</h3>
-<p>Lisää pieni form jolla voidaan syöttää uusi henkilö taulukkoon persons. </p>
-<form action="">
-    <label for="newPerson">Uusi henkilö</label><br>
-    <input type="text" id="newPerson" /><br>
-    <button type="button" onClick="addPerson()">Lisää</button>
-</form>
-<p>Nappia painamalla kutsutaan funktiota addPerson joka a.) lisää henkilön taulukkoon ja b.) kutsuu listPersons()-funktiota.</p>
+                <h3>2. Lisää henkilö</h3>
+                <p>Lisää pieni form jolla voidaan syöttää uusi henkilö taulukkoon persons. </p>
+                <form action="">
+                    <label for="newPerson">Uusi henkilö</label><br>
+                    <input type="text" id="newPerson" /><br>
+                    <button type="button" onClick="addPerson()">Lisää</button>
+                </form>
+                <p>Nappia painamalla kutsutaan funktiota addPerson joka a.) lisää henkilön taulukkoon ja b.) kutsuu
+                    listPersons()-funktiota.</p>
 
-<h3>3. Sort</h3>
-<p>Lisää painike joka järjestää listan aakkosjärjestykseen.</p>
+                <h3>3. Sort</h3>
+                <p>Lisää painike joka järjestää listan aakkosjärjestykseen.</p>
 
 
-<h3>4. Poistaminen</h3>
+                <h3>4. Poistaminen</h3>
 
-<p>Lisää painike jolla voidaan poistaa henkilö. delete-metodi jättää aukkoja taulukkoon joten käytä splice-metodia. </p>
+                <p>Lisää painike jolla voidaan poistaa henkilö. delete-metodi jättää aukkoja taulukkoon joten käytä
+                    splice-metodia. </p>
 
-<!--
+                <!--
     let ruuat = ["keitto", "heitto", "peippo"]
 
 
@@ -78,9 +86,9 @@ function list() {
     })
 }
 -->
-<h3>5. Olio</h3>
-<p>Tee js-tiedostoon kolme autoa.
-<pre>
+                <h3>5. Olio</h3>
+                <p>Tee js-tiedostoon kolme autoa.
+                <pre>
 let car1 = {
     name: "Toyota Corolla Verso",
     motor: "1.8",
@@ -88,28 +96,28 @@ let car1 = {
     price: 4400
 }    
 </pre>
-Lisää autot taulukkoon:
-<pre>
+                Lisää autot taulukkoon:
+                <pre>
 let cars = [car1, car2, car3];    
 </pre>
-</p>
-<p>Tehdään funktio joka listaa autot html-sivulle. 
-</p>
-<ul>
-    <li>uusi funktio (esimerkiksi listaaAutot())</li>
-    <li>käy läpi taulukko cars</li>
-    <li>tee uusi div-elementti createElement-metodin avulla</li>
-    <li>lisää div-elementille auton nimi otsikolla ja listana auton tiedot.</li>
-</ul>
-<p><img class="image" src="../kuvat/js_cars.png" alt="" /></p>
+                </p>
+                <p>Tehdään funktio joka listaa autot html-sivulle.
+                </p>
+                <ul>
+                    <li>uusi funktio (esimerkiksi listaaAutot())</li>
+                    <li>käy läpi taulukko cars</li>
+                    <li>tee uusi div-elementti createElement-metodin avulla</li>
+                    <li>lisää div-elementille auton nimi otsikolla ja listana auton tiedot.</li>
+                </ul>
+                <p><img class="image" src="../kuvat/js_cars.png" alt="" /></p>
 
-                    </article>
-            </div>
+            </article>
         </div>
     </div>
-    <div class="current-section">
+    </div>
+    <div class="footer">
         kevät 2023
-      </div>
+    </div>
 </body>
 
 </html>

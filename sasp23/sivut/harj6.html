@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    
+
     <title>Harjoitukset 6</title>
 </head>
 
@@ -15,58 +16,64 @@
         </header>
         <div id="container">
 
-            <div id="main" role="main">
-                
-                <article class="markdown-body">
-
-                    <h2>Harjoitukset 6, funktioita</h2>
-
-                    <h3>6.1 Tekstin tulostaminen</h3>
-
-                    <p>Laadi funktio  joka tulostaa divin, jonka sisällä otsikko sekä teksti kappale. Kokeile miten funktio toimii pääohjelmassasi.
-                    </p>
-<pre>function outputDiv()</pre>
-                    
-                    <p>Muuta funktiota siten, että otsikko sekä tekstikappale tulevat parametreinä. Testaa toiminta.
-                    </p>
-                    <pre>function outputDiv($title, $text)</pre>
-                    
-                    <p>Katso mallia <a href="https://www.w3schools.com/php/php_functions.asp" target="_blank">w3schoolin materiaalista</a>.</p>
 
 
-                    <h3>Harjoitus 6.2</h3>
+            <article class="">
 
-                    <p>Tee lomake jolla pyydetään pelaajalta pisteet, pelit ja vahvuusluku. Tee samalle sivulle lomakkeenkäsittelijä jossa luet tiedot muuttujiin ja kutsut funktiota joka laskee pelaajan suoritusluvun.
-                        </p>
-                        <pre>function calculatePerformance($points, $games, $elo)</pre>
+                <h2>Harjoitukset 6, funktioita</h2>
 
-                        <p>Suoritusluku lasketaan seuraavalla kaavalla: 
+                <h3>6.1 Tekstin tulostaminen</h3>
 
-                        </p>
-                        <pre>suoritusluku = (pisteet/pelit-0.5)*400 + vahvuusluku</pre>
-                    <h3>Kirjautuminen 6.3</h3>
-                    <p>Tee lomake jolla käyttäjä syöttää sähköpostitunnuksen ja salasanan, tarkista onko sähköpostiosoite oikeassa muodossa ja onko salasana "tosi sala sana". Anna käyttäjälle sopiva ilmoitus oikeasta tai väärästä syötteestä.</p>
-                    <h3>Funktioita 6.4</h3>
-                    <p>Laadi seuraavat funktiot, kokeile niiden toimintaa sivullasi.</p>
+                <p>Laadi funktio joka tulostaa divin, jonka sisällä otsikko sekä teksti kappale. Kokeile miten
+                    funktio toimii pääohjelmassasi.
+                </p>
+                <pre>function outputDiv()</pre>
 
-                    <ul>
-                        <li>onVokaali($kirjain), tarkistaa, onko lähetetty kirjain vokaali, palauttaa true, jos on<br>
-                            Vihje: tee ensin taulukko, jossa ovat vokaalit. Tutki sen jälkeen silmukalla tai
-                            in_array()-funktion avulla taulukkoa.
-                        </li>
-                        <li>sanitize_name($name)-funktio, joka saa syötteenä käyttäjän kirjoittaman merkkijonon ja
-                            palauttaa sen turvallisessa muodossa. Funktion tulee poistaa alusta ja lopusta tyhjät
-                            merkkijonot (kts. funktiota trim) käyttää filter_var -funktiota sopivalla filtterillä.
-                        </li>
-                    </ul>
+                <p>Muuta funktiota siten, että otsikko sekä tekstikappale tulevat parametreinä. Testaa toiminta.
+                </p>
+                <pre>function outputDiv($title, $text)</pre>
 
-                </article>
-            </div>
+                <p>Katso mallia <a href="https://www.w3schools.com/php/php_functions.asp" target="_blank">w3schoolin
+                        materiaalista</a>.</p>
+
+
+                <h3>Harjoitus 6.2</h3>
+
+                <p>Tee lomake jolla pyydetään pelaajalta pisteet, pelit ja vahvuusluku. Tee samalle sivulle
+                    lomakkeenkäsittelijä jossa luet tiedot muuttujiin ja kutsut funktiota joka laskee pelaajan
+                    suoritusluvun.
+                </p>
+                <pre>function calculatePerformance($points, $games, $elo)</pre>
+
+                <p>Suoritusluku lasketaan seuraavalla kaavalla:
+
+                </p>
+                <pre>suoritusluku = (pisteet/pelit-0.5)*400 + vahvuusluku</pre>
+                <h3>Kirjautuminen 6.3</h3>
+                <p>Tee lomake jolla käyttäjä syöttää sähköpostitunnuksen ja salasanan, tarkista onko
+                    sähköpostiosoite oikeassa muodossa ja onko salasana "tosi sala sana". Anna käyttäjälle sopiva
+                    ilmoitus oikeasta tai väärästä syötteestä.</p>
+                <h3>Funktioita 6.4</h3>
+                <p>Laadi seuraavat funktiot, kokeile niiden toimintaa sivullasi.</p>
+
+                <ul>
+                    <li>onVokaali($kirjain), tarkistaa, onko lähetetty kirjain vokaali, palauttaa true, jos on<br>
+                        Vihje: tee ensin taulukko, jossa ovat vokaalit. Tutki sen jälkeen silmukalla tai
+                        in_array()-funktion avulla taulukkoa.
+                    </li>
+                    <li>sanitize_name($name)-funktio, joka saa syötteenä käyttäjän kirjoittaman merkkijonon ja
+                        palauttaa sen turvallisessa muodossa. Funktion tulee poistaa alusta ja lopusta tyhjät
+                        merkkijonot (kts. funktiota trim) käyttää filter_var -funktiota sopivalla filtterillä.
+                    </li>
+                </ul>
+
+            </article>
         </div>
     </div>
-    <div class="current-section">
+    </div>
+    <div class="footer">
         kevät 2023
-      </div>
+    </div>
 </body>
 
 </html>

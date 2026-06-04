@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    
+
     <title>Javascriptharjoitukset 3</title>
 </head>
 
@@ -15,75 +16,96 @@
         </header>
         <div id="container">
 
-            <div id="main" role="main">
-                
-                <article class="markdown-body">
 
 
+            <article class="">
+                <h2>Javascript-harjoitukset 3</h2>
+                <p>Aloita uusi tiedosto, tallenna se kansioon harj nimellä jsharj3.html ja jsharj3.js. Käytä apuna
+                    <a href="https://www.w3schools.com/js/" target="_blank">w3schoolin javascript-materiaalia</a>.
 
-                    <h2>Javascript-harjoitukset 3</h2>
-                    <p>Aloita uusi tiedosto, tallenna se kansioon harj nimellä jsharj3.html ja jsharj3.js. Käytä apuna <a href="https://www.w3schools.com/js/" target="_blank">w3schoolin javascript-materiaalia</a>. 
-                        
-                        <h3>1. Ruokalista</h3>
+                <h3>1. Ruokalista</h3>
 
-                        <p>Tee taulukko jossa on tämän viikon ruokalista. </p>
-                        <p>Laadi funktio joka tulostaa taulukon sisällön html-sivullesi näkyviin.</p>
-                       <p>Esimerkki:</p>
-<table>
-    <tr><th>päiväys</th><th>ruoka</th></tr>
-    <tr><td>13.3.2022</td><td>Härkis sweet´n sour (G, VEG, L) Riisi, tumma (G, VEG, L)</td></tr>
-    <tr><td>14.3.2022</td><td>Juures-voipapupyörykkä (G, VEG, L) Tomaattinen kastike (G, L) Perunat (G, VEG, L)</td></tr>
-    <tr><td>15.3.2022</td><td>Värikäs kasviskeitto (G, L) Täysjyväviipaleet (L) Kikherne-punajuuritahna (G, VEG, L)</td></tr>
-    <tr><td>16.3.2022</td><td>Seitankebabkiusaus (L)</td></tr>
-    <tr><td>17.3.2022</td><td>Härkispata pomodoro (G, VEG, L) Pasta täysjyvä cappelli (VEG, L) Reissumies (L)</td></tr>
-</table>
+                <p>Tee taulukko jossa on tämän viikon ruokalista. </p>
+                <p>Laadi funktio joka tulostaa taulukon sisällön html-sivullesi näkyviin.</p>
+                <p>Esimerkki:</p>
+                <table>
+                    <tr>
+                        <th>päiväys</th>
+                        <th>ruoka</th>
+                    </tr>
+                    <tr>
+                        <td>13.3.2022</td>
+                        <td>Härkis sweet´n sour (G, VEG, L) Riisi, tumma (G, VEG, L)</td>
+                    </tr>
+                    <tr>
+                        <td>14.3.2022</td>
+                        <td>Juures-voipapupyörykkä (G, VEG, L) Tomaattinen kastike (G, L) Perunat (G, VEG, L)</td>
+                    </tr>
+                    <tr>
+                        <td>15.3.2022</td>
+                        <td>Värikäs kasviskeitto (G, L) Täysjyväviipaleet (L) Kikherne-punajuuritahna (G, VEG, L)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>16.3.2022</td>
+                        <td>Seitankebabkiusaus (L)</td>
+                    </tr>
+                    <tr>
+                        <td>17.3.2022</td>
+                        <td>Härkispata pomodoro (G, VEG, L) Pasta täysjyvä cappelli (VEG, L) Reissumies (L)</td>
+                    </tr>
+                </table>
 
-                        <h3>2. Ruuan lisääminen</h3>
+                <h3>2. Ruuan lisääminen</h3>
 
-                        <p>Lisää toiminto uuden ruuan lisäämiseksi.</p>
+                <p>Lisää toiminto uuden ruuan lisäämiseksi.</p>
 
-<form action="">
-    <label for="">päiväys</label><br>
-    <input type="date" name="" id=""><br>
-    <label for="">ruoka</label><br>
-    <input type="tel" name="" id=""><br>
-    <button>Lisää ruoka</button>
-</form>
+                <form action="">
+                    <label for="">päiväys</label><br>
+                    <input type="date" name="" id=""><br>
+                    <label for="">ruoka</label><br>
+                    <input type="tel" name="" id=""><br>
+                    <button>Lisää ruoka</button>
+                </form>
 
-                        <h3>3. Ruuan poistaminen</h3>
-                        <p>Lisää painike mukaan jokaisen ruuan jälkeen. Nappia painamalla kyseinen ruoka poistettaisiin taulukosta.</p>
-                    
+                <h3>3. Ruuan poistaminen</h3>
+                <p>Lisää painike mukaan jokaisen ruuan jälkeen. Nappia painamalla kyseinen ruoka poistettaisiin
+                    taulukosta.</p>
 
-                        <h3>4. Henkilöt</h3>
 
-                        <p>Tee lomake jolla voidaan luoda taulukkoon uusi olio henkilö (Person). Henkilöllä on tiedot firstname, lastname, age ja email. </p>
+                <h3>4. Henkilöt</h3>
 
-                        <h4>Syötä uusi henkilö</h4>
-                        <form action="">
-                            <label for="firstname">Etunimi</label><br>
-                            <input type="text"><br>                            
-                            <label for="lastname">Sukunimi</label><br>
-                            <input type="text" id="lastname"><br>                            
-                            <label for="age">Ikä</label><br>
-                            <input type="number" id="age"><br>                            
-                            <label for="email">Sähköposti</label><br>
-                            <input type="text" id="email"><br>    
-                            <button type="button">Lisää</button>                        
-                        </form>
+                <p>Tee lomake jolla voidaan luoda taulukkoon uusi olio henkilö (Person). Henkilöllä on tiedot
+                    firstname, lastname, age ja email. </p>
 
-                        <h3>5. Henkilöt taulukossa</h3>
-                        <p>Tulosta taulukkoon lisätyt henkilöt sivullesi table-taulukon sisällä.</p>
-                        <p>Lisää taulukkoon myös mahdollisuus poistaa lisätty henkilö.</p>
-                        <h3>6. Lisätehtävä</h3>
-                        <p>Kokeile w3schools-sivuston <a href="https://www.w3schools.com/graphics/game_intro.asp" target="_blank">HTML + Javascript peliä</a>. Tee tämä tutoriaali omalle sivulleen, linkitä se harjoitussivullesi.</p>
-                    </article>
+                <h4>Syötä uusi henkilö</h4>
+                <form action="">
+                    <label for="firstname">Etunimi</label><br>
+                    <input type="text"><br>
+                    <label for="lastname">Sukunimi</label><br>
+                    <input type="text" id="lastname"><br>
+                    <label for="age">Ikä</label><br>
+                    <input type="number" id="age"><br>
+                    <label for="email">Sähköposti</label><br>
+                    <input type="text" id="email"><br>
+                    <button type="button">Lisää</button>
+                </form>
 
-            </div>
+                <h3>5. Henkilöt taulukossa</h3>
+                <p>Tulosta taulukkoon lisätyt henkilöt sivullesi table-taulukon sisällä.</p>
+                <p>Lisää taulukkoon myös mahdollisuus poistaa lisätty henkilö.</p>
+                <h3>6. Lisätehtävä</h3>
+                <p>Kokeile w3schools-sivuston <a href="https://www.w3schools.com/graphics/game_intro.asp"
+                        target="_blank">HTML + Javascript peliä</a>. Tee tämä tutoriaali omalle sivulleen, linkitä
+                    se harjoitussivullesi.</p>
+            </article>
+
         </div>
     </div>
-    <div class="current-section">
+    </div>
+    <div class="footer">
         kevät 2023
-      </div>
+    </div>
 </body>
 
 </html>

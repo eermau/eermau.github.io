@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -13,73 +14,74 @@
             <h1>Fullstack-kehitys</h1>
         </header>
         <div id="container">
-            <div id="main" role="main">
-                <article class="markdown-body">
 
-                    <h1>Tietovisa</h1>
-                    <h2>Yleistä</h2>
-                    <p>Tehtävänä on suunnitella ja toteuttaa yksinkertainen tietovisa. Pelissä on erilaisia tietovisoja
-                        jotka sisältävät monivalintakysymyksiä. Pelattuaan pelin käyttäjältä pyydetään nimi ja tulokset
-                        tallennetaan tietokantaan.
-                    </p>
-                    <p><img src="db_structure.png" alt="Tietokannan rakenne"></p>
-                    <p>Voit käyttää tietokantana <a href="react_quiz.sql">react_quiz.sql</a>-tiedostoa.</p>
+            <article class="">
 
-                    <h2>Ryhmätyöskentely</h2>
-                    <p>Käytetään omaa github-repoa jossa ryhmä voi tehdä yhteisen projektin.</p>
-                    <ul>
-                        <li>Tehkää ryhmälle myös projektiseinä ja määritelkää siellä tehtävät</li>
-                        <li>Backlog, In Progress, Done ja Daily -sarakkeet</li>
-                    </ul>
+                <h1>Tietovisa</h1>
+                <h2>Yleistä</h2>
+                <p>Tehtävänä on suunnitella ja toteuttaa yksinkertainen tietovisa. Pelissä on erilaisia tietovisoja
+                    jotka sisältävät monivalintakysymyksiä. Pelattuaan pelin käyttäjältä pyydetään nimi ja tulokset
+                    tallennetaan tietokantaan.
+                </p>
+                <p><img src="db_structure.png" alt="Tietokannan rakenne"></p>
+                <p>Voit käyttää tietokantana <a href="react_quiz.sql">react_quiz.sql</a>-tiedostoa.</p>
 
-                    <h2>Käyttäjät</h2>
+                <h2>Ryhmätyöskentely</h2>
+                <p>Käytetään omaa github-repoa jossa ryhmä voi tehdä yhteisen projektin.</p>
+                <ul>
+                    <li>Tehkää ryhmälle myös projektiseinä ja määritelkää siellä tehtävät</li>
+                    <li>Backlog, In Progress, Done ja Daily -sarakkeet</li>
+                </ul>
 
-                    <ul>
-                        <li>Kirjautumaton käyttäjä voi pelata peliä ja nähdä parhaat tulokset.</li>
-                        <li>Kirjautunut käyttäjä pystyy 
-                            <ul>
-                                <li>lisäämään uusia tietovisoja, poistamaan olemassa olevia ja muokkaamaan tietovisan nimeä.</li>
-                                <li>lisäämään tietovisalle uusia kysymyksiä tai poistamaan olemassa olevia.</li>
-                                <li>tyhjentämään valitun tietovisan high score-taulukon.</li>
-                            </ul>
-                        </li>
-                        
-                    </ul>
-                    <p>Tee taulu tietokannan käyttäjälle (esim. admin tai user) ja mieti sopivat kentät.</p>
-                    <h2>Etusivu</h2>
-                    <p>
-                        Etusivulla näytetään esittelyteksti ja painike Aloita peli joka ohjaa sivulle Pelin
-                        aloittaminen. Etusivulla esitetään tietovisojen parhaat tulokset taulukossa. Tulokset
-                        ryhmitellään eri kestojen (lyhyt, normaali, pitkä) mukaan.
-                    </p>
-                    <h2>Pelin aloittaminen</h2>
-                    <p>
-                        Pelin aloitus tapahtuu valitsemalla haluttu tietovisa alasvetovalikosta. Käyttäjä valitsee myös
-                        pelin pituuden (lyhyt - 5 kysymystä, normaali - 10 kysymystä tai pitkä - 15 kysymystä). Peli
-                        käynnistyy painamalla 'Pelaamaan!' -painiketta.
-                    </p>
-                    <h2>
-                        Tietovisan pelaaminen
-                    </h2>
-                    <p>Tietovisan aikana näytetään haluttu määrä kysymyksiä yksitellen. Jos pelaaja vastaa oikein niin
-                        näytetään lyhyt animaatio. Mikäli pelaaja vastaa väärin niin oikea vastaus animoidaan ennen
-                        siirtymistä seuraavaan kysymykseen.
-                    </p>
-                    <h2>High score-taulukko
-                    </h2>
-                    <p>Kun peli päättyy näytetään parhaat tulokset taulukossa. Pelaajan tulos korostetaan tulosjoukossa.
-                        Jos tuloksia on yli 20 niin näytetään sivutus (20 tulosta / sivu).
-                    </p>
-                    <p>Mieti sopiva tapa esittää taulukon tiedot ja suodattaminen eri kestojen mukaisesti.</p>
-                    <p>
-                        Peliä pelataan pääsääntöisesti mobiililaitteella joten sovelluksen tulee huomioida
-                        responsiivisuus (Google Chrome Dimensions: iPhone SE).
-                    </p>
-                </article>
-            </div>
+                <h2>Käyttäjät</h2>
+
+                <ul>
+                    <li>Kirjautumaton käyttäjä voi pelata peliä ja nähdä parhaat tulokset.</li>
+                    <li>Kirjautunut käyttäjä pystyy
+                        <ul>
+                            <li>lisäämään uusia tietovisoja, poistamaan olemassa olevia ja muokkaamaan tietovisan
+                                nimeä.</li>
+                            <li>lisäämään tietovisalle uusia kysymyksiä tai poistamaan olemassa olevia.</li>
+                            <li>tyhjentämään valitun tietovisan high score-taulukon.</li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <p>Tee taulu tietokannan käyttäjälle (esim. admin tai user) ja mieti sopivat kentät.</p>
+                <h2>Etusivu</h2>
+                <p>
+                    Etusivulla näytetään esittelyteksti ja painike Aloita peli joka ohjaa sivulle Pelin
+                    aloittaminen. Etusivulla esitetään tietovisojen parhaat tulokset taulukossa. Tulokset
+                    ryhmitellään eri kestojen (lyhyt, normaali, pitkä) mukaan.
+                </p>
+                <h2>Pelin aloittaminen</h2>
+                <p>
+                    Pelin aloitus tapahtuu valitsemalla haluttu tietovisa alasvetovalikosta. Käyttäjä valitsee myös
+                    pelin pituuden (lyhyt - 5 kysymystä, normaali - 10 kysymystä tai pitkä - 15 kysymystä). Peli
+                    käynnistyy painamalla 'Pelaamaan!' -painiketta.
+                </p>
+                <h2>
+                    Tietovisan pelaaminen
+                </h2>
+                <p>Tietovisan aikana näytetään haluttu määrä kysymyksiä yksitellen. Jos pelaaja vastaa oikein niin
+                    näytetään lyhyt animaatio. Mikäli pelaaja vastaa väärin niin oikea vastaus animoidaan ennen
+                    siirtymistä seuraavaan kysymykseen.
+                </p>
+                <h2>High score-taulukko
+                </h2>
+                <p>Kun peli päättyy näytetään parhaat tulokset taulukossa. Pelaajan tulos korostetaan tulosjoukossa.
+                    Jos tuloksia on yli 20 niin näytetään sivutus (20 tulosta / sivu).
+                </p>
+                <p>Mieti sopiva tapa esittää taulukon tiedot ja suodattaminen eri kestojen mukaisesti.</p>
+                <p>
+                    Peliä pelataan pääsääntöisesti mobiililaitteella joten sovelluksen tulee huomioida
+                    responsiivisuus (Google Chrome Dimensions: iPhone SE).
+                </p>
+            </article>
         </div>
     </div>
-    <div class="current-section">
+    </div>
+    <div class="footer">
 
     </div>
 </body>

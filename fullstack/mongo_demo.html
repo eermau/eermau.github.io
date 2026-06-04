@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -13,39 +14,47 @@
             <h1>Fullstack-kehitys</h1>
         </header>
         <div id="container">
-            <div id="main" role="main">
-               <article class="markdown-body">
 
-<h2>MongoDB</h2>
-<p>MongoDB on dokumenttitietokanta ja NoSQL-tietokanta. NoSQL-tietokantaan tallennetaan tietoa toisella tapaa kuin relaatiotietokantaan. NoSQL-tietokanta on tullut vaihtoehdoksi perinteiselle relaatiotietokannalle tallennuskapasiteetin ja tietokoneiden tehokkuuden kasvettua vuosien saatossa. NoSQL-tietokantaa ei käytetä SQL-kyselyiden kautta vaan sinne lisätään ja poistetaan uusia dokumentteja. Tässä demossa käytetään lähteenä Helsingin yliopiston Fullstack-kurssin osiota <a href="https://fullstackopen.com/osa3/tietojen_tallettaminen_mongo_db_tietokantaan" target="_blank">Tietojen tallentaminen MongoDB-tietokantaan</a>.
-</p>
-<ul>
-    <li>Ohje <a href="atlasdatabase.html">MongoDB Atlas-palvelun käyttöön</a></li>
+            <article class="">
 
-</ul>
+                <h2>MongoDB</h2>
+                <p>MongoDB on dokumenttitietokanta ja NoSQL-tietokanta. NoSQL-tietokantaan tallennetaan tietoa
+                    toisella tapaa kuin relaatiotietokantaan. NoSQL-tietokanta on tullut vaihtoehdoksi perinteiselle
+                    relaatiotietokannalle tallennuskapasiteetin ja tietokoneiden tehokkuuden kasvettua vuosien
+                    saatossa. NoSQL-tietokantaa ei käytetä SQL-kyselyiden kautta vaan sinne lisätään ja poistetaan
+                    uusia dokumentteja. Tässä demossa käytetään lähteenä Helsingin yliopiston Fullstack-kurssin
+                    osiota <a href="https://fullstackopen.com/osa3/tietojen_tallettaminen_mongo_db_tietokantaan"
+                        target="_blank">Tietojen tallentaminen MongoDB-tietokantaan</a>.
+                </p>
+                <ul>
+                    <li>Ohje <a href="atlasdatabase.html">MongoDB Atlas-palvelun käyttöön</a></li>
 
-<p>Huom: mikäli koululta ei saada yhteyttä toimimaan voidaan MongoDB tehdä Dockerin avulla.</p>
+                </ul>
 
-<ul>
-    <li><a href="https://otredu.github.io/docker/mongodb.html" target="_blank">Mongodb ja mongo-express (localhost)
-    </a> (otredu)</li>
-</ul>
-</p>
+                <p>Huom: mikäli koululta ei saada yhteyttä toimimaan voidaan MongoDB tehdä Dockerin avulla.</p>
 
-<h3>Yhdistäminen</h3>
+                <ul>
+                    <li><a href="https://otredu.github.io/docker/mongodb.html" target="_blank">Mongodb ja
+                            mongo-express (localhost)
+                        </a> (otredu)</li>
+                </ul>
+                </p>
+
+                <h3>Yhdistäminen</h3>
 
 
-<p>Tee uusi kansio <i>notesmongodemo</i>. Tee tämän alle kansio <i>notesmongoback</i>. Alustetaan npm. Käytetään yhteyteen Mongoose-kirjastoa. Asenna se:</p>
-<pre>
+                <p>Tee uusi kansio <i>notesmongodemo</i>. Tee tämän alle kansio <i>notesmongoback</i>. Alustetaan
+                    npm. Käytetään yhteyteen Mongoose-kirjastoa. Asenna se:</p>
+                <pre>
 npm init
 npm install
 npm install mongoose
 </pre>
-<p>Tehdään ensin testitiedosto jolla kokeillaan miten lisätään uusi dokumentti/tietue.</p>
-<h4>Notes-testi</h4>
-<p>Tee uusi tiedosto mongo.js ja testataan sen avulla yhteyttä Mongo-tietokantaan.</p>
-<p>Otetaan käyttöön mongoose-kirjasto ja yhdistetään config-tiedoston avulla tietokantaan.</p>
-<pre>
+                <p>Tehdään ensin testitiedosto jolla kokeillaan miten lisätään uusi dokumentti/tietue.</p>
+                <h4>Notes-testi</h4>
+                <p>Tee uusi tiedosto mongo.js ja testataan sen avulla yhteyttä Mongo-tietokantaan.</p>
+                <p>Otetaan käyttöön mongoose-kirjasto ja yhdistetään config-tiedoston avulla tietokantaan.</p>
+                <pre>
 const mongoose = require('mongoose')
 const dbConfig = require('./config');
 
@@ -63,7 +72,7 @@ const dbConfig = require('./config');
      process.exit();
  });
 </pre>
-<!--
+                <!--
 <p>Annetaan argumenttina salasana, jos salasanaa ei tule niin virheilmoitus:</p>
 <pre>
 if (process.argv.length&lt;3) {
@@ -79,8 +88,10 @@ const url =
 mongoose.connect(url)
 </pre>
 -->
-<p>Kun yhteys on tehty laaditaan skeema ja model. Lisätietoa mongoosejs-sivustolla (<a href="https://mongoosejs.com/docs/guide.html">skeemasta</a> ja <a href="https://mongoosejs.com/docs/models.html">modelista</a>).</p>
-<pre>
+                <p>Kun yhteys on tehty laaditaan skeema ja model. Lisätietoa mongoosejs-sivustolla (<a
+                        href="https://mongoosejs.com/docs/guide.html">skeemasta</a> ja <a
+                        href="https://mongoosejs.com/docs/models.html">modelista</a>).</p>
+                <pre>
 const noteSchema = new mongoose.Schema({
     content: String,
     date: Date,
@@ -89,8 +100,8 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 </pre>
-<p>Lopulta esitellään uusi note ja tallennetaan se:</p>
-<pre>
+                <p>Lopulta esitellään uusi note ja tallennetaan se:</p>
+                <pre>
 const note = new Note({
     content: 'HTML is Easy',
     date: new Date(),
@@ -102,16 +113,18 @@ note.save().then(result => {
     mongoose.connection.close()
 })    
 </pre>
-<p><!--Salasana annetaan tässä parametrina <i>process.argv[2]</i>. -->Suorita ohjelma</p>
-<pre>
+                <p><!--Salasana annetaan tässä parametrina <i>process.argv[2]</i>. -->Suorita ohjelma</p>
+                <pre>
 node mongo.js <!--salasanasi-->    
 </pre>
-<p>Katsotaan tietokannan sisältämää tietoa Browse Collections-kohdassa:</p>
-<p><img width="500" src="./kuvat/mongo_browse_collections.png" /></p>
-<p>Kokeillaan antaa tietokannalle toinen nimi. Poista myFirstDatabase ja muuta tietokannan nimeksi koodissasi noteApp. Aja sovellus uudelleen ja tarkista tiedot.</p>
+                <p>Katsotaan tietokannan sisältämää tietoa Browse Collections-kohdassa:</p>
+                <p><img width="500" src="./kuvat/mongo_browse_collections.png" /></p>
+                <p>Kokeillaan antaa tietokannalle toinen nimi. Poista myFirstDatabase ja muuta tietokannan nimeksi
+                    koodissasi noteApp. Aja sovellus uudelleen ja tarkista tiedot.</p>
 
-<p>Kokeile lisätä tietokantaasi muutamia viestejä. Tämän jälkeen kommentoi kohta notesin lisäämisestä ja kokeillaan hakea tiedot tietokannastasi:</p>
-<pre>
+                <p>Kokeile lisätä tietokantaasi muutamia viestejä. Tämän jälkeen kommentoi kohta notesin
+                    lisäämisestä ja kokeillaan hakea tiedot tietokannastasi:</p>
+                <pre>
 Note.find({}).then(result =&gt; {
     result.forEach(note =&gt; {
         console.log(note)
@@ -120,30 +133,31 @@ Note.find({}).then(result =&gt; {
 })
 </pre>
 
-<p>Hakuehto tulee find-metodin sisälle, jos halutaan hakea vain tärkeät viestit:</p>
-<pre>
+                <p>Hakuehto tulee find-metodin sisälle, jos halutaan hakea vain tärkeät viestit:</p>
+                <pre>
 Note.find({ important: true }).then(result =&gt; {
     ...
 })    
 </pre>
-<p>Lisätietoa hakuoperaattoreista löytyy <a href="https://docs.mongodb.com/manual/reference/operator/">MongoDB:n sivuilla</a>.</p>
+                <p>Lisätietoa hakuoperaattoreista löytyy <a
+                        href="https://docs.mongodb.com/manual/reference/operator/">MongoDB:n sivuilla</a>.</p>
 
 
-<h3>Backend (index.js)</h3>
+                <h3>Backend (index.js)</h3>
 
-<p>Laaditaan backend joka ottaa yhteyden Mongo-tietokantaan.</p>
-<h4>index.js</h4>
+                <p>Laaditaan backend joka ottaa yhteyden Mongo-tietokantaan.</p>
+                <h4>index.js</h4>
 
-<p>Lisää .env-tiedosto ja sinne</p>
-<pre>
+                <p>Lisää .env-tiedosto ja sinne</p>
+                <pre>
 PORT = 3001
 DB_HOST = mongodb://localhost:27017/
 DB_USER = root
 DB_PASS = mypass123
 DB_DATABASE = demo</pre>
 
-<p>Asenna dotenv, express, bcryptjs, jsonwebtoken ja nodemon:</p>
-<pre>
+                <p>Asenna dotenv, express, bcryptjs, jsonwebtoken ja nodemon:</p>
+                <pre>
 npm install dotenv
 npm install express --save
 npm install bcryptjs --save
@@ -151,13 +165,13 @@ npm install jsonwebtoken --save
 npm install --save-dev nodemon    
 npm install mongoose
 </pre>
-<p>Lisää package.json -tiedostoon start-skripti, käynnistä backend <code>npm start</code>.</p>
-<pre>
+                <p>Lisää package.json -tiedostoon start-skripti, käynnistä backend <code>npm start</code>.</p>
+                <pre>
 "start": "npx nodemon index.js"    
 </pre>
 
-<p>Tee config.js -tiedosto</p>
-<pre>
+                <p>Tee config.js -tiedosto</p>
+                <pre>
 require('dotenv').config()
 
 let PORT = process.env.PORT
@@ -181,9 +195,9 @@ module.exports = {
 </pre>
 
 
-<p>index.js-tiedostossa ota mukaan .env ja express</p>
+                <p>index.js-tiedostossa ota mukaan .env ja express</p>
 
-<pre>
+                <pre>
 require('dotenv').config();
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -197,8 +211,8 @@ const express = require('express')
 const app = express()
 app.use(express.json());</pre>
 
-<p>Kuunnellaan porttia</p>
-<pre>
+                <p>Kuunnellaan porttia</p>
+                <pre>
 app.listen(PORT, () =&gt; {
     console.log(`Server running on port ${PORT}`)
 })
@@ -207,11 +221,11 @@ app.get('/', (req, res) =&gt; {
     res.send('&lt;h1&gt;Hello World!&lt;/h1&gt;')
 })
 </pre>
-<h4>note.js</h4>
+                <h4>note.js</h4>
 
-<p>Erotetaan <i>models</i> / <i>note.js</i> -tiedostoon mongoDB:n käsittely.</p>
+                <p>Erotetaan <i>models</i> / <i>note.js</i> -tiedostoon mongoDB:n käsittely.</p>
 
-<pre>
+                <pre>
 const dbConfig = require('../config');
 const mongoose = require('mongoose');
 
@@ -245,16 +259,17 @@ noteSchema.set('toJSON', {
 
 module.exports = mongoose.model('Note', noteSchema) 
 </pre>
-<p>note.js exporttaa Note:n jota voidaan käyttää index.js-tiedostossa.</p>
-<h4>index.js</h4>
-<p>
-Otetaan Note käyttöön index.js-tiedoston alussa.  
-</p>
-<pre>
+                <p>note.js exporttaa Note:n jota voidaan käyttää index.js-tiedostossa.</p>
+                <h4>index.js</h4>
+                <p>
+                    Otetaan Note käyttöön index.js-tiedoston alussa.
+                </p>
+                <pre>
 const Note = require('./models/note')
 </pre>
-<p>Tässä käytössä jo käyttäjän kirjautuminen ja rekisteröityminen. Tähän tarvitaan apufunktiota getTokenFrom:</p>
-<pre>
+                <p>Tässä käytössä jo käyttäjän kirjautuminen ja rekisteröityminen. Tähän tarvitaan apufunktiota
+                    getTokenFrom:</p>
+                <pre>
 const getTokenFrom = req =&gt; {
     const authorization = req.get('authorization');
     console.log("authorization", authorization);
@@ -265,10 +280,10 @@ const getTokenFrom = req =&gt; {
     }
 }    
 </pre>
-<p>
-Haetaan notesit tietokannasta:    
-</p>
-<pre>
+                <p>
+                    Haetaan notesit tietokannasta:
+                </p>
+                <pre>
 app.get('/api/notes', (req, res) =&gt; {
     const token = getTokenFrom(req);
     console.log(token);
@@ -301,10 +316,10 @@ app.get('/api/notes', (req, res) =&gt; {
 })    
 </pre>
 
-<h3>Muut backendin toiminnot</h3>
-<h4>index.js</h4>
-<p>Muistiinpanon lisääminen</p>
-<pre>
+                <h3>Muut backendin toiminnot</h3>
+                <h4>index.js</h4>
+                <p>Muistiinpanon lisääminen</p>
+                <pre>
 app.post('/api/notes', (req, res) =&gt; {
     const token = getTokenFrom(req);
     console.log(token);
@@ -349,16 +364,16 @@ app.post('/api/notes', (req, res) =&gt; {
 })    
 </pre>
 
-<p>Yhden muistiinpanon avaaminen</p>
-<pre>
+                <p>Yhden muistiinpanon avaaminen</p>
+                <pre>
 app.get('/api/notes/:id', (req, res) =&gt; {
     Note.findById(req.params.id).then(note =&gt; {
         res.json(note)
     })
 })    
 </pre>
-<p>Muistiinpanon poistaminen onnistuu findByIdAndDelete-metodilla:</p>
-<pre>
+                <p>Muistiinpanon poistaminen onnistuu findByIdAndDelete-metodilla:</p>
+                <pre>
 app.delete('/api/notes/:id', (req, res, next) =&gt; {
     Note.findByIdAndDelete(req.params.id)
         .then(result =&gt; {
@@ -368,8 +383,8 @@ app.delete('/api/notes/:id', (req, res, next) =&gt; {
 })    
 </pre>
 
-<p>Muistiinpanon tärkeyden muuttaminen findByIdAndUpdate-metodilla:</p>
-<pre>
+                <p>Muistiinpanon tärkeyden muuttaminen findByIdAndUpdate-metodilla:</p>
+                <pre>
 app.put('/api/notes/:id', (req, res, next) =&gt; {
     const body = req.body
   
@@ -384,16 +399,17 @@ app.put('/api/notes/:id', (req, res, next) =&gt; {
       })
       .catch(error =&gt; next(error))
   })
-</pre> 
-<h4>Testaaminen</h4>
-<p>Tee kansio test ja kokeile .http-tiedostojen avulla kaikkien muistiinpanojen hakemista ja uuden muistiinpanon lisäämistä.</p>
-<pre>
+</pre>
+                <h4>Testaaminen</h4>
+                <p>Tee kansio test ja kokeile .http-tiedostojen avulla kaikkien muistiinpanojen hakemista ja uuden
+                    muistiinpanon lisäämistä.</p>
+                <pre>
 GET http://localhost:3001/api/notes HTTP/1.1
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVlcmlra2kiLCJpZCI6IjY2MTNjMWIxMjllNzU2MTUxNWI2MGY1NSIsImlhdCI6MTcxMjU3MTA3MX0.3-LYBqE_rCmE9PjvSusd2VNn2BGCwMqt5HzUiq-SoVA
 content-type: application/json   
 </pre>
-<p>Lisääminen:</p>
-<pre>
+                <p>Lisääminen:</p>
+                <pre>
 POST http://localhost:3001/api/notes HTTP/1.1
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVlcmlra2kiLCJpZCI6IjY2MTNjMWIxMjllNzU2MTUxNWI2MGY1NSIsImlhdCI6MTcxMjU3MTA3MX0.3-LYBqE_rCmE9PjvSusd2VNn2BGCwMqt5HzUiq-SoVA
 content-type: application/json
@@ -404,12 +420,12 @@ content-type: application/json
     "important": false
 }    
 </pre>
-<h3>Kirjautuminen ja rekisteröityminen</h3>
+                <h3>Kirjautuminen ja rekisteröityminen</h3>
 
-<h4>user.js</h4>
-<p>Tehdään models-kansioon käyttäjille oma tiedosto user.js.</p>
+                <h4>user.js</h4>
+                <p>Tehdään models-kansioon käyttäjille oma tiedosto user.js.</p>
 
-<pre>
+                <pre>
 const dbConfig = require('../config');
 const mongoose = require('mongoose');
 
@@ -443,11 +459,11 @@ userSchema.set('toJSON', {
 module.exports = mongoose.model('User', userSchema)     
 </pre>
 
-<h4>index.js</h4>
+                <h4>index.js</h4>
 
-<h5>rekisteröityminen</h5>
+                <h5>rekisteröityminen</h5>
 
-<pre>
+                <pre>
 app.post('/api/register', (req, res) =&gt; {
     const user = req.body
     
@@ -475,11 +491,11 @@ app.post('/api/register', (req, res) =&gt; {
         })
 })    
 </pre>
-<p>Tee tests-kansioon testi rekisteröitymisesta, kokeile toimintaa.</p>
+                <p>Tee tests-kansioon testi rekisteröitymisesta, kokeile toimintaa.</p>
 
-<h5>kirjautuminen</h5>
+                <h5>kirjautuminen</h5>
 
-<pre>
+                <pre>
 app.post('/api/login', (req, res) =&gt; {
     const body = req.body;
     console.log(body);
@@ -527,9 +543,9 @@ app.post('/api/login', (req, res) =&gt; {
 
 }); 
 </pre>
-<p>Tee tests-kansioon testi rekisteröitymisesta ja kirjautumisesta, kokeile toimintaa.</p>
+                <p>Tee tests-kansioon testi rekisteröitymisesta ja kirjautumisesta, kokeile toimintaa.</p>
 
-<pre>
+                <pre>
 POST http://localhost:3001/api/register HTTP/1.1
 content-type: application/json
 
@@ -540,40 +556,44 @@ content-type: application/json
 }      
 </pre>
 
-<h3>Frontend</h3>
-<p>Ei korvata vanhaa notesbackend-versiota vaan tehdään kopio joka käyttää MongoDB:tä. Tee itsellesi uusi kansio notesmongofront ja kopioi sinne notesfront jota käytettiin MySQL-tietokannan kanssa. <!--Kommentoi pois kirjautuminen ja rekisteröityminen, tämän version tarkoituksena on vain pystyä lisäämään uusia muistiinpanoja ja poistamaan olemassa olevia.--></p>
+                <h3>Frontend</h3>
+                <p>Ei korvata vanhaa notesbackend-versiota vaan tehdään kopio joka käyttää MongoDB:tä. Tee itsellesi
+                    uusi kansio notesmongofront ja kopioi sinne notesfront jota käytettiin MySQL-tietokannan kanssa.
+                    <!--Kommentoi pois kirjautuminen ja rekisteröityminen, tämän version tarkoituksena on vain pystyä lisäämään uusia muistiinpanoja ja poistamaan olemassa olevia.-->
+                </p>
 
-<ul>
-    <li>notesService.js: vaihda baseUrl muotoon api/notes</li>
-    <li>userService.js: vaihda samaan tapaan login ja register muotoon api/login ja api/register</li>
-    <li>Muuta polut vite.config.js-tiedostossa.</li>
-    <li>Testaa sovelluksen toimintaa
-        <ul>
-            <li>kaikkien muistiinpanojen hakeminen</li>
-            <li>uuden muistiinpanon lisääminen</li>
-            <li>muistiinpanon poistaminen</li>
-            <li>muistiinpanon tärkeyden muuttaminen</li>
-        </ul>
-    </li>
-</ul>
+                <ul>
+                    <li>notesService.js: vaihda baseUrl muotoon api/notes</li>
+                    <li>userService.js: vaihda samaan tapaan login ja register muotoon api/login ja api/register
+                    </li>
+                    <li>Muuta polut vite.config.js-tiedostossa.</li>
+                    <li>Testaa sovelluksen toimintaa
+                        <ul>
+                            <li>kaikkien muistiinpanojen hakeminen</li>
+                            <li>uuden muistiinpanon lisääminen</li>
+                            <li>muistiinpanon poistaminen</li>
+                            <li>muistiinpanon tärkeyden muuttaminen</li>
+                        </ul>
+                    </li>
+                </ul>
 
-<hr />
+                <hr />
 
-<h3>Harjoitus</h3>
+                <h3>Harjoitus</h3>
 
-<p>Teemme MongoDB:tä käyttävän version keikkainfosta.</p>
+                <p>Teemme MongoDB:tä käyttävän version keikkainfosta.</p>
 
-<ul>
-    <li><a href="mongo_harj_gigs2.html">Keikkainfo 2.0</a></li>
-</ul>
+                <ul>
+                    <li><a href="mongo_harj_gigs2.html">Keikkainfo 2.0</a></li>
+                </ul>
 
-</article>
-</div>
-</div>
-</div>
-<div class="current-section">
+            </article>
+        </div>
+    </div>
+    </div>
+    <div class="footer">
 
-</div>
+    </div>
 </body>
 
 </html>

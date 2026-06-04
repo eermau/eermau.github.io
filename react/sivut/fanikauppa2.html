@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -11,39 +12,43 @@
 <body>
     <div class="wrapper">
         <a href="../index.html">
-        <header>
-            <h1>Fullstack-kehitys</h1>
-        </header>
+            <header>
+                <h1>Fullstack-kehitys</h1>
+            </header>
         </a>
         <div id="container">
 
-            <div id="main" role="main">
 
-                <article class="markdown-body">
 
-                    <h2>Fanikauppa 2.0</h2>
-                    <h3>Yleistä</h3>
+            <article class="">
 
-<p>Tehdään fanikaupasta tietokantapohjainen web-sovellus. Tarkoitus on, että sovellus hakee tuotteet tietokannasta ja uusi tilaus voidaan tallettaa tietokantaan tilauksen päätteeksi.
-</p>
+                <h2>Fanikauppa 2.0</h2>
+                <h3>Yleistä</h3>
 
-<h3>
-Projekti</h3>
-<p>
-Tee uusi kansio fanikauppa2 ja sen alle alikansiot database ja backend.
-</p>
-<h3>
-Tietokanta</h3>
+                <p>Tehdään fanikaupasta tietokantapohjainen web-sovellus. Tarkoitus on, että sovellus hakee tuotteet
+                    tietokannasta ja uusi tilaus voidaan tallettaa tietokantaan tilauksen päätteeksi.
+                </p>
 
-<p>Toteuta tietokanta kansioon database. Tee migrations ja seed -tiedostot joilla tietokanta voidaan luoda helposti uudelleen. Tietokannan products-taulussa on kenttä amount jonka avulla voit simuloida ostoskorissa olevaa tuotemäärää sovelluksessasi.
-</p>
-<p><img src="../kuvat/fanikauppa_db.png" alt=""></p>
-<h3>Backend</h3>
+                <h3>
+                    Projekti</h3>
+                <p>
+                    Tee uusi kansio fanikauppa2 ja sen alle alikansiot database ja backend.
+                </p>
+                <h3>
+                    Tietokanta</h3>
 
-<p>Aloita sovelluksen backend. Toteuta ensimmäisenä vain GET /products sekä POST /orders. Tee testi joka hakee kaikki tuotteet sekä testi joka tallettaa uuden tilauksen tietokantaan. 
-<pre>GET http://localhost:3001/products HTTP/1.1</pre>
-<p>Tilauksen lisääminen lisää uuden asiakkaan ja tilatut tuotteet:</p>
-<pre>
+                <p>Toteuta tietokanta kansioon database. Tee migrations ja seed -tiedostot joilla tietokanta voidaan
+                    luoda helposti uudelleen. Tietokannan products-taulussa on kenttä amount jonka avulla voit
+                    simuloida ostoskorissa olevaa tuotemäärää sovelluksessasi.
+                </p>
+                <p><img src="../kuvat/fanikauppa_db.png" alt=""></p>
+                <h3>Backend</h3>
+
+                <p>Aloita sovelluksen backend. Toteuta ensimmäisenä vain GET /products sekä POST /orders. Tee testi
+                    joka hakee kaikki tuotteet sekä testi joka tallettaa uuden tilauksen tietokantaan.
+                <pre>GET http://localhost:3001/products HTTP/1.1</pre>
+                <p>Tilauksen lisääminen lisää uuden asiakkaan ja tilatut tuotteet:</p>
+                <pre>
 POST http://localhost:3001/order HTTP/1.1
 content-type: application/json
 
@@ -71,31 +76,34 @@ content-type: application/json
 
 }    
 </pre>
-</p>
-<h3>Frontend</h3>
+                </p>
+                <h3>Frontend</h3>
 
-<p>
-Voit kopioida vanhan fronend-kansion fanikauppa2-kansion alle. Frontend muuttuu jonkin verran nyt kun käytetään tietokantaa eikä kovakoodattuja tietoja.
-</p>
-<ul>
-    <li>Tee ensimmäisenä tuotteiden näyttäminen kaupassasi.</li>
-    <li>Toteuta tilauksen lisääminen siinä vaiheessa kun käyttäjä on syöttänyt yhteystiedot ja paina Lähetä tilaus-painiketta.</li>
-</ul>
-
-
-<h3>Edistyneet toiminnot</h3>
-
-<h4>Autentikaatio</h4>
-<p>Muuta sovellus toimimaan siten, että käyttäjä voi rekisteröityä asiakkaaksi. Kun käyttäjä on kirjautunut tilaus hyödyntää suoraan kirjautuneen asiakkaan tietoja.
-</p>
-
-<h4>Tilauksien tarkastelu</h4>
-<p>Lisää toiminnallisuus jossa käyttäjä voi tarkastella aikaisemmin tekemiään tilauksia.</p>
+                <p>
+                    Voit kopioida vanhan fronend-kansion fanikauppa2-kansion alle. Frontend muuttuu jonkin verran
+                    nyt kun käytetään tietokantaa eikä kovakoodattuja tietoja.
+                </p>
+                <ul>
+                    <li>Tee ensimmäisenä tuotteiden näyttäminen kaupassasi.</li>
+                    <li>Toteuta tilauksen lisääminen siinä vaiheessa kun käyttäjä on syöttänyt yhteystiedot ja paina
+                        Lähetä tilaus-painiketta.</li>
+                </ul>
 
 
-             </article>
-            </div>
+                <h3>Edistyneet toiminnot</h3>
+
+                <h4>Autentikaatio</h4>
+                <p>Muuta sovellus toimimaan siten, että käyttäjä voi rekisteröityä asiakkaaksi. Kun käyttäjä on
+                    kirjautunut tilaus hyödyntää suoraan kirjautuneen asiakkaan tietoja.
+                </p>
+
+                <h4>Tilauksien tarkastelu</h4>
+                <p>Lisää toiminnallisuus jossa käyttäjä voi tarkastella aikaisemmin tekemiään tilauksia.</p>
+
+
+            </article>
         </div>
+    </div>
     </div>
     <footer>
         <p>

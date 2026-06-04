@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    
+
     <title>Demo 9</title>
 </head>
 
@@ -15,37 +16,40 @@
         </header>
         <div id="container">
 
-            <div id="main" role="main">
-                
-                <article class="markdown-body">
 
 
-                    <h2>Demo 9, funktioita, syötteiden käsittelyä</h2>
+            <article class="">
 
-<h3>9.1 Funktiot</h3>
-<p>Kokeillaan miten funktiot toimivat PHP:ssa. </p>
-<ul>
-    <li>Tee funktio (printSomething())joka tulostaa tekstin p-elementin sisällä. Kutsu funktiota php-tiedossasi.</li>
-    <li>Tee funktio (printSomethings(arg)) joka tulostaa arg-parametrin verran p-elementtejä teksteineen. Testaa tätä php-tiedostossasi.</li>
-    <li>Tee funktio (returnSomethings(arg)) joka palauttaa arg-parametrin verran p-elementtejä tekstinä. Testaa php-tiedostossasi.</li>
-</ul>
-                    <h3>9.2 salasanan suojaus</h3>
-                    <p>Seuraavien funktioiden (password_hash ja password_verify) avulla suojataan salasanat.
-                    <p>
-                    <p> Siis: Suojaa sana "salasana", tulosta se suojattuna. Vertaa suojattua sanaa toisessa muuttujassa
-                        olevaan samaan sanaan ja lisäksi sanaan "salainen".</p>
-                    <!--
+
+                <h2>Demo 9, funktioita, syötteiden käsittelyä</h2>
+
+                <h3>9.1 Funktiot</h3>
+                <p>Kokeillaan miten funktiot toimivat PHP:ssa. </p>
+                <ul>
+                    <li>Tee funktio (printSomething())joka tulostaa tekstin p-elementin sisällä. Kutsu funktiota
+                        php-tiedossasi.</li>
+                    <li>Tee funktio (printSomethings(arg)) joka tulostaa arg-parametrin verran p-elementtejä
+                        teksteineen. Testaa tätä php-tiedostossasi.</li>
+                    <li>Tee funktio (returnSomethings(arg)) joka palauttaa arg-parametrin verran p-elementtejä
+                        tekstinä. Testaa php-tiedostossasi.</li>
+                </ul>
+                <h3>9.2 salasanan suojaus</h3>
+                <p>Seuraavien funktioiden (password_hash ja password_verify) avulla suojataan salasanat.
+                <p>
+                <p> Siis: Suojaa sana "salasana", tulosta se suojattuna. Vertaa suojattua sanaa toisessa muuttujassa
+                    olevaan samaan sanaan ja lisäksi sanaan "salainen".</p>
+                <!--
 	$password = password_hash($password, PASSWORD_DEFAULT);
 	tarkista onko se sama
 	boolean password_verify($passwd, $row['account_password'])
 -->
 
-                    <h3>9.3 filter_var - merkkijono</h3>
-                    <p>Poista html seuraavasta lauseesta ja tulosta lopputulos:</p>
-                    <pre>
+                <h3>9.3 filter_var - merkkijono</h3>
+                <p>Poista html seuraavasta lauseesta ja tulosta lopputulos:</p>
+                <pre>
 &lt;h1&gt;Hei! Kuinka voit tänään?&lt;/h1&gt;
 </pre>
-                    <!--
+                <!--
 
 $lause = "<h1>Hei! Kuinka voit tänään?</h1>";
 
@@ -53,12 +57,12 @@ $lause = "<h1>Hei! Kuinka voit tänään?</h1>";
 <!--$sanitizedComment = filter_var($comment, FILTER_SANITIZE_STRING);
 echo $sanitizedComment;Katso myös <a href="https://www.tutorialrepublic.com/php-tutorial/php-filters.php">Tutorialrepublicin filter-materiaali</a></p>-->
 
-                    <h3>9.4 filter_var - kokonaisluku</h3>
-                    <p>Tarkista, onko annettu kokonaisluku validi:</p>
-                    <pre>
+                <h3>9.4 filter_var - kokonaisluku</h3>
+                <p>Tarkista, onko annettu kokonaisluku validi:</p>
+                <pre>
 $int = 20;
 </pre>
-                    <!--
+                <!--
 // Validate sample integer value
 if(filter_var($int, FILTER_VALIDATE_INT)){
     echo "The <b>$int</b> is a valid integer";
@@ -66,13 +70,13 @@ if(filter_var($int, FILTER_VALIDATE_INT)){
     echo "The <b>$int</b> is not a valid integer";
 }-->
 
-                    <h3>9.5 filter_var - URL</h3>
-                    Tarkista, onko annettu URL validi
-                    <pre>
+                <h3>9.5 filter_var - URL</h3>
+                Tarkista, onko annettu URL validi
+                <pre>
 172.16.254.1
 </pre>
 
-                    <!--
+                <!--
 // Sample IP address
 $ip = "172.16.254.1";
 
@@ -83,12 +87,12 @@ if(filter_var($ip, FILTER_VALIDATE_IP)){
     echo "The <b>$ip</b> is not a valid IP address";
 }-->
 
-                    <h3>9.6 filter_var - sähköposti</h3>
-                    <p>Validoi ja sanitoi seuraava sähköpostiosoite:</p>
-                    <pre>
+                <h3>9.6 filter_var - sähköposti</h3>
+                <p>Validoi ja sanitoi seuraava sähköpostiosoite:</p>
+                <pre>
 someone@@example.com
 </pre>
-                    <!--
+                <!--
 // Sample email address
 $email = "someone@@example.com";
 
@@ -104,13 +108,13 @@ if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 }
 -->
 
-                    <h3>9.7 filter_var - kokonaisluku ja väli</h3>
-                    <p>Validoi kokonaisluvun arvo ja tarkista, onko se jossain välissä:</p>
-                    <pre>
+                <h3>9.7 filter_var - kokonaisluku ja väli</h3>
+                <p>Validoi kokonaisluvun arvo ja tarkista, onko se jossain välissä:</p>
+                <pre>
 75
 </pre>
 
-                    <!--
+                <!--
 
 // Sample integer value
 $int = 75;
@@ -124,13 +128,13 @@ if(filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range" =>
 }-->
 
 
-                </article>
-            </div>
+            </article>
         </div>
     </div>
-    <div class="current-section">
+    </div>
+    <div class="footer">
         kevät 2023
-      </div>
+    </div>
 </body>
 
 </html>

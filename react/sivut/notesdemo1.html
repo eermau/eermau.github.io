@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -11,30 +12,33 @@
 <body>
     <div class="wrapper">
         <a href="../index.html">
-        <header>
-            <h1>Fullstack-kehitys</h1>
-        </header>
+            <header>
+                <h1>Fullstack-kehitys</h1>
+            </header>
         </a>
         <div id="container">
 
-            <div id="main" role="main">
 
-                <article class="markdown-body">
-                    <a href="json.html">backend</a> | <a href="notesdemo1.html">frontend</a>
-                    <h2>Notes-demo (2/2)</h2>
-                    <h3>Projekti</h3>
-<p>Tehdään React-frontend jonka avulla hallitaan json-palvelimen tietokantaa. Siirry <i>notesdemo</i>-kansioon ja luo uusi React-projekti:</p>
 
-<pre>
+            <article class="">
+                <a href="json.html">backend</a> | <a href="notesdemo1.html">frontend</a>
+                <h2>Notes-demo (2/2)</h2>
+                <h3>Projekti</h3>
+                <p>Tehdään React-frontend jonka avulla hallitaan json-palvelimen tietokantaa. Siirry
+                    <i>notesdemo</i>-kansioon ja luo uusi React-projekti:
+                </p>
+
+                <pre>
 npm create vite@latest notesfront -- --template react
 cd notesfront
 npm i
 npm install axios --save
 npm run dev
 </pre>
-<p>Asensimme <i>axios</i>-kirjaston tietokannan käsittelyä varten React-sovelluksessa. Tietokannan käsittely onnistuu myös <i>fetch</i>-kutsujen avulla.</p>
+                <p>Asensimme <i>axios</i>-kirjaston tietokannan käsittelyä varten React-sovelluksessa. Tietokannan
+                    käsittely onnistuu myös <i>fetch</i>-kutsujen avulla.</p>
 
-<pre>
+                <pre>
 import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
@@ -51,12 +55,14 @@ function App() {
 
 export default App    
 </pre>
-<p><i>axios</i> palauttaa <i>promisen</i> joka voi olla joko <i>pending</i> (ei ole vielä tapahtunut), <i>fulfilled</i> (onnistunut) tai <i>rejected</i> (hylätty).</p>
-<p><img src="../kuvat/notesdemo_1.png" alt="" width="400px"></p>
-<p>Viesti näkyy kahdesti koska Reactin StrictMode kutsuu render-funktiota kahdesti.</p>
+                <p><i>axios</i> palauttaa <i>promisen</i> joka voi olla joko <i>pending</i> (ei ole vielä
+                    tapahtunut), <i>fulfilled</i> (onnistunut) tai <i>rejected</i> (hylätty).</p>
+                <p><img src="../kuvat/notesdemo_1.png" alt="" width="400px"></p>
+                <p>Viesti näkyy kahdesti koska Reactin StrictMode kutsuu render-funktiota kahdesti.</p>
 
-<p>Muutetaan sovellusta siten, että otetaan mukaan tilamuuttuja <i>notes</i> johon tallennamme muistiinpanot:</p>
-<pre>
+                <p>Muutetaan sovellusta siten, että otetaan mukaan tilamuuttuja <i>notes</i> johon tallennamme
+                    muistiinpanot:</p>
+                <pre>
 import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
@@ -82,12 +88,14 @@ function App() {
 
 export default App
 </pre>
-<p>Kun katsot konsoliin niin muistiinpanoja haetaan koko ajan. Tehdään siis lisäys jossa muistiinpanojen haku muutetaan funktioksi <i>startHook</i> ja tätä kutsutaan vain kerran silloin kun sovellus latautuu:</p>
-<pre>
+                <p>Kun katsot konsoliin niin muistiinpanoja haetaan koko ajan. Tehdään siis lisäys jossa
+                    muistiinpanojen haku muutetaan funktioksi <i>startHook</i> ja tätä kutsutaan vain kerran silloin
+                    kun sovellus latautuu:</p>
+                <pre>
 import { useState, useEffect } from 'react'    
 </pre>
-<p>startHook:</p>
-<pre>
+                <p>startHook:</p>
+                <pre>
 const startHook = () => {
 // haetaan notes:
 axios.get('http://localhost:3001/notes')
@@ -101,18 +109,24 @@ axios.get('http://localhost:3001/notes')
 
 useEffect(startHook, [])    
 </pre>
-<h4>Muistiinpanojen näyttäminen</h4>
-<p>Tee <i>components</i>-alikansioon uusi tiedosto <i>Notes.jsx</i> ja sinne komponentti <i>Notes</i>. Näytä komponentissa muistiinpanot listassa:</p>
-<p><img src="../kuvat/notesdemo_2.png" alt=""></p>
-<p>Muotoile tärkeät ja normaalit muistiinpanot eri näköisiksi. Tee App.css-tiedostoon tarvittavat tyylimäärittelyt. Notes-komponentilla voit vaihtaa luokan tyylin nimeä näin:</p>
-<pre>&lt;li className={note.important ? "important" : "normal"}&gt;</pre>
-<p><img src="../kuvat/notesdemo_3.png" alt=""></p>
+                <h4>Muistiinpanojen näyttäminen</h4>
+                <p>Tee <i>components</i>-alikansioon uusi tiedosto <i>Notes.jsx</i> ja sinne komponentti
+                    <i>Notes</i>. Näytä komponentissa muistiinpanot listassa:
+                </p>
+                <p><img src="../kuvat/notesdemo_2.png" alt=""></p>
+                <p>Muotoile tärkeät ja normaalit muistiinpanot eri näköisiksi. Tee App.css-tiedostoon tarvittavat
+                    tyylimäärittelyt. Notes-komponentilla voit vaihtaa luokan tyylin nimeä näin:</p>
+                <pre>&lt;li className={note.important ? "important" : "normal"}&gt;</pre>
+                <p><img src="../kuvat/notesdemo_3.png" alt=""></p>
 
-<h3>Muistiinpanon lisääminen</h3>
-<p>Lisää <i>App.jsx</i>-tiedostolle funktio addNote jonka avulla voidaan lisätä uusi muistiinpano. Koska osoite esiintyy useita kertoja koodin sisällä, se kannattaa erottaa omaan muuttujaan <i>baseURL</i>.</p>
-<pre>const baseURL = 'http://localhost:3001/notes';</pre>
-<p><i>addNote</i>-funktio:</p>
-<pre>
+                <h3>Muistiinpanon lisääminen</h3>
+                <p>Lisää <i>App.jsx</i>-tiedostolle funktio addNote jonka avulla voidaan lisätä uusi muistiinpano.
+                    Koska osoite esiintyy useita kertoja koodin sisällä, se kannattaa erottaa omaan muuttujaan
+                    <i>baseURL</i>.
+                </p>
+                <pre>const baseURL = 'http://localhost:3001/notes';</pre>
+                <p><i>addNote</i>-funktio:</p>
+                <pre>
 const addNote = (e, newNote, newImportance) =&gt; {
     e.preventDefault();
     const note = {
@@ -125,9 +139,10 @@ const addNote = (e, newNote, newImportance) =&gt; {
     })
 }    
 </pre>
-<p>Tee uusi tiedosto <i>NotesForm.jsx</i> kansioon <i>components</i>. NotesForm lisää uuden muistiinpanon käyttäen addNote-funktiota.</p>
-<p><img src="../kuvat/notesdemo_4.png" alt=""></p>
-<pre>
+                <p>Tee uusi tiedosto <i>NotesForm.jsx</i> kansioon <i>components</i>. NotesForm lisää uuden
+                    muistiinpanon käyttäen addNote-funktiota.</p>
+                <p><img src="../kuvat/notesdemo_4.png" alt=""></p>
+                <pre>
 import { useState } from "react";
 
 const NotesForm = ({ addNote }) =&gt; {
@@ -158,13 +173,18 @@ const NotesForm = ({ addNote }) =&gt; {
 
 export default NotesForm;    
 </pre>
-<p>Kun muistiinpano lisätään niin se menee tietokantaasi. Tulos näkyy kuitenkin vast kun sivu päivittyy uudelleen. Lisää <i>addNote</i>-funktiolle <i>console.log</i>-rivin alle <i>then</i>-haaraan <i>notes</i>-tilaamuuttujan päivitys:</p>
-<pre>setNotes(notes.concat(response.data));</pre>
+                <p>Kun muistiinpano lisätään niin se menee tietokantaasi. Tulos näkyy kuitenkin vast kun sivu
+                    päivittyy uudelleen. Lisää <i>addNote</i>-funktiolle <i>console.log</i>-rivin alle
+                    <i>then</i>-haaraan <i>notes</i>-tilaamuuttujan päivitys:
+                </p>
+                <pre>setNotes(notes.concat(response.data));</pre>
 
-<h3>Muistiinpanon poistaminen</h3>
-<p><img src="../kuvat/notesdemo_5.png" alt=""></p>
-<p>Poistaminen tapahtuu kutsumalla axios.delete-funktiota. Toteuta poisto toiminnolla samalla tavalla kuin lisäys. Lisää uusi funktio <i>deleteNote</i> App.jsx-tiedostolle. Muista lisätä tämä mukaan <i>Notes</i>-komponentille.</p>
-<pre>
+                <h3>Muistiinpanon poistaminen</h3>
+                <p><img src="../kuvat/notesdemo_5.png" alt=""></p>
+                <p>Poistaminen tapahtuu kutsumalla axios.delete-funktiota. Toteuta poisto toiminnolla samalla
+                    tavalla kuin lisäys. Lisää uusi funktio <i>deleteNote</i> App.jsx-tiedostolle. Muista lisätä
+                    tämä mukaan <i>Notes</i>-komponentille.</p>
+                <pre>
 const deleteNote = (e, id) =&gt; {
     e.stopPropagation();
     axios.delete(`${baseURL}/${id}`)
@@ -174,11 +194,15 @@ const deleteNote = (e, id) =&gt; {
     })
 }
 </pre>
-<p><i>Notes</i>-komponentilla kutsutaan poistamista painikkeen avulla. Lisää painike <i>li</i>-elementin sisälle:</p>
-<pre>&lt;button onClick={e=&gt;deleteNote(e, note.id)}&gt;Poista&lt;/button&gt;</pre>
-<h3>Muistiinpanon tärkeyden muuttaminen</h3>
-<p>Tärkeyden muuttaminen muuttaa <i>importance</i>-arvon päinvastaiseksi. Lisää funktio <i>changeImportance</i> tiedostolle <i>App.jsx</i> ja vie se <i>Notes</i>-komponentille.</p>
-<pre>
+                <p><i>Notes</i>-komponentilla kutsutaan poistamista painikkeen avulla. Lisää painike
+                    <i>li</i>-elementin sisälle:
+                </p>
+                <pre>&lt;button onClick={e=&gt;deleteNote(e, note.id)}&gt;Poista&lt;/button&gt;</pre>
+                <h3>Muistiinpanon tärkeyden muuttaminen</h3>
+                <p>Tärkeyden muuttaminen muuttaa <i>importance</i>-arvon päinvastaiseksi. Lisää funktio
+                    <i>changeImportance</i> tiedostolle <i>App.jsx</i> ja vie se <i>Notes</i>-komponentille.
+                </p>
+                <pre>
 const changeImportance = (e, id) =&gt; {
     e.stopPropagation();
     // etsitaan id:n perusteella oikea note:
@@ -200,16 +224,22 @@ const changeImportance = (e, id) =&gt; {
       })
   }    
 </pre>
-<p>Jotta muistiinpanot näkyvät oikein ilman sivun päivittämistä myös notes-tilamuuttuja tulee päivittää muuttamisen jälkeen. Tämä vaatii <i>tempNotes</i>-apumuuttujan käyttämistä: haetaan nykyiset muistiinpanot ja päivitetään oikean id:n muistiinpano muutetulla.</p>
-<p>Tärkeys muuttuu klikattaessa <i>li</i>-elementtiä. Lisää <i>onClick</i>-metodi <i>Notes</i>-komponentilla <i>li</i>-elementin sisälle:</p>
-<pre>onClick={e=&gt;changeImportance(e, note.id)}</pre>
+                <p>Jotta muistiinpanot näkyvät oikein ilman sivun päivittämistä myös notes-tilamuuttuja tulee
+                    päivittää muuttamisen jälkeen. Tämä vaatii <i>tempNotes</i>-apumuuttujan käyttämistä: haetaan
+                    nykyiset muistiinpanot ja päivitetään oikean id:n muistiinpano muutetulla.</p>
+                <p>Tärkeys muuttuu klikattaessa <i>li</i>-elementtiä. Lisää <i>onClick</i>-metodi
+                    <i>Notes</i>-komponentilla <i>li</i>-elementin sisälle:
+                </p>
+                <pre>onClick={e=&gt;changeImportance(e, note.id)}</pre>
 
-<h3>Viestin näyttäminen käyttäjälle</h3>
+                <h3>Viestin näyttäminen käyttäjälle</h3>
 
-<p>Lisätään sovellukselle viesti onnistuneesta toiminnosta. <i>App.jsx</i> tarvitsee aluksi uuden tilamuuttujan.</p>
-<pre>const [message, setMessage] = useState("");</pre>
-<p>Lisää <i>App.jsx</i>-tiedostolle uusi funktio <i>messageHook</i> jossa näytetään viesti viiden sekunnin ajan. <i>messageHook</i> tarvitsee oman useEffect-ohjaimen.</p>
-<pre>
+                <p>Lisätään sovellukselle viesti onnistuneesta toiminnosta. <i>App.jsx</i> tarvitsee aluksi uuden
+                    tilamuuttujan.</p>
+                <pre>const [message, setMessage] = useState("");</pre>
+                <p>Lisää <i>App.jsx</i>-tiedostolle uusi funktio <i>messageHook</i> jossa näytetään viesti viiden
+                    sekunnin ajan. <i>messageHook</i> tarvitsee oman useEffect-ohjaimen.</p>
+                <pre>
 const messageHook = () =&gt; {
     if(message !== ""){
         const timer = setTimeout(()=&gt;setMessage(""), 5000);
@@ -219,19 +249,22 @@ const messageHook = () =&gt; {
 
 useEffect(messageHook, [message]);    
 </pre>
-<p>Päivitä <i>setMessage</i>-funktion avulla viesti aina kun toiminto on tehty onnistuneesti.</p>
-<pre>setMessage("Muistiinpano poistettu");</pre>
-<p>Viesti pitää vielä saada näkyviin, lisää se<i>App.jsx</i>-tiedostoon</p>
-<pre>{message && &lt;div className='message'&gt;{message}&lt;/div&gt;}</pre>
+                <p>Päivitä <i>setMessage</i>-funktion avulla viesti aina kun toiminto on tehty onnistuneesti.</p>
+                <pre>setMessage("Muistiinpano poistettu");</pre>
+                <p>Viesti pitää vielä saada näkyviin, lisää se<i>App.jsx</i>-tiedostoon</p>
+                <pre>{message && &lt;div className='message'&gt;{message}&lt;/div&gt;}</pre>
 
-<h3>Lisätehtävät</h3>
+                <h3>Lisätehtävät</h3>
 
-<h4>Muistiinpanojen suodattaminen</h4>
-<p>Lisää toiminnallisuus muistiinpanojen suodattamiselle <i>select</i>-ohjaimen avulla. Ohjaimesta voidaan valita näytettäväksi tärkeät, normaalit tai kaikki muistiinpanot.</p>
-<p><img src="../kuvat/notesdemo_6.png" alt=""></p>
-<p>Lisää <i>Notes</i>-komponentille <i>select</i>-ohjain, kun ohjain muuttuu (onChange) niin päivitä tilamuuttujaa <i>filter</i> sen päivitysfunktion <i>setFilter</i> avulla.</p>
-<p>Lisää <i>Notes</i>-komponentille ennen <i>return</i>-osaa tarkistus mikä arvo on valittuna. Oletuksena valitaan kaikki apumuuttujaan <i>filteredNotes</i>.</p>
-<pre>
+                <h4>Muistiinpanojen suodattaminen</h4>
+                <p>Lisää toiminnallisuus muistiinpanojen suodattamiselle <i>select</i>-ohjaimen avulla. Ohjaimesta
+                    voidaan valita näytettäväksi tärkeät, normaalit tai kaikki muistiinpanot.</p>
+                <p><img src="../kuvat/notesdemo_6.png" alt=""></p>
+                <p>Lisää <i>Notes</i>-komponentille <i>select</i>-ohjain, kun ohjain muuttuu (onChange) niin päivitä
+                    tilamuuttujaa <i>filter</i> sen päivitysfunktion <i>setFilter</i> avulla.</p>
+                <p>Lisää <i>Notes</i>-komponentille ennen <i>return</i>-osaa tarkistus mikä arvo on valittuna.
+                    Oletuksena valitaan kaikki apumuuttujaan <i>filteredNotes</i>.</p>
+                <pre>
 let filteredNotes = notes; // oletus kaikki
 if (filter === "tärkeät") {
     // jos filter niin suodatetaan
@@ -242,12 +275,14 @@ if (filter === "normaalit") {
     filteredNotes = notes.filter(n =&gt; n.important === false)
 }    
 </pre>
-<p>Muuta <i>notes.map</i>-kutsussa <i>notes</i>-muuttujan tilalle <i>filteredNotes</i>.</p>
+                <p>Muuta <i>notes.map</i>-kutsussa <i>notes</i>-muuttujan tilalle <i>filteredNotes</i>.</p>
 
-<h4>Virheilmoituksen näyttäminen</h4>
-<p>Lisää uusi <i>errorMessage</i> ja tälle oma <i>errorHook</i>. Muotoile virheilmoitus tyylitiedoston avulla.</p>
-<p>Virheilmoitus tulisi näyttää esimerkiksi jos käyttäjä yrittää syöttää tyhjän muistiinpanon. Voit lisätä virheilmoituksen myös <i>then</i>-metodin <i>catch</i>-haaraan:</p>
-<pre>
+                <h4>Virheilmoituksen näyttäminen</h4>
+                <p>Lisää uusi <i>errorMessage</i> ja tälle oma <i>errorHook</i>. Muotoile virheilmoitus
+                    tyylitiedoston avulla.</p>
+                <p>Virheilmoitus tulisi näyttää esimerkiksi jos käyttäjä yrittää syöttää tyhjän muistiinpanon. Voit
+                    lisätä virheilmoituksen myös <i>then</i>-metodin <i>catch</i>-haaraan:</p>
+                <pre>
 axios.delete(`${baseURL}/${id}`)
     .then(reponse =&gt; {
         ...
@@ -257,9 +292,9 @@ axios.delete(`${baseURL}/${id}`)
         setErrorMessage(`Muistiinpanon poisto epäonnistui ${error}`);
     })    
 </pre>
-</article>
-            </div>
+            </article>
         </div>
+    </div>
     </div>
     <footer>
         <p>

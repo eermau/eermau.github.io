@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -11,27 +12,28 @@
 <body>
     <div class="wrapper">
         <a href="../index.html">
-        <header>
-            <h1>Fullstack-kehitys</h1>
-        </header>
+            <header>
+                <h1>Fullstack-kehitys</h1>
+            </header>
         </a>
         <div id="container">
 
-            <div id="main" role="main">
 
-                <article class="markdown-body">
-                    <a href="notesphp.html">backend</a> | <a href="notesphp2.html">frontend</a>
-                    <h2>Notes PHP (1/2)</h2>
-                    <h3>Backend</h3>
-<p>
 
-Tehdään PHP:lla toimiva backend joka toimii notesdemon kanssa. Lisää kansio phpback notesdemon alapuolelle.
-</p>
+            <article class="">
+                <a href="notesphp.html">backend</a> | <a href="notesphp2.html">frontend</a>
+                <h2>Notes PHP (1/2)</h2>
+                <h3>Backend</h3>
+                <p>
 
-<p>
-Laadi kansiorakenne
-</p>
-<pre>
+                    Tehdään PHP:lla toimiva backend joka toimii notesdemon kanssa. Lisää kansio phpback notesdemon
+                    alapuolelle.
+                </p>
+
+                <p>
+                    Laadi kansiorakenne
+                </p>
+                <pre>
 phpback
   index.php
 
@@ -48,8 +50,8 @@ phpback / controlelrs
   usersManagement.php
 </pre>
 
-<h4>helpers.php</h4>
-<pre>
+                <h4>helpers.php</h4>
+                <pre>
 &lt;?php
 
 function getRoute($uri) {
@@ -101,9 +103,9 @@ function respond($statusCode, $data = null)
 }
 </pre>
 
-<h3>models</h3>
-<h4>connection.php</h4>
-<pre>
+                <h3>models</h3>
+                <h4>connection.php</h4>
+                <pre>
 &lt;?php
 function connectDB(){
     static $connection;
@@ -133,8 +135,8 @@ function connect() {
     }
 }
 </pre>
-<h4>note.php</h4>
-<pre>
+                <h4>note.php</h4>
+                <pre>
 &lt;?php
 require_once "connection.php";
 
@@ -173,8 +175,8 @@ function updateNote(int $id, string $content, bool $important): void
 }
 </pre>
 
-<h4>user.php</h4>
-<pre>
+                <h4>user.php</h4>
+                <pre>
 &lt;?php
 require_once "connection.php";
 
@@ -214,9 +216,9 @@ function login(string $username, string $password) {
 }
 </pre>
 
-<h3>controllers</h3>
-<h4>notesManagement.php</h4>
-<pre>
+                <h3>controllers</h3>
+                <h4>notesManagement.php</h4>
+                <pre>
 &lt;?php
 require_once "./models/note.php";
 
@@ -303,8 +305,8 @@ function getNotesController()
     }
 }
 </pre>
-<h4>usersManagement.php</h4>
-<pre>
+                <h4>usersManagement.php</h4>
+                <pre>
 &lt;?php
 require_once "./models/user.php";
 
@@ -371,9 +373,10 @@ function meController() {
     }
 }
 </pre>
-<h4>index.php</h4>
-<p>Sijoita index.php juurihakemistoon. Täällä käsitellään reititys ja ohjataan pyyntö oikeaan paikkaan.</p>
-<pre>
+                <h4>index.php</h4>
+                <p>Sijoita index.php juurihakemistoon. Täällä käsitellään reititys ja ohjataan pyyntö oikeaan
+                    paikkaan.</p>
+                <pre>
 &lt;?php
 session_start();
 
@@ -434,9 +437,9 @@ switch ($route) {
         respond(404);
 }    
 </pre>
-</article>
-            </div>
+            </article>
         </div>
+    </div>
     </div>
     <footer>
         <p>

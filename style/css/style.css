@@ -23,18 +23,20 @@ header {
 }
 
 #divHeadLink {
-    float:right;
+    float: right;
     padding-right: 20px;
     margin-top: -30px;
 }
+
 #divHeadLink a {
-    color:#457b9d
-}
-#divHeadLink a:hover {
-    color:#ffffff
+    color: #457b9d
 }
 
-.current-section {
+#divHeadLink a:hover {
+    color: #ffffff
+}
+
+.footer {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -46,7 +48,7 @@ header {
 }
 
 pre {
-    overflow:auto;
+    overflow: auto;
     color: #f1faee;
     background-color: #457b9d;
     padding: 10px;
@@ -111,11 +113,15 @@ form {
     background-color: #c6cccc;
 }
 
-input[type=submit], [type=button], button {
+input[type=submit],
+[type=button],
+button {
     padding: 5px 15px 5px 15px;
 }
 
-input[type=submit]:hover, [type=button]:hover, button:hover {
+input[type=submit]:hover,
+[type=button]:hover,
+button:hover {
     text-shadow: 0 0 .65px #333, 0 0 .65px #333;
 }
 
@@ -127,13 +133,16 @@ input[type=submit]:hover, [type=button]:hover, button:hover {
         margin-left: auto;
         margin-right: auto;
     }
+
     header {
         height: auto;
     }
+
     .current-section {
         width: 100%;
     }
+
     #divHeadLink {
         padding: 10px;
     }
-  }
+}

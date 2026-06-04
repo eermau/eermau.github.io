@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../style/css/style.css">
-    
+
     <title>Harjoitukset 2</title>
 </head>
 
@@ -15,58 +16,56 @@
         </header>
         <div id="container">
 
-            <div id="main" role="main">
-                
-                <article class="markdown-body">
 
 
+            <article class="">
+                <h2>PHP, harjoitukset 2</h2>
+                <p>Tee uusi php-tiedosto, tallenna se kansioon harj nimellä harj2.php.</p>
+                <h3>Ehtolauseet</h3>
 
-                    <h2>PHP, harjoitukset 2</h2>
-                   <p>Tee uusi php-tiedosto, tallenna se kansioon harj nimellä harj2.php.</p>
-                    <h3>Ehtolauseet</h3>
+                <h3>2.1 Ehtolauseet, satunnaisluku ja jakojäännös</h3>
+                <p>Arvo satunnaisluku väliltä 1 - 20 muuttujaan.</p>
+                <p>Tarkista, onko se parillinen vai pariton ja tulosta kumpi on kyseessä. Parillisuuden
+                    testaamisessa kannattaa käyttää jakojäännöstä.
+                </p>
+                <p> käyttää <a href="https://www.w3schools.com/php/func_math_fmod.asp"
+                        target="_blank">fmod()</a>-funktiota tai %-operaattoria:
+                </p>
+                <pre>$luku % 2</pre>
+                <h3>2.2 Ehtoja ja satunnaisluku</h3>
+                <p>Arvo satunnaisluku väliltä 1 - 100 muuttujaan.</p>
+                <ul>
+                    <li>Jos luku on välillä 30 - 50, tulosta arvottu luku ja "Pienehkö"</li>
+                    <li>Jos luku on pienempi kuin 10 tai suurempi kuin 90, tulosta luku sekä teksti "ääriarvo"</li>
+                    <li>Jos luku on pienempi kuin 50 ja parillinen, tulosta sekä arvottu luku että teksti "Pieni ja
+                        parillinen".</li>
+                    <li>Jos luku ei ole 35, tulosta luku ja teksti "Ei 35"</li>
 
-                    <h3>2.1 Ehtolauseet, satunnaisluku ja jakojäännös</h3>
-                    <p>Arvo satunnaisluku väliltä 1 - 20 muuttujaan.</p>
-                    <p>Tarkista, onko se parillinen vai pariton ja tulosta kumpi on kyseessä. Parillisuuden
-                        testaamisessa kannattaa käyttää jakojäännöstä. 
-                    </p>
-<p> käyttää <a href="https://www.w3schools.com/php/func_math_fmod.asp" target="_blank">fmod()</a>-funktiota tai %-operaattoria:
-</p>                       <pre>$luku % 2</pre>
-                    <h3>2.2 Ehtoja ja satunnaisluku</h3>
-                    <p>Arvo satunnaisluku väliltä 1 - 100 muuttujaan.</p>
-                    <ul>
-                        <li>Jos luku on välillä 30 - 50, tulosta arvottu luku ja "Pienehkö"</li>
-                        <li>Jos luku on pienempi kuin 10 tai suurempi kuin 90, tulosta luku sekä teksti "ääriarvo"</li>
-                        <li>Jos luku on pienempi kuin 50 ja parillinen, tulosta sekä arvottu luku että teksti "Pieni ja
-                            parillinen".</li>
-                        <li>Jos luku ei ole 35, tulosta luku ja teksti "Ei 35"</li>
+                </ul>
 
-                    </ul>
+                <h3>2.3 Ehtolauseet ja lukumuunnokset</h3>
+                <p>Tee seuraavat muunnokset ja vertailut. Tulosta vastauksen arvo ruudulle selitystekstin kera.</p>
+                <ul>
+                    <li>kumpi on suurempi: <a href="https://www.php.net/manual/en/function.sqrt.php"
+                            target="_blank">neliöjuuri</a> 146:sta vai 3 <a
+                            href="https://www.php.net/manual/en/function.pow.php" target="_blank">potenssiin</a> 3
+                    </li>
+                    <li>kumpi on suurempi: 165 / 8 laskun <a href="https://www.php.net/manual/en/function.fmod.php"
+                            target="_blank">jakojäännös</a> vai hexadesimaaliluvun 03 arvo <a
+                            href="https://www.php.net/manual/en/function.hexdec.php" target="_blank">desimaalilukuna</a>
+                    </li>
+                    <li>mikä on suurin: hexadesimaaliluvun AF arvo desimaalilukuna, 5 potenssiin 3 vai luku 155</li>
+                </ul>
 
-                    <h3>2.3 Ehtolauseet ja lukumuunnokset</h3>
-                    <p>Tee seuraavat muunnokset ja vertailut. Tulosta vastauksen arvo ruudulle selitystekstin kera.</p>
-                    <ul>
-                        <li>kumpi on suurempi: <a href="https://www.php.net/manual/en/function.sqrt.php"
-                                target="_blank">neliöjuuri</a> 146:sta vai 3 <a
-                                href="https://www.php.net/manual/en/function.pow.php" target="_blank">potenssiin</a> 3
-                        </li>
-                        <li>kumpi on suurempi: 165 / 8 laskun <a href="https://www.php.net/manual/en/function.fmod.php"
-                                target="_blank">jakojäännös</a> vai hexadesimaaliluvun 03 arvo <a
-                                href="https://www.php.net/manual/en/function.hexdec.php"
-                                target="_blank">desimaalilukuna</a>
-                        </li>
-                        <li>mikä on suurin: hexadesimaaliluvun AF arvo desimaalilukuna, 5 potenssiin 3 vai luku 155</li>
-                    </ul>
+                <p>Testaa töiden toiminta</p>
 
-                    <p>Testaa töiden toiminta</p>
-
-                </article>
-            </div>
+            </article>
         </div>
     </div>
-    <div class="current-section">
+    </div>
+    <div class="footer">
         kevät 2023
-      </div>
+    </div>
 </body>
 
 </html>

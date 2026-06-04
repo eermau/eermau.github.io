@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -17,32 +18,36 @@
         </a>
         <div id="container">
 
-            <div id="main" role="main">
 
-                <article class="markdown-body">
 
-                    <h2>Yksikkötestaus ja JEST-demo</h2>
-                    <h3>Ympäristön asentaminen</h3>
-                    <p>Tee GitHub-repoon kansio <i>jest</i>. Siirry kansioon ja alusta uusi node.js-projekti.</p>
-                    <pre>npm init</pre>
-                    <p>Asenna JEST, <i>--save-dev</i> tallettaa jest-kirjaston <i>package.json</i>-tiedostoon talteen.
-                    </p>
-                    <pre>npm install --save-dev jest</pre>
+            <article class="">
 
-                    <p>Jotta node_modules-kansio ei mene Git-repoosi niin lisätään juurihakemistoon uusi tiedosto <i>.gitignore</i>, kirjoita tiedoston sisällöksi vain <code>node_modules</code>.</p>
-                    <h3>Testin luonti</h3>
-                    <p>Lisää kandio <i>demot</i> ja luo sinne tiedosto <i>sum.js</i> sekä <i>sum.test.js</i>. Tehdään JavaScript-ohjelma yhteen tiedostoon ja sitä testaavat yksikkötestit toiseen.</p>
-                
-                    <p><i>sum.js</i>:</p>
-<pre>
+                <h2>Yksikkötestaus ja JEST-demo</h2>
+                <h3>Ympäristön asentaminen</h3>
+                <p>Tee GitHub-repoon kansio <i>jest</i>. Siirry kansioon ja alusta uusi node.js-projekti.</p>
+                <pre>npm init</pre>
+                <p>Asenna JEST, <i>--save-dev</i> tallettaa jest-kirjaston <i>package.json</i>-tiedostoon talteen.
+                </p>
+                <pre>npm install --save-dev jest</pre>
+
+                <p>Jotta node_modules-kansio ei mene Git-repoosi niin lisätään juurihakemistoon uusi tiedosto
+                    <i>.gitignore</i>, kirjoita tiedoston sisällöksi vain <code>node_modules</code>.
+                </p>
+                <h3>Testin luonti</h3>
+                <p>Lisää kandio <i>demot</i> ja luo sinne tiedosto <i>sum.js</i> sekä <i>sum.test.js</i>. Tehdään
+                    JavaScript-ohjelma yhteen tiedostoon ja sitä testaavat yksikkötestit toiseen.</p>
+
+                <p><i>sum.js</i>:</p>
+                <pre>
 const sum = (a, b) =&gt; {
     return a + b;
 }
 
 module.exports = sum;   
 </pre>
-<p><i>sum.test.js</i>-tiedostossa otetaan käyttöön sum-funktio ja laaditaan kolme testiä yhteenlaskulle:</p>
-<pre>
+                <p><i>sum.test.js</i>-tiedostossa otetaan käyttöön sum-funktio ja laaditaan kolme testiä
+                    yhteenlaskulle:</p>
+                <pre>
 const sum = require('./sum');
 
 test('yhteenlasku 1+2=3', () =&gt; {
@@ -57,30 +62,32 @@ test('yhteenlasku -1+2=1', () =&gt; {
     expect(sum(-1, 2)).toBe(1);
 });    
 </pre>
-<p>Lisää <i>package.json</i>-tiedostoon oikea testauskomento:</p>
-<p><img src="../kuvat/jest_1.png" alt=""></p>
-<pre>
+                <p>Lisää <i>package.json</i>-tiedostoon oikea testauskomento:</p>
+                <p><img src="../kuvat/jest_1.png" alt=""></p>
+                <pre>
   "scripts": {
     "test": "jest --coverage"
   },    
 </pre>
-<p>Aja testit komentokehotteessa:</p>
-<pre> npm run test</pre>        
-<p><img src="../kuvat/jest_2.png" alt=""></p>      
+                <p>Aja testit komentokehotteessa:</p>
+                <pre> npm run test</pre>
+                <p><img src="../kuvat/jest_2.png" alt=""></p>
 
-<h4>Poikkeuksen heittäminen</h4>
+                <h4>Poikkeuksen heittäminen</h4>
 
-<p>Funktio toimii nyt oikeilla arvoilla mutta on hyvä varautua virhetilanteisiin (= poikkeuksiin). Kun funktio kohtaa poikkeuksen se heittää virheen, koodissa voidaan varautua tähän.</p>
+                <p>Funktio toimii nyt oikeilla arvoilla mutta on hyvä varautua virhetilanteisiin (= poikkeuksiin).
+                    Kun funktio kohtaa poikkeuksen se heittää virheen, koodissa voidaan varautua tähän.</p>
 
-<p><i>sum.js</i>-tiedostossa tarkistetaan alussa ovatko syötteet lukuja:</p>
-<pre>
+                <p><i>sum.js</i>-tiedostossa tarkistetaan alussa ovatko syötteet lukuja:</p>
+                <pre>
 if (typeof a !== 'number' || typeof b !== 'number') {
     throw new Error('Virheellinen syöte!');
 }    
 </pre>
 
-<p><i>sum.test.js</i>-testitiedostossa testataan toimiiko poikkeuksen heittäminen jos jompi kumpi syöte on virheellinen tai jos syötteet puuttuvat kokonaan:</p>
-<pre>
+                <p><i>sum.test.js</i>-testitiedostossa testataan toimiiko poikkeuksen heittäminen jos jompi kumpi
+                    syöte on virheellinen tai jos syötteet puuttuvat kokonaan:</p>
+                <pre>
 test('virheellinen syöte', () =&gt; {
     expect(() =&gt; sum(1, 'b')).toThrow('Virheellinen syöte!');
 })
@@ -93,9 +100,9 @@ test('virheellinen syöte', () =&gt; {
     expect(() =&gt; sum()).toThrow('Virheellinen syöte!');
 })    
 </pre>
-                </article>
-            </div>
+            </article>
         </div>
+    </div>
     </div>
     <footer>
         <p>

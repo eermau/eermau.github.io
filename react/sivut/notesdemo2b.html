@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fi">
 
 <head>
@@ -11,26 +12,28 @@
 <body>
     <div class="wrapper">
         <a href="../index.html">
-        <header>
-            <h1>Fullstack-kehitys</h1>
-        </header>
+            <header>
+                <h1>Fullstack-kehitys</h1>
+            </header>
         </a>
         <div id="container">
 
-            <div id="main" role="main">
 
-                <article class="markdown-body">
-                    <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a>
-                    <h2>Notes-demo 2 (2/2)</h2>
 
-<h3>Käyttäjän lisääminen</h3>
-<p>Sovelluksestamme puuttuu vielä kirjautuminen ja rekisteröityminen. Ensimmäiseksi toteutetaan backendiin mahdollisuus luoda uusi käyttäjä. Uuden käyttäjän salasana salataan ja sitä varten tarvitaan kirjasto <i>bcryptjs</i>.</p>
-<pre>npm install bcryptjs --save
+            <article class="">
+                <a href="notesdemo2.html">backend</a> | <a href="notesdemo2b.html">autentikaatio</a>
+                <h2>Notes-demo 2 (2/2)</h2>
+
+                <h3>Käyttäjän lisääminen</h3>
+                <p>Sovelluksestamme puuttuu vielä kirjautuminen ja rekisteröityminen. Ensimmäiseksi toteutetaan
+                    backendiin mahdollisuus luoda uusi käyttäjä. Uuden käyttäjän salasana salataan ja sitä varten
+                    tarvitaan kirjasto <i>bcryptjs</i>.</p>
+                <pre>npm install bcryptjs --save
 </pre>
-<p>Ota <i>bcryptjs</i> käyttöön tiedostossa <i>index.js</i></p>
-<pre>const bcrypt = require('bcryptjs')</pre>
-<p>Lisää backendin <i>index.js</i>-tiedostoon /register -toiminto:</p>
-<pre>
+                <p>Ota <i>bcryptjs</i> käyttöön tiedostossa <i>index.js</i></p>
+                <pre>const bcrypt = require('bcryptjs')</pre>
+                <p>Lisää backendin <i>index.js</i>-tiedostoon /register -toiminto:</p>
+                <pre>
 app.post('/register', (req, res) =&gt; {
     const user = req.body;
     const saltRounds = 10;
@@ -51,8 +54,8 @@ app.post('/register', (req, res) =&gt; {
         })
 })    
 </pre>
-<p>Testaa käyttäjän lisäämistä REST-testillä (<i>post_register.http</i>):</p>
-<pre>
+                <p>Testaa käyttäjän lisäämistä REST-testillä (<i>post_register.http</i>):</p>
+                <pre>
 POST http://localhost:3001/register HTTP/1.1
 content-type: application/json
 
@@ -63,15 +66,19 @@ content-type: application/json
 }    
 </pre>
 
-<h3>Kirjautuminen</h3>
-<p>Kirjautuminen tarkistaa löytyykö tietokannasta käyttäjä ja vastaako salasana tietokannan salasanaan. Tämän jälkeen luodaan JSON Web Token, tähän käytetään <i>jwt</i>-kirjastoa. JWT allekirjoitetaan käyttäen salausavainta (SECRET). JWT tallennetaan selaimen muistiin ja se lähetetään aina jokaisen kutsun yhteydessä backendille. Käyttäjän id tallennetaan JWT:n sisälle, ei lähetetä puhtaana json-datana.</p>
-<p>Asenna jwt-kirjasto</p>
-<pre>npm install jsonwebtoken --save</pre>
-<p>Ota <i>jwt</i> käyttöönn tiedostossa <i>index.js</i></p>
-<pre>const jwt = require('jsonwebtoken')</pre>
+                <h3>Kirjautuminen</h3>
+                <p>Kirjautuminen tarkistaa löytyykö tietokannasta käyttäjä ja vastaako salasana tietokannan
+                    salasanaan. Tämän jälkeen luodaan JSON Web Token, tähän käytetään <i>jwt</i>-kirjastoa. JWT
+                    allekirjoitetaan käyttäen salausavainta (SECRET). JWT tallennetaan selaimen muistiin ja se
+                    lähetetään aina jokaisen kutsun yhteydessä backendille. Käyttäjän id tallennetaan JWT:n sisälle,
+                    ei lähetetä puhtaana json-datana.</p>
+                <p>Asenna jwt-kirjasto</p>
+                <pre>npm install jsonwebtoken --save</pre>
+                <p>Ota <i>jwt</i> käyttöönn tiedostossa <i>index.js</i></p>
+                <pre>const jwt = require('jsonwebtoken')</pre>
 
-<p>Lisää /login-toiminto backendin <i>index.js</i>-tiedostoon:</p>
-<pre>
+                <p>Lisää /login-toiminto backendin <i>index.js</i>-tiedostoon:</p>
+                <pre>
 app.post('/login', (req, res) =&gt; {
     const user = req.body;
     console.log(user);
@@ -111,8 +118,8 @@ app.post('/login', (req, res) =&gt; {
 })    
 </pre>
 
-<p>Testaa kirjautumista REST-testillä (<i>post_login.http</i>):</p>
-<pre>
+                <p>Testaa kirjautumista REST-testillä (<i>post_login.http</i>):</p>
+                <pre>
 POST http://localhost:3001/login HTTP/1.1
 content-type: application/json
 
@@ -121,15 +128,16 @@ content-type: application/json
     "password": "salasana"
 }    
 </pre>
-<p>Kirjautuminen palauttaa tokenin ja käyttäjänimen.</p>
+                <p>Kirjautuminen palauttaa tokenin ja käyttäjänimen.</p>
 
-<h3>Frontend</h3>
+                <h3>Frontend</h3>
 
-<h4>Rekisteröityminen</h4>
-<p>Luo uusi tiedosto <i>Register.jsx</i> kansioon <i>components</i>. Laadi lomake jonka avulla käyttäjä voi rekisteröityä notesdemon käyttäjäksi.</p>
-<p><img src="../kuvat/notesdemo2_4.png" alt=""></p>
-<p>Lisää funktio <i>registerHandler</i> tiedostolle <i>App.jsx</i></p>
-<pre>
+                <h4>Rekisteröityminen</h4>
+                <p>Luo uusi tiedosto <i>Register.jsx</i> kansioon <i>components</i>. Laadi lomake jonka avulla
+                    käyttäjä voi rekisteröityä notesdemon käyttäjäksi.</p>
+                <p><img src="../kuvat/notesdemo2_4.png" alt=""></p>
+                <p>Lisää funktio <i>registerHandler</i> tiedostolle <i>App.jsx</i></p>
+                <pre>
 const registerHandler = (e, userdata) =&gt; {
   e.preventDefault();
   console.log(userdata);
@@ -141,10 +149,13 @@ const registerHandler = (e, userdata) =&gt; {
 }    
 </pre>
 
-<h4>Kirjautuminen</h4>
-<p>Tee seuraavaksi komponentti <i>Login</i> tiedostoon <i>Login.jsx</i>. Lisää samaan tapaan <i>loginHandler</i>-funktio tiedostolle <i>App.jsx</i>. URL-osoitteet voi määritellä muuttujiin <i>loginURL</i> ja <i>registerURL</i>.</p>
-<p><img src="../kuvat/notesdemo2_5.png" alt=""></p>
-<pre>
+                <h4>Kirjautuminen</h4>
+                <p>Tee seuraavaksi komponentti <i>Login</i> tiedostoon <i>Login.jsx</i>. Lisää samaan tapaan
+                    <i>loginHandler</i>-funktio tiedostolle <i>App.jsx</i>. URL-osoitteet voi määritellä muuttujiin
+                    <i>loginURL</i> ja <i>registerURL</i>.
+                </p>
+                <p><img src="../kuvat/notesdemo2_5.png" alt=""></p>
+                <pre>
 const loginHandler = (e, userdata) =&gt; {
     e.preventDefault();
     axios.post(loginURL, userdata)
@@ -153,18 +164,20 @@ const loginHandler = (e, userdata) =&gt; {
     })
 }    
 </pre>
-<p>Kokeile kirjautumista ja tarkista tulostaako <i>console.log</i> saadun tokenin oikein.</p>
-<p>Frontendin tulee säilyttää tieto käyttäjästä muistissa. Lisää uusi tilamuuttuja:</p>
-<pre>const [user, setUser] = useState(null);
+                <p>Kokeile kirjautumista ja tarkista tulostaako <i>console.log</i> saadun tokenin oikein.</p>
+                <p>Frontendin tulee säilyttää tieto käyttäjästä muistissa. Lisää uusi tilamuuttuja:</p>
+                <pre>const [user, setUser] = useState(null);
 </pre>
-<p>Asetetaan <i>user</i> kirjautumisen then-haarassa:</p>
-<pre>setUser(response.data)  //HUOM! tämä sisältää olion: {token, username}</pre>
-<p>Käyttäjän tulee pysyä kirjautuneena vaikka selainta päivitettäisiin. Tieto tokenista täytyy asettaa myös selaimen muistiin.</p>
-<pre>
+                <p>Asetetaan <i>user</i> kirjautumisen then-haarassa:</p>
+                <pre>setUser(response.data)  //HUOM! tämä sisältää olion: {token, username}</pre>
+                <p>Käyttäjän tulee pysyä kirjautuneena vaikka selainta päivitettäisiin. Tieto tokenista täytyy
+                    asettaa myös selaimen muistiin.</p>
+                <pre>
 window.localStorage.setItem('notesdemouser', JSON.stringify(response.data))
 </pre>
-<p>Tarkistus ollaanko kirjauduttu vai ei tarvitsee oman hookin. Tehdään <i>userHook</i> joka tarkistaa löytyykö selaimen muistista <i>notesdemouser</i>.</p>
-<pre>
+                <p>Tarkistus ollaanko kirjauduttu vai ei tarvitsee oman hookin. Tehdään <i>userHook</i> joka
+                    tarkistaa löytyykö selaimen muistista <i>notesdemouser</i>.</p>
+                <pre>
 const userHook = () =&gt; {
     const loggedUserJSON = window.localStorage.getItem('notesdemouser')
     if (loggedUserJSON) {
@@ -173,42 +186,52 @@ const userHook = () =&gt; {
     }
   }    
 </pre>
-<p>Muuta vanha <i>startHook</i> ja lisää <i>userHook</i></p>
-<pre>
+                <p>Muuta vanha <i>startHook</i> ja lisää <i>userHook</i></p>
+                <pre>
 useEffect(userHook, []);
 useEffect(startHook, [user]);    
 </pre>
-<p><i>startHook</i>:in alussa tarkistetaan onko käyttäjä olemassa. Jos ei ole kirjauduttu ei haeta notes-tietoja</p>
-<pre>
+                <p><i>startHook</i>:in alussa tarkistetaan onko käyttäjä olemassa. Jos ei ole kirjauduttu ei haeta
+                    notes-tietoja</p>
+                <pre>
 if (user === null) {
     return;
 }    
 </pre>
-<h4>Logout</h4>
-<p>Lisää painike uloskirjautumiselle <i>App.jsx</i>-tiedostoon. Painike kutsuu <i>logoutHandler</i>-funktiota joka tyhjentää <i>notesdemouser</i>-tiedon selaimesta.</p>
-<pre>
+                <h4>Logout</h4>
+                <p>Lisää painike uloskirjautumiselle <i>App.jsx</i>-tiedostoon. Painike kutsuu
+                    <i>logoutHandler</i>-funktiota joka tyhjentää <i>notesdemouser</i>-tiedon selaimesta.
+                </p>
+                <pre>
 const logoutHandler = () =&gt; {
     setUser(null)
     window.localStorage.removeItem('notesdemouser')
 }    
 </pre>
 
-<h4>Käyttöliittymän ulkoasu</h4>
+                <h4>Käyttöliittymän ulkoasu</h4>
 
-<p>Nyt moni asia jo toimii mutta käyttöliittymä ei toimi ihan niin kuin pitäisi. Piilotetaan <i>Notes</i> ja <i>NotesForm</i> jos käyttäjä ei ole kirjautunut. Kun käyttäjä kirjautuu piilotetaan <i>Login</i> ja <i>Register</i>. </p>
+                <p>Nyt moni asia jo toimii mutta käyttöliittymä ei toimi ihan niin kuin pitäisi. Piilotetaan
+                    <i>Notes</i> ja <i>NotesForm</i> jos käyttäjä ei ole kirjautunut. Kun käyttäjä kirjautuu
+                    piilotetaan <i>Login</i> ja <i>Register</i>.
+                </p>
 
-<div class="twoimages">
-<p>Kirjautumaton:<img src="../kuvat/notesdemo2_7.png" alt=""></p>
-<p>Kirjautunut:<img src="../kuvat/notesdemo2_6.png" alt=""></p>
-</div>
+                <div class="twoimages">
+                    <p>Kirjautumaton:<img src="../kuvat/notesdemo2_7.png" alt=""></p>
+                    <p>Kirjautunut:<img src="../kuvat/notesdemo2_6.png" alt=""></p>
+                </div>
 
-<h3>Autentikaatio - backend</h3>
+                <h3>Autentikaatio - backend</h3>
 
-<p>Viimeinen asia on autentikaatio, tarkistetaan milloin käyttäjä on kirjautunut. Backendissä tulee tietää kuka on kirjautunut: kenen muistiinpanot näytetään, kuka on käyttäjä joka luo uuden muistiinpanon tai muokkaa olemassa olevaa. Jokainen pyyntö sisältää tokenin joka sisältää käyttäjän id:n.</p>
+                <p>Viimeinen asia on autentikaatio, tarkistetaan milloin käyttäjä on kirjautunut. Backendissä tulee
+                    tietää kuka on kirjautunut: kenen muistiinpanot näytetään, kuka on käyttäjä joka luo uuden
+                    muistiinpanon tai muokkaa olemassa olevaa. Jokainen pyyntö sisältää tokenin joka sisältää
+                    käyttäjän id:n.</p>
 
-<h4>Apufunktio</h4>
-<p>Lisätään apufunktio joka lukee <i>authorization</i>-tiedon pyynnöstä. Funktio purkaa tokenin ja palauttaa sen.</p>
-<pre>
+                <h4>Apufunktio</h4>
+                <p>Lisätään apufunktio joka lukee <i>authorization</i>-tiedon pyynnöstä. Funktio purkaa tokenin ja
+                    palauttaa sen.</p>
+                <pre>
 const getTokenFrom = req =&gt; {
     const authorization = req.get('authorization');
     console.log(authorization);
@@ -219,9 +242,13 @@ const getTokenFrom = req =&gt; {
     }
 }    
 </pre>
-<h4>Muistiinpanojen hakeminen</h4>
-<p>Tee ensimmäisenä lisäys tokenin käsittelystä /GET -pyynnölle. Lisää seuraava koodi <i>app.get</i>-metodin alkuun. Luetaan token pyynnöstä ja annetaan virheilmoitus mikäli se puuttuu. Tämän jälkeen puretaan token käyttäen <code>jwt.verify</code> funktiota. Frontend lähettää tokenissa olion jonka sisällä on käyttäjän nimi ja id.</p>
-<pre>
+                <h4>Muistiinpanojen hakeminen</h4>
+                <p>Tee ensimmäisenä lisäys tokenin käsittelystä /GET -pyynnölle. Lisää seuraava koodi
+                    <i>app.get</i>-metodin alkuun. Luetaan token pyynnöstä ja annetaan virheilmoitus mikäli se
+                    puuttuu. Tämän jälkeen puretaan token käyttäen <code>jwt.verify</code> funktiota. Frontend
+                    lähettää tokenissa olion jonka sisällä on käyttäjän nimi ja id.
+                </p>
+                <pre>
 const token = getTokenFrom(req);
 console.log(token);
 
@@ -246,26 +273,34 @@ if(!decodedToken || !decodedToken.id){
     )
 }    
 </pre>
-<p>Lisää REST-testi <i>get_auth_notes.http</i> jossa on mukana token (id:1). Varmista, että backend löytää käyttäjän muistiinpanot.</p>
-<pre>
+                <p>Lisää REST-testi <i>get_auth_notes.http</i> jossa on mukana token (id:1). Varmista, että backend
+                    löytää käyttäjän muistiinpanot.</p>
+                <pre>
 GET http://localhost:3001/notes HTTP/1.1
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWQiOjEsImlhdCI6MTYwMjE0NTY5OX0.lNsfJVKobqhpf8ZYU0-WopwWxwF1aPsQYjCD_U9c9Xo    
 </pre>
-<p>Nyt tulee näkyviin vielä kaikki muistiinpanot koska <i>knex.select</i> ei rajoita tietoja. Lisää ehto mukaan:</p>
-<pre>where('user_id', '=', decodedToken.id)
+                <p>Nyt tulee näkyviin vielä kaikki muistiinpanot koska <i>knex.select</i> ei rajoita tietoja. Lisää
+                    ehto mukaan:</p>
+                <pre>where('user_id', '=', decodedToken.id)
 </pre>
-<p>Aja testi uudelleen ja varmista että nyt tulevat näkyviin vain yhden käyttäjän muistiinpanot.</p>
+                <p>Aja testi uudelleen ja varmista että nyt tulevat näkyviin vain yhden käyttäjän muistiinpanot.</p>
 
-<h4>Muut toiminnot</h4>
-<p>Kirjautuneen käyttäjän muita toimintoja ovat muistiinpanon lisääminen, muokkaaminen ja poistaminen. Lisää yllä oleva tokenin tarkistus myös näille toiminnoille. Muistiinpanon lisäämisessä korjaa nyt käyttäjän id:</p>
-<pre>note.user_id = decodedToken.id;
+                <h4>Muut toiminnot</h4>
+                <p>Kirjautuneen käyttäjän muita toimintoja ovat muistiinpanon lisääminen, muokkaaminen ja
+                    poistaminen. Lisää yllä oleva tokenin tarkistus myös näille toiminnoille. Muistiinpanon
+                    lisäämisessä korjaa nyt käyttäjän id:</p>
+                <pre>note.user_id = decodedToken.id;
 </pre>
 
-<h3>Autentikaatio - frontend</h3>
+                <h3>Autentikaatio - frontend</h3>
 
-<p>Backend toimii nyt oikein mutta frontend ei vielä lähetä <i>tokenia</i>. Kirjautuneen käyttäjän pyyntöihin tulee lisätä <i>Authorization: bearer</i>-teksti sekä <i>token</i> joka sisältää käyttäjän nimen ja id:n. </p>
-<p>Lisää uusi kansio <i>services</i> ja sinne tiedostot <i>notesService.js</i> sekä <i>userService.js</i>. Siirretään <i>notesService</i>:n sisälle <i>axios</i>-kutsun tekeminen.</p>
-<pre>
+                <p>Backend toimii nyt oikein mutta frontend ei vielä lähetä <i>tokenia</i>. Kirjautuneen käyttäjän
+                    pyyntöihin tulee lisätä <i>Authorization: bearer</i>-teksti sekä <i>token</i> joka sisältää
+                    käyttäjän nimen ja id:n. </p>
+                <p>Lisää uusi kansio <i>services</i> ja sinne tiedostot <i>notesService.js</i> sekä
+                    <i>userService.js</i>. Siirretään <i>notesService</i>:n sisälle <i>axios</i>-kutsun tekeminen.
+                </p>
+                <pre>
 import axios from 'axios';
 
 const baseUrl = 'http://localhost:3001/notes'
@@ -308,29 +343,38 @@ export default {
     setToken: setToken
 }    
 </pre>
-<p>Ota <i>App.jsx</i>-tiedostolla uusi <i>notesService</i> käyttöön:</p>
-<pre>
+                <p>Ota <i>App.jsx</i>-tiedostolla uusi <i>notesService</i> käyttöön:</p>
+                <pre>
 import notesService from './services/notesService'    
 </pre>
-<p>Poista tarpeeton <i>baseURL</i> ja muuta <i>axios</i>-kutsut käyttämään uutta <i>notesService</i>:a. Uusi tapa palauttaa suoraan <i>response.data</i>:n joten muuta <i>App.jsx</i>-tiedostolla <i>response.data</i> muotoon <i>response</i>. Esimerkkinä muistiinpanon lisääminen:</p>
-<pre>
+                <p>Poista tarpeeton <i>baseURL</i> ja muuta <i>axios</i>-kutsut käyttämään uutta
+                    <i>notesService</i>:a. Uusi tapa palauttaa suoraan <i>response.data</i>:n joten muuta
+                    <i>App.jsx</i>-tiedostolla <i>response.data</i> muotoon <i>response</i>. Esimerkkinä
+                    muistiinpanon lisääminen:
+                </p>
+                <pre>
 notesService.add(note).then(response =&gt; {
     setMessage("Muistiinpano lisätty");
     setNotes(notes.concat(response))   
 })    
 </pre>
-<p>notesServicelle tulee kertoa token. Lisää <i>loginHandler</i>-funktiolle <i>setUser</i>-rivin viereen</p>
-<pre>notesService.setToken(response.data.token)</pre>
-<p>(kun olet lisännyt userServicen niin <i>response.token</i>)</p>
-<p><i>userHook</i>-funktiota kutsutaan selaimen päivittyessä, täälläkin tulee välittää tieto tokenista <i>notesServicelle</i>:</p>
-<pre>
+                <p>notesServicelle tulee kertoa token. Lisää <i>loginHandler</i>-funktiolle <i>setUser</i>-rivin
+                    viereen</p>
+                <pre>notesService.setToken(response.data.token)</pre>
+                <p>(kun olet lisännyt userServicen niin <i>response.token</i>)</p>
+                <p><i>userHook</i>-funktiota kutsutaan selaimen päivittyessä, täälläkin tulee välittää tieto
+                    tokenista <i>notesServicelle</i>:</p>
+                <pre>
 notesService.setToken(user.token)
 </pre>
 
-<h4>userService</h4>
-<p>Lisää toiminnot <i>login</i> ja <i>register</i> tiedostolle <i>userService</i>. Tämä on yksinkertaisempi sillä emme tarvitse tietoa tokenista eikä siten ole tarvetta <i>makeHeader</i>-funktion kutsumiselle.</p>
+                <h4>userService</h4>
+                <p>Lisää toiminnot <i>login</i> ja <i>register</i> tiedostolle <i>userService</i>. Tämä on
+                    yksinkertaisempi sillä emme tarvitse tietoa tokenista eikä siten ole tarvetta
+                    <i>makeHeader</i>-funktion kutsumiselle.
+                </p>
 
-<pre>
+                <pre>
 import axios from 'axios';
 const registerURL = 'http://localhost:3001/register';
 const loginURL = 'http://localhost:3001/login';
@@ -352,9 +396,9 @@ export default {
 }    
 </pre>
 
-</article>
-            </div>
+            </article>
         </div>
+    </div>
     </div>
     <footer>
         <p>
