@@ -30,10 +30,13 @@
                 <h4>Kansiot</h4>
 
                 <ul>
-                    <li>Valitse Assets ja lisää uusi alikansio Scripts</li>
-                    <li>Lisää myös uusi alikansio Images, ladataan tänne kuva (hiiren oikea / Import Asset..), nimeä
+                    <li>Valitse Assets ja lisää uusi alikansio Scripts
+                        <p><img src="../kuvat/hellounity_2.png" /></p>
+
+                    </li>
+                    <li>Lisää myös uusi alikansio Images, ladataan tänne kuva hahmosta ja jostain kerättävästä objektista (hiiren oikea / Import Asset..), nimeä
                         character
-                        <p><img src="../kuvat/hello_1.png" /></p>
+                        <p><img src="../kuvat/hellounity_3.png" /></p>
                     </li>
                 </ul>
 
@@ -43,7 +46,7 @@
                         Hierarchy-ikkuna / hiiren oikea / Create Empty</li>
                     <li>Nimeä Character, lisää Inspector-ikkunassa uusi Sprite Renderer</li>
 
-                    <li>Raahaa Assets / Images -kansiosta kuva Sprite-kohtaan</li>
+                    <li>Raahaa Assets / Images -kansiosta kuva Sprite-kohtaan (tai raahaa hahmo suoraan mukaan Scenelle).</li>
 
                     <li>Kokeile mitä Inspector-ikkunan toiminnot tekevät:
                         <ul>
@@ -69,11 +72,11 @@
                     </li>
                     <li>Raahaa CharacterHandler-skripti Inspector-ikkunassa Character-oliolle.
 
-                        <p><img src="../kuvat/hello_2.png" /></p>
+                        <p><img src="../kuvat/hellounity_4.png" /></p>
                     </li>
 
                     <li>Aja sovellus Play-napilla ja testaa toimiiko liikkuminen. Jos hahmo kävelee vasemmalle niin
-                        voit pysäyttää sovelluksen ja lisätä liikkumisen myös oikealle, ylös- ja alaspäin. </li>
+                        voit pysäyttää sovelluksen ja lisätä liikkumisen myös oikealle, ylös- ja alaspäin (RightArrow, UpArrow, DownArrow). </li>
                 </ul>
 
                 <p>Jos haluat kääntää koodissa hahmon voit kokeilla SpriteRenderer-komponentin muokkaamista näin:
@@ -158,6 +161,7 @@ public class CharacterHandler : MonoBehaviour
 {
 	osumat++;
 	txtViesti.text = "Osumia: " + osumat;
+    Destroy(colInfo.gameObject);
 }
 </pre>
                     </li>
