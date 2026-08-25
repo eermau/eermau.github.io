@@ -23,11 +23,12 @@
                 <article class="markdown-body">
                     <h2>Soveltavat harjoitukset</h2>
 
-                    <p>Valitse alla olevista tehtävistä sinulle sopivat. Lisää tehtäville oma kansio GitHub-repoosi.</p>
+                    <p>Valitse alla olevista tehtävistä sinulle sopivat. Lisää tehtäville oma kansio GitHub-repoosi. Näiden tehtävien tekemisessä saa käyttää apuna tekoälyä.</p>
 
 <ol>
-    <li><a href="#harjoitus1">Tuoterekisteri</a></li>
-    <li><a href="#harjoitus2">Osakekurssien seuranta (yfinance)</a></li>
+    <li><a href="#tuoterekisteri">Tuoterekisteri</a></li>
+    <li><a href="#hahmogeneraattori">Hahmogeneraattori</a></li>
+    <li><a href="#osakkeet">Osakekurssien seuranta (yfinance)</a></li>
     <li><a href="#sääsovellus">Sääsovellus</a></li>
     <li><a href="#html-sivun-automaattinen-luonti">HTML-sivun automaattinen luonti</a></li>
     <li><a href="#kirjasto">Kirjasto (Book Manager)</a></li>
@@ -35,29 +36,32 @@
     <li><a href="#salasanan-vahvuuden-arviointi">Salasanan vahvuuden arviointi</a></li>
     <li><a href="#kuluseuranta">Kuluseuranta</a></li>
     <li><a href="#verkkosivun-tietojen-hakeminen">Verkkosivun tietojen hakeminen</a></li>
-    <li><a href="#hahmogeneraattori">Hahmogeneraattori</a></li>
 </ol>
 
-<h4 id="harjoitus1">Harjoitus 1: Tuoterekisteri</h4>
+<hr />
+<h4 id="tuoterekisteri">Tuoterekisteri</h4>
 
 <p>Tee ohjelma, jolla käyttäjä voi</p>
 
 <ul>
     <li>listata tuotteet</li>
-    <li>hakea tuotteen nimellä</li>
     <li>lisätä uuden tuotteen</li>
     <li>poistaa tuotteen</li>
-</ul>
-
-<p>Lisähaasteita</p>
-
-<ul>
-    <li>muokkaa tuotetta</li>
-    <li>järjestä hinnan mukaan</li>
     <li>näytä varaston kokonaisarvo</li>
 </ul>
 
-<h4 id="harjoitus2">Harjoitus 2: Osakekurssien seuranta (yfinance)</h4>
+<p>Näytä tuotehallinnan toiminnot menussa joka tulostetaan käynnistettäessä:</p>
+<pre>
+--- TUOTEHALLINTA ---
+1. Listaa tuotteet
+2. Lisää tuote
+3. Poista tuote
+4. Näytä varaston kokonaisarvo
+0. Lopeta
+Valitse toiminto:     
+</pre>
+<hr />
+<h4 id="osakkeet">Osakekurssien seuranta (yfinance)</h4>
 
 <p>Kysy käyttäjältä osakkeen tunnus (esim. AAPL, MSFT, NOKIA.HE).</p>
 
@@ -75,6 +79,7 @@
 
 <p>vertaile kahta osaketta ja 
 piirrä kurssikäyrä matplotlibilla</p>
+<hr />
 
 <h4 id="sääsovellus">Sääsovellus</h4>
 
@@ -90,57 +95,69 @@ piirrä kurssikäyrä matplotlibilla</p>
 <p>Lisähaaste</p>
 
 <p>Näytä seuraavan kolmen päivän ennuste.</p>
-
+<hr />
 <h4 id="html-sivun-automaattinen-luonti">HTML-sivun automaattinen luonti</h4>
 
 <p>Luo Python-ohjelma, joka lukee esimerkiksi CSV:n ja muodostaa siitä HTML-sivun.</p>
 
 <p>Esimerkiksi lukee tiedoston products.csv ja luo siitä products.html-tiedoson. Sivulla näkyy tuotteet taulukossa.</p>
 <p>Lisää CSS-tyylit.</p>
+<hr />
 
 <h4 id="kirjasto">Kirjasto (Book Manager)</h4>
 
-Ohjelma ylläpitää omaa kirjakokoelmaa.
+<p>
+Ohjelma ylläpitää omaa kirjakokoelmaa.</p>
+<p>
+Toiminnot</p>
+<ul>
+    <li>lisää kirja</li>
+    <li>poista kirja</li>
+    <li>listaa kirjat</li>
+    <li>etsi kirjailijan mukaan</li>
+    <li>poista kirja</li>
+</ul>
 
-Toiminnot
+<p>
+Tallennus JSON- tai CSV-tiedostoon.</p>
 
-lisää kirja
-listaa kirjat
-etsi kirjailijan mukaan
-poista kirja
-
-Tallennus JSON- tai CSV-tiedostoon.
-
+<hr />
 
 <h4 id="tekstianalyysi">Tekstianalyysi</h4>
 
-Lue pitkä tekstitiedosto.
+<p>Lue pitkä tekstitiedosto.</p>
 
-Laske
+<p>Laske</p>
 
-sanojen määrä
-rivien määrä
-yleisin sana
-pisin sana
+<ul>
+    <li>sanojen määrä</li>
+    <li>rivien määrä</li>
+    <li>yleisin sana</li>
+    <li>pisin sana</li>
+</ul>
 
+<hr />
 
 <h4 id="salasanan-vahvuuden-arviointi">Salasanan vahvuuden arviointi</h4>
+<p>
+Kysy käyttäjältä salasana.</p>
 
-Kysy salasana.
-
-Tarkista
-
-pituus
-isot kirjaimet
-numerot
-erikoismerkit
-
-Anna arvosana
-
-Heikko
-Kohtalainen
-Hyvä
-Erinomainen
+<p></p>Tarkista</p>
+<ul>
+    <li>pituus</li>
+    <li>isot kirjaimet</li>
+    <li>numerot</li>
+    <li>erikoismerkit</li>
+</ul>
+<p>
+Anna arvosana</p>
+<ul>
+    <li>Heikko</li>
+    <li>Kohtalainen</li>
+    <li>Hyvä</li>
+    <li>Erinomainen</li>
+</ul>
+<hr />
 
 <h4 id="kuluseuranta">Kuluseuranta</h4>
 
@@ -161,6 +178,7 @@ Erinomainen
     <li>kulut kategorioittain</li>
     <li>suurimman ostoksen</li>
 </ul>
+<hr />
 
 <h4 id="verkkosivun-tietojen-hakeminen">Verkkosivun tietojen hakeminen</h4>
 <p>
@@ -174,26 +192,13 @@ Käytä BeautifulSoup-kirjastoa.</p>
     <li>10 ensimmäistä otsikkoa</li>
 </ul>
 
-<p>Ohjelma laskee</p>
 
-<ul>
-    <li>kokonaiskulut</li>
-    <li>kulut kategorioittain</li>
-suurimman ostoksen
-
-Verkkosivun tietojen hakeminen
-
-Käytä BeautifulSoup-kirjastoa.
-
-Nouda esimerkiksi uutisotsikot joltakin verkkosivulta.
-
-Tulosta
-
-10 ensimmäistä otsikkoa
+<hr />
 
 <h4 id="hahmogeneraattori">Hahmogeneraattori</h4>
 
-<p>Laadi ohjelma joka luo roolipelihahmon. Hahmolle arvotaan rotu, luokka ja ominaisuuksien arvot (strength, dexterity, constitution, intelligence, wisdom, charisma). Ominaisuudet arvotaan kuten olisi heitetty kolmea kuusisivuista noppaa ja summattu tulos. Hahmon tiedot tulostetaan näytölle.</p>
+<p>Laadi ohjelma joka luo roolipelihahmon. Hahmolle arvotaan rotu, luokka ja ominaisuuksien arvot (strength, dexterity, constitution, intelligence, wisdom, charisma). Ominaisuudet arvotaan kuten olisi heitetty kolmea kuusisivuista noppaa ja summattu tulos. </p>
+<p>Hahmon tiedot tulostetaan näytölle.</p>
 
                 </article>
             </div>
