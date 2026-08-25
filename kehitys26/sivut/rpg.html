@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../style/css/style_unity.css">
+
+    <title>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../index.html">
+            <header class="unity">
+                <h1>Kehitysymp&auml;rist&ouml;n k&auml;ytt&ouml; 15 osp</h1>
+            </header>
+        </a>
+        <div id="container">
+
+
+
+            <article class="">
+                <h1>2D-roolipeli</h1>
+
+                <h3>Yleistä</h3>
+             <p>Tässä työssä kokeillaan Tilemap-työkalua kentän rakentamisessa. Lisäksi tehdään yksinkertainen animaatio hahmolle.</p>
+             
+             <h4>Uusi projekti ja kuvat</h4>
+<ul>
+    <li>Aloita 2D-projekti, nimeä järkevästi</li>
+    <li>Lisää kansio Assets / Art, tuo tänne neljä kuvaa (<a href="../kuvat/ground.png">ground</a>, <a href="../kuvat/ground2.png">ground2</a>, <a href="../kuvat/water.png">water</a> ja <a href="../kuvat/ground_3_x_3.png">ground 3 x 3</a>)</li>
+</ul>             
+             
+<p>Kolme kuvista ovat kooltaan 100px x 100 px, kolmas kuva on kooltaan 300px x 300px.</p>             
+             <p>Tehdään isosta ruohikosta yhdeksän kuvaa jotka jokainen kooltaan 100px x 100px. Kuvan pilkkominen tapahtuu näin:</p>
+             <ul>
+                <li>Valitse kuva</li>
+                <li>Texture Type Sprite (2D and UI)</li>
+                <li>Sprite Mode: Multiple</li>
+                <li>Pixels Per Unit 100 (koska kuva 100x100)</li>
+                <li>Filter Mode: Point (no filter)
+                    ja paina Apply</li>
+                    <li>Paina nappia Sprite Editor
+                      
+                      <ul>
+                        <li>tee kuvasta 3 x 3 kokoinen             <p><img src="../kuvat/rpg_slice.png" alt=""></p>
+                        </li>
+                        <li>paina Slice ja lopuksi Apply</li>
+                      </ul>  
+                    </li>
+             </ul>
+             <p>Lopputuloksena Art-kansiossasi on yksi kuva jaettuna yhdeksään osaan:</p>
+             <p><img src="../kuvat/rpg_art.png" alt=""></p>
+
+             
+             
+             
+             
+             
+             
+             
+
+             <h3>Pelialueen rakentaminen</h3>
+
+             <h4>Tilemap</h4>
+             <p>Tilemap ja Tilepalette ovat tapa rakentaa pelialue kuvista "maalaamaalla".</p>
+             <ul>
+                <li>Hierarchy: hiiren oikea / 2D Object / Tilemap / Rectangular</li>
+             </ul>
+             <p>Ilmestyy ruudukko pelialueelle. Palaamme hetken kuluttua maalaamaan tänne pelialueen.</p>
+
+             <h4>Tile Palette</h4>
+             
+             <p>Avataan Tile Palette-työkalu: Window / 2D / Tile Palette</p>
+             
+             <ul>
+                <li>Valitse Create New Palette, anna nimeksi esim. RPGPalette ja tallenna se kansioon Tilemap</li>
+             </ul>
+             <p>Tämän jälkeen raahaa kuvat Art-kansiosta osaksi palettiasi, tallenna jokainen Tile kansioon Tilemap (tarkenne .asset).</p>
+             <p><img src="../kuvat/rpg_palette.png" alt=""></p>
+             <p>Nyt voit palata takaisin Hierarchy-ikkunan Tilemapille. Pidä TilePalette auki ja varmista että sinulla on valittuna jokin paletin kuvista sekä maalipensseli. Kokeile maalata pelialue Scene-näkymässä.</p>
+             
+             <p>Lisätään Tilemap-objektille komponentiksi Tilemap Collider 2D
+                </p>
+                <ul>
+                    <li>valitse Assets / Tilemap-kansiosta ne tiilet joissa pelaaja ei törmää</li>
+                        <li>aseta niissä Collider Type - None. Käytännössä ainoastaan vesi olisi sellainen johon pelaaja törmää. <p><img src="../kuvat/rpg_tilemap_collider.png" alt=""></p></li>
+                        <li>Testaa toiminta.</li>
+                </ul>
+             
+            <h3>Pelihahmo ja animaatio</h3>
+             
+             
+
+            </article>
+        </div>
+    </div>
+    <footer class="unitycolor">
+        <p>
+            Ohjelmiston toteuttaminen ohjelmistokomponenttikirjastolla | 2026</p>
+    </footer>
+</body>
+
+</html>
