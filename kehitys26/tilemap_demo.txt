@@ -1,0 +1,68 @@
+Knight's Journey
+
+Uusi projekti
+Aloita 2D-projekti
+
+Kansio Assets / Art, lisää tänne neljä kuvaa
+
+kolme kuvaa ovat kooltaan 100px x 100 px, kolmas kuva on kooltaan 300px x 300px.
+
+Tehdään isosta ruohikosta yhdeksän kuvaa jotka jokainen kooltaan 100px x 100px.
+
+Kuvan pilkkominen
+Valitse kuva
+Texture Type Sprite (2D and UI)
+Sprite Mode: Multiple
+Pixels Per Unit 100 (koska kuva 100x100)
+Filter Mode: Point (no filter)
+-> Apply
+
+Paina nappia Sprite Editor
+- tee kuvasta 3 x 3 kokoinen
+- paina Apply
+
+
+
+TileMap
+
+Hierarchy-ikkunassa
+Hierarchy → hiiren oikea → 2D Object → Tilemap → Rectangular
+
+Palaamme hetken kuluttua maalaamaan tänne pelialueen.
+
+Tile Palette
+Avataan Tile Palette-työkalu
+Window → 2D → Tile Palette
+
+Valitse Create New Palette, anna nimi ja tallenna se kansioon Tilemap
+
+Tämän jälkeen raahaa kuvat Art-kansiosta osaksi palettiasi, tallenna jokainen Tile kansioon Tilemap (tarkenne .asset).
+
+Nyt voit palata takaisin Hierarchy-ikkunan Tilemapille. Pidä TilePalette auki ja varmista että sinulla on valittuna jokin paletin kuvista sekä maalipensseli. Kokeile maalata pelialue Scene-näkymässä.
+
+Lisätään Tilemap-objektille komponentiksi Tilemap Collider 2D
+- valitse Assets / Tilemap-kansiosta ne tiilet joissa pelaaja ei törmää, aseta niissä Collider Type - None. Käytännössä ainoastaan vesi olisi sellainen johon pelaaja törmää. Testaa toiminta.
+
+
+
+Player
+
+Animation
+
+Enemy
+
+Move - tietty liikerata
+
+HP
+
+
+
+Kuvat 100px x 100px
+Tilemap
+Grid/Tilemap
+Tilemap collider, asetetaan Ground - None
+
+
+Yksinkertainen animaatio
+- Valitaan Sprite
+- 
