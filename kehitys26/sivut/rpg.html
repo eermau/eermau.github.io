@@ -24,74 +24,79 @@
                 <h1>2D-roolipeli</h1>
 
                 <h3>Yleistä</h3>
-             <p>Tässä työssä kokeillaan Tilemap-työkalua kentän rakentamisessa. Lisäksi tehdään yksinkertainen animaatio hahmolle.</p>
-             
-             <h4>Uusi projekti ja kuvat</h4>
-<ul>
-    <li>Aloita 2D-projekti, nimeä järkevästi</li>
-    <li>Lisää kansio Assets / Art, tuo tänne neljä kuvaa (<a href="../kuvat/ground.png">ground</a>, <a href="../kuvat/ground2.png">ground2</a>, <a href="../kuvat/water.png">water</a> ja <a href="../kuvat/ground_3_x_3.png">ground 3 x 3</a>)</li>
-</ul>             
-             
-<p>Kolme kuvista ovat kooltaan 100px x 100 px, kolmas kuva on kooltaan 300px x 300px.</p>             
-             <p>Tehdään isosta ruohikosta yhdeksän kuvaa jotka jokainen kooltaan 100px x 100px. Kuvan pilkkominen tapahtuu näin:</p>
-             <ul>
-                <li>Valitse kuva</li>
-                <li>Texture Type Sprite (2D and UI)</li>
-                <li>Sprite Mode: Multiple</li>
-                <li>Pixels Per Unit 100 (koska kuva 100x100)</li>
-                <li>Filter Mode: Point (no filter)
-                    ja paina Apply</li>
+                <p>Tässä työssä kokeillaan Tilemap-työkalua kentän rakentamisessa. Lisäksi tehdään yksinkertainen
+                    animaatio hahmolle.</p>
+
+                <h4>Uusi projekti ja kuvat</h4>
+                <ul>
+                    <li>Aloita 2D-projekti, nimeä järkevästi</li>
+                    <li>Lisää kansio Assets / Art, tuo tänne kolme kuvaa (
+                        <a href="../kuvat/rpg_knight.png">knight</a>,
+
+                        <a
+                            href="../kuvat/rpg_tiles_road.png">ground</a> ja <a
+                            href="../kuvat/rpg_tiles_water.png">water</a>
+                        )</li>
+                </ul>
+
+                <p>Kuvat ovat kooltaan 600px x 600 px. Tehdään isosta ruohikosta yhdeksän kuvaa jotka jokainen kooltaan 200px x 200px. Kuvan pilkkominen
+                    tapahtuu näin:</p>
+                <ul>
+                    <li>Valitse kuva Art-kansiostasi. Asetetaan Inspector-ikkunassa ominaisuudet.</li>
+                    <li>Texture Type Sprite (2D and UI)</li>
+                    <li>Sprite Mode: Multiple</li>
+                    <li>Pixels Per Unit 200 (koska kuva 200 x 200)</li>
+                    <li>Filter Mode: Point (no filter)
+                        ja paina Apply</li>
                     <li>Paina nappia Sprite Editor
-                      
-                      <ul>
-                        <li>tee kuvasta 3 x 3 kokoinen             <p><img src="../kuvat/rpg_slice.png" alt=""></p>
-                        </li>
-                        <li>paina Slice ja lopuksi Apply</li>
-                      </ul>  
+
+                        <ul>
+                            <li>tee kuvasta 3 x 3 kokoinen <p><img src="../kuvat/rpg_slice.png" alt=""></p>
+                            </li>
+                            <li>paina Slice ja lopuksi Apply</li>
+                        </ul>
                     </li>
-             </ul>
-             <p>Lopputuloksena Art-kansiossasi on yksi kuva jaettuna yhdeksään osaan:</p>
-             <p><img src="../kuvat/rpg_art.png" alt=""></p>
+                </ul>
+                <p>Lopputuloksena Art-kansiossasi on yksi kuva jaettuna yhdeksään osaan</p>
+                <!-- <p><img src="../kuvat/rpg_art.png" alt=""></p> -->
 
-             
-             
-             
-             
-             
-             
-             
+<hr />
+                <h3>Pelialueen rakentaminen</h3>
 
-             <h3>Pelialueen rakentaminen</h3>
+                <h4>Tilemap</h4>
+                <p>Tilemap ja Tilepalette ovat tapa rakentaa pelialue kuvista "maalaamaalla".</p>
+                <ul>
+                    <li>Hierarchy: hiiren oikea / 2D Object / Tilemap / Rectangular</li>
+                </ul>
+                <p>Ilmestyy ruudukko pelialueelle. Palaamme hetken kuluttua maalaamaan tänne pelialueen.</p>
 
-             <h4>Tilemap</h4>
-             <p>Tilemap ja Tilepalette ovat tapa rakentaa pelialue kuvista "maalaamaalla".</p>
-             <ul>
-                <li>Hierarchy: hiiren oikea / 2D Object / Tilemap / Rectangular</li>
-             </ul>
-             <p>Ilmestyy ruudukko pelialueelle. Palaamme hetken kuluttua maalaamaan tänne pelialueen.</p>
+                <h4>Tile Palette</h4>
 
-             <h4>Tile Palette</h4>
-             
-             <p>Avataan Tile Palette-työkalu: Window / 2D / Tile Palette</p>
-             
-             <ul>
-                <li>Valitse Create New Palette, anna nimeksi esim. RPGPalette ja tallenna se kansioon Tilemap</li>
-             </ul>
-             <p>Tämän jälkeen raahaa kuvat Art-kansiosta osaksi palettiasi, tallenna jokainen Tile kansioon Tilemap (tarkenne .asset).</p>
-             <p><img src="../kuvat/rpg_palette.png" alt=""></p>
-             <p>Nyt voit palata takaisin Hierarchy-ikkunan Tilemapille. Pidä TilePalette auki ja varmista että sinulla on valittuna jokin paletin kuvista sekä maalipensseli. Kokeile maalata pelialue Scene-näkymässä.</p>
-             
-             <p>Lisätään Tilemap-objektille komponentiksi Tilemap Collider 2D
+                <p>Avataan Tile Palette-työkalu: Window / 2D / Tile Palette</p>
+
+                <ul>
+                    <li>Valitse Create New Palette, anna nimeksi esim. RPGPalette ja tallenna se kansioon Tilemap</li>
+                </ul>
+                <p>Tämän jälkeen raahaa kuvat Art-kansiosta osaksi palettiasi, tallenna jokainen Tile kansioon Tilemap
+                    (tarkenne .asset).</p>
+                <p><img src="../kuvat/rpg_palette.png" alt=""></p>
+                <p>Nyt voit palata takaisin Hierarchy-ikkunan Tilemapille. Pidä TilePalette auki ja varmista että
+                    sinulla on valittuna jokin paletin kuvista sekä maalipensseli. Kokeile maalata pelialue
+                    Scene-näkymässä.</p>
+
+                <p>Lisätään Tilemap-objektille komponentiksi Tilemap Collider 2D
                 </p>
                 <ul>
                     <li>valitse Assets / Tilemap-kansiosta ne tiilet joissa pelaaja ei törmää</li>
-                        <li>aseta niissä Collider Type - None. Käytännössä ainoastaan vesi olisi sellainen johon pelaaja törmää. <p><img src="../kuvat/rpg_tilemap_collider.png" alt=""></p></li>
-                        <li>Testaa toiminta.</li>
+                    <li>aseta niissä Collider Type - None. Käytännössä ainoastaan vesi olisi sellainen johon pelaaja
+                        törmää. <p><img src="../kuvat/rpg_tilemap_collider.png" alt=""></p>
+                    </li>
+                    <li>Testaa toiminta.</li>
                 </ul>
-             
-            <h3>Pelihahmo ja animaatio</h3>
-             
-             
+<hr />
+                <h3>Pelihahmo ja animaatio</h3>
+
+
 
             </article>
         </div>
