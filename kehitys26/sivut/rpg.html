@@ -33,13 +33,14 @@
                     <li>Lisää kansio Assets / Art, tuo tänne kolme kuvaa (
                         <a href="../kuvat/rpg_knight.png">knight</a>,
 
-                        <a
-                            href="../kuvat/rpg_tiles_road.png">ground</a> ja <a
+                        <a href="../kuvat/rpg_tiles_road.png">ground</a> ja <a
                             href="../kuvat/rpg_tiles_water.png">water</a>
-                        )</li>
+                        )
+                    </li>
                 </ul>
 
-                <p>Kuvat ovat kooltaan 600px x 600 px. Tehdään isosta ruohikosta yhdeksän kuvaa jotka jokainen kooltaan 200px x 200px. Kuvan pilkkominen
+                <p>Kuvat ovat kooltaan 600px x 600 px. Tehdään isosta ruohikosta yhdeksän kuvaa jotka jokainen kooltaan
+                    200px x 200px. Kuvan pilkkominen
                     tapahtuu näin:</p>
                 <ul>
                     <li>Valitse kuva Art-kansiostasi. Asetetaan Inspector-ikkunassa ominaisuudet.</li>
@@ -60,7 +61,7 @@
                 <p>Lopputuloksena Art-kansiossasi on yksi kuva jaettuna yhdeksään osaan</p>
                 <!-- <p><img src="../kuvat/rpg_art.png" alt=""></p> -->
 
-<hr />
+                <hr />
                 <h3>Pelialueen rakentaminen</h3>
 
                 <h4>Tilemap</h4>
@@ -93,9 +94,26 @@
                     </li>
                     <li>Testaa toiminta.</li>
                 </ul>
-<hr />
+                <p>Tilemap-objektin Order in layer kannattaa asettaa arvolle -1 jotta pelaaja varmasti näkyy sinulle.
+                </p>
+                <hr />
                 <h3>Pelihahmo ja animaatio</h3>
 
+                <ul>
+                    <li>Lisää Player-pelihahmolle uusi komponentti Animator</li>
+                    <li>Lisää Project-valikossa uusi kansio Animations</li>
+                    <li>Lisää Animations-kansiossa Animation Contoller: hiiren oikea / Create / Animation Controller,
+                        nimeä esim. PlayerAnimationContorller.</li>
+                    <li>Lisää komponentin Animator ominaisuus Controller ja PlayerAnimationController.</li>
+                    <li>valitse Window / Animation / Animation</li>
+                    <li>valitse Player-GameObject ja paina Create, tallenna animaatio kansioon Animations nimellä
+                        Player_Walk_Right.anim</li>
+
+                        Animator
+                        Muuttujat: float moveY, float moveX, bool isMoving.
+                        Lisää uudet tilat Player_Walk_Right ja Player_Walk_Left
+                        Lisää transition-muutokset hiiren oikealla painikkeella. Siirtymälle asetetaan ehdot kohdassa Conditions (siirtymä oikealle liikkumiseen kun isMoving true ja moveX suurempi kuin 0).
+                </ul>
 
 
             </article>
