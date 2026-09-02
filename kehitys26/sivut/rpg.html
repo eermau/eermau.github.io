@@ -23,7 +23,6 @@
             <article class="">
                 <h1>2D-roolipeli</h1>
 
-                <h3>Yleistä</h3>
                 <p>Tässä työssä kokeillaan Tilemap-työkalua kentän rakentamisessa. Lisäksi tehdään yksinkertainen
                     animaatio hahmolle.</p>
 
@@ -31,13 +30,15 @@
                 <ul>
                     <li>Aloita 2D-projekti, nimeä järkevästi</li>
                     <li>Lisää kansio Assets / Art, tuo tänne kolme kuvaa (
-                        <a href="../kuvat/rpg_knight.png">knight</a>,
-
+                        <a href="../kuvat/rpg_knight_right.png">knight</a>,
+                        <a href="../kuvat/rpg_knight_left.png">knight 2</a>,
                         <a href="../kuvat/rpg_tiles_road.png">ground</a> ja <a
                             href="../kuvat/rpg_tiles_water.png">water</a>
                         )
                     </li>
                 </ul>
+
+                <h3>Kuvien pilkkominen</h3>
 
                 <p>Kuvat ovat kooltaan 600px x 600 px. Tehdään isosta ruohikosta yhdeksän kuvaa jotka jokainen kooltaan
                     200px x 200px. Kuvan pilkkominen
@@ -94,27 +95,149 @@
                     </li>
                     <li>Testaa toiminta.</li>
                 </ul>
-                <p>Tilemap-objektin Order in layer kannattaa asettaa arvolle -1 jotta pelaaja varmasti näkyy sinulle.
+                <p>Tilemap-objektin Order in layer kannattaa asettaa arvolle -1 jotta lisättävä pelaaja varmasti näkyy
+                    sinulle.
                 </p>
                 <hr />
                 <h3>Pelihahmo ja animaatio</h3>
 
                 <ul>
+                    <li>Lisää uusi tyhjä GameObject ja nimeä se Player</li>
                     <li>Lisää Player-pelihahmolle uusi komponentti Animator</li>
-                    <li>Lisää Project-valikossa uusi kansio Animations</li>
+                    <li>Lisää Project-valikossa uusi kansio Assets / Animations</li>
                     <li>Lisää Animations-kansiossa Animation Contoller: hiiren oikea / Create / Animation Controller,
                         nimeä esim. PlayerAnimationContorller.</li>
-                    <li>Lisää komponentin Animator ominaisuus Controller ja PlayerAnimationController.</li>
-                    <li>valitse Window / Animation / Animation</li>
+                    <li>Lisää Player komponentin Animator ominaisuus Controller / PlayerAnimationController.</li>
+                    <li>Seuraavaksi luodaan animaatio kävelylle. Avaa Window / Animation / Animation</li>
                     <li>valitse Player-GameObject ja paina Create, tallenna animaatio kansioon Animations nimellä
-                        Player_Walk_Right.anim</li>
+                        PlayerWalkRight.anim
+                        <p><img src="../kuvat/rpg_animation_create.png" alt=""></p>
+                        <p>Tee myös muut animaatiot hahmon liikkeelle (hahmo paikallaan, kävely vasemmalle, kävely ylös
+                            ja kävely alas).</p>
+                    </li>
+                    <li>Avaa Animator ja määritä Parametrs-kohdassa kolme muuttujaa: float moveY, float moveX, bool
+                        isMoving. Määritä tilat (State) ja aseta hiiren oikealla PlayerIdel oletustilaksi. Tee siirtymät
+                        (Transitions) hiiren oikealla painikkeella.
+                        <p><img src="../kuvat/rpg_animation_animator.png" alt=""></p>
+                    </li>
+                    <li>
+                        Muuttujien avulla määritellään siirtymälle ehdot. Valitse esimerkiksi siirtymä PlayerIdlestä
+                        PlayerWalkRigh, tämän jälkeen lisää +-painikkeella uusi ehto.
+                        <ul>
+                            <li>Oikelle siirtymä kun isMoving true ja moveX suurempi kuin 0</li>
+                            <li>Paluu takaisin kun isMoving false</li>
+                        </ul>
+                        <p><img src="../kuvat/rpg_animation_conditions.png" alt=""></p>
+                    </li>
+                </ul>
+                <p>Animaatiot ovat olemassa mutta pelaajalta puuttuu vielä liikkuminen eikä tietoa liikkeestä välitetä
+                    Animator-komponentille. Lisätään pelaajalle skripti.</p>
 
-                        Animator
-                        Muuttujat: float moveY, float moveX, bool isMoving.
-                        Lisää uudet tilat Player_Walk_Right ja Player_Walk_Left
-                        Lisää transition-muutokset hiiren oikealla painikkeella. Siirtymälle asetetaan ehdot kohdassa Conditions (siirtymä oikealle liikkumiseen kun isMoving true ja moveX suurempi kuin 0).
+                <p><b>PlayerScript.cs</b></p>
+                <pre>
+ public class PlayerScript : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private Animator animator;
+    public float speed;
+
+    void Start()
+    {
+        // Pelaajan komponentit:
+        animator = GetComponent&lt;Animator&gt;();
+        rb = GetComponent&lt;Rigidbody2D&gt;();    
+    }
+
+    void FixedUpdate()
+    {
+        float moveX = Input.GetAxis("Horizontal");
+        float moveY = Input.GetAxis("Vertical");
+        bool isMoving = Mathf.Abs(moveX) &lt; 0.1f || Mathf.Abs(moveY) &lt; 0.1f;
+        rb.velocity = new Vector2(moveX * speed, moveY * speed);
+        // tiedot Animator-komponentille:
+        animator.SetBool("isMoving", isMoving);
+        animator.SetFloat("moveX", moveX);
+        animator.SetFloat("moveY", moveY);
+
+    }
+}                   
+                </pre>
+                <p>Kokeile ohjelman toimintaa, testaa tulevatko animaatio käyttöön.</p>
+
+                <h3>Blend Tree</h3>
+                <ul>
+                    <li>Mene Animator-ikkunaan.</li>
+                    <li>Luo uusi state:
+                        Create State → From New Blend Tree</li>
+                    <li>Nimeä se esimerkiksi:
+                        PlayerWalk
+                    </li>
+                    <li>Tuplaklikkaa Blend Treeä, jolloin pääset sen sisälle.
+                        <ul>
+                            <li>Valitse Inspector-ikkunassa Blend Tyle / 2D Simple Directional</li>
+                            <li>Blend Treen kohdassa Motion paina + ja lisää neljä Motion Fieldiä. Huomaa
+                                Parameters-kohdassa moveX ja moveY.</li>
+                        </ul>
+                        <p><img src="../kuvat/rpg_animation_blendtree.png" alt=""></p>
+
+                    </li>
+                    <li>Muuta Animator Base Level. Poista liikkumiseen liittyvät tilat ja korvaa ne PlayerWalk-tilalla.
+                        Liitä transitions, ehdoksi vain isMoving true tai false.
+                        <p>
+                        <p><img src="../kuvat/rpg_animation_animator2.png" alt=""></p>
+                        </p>
+                    </li>
                 </ul>
 
+
+
+                <h3>Örkki</h3>
+                <p>Voit lisätä vielä örkin mukaan pelillesi (<a href="../kuvat/rpg_orc.png" target="_blank">orc.png</a>)
+                </p>
+                <p>Tässä örkki kulkee edes takaisin ja vaihtaa suuntaa. Blend Treessä käytetty samaa animaatiota jossa
+                    hahmo liikkuu vasemmalle ja käännetään se koodissa.</p>
+                <p><b>OrcScript.cs</b></p>
+                <pre>
+public class OrcScript : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private Animator animator;
+    public float speed;
+    private int direction;
+    private bool facingRight = false;
+
+    void Start()
+    {
+        animator = GetComponent&lt;Animator&gt;();
+        rb = GetComponent&lt;Rigidbody2D&gt;();    
+        direction = -1;
+        speed = 1.5f;
+    }
+
+    void FixedUpdate()
+    {
+        if (transform.position.x &lt; 5f) {
+            direction = -1;
+            Flip();
+        }
+        else if (transform.position.x &gt; -5f) {
+            direction = 1;
+            Flip();
+        }
+        rb.velocity = new Vector2(direction * speed, 0);
+        // tiedot Animator-komponentille:
+        animator.SetBool("isWalking", true);
+        animator.SetFloat("moveX", direction);
+    }
+
+    void Flip() {
+        facingRight = !facingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x = Scaler.x * -1;
+        transform.localScale = Scaler;
+    }
+}
+                </pre>
 
             </article>
         </div>
