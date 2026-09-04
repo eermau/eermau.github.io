@@ -152,7 +152,7 @@
     {
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
-        bool isMoving = Mathf.Abs(moveX) &lt; 0.1f || Mathf.Abs(moveY) &lt; 0.1f;
+        bool isMoving = Mathf.Abs(moveX) &gt; 0.1f || Mathf.Abs(moveY) &gt; 0.1f;
         rb.velocity = new Vector2(moveX * speed, moveY * speed);
         // tiedot Animator-komponentille:
         animator.SetBool("isMoving", isMoving);
