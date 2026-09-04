@@ -102,18 +102,20 @@
                 <h3>Pelihahmo ja animaatio</h3>
 
                 <ul>
-                    <li>Lisää uusi tyhjä GameObject ja nimeä se Player</li>
-                    <li>Lisää Player-pelihahmolle uusi komponentti Animator</li>
+                    <li>Lisää uusi tyhjä <b>GameObject</b> ja nimeä se Player</li>
+                    <li>Älä lisää kuvaa pelaajalle tässä vaiheessa. Lisää kuitenkin <b>Rigidbody2D</b>, aseta Kinematic tai Mass arvolle 0.</li>
+                    <li>Lisää Player-pelihahmolle uusi komponentti <b>Animator</b></li>
                     <li>Lisää Project-valikossa uusi kansio Assets / Animations</li>
-                    <li>Lisää Animations-kansiossa Animation Contoller: hiiren oikea / Create / Animation Controller,
+                    <li>Lisää Animations-kansiossa <b>Animation Contoller</b>: hiiren oikea / Create / Animation Controller,
                         nimeä esim. PlayerAnimationContorller.</li>
                     <li>Lisää Player komponentin Animator ominaisuus Controller / PlayerAnimationController.</li>
                     <li>Seuraavaksi luodaan animaatio kävelylle. Avaa Window / Animation / Animation</li>
                     <li>valitse Player-GameObject ja paina Create, tallenna animaatio kansioon Animations nimellä
                         PlayerWalkRight.anim
                         <p><img src="../kuvat/rpg_animation_create.png" alt=""></p>
+                        <p>Raahaa ensimmäinen kuva jossa pelaaja kävelee oikealle kohtaan 0:00, raahaa toinen kuva esimerkiksi kohtaan 0:15. Voit testata Play-painikkeella animaation toimintaa.</p>
                         <p>Tee myös muut animaatiot hahmon liikkeelle (hahmo paikallaan, kävely vasemmalle, kävely ylös
-                            ja kävely alas).</p>
+                            ja kävely alas). Valitse yksitellen kohta Create New Clip... ja tallenna animaatio samaan kansioon uudella nimellä (esim. PlayerWalkUp.anim)</p>
                     </li>
                     <li>Avaa Animator ja määritä Parametrs-kohdassa kolme muuttujaa: float moveY, float moveX, bool
                         isMoving. Määritä tilat (State) ja aseta hiiren oikealla PlayerIdel oletustilaksi. Tee siirtymät
