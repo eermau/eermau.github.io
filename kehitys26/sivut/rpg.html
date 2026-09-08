@@ -218,11 +218,11 @@ public class OrcScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (transform.position.x &lt; 5f) {
+        if (transform.position.x &gt; 5f) {
             direction = -1;
             Flip();
         }
-        else if (transform.position.x &gt; -5f) {
+        else if (transform.position.x &lt; -5f) {
             direction = 1;
             Flip();
         }
