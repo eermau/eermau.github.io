@@ -1,4 +1,21 @@
-id,name,price,stock
-1,Keyboard,59.90,12
-2,Mouse,24.90,35
-3,Monitor,199.90,8
+name,description,price,category,weight
+Ashen Longsword,A weathered longsword said to have been carried by a knight who guarded a forgotten shrine.,125,Melee weapon,4.5
+Gravewarden Axe,A heavy iron axe decorated with faded runes from an ancient burial ground.,180,Melee weapon,7.0
+Moonlit Falchion,A curved blade with a pale edge that seems to shimmer beneath the night sky.,210,Melee weapon,3.8
+Thornwood Spear,A hunting spear reinforced with dark thornwood and bound in old leather.,95,Melee weapon,4.0
+Emberglass Dagger,A slender dagger forged from red-black glass that remains warm to the touch.,160,Melee weapon,1.2
+Ravenbone Bow,A short bow carved from blackened bone and strung with braided beast sinew.,145,Ranged weapon,2.5
+Frostfeather Crossbow,A compact crossbow decorated with silver feathers and frost-blue metal.,230,Ranged weapon,5.0
+Ironroot Shield,A round wooden shield reinforced with iron bands and roots hardened like steel.,110,Shield,6.5
+Crown of the Hollow King,A cracked iron crown that once belonged to a ruler whose kingdom vanished into mist.,350,Armor,3.0
+Wolfhide Cuirass,A rugged leather chest piece made from the hides of enormous northern wolves.,190,Armor,8.0
+Grave-Silk Robe,A dark ceremonial robe woven from unusually strong silk found in an ancient crypt.,175,Armor,2.0
+Stonebound Gauntlets,Massive iron gauntlets engraved with symbols of endurance and protection.,140,Armor,5.5
+Mourning Helm,A battered steel helmet with a narrow visor and a black funeral veil.,155,Armor,4.0
+Wyrmscale Boots,Light boots covered in overlapping scales taken from a small drake.,120,Armor,2.5
+Crimson Flask,A sealed glass flask containing a bitter red tonic favored by wandering warriors.,45,Consumable,0.5
+Tears of the Moon,A rare silver-blue potion said to restore strength after a long journey.,90,Consumable,0.4
+Sagefire Incense,A bundle of fragrant herbs that burns with a faint green flame.,65,Consumable,0.3
+Rune of the Lost Path,A small stone rune believed to reveal hidden passages to those who understand its markings.,250,Magic item,1.0
+Lantern of Distant Stars,An ornate brass lantern whose pale light never seems to run out.,300,Magic item,2.5
+Blacksmith's Talisman,A worn iron charm said to bring luck when repairing weapons and armor.,85,Accessory,0.2
