@@ -1,0 +1,284 @@
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../style/css/style_ok.css">
+
+    <title>Fullstack-projekti</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Fullstack-projekti</h1>
+            <div id="divHeadLink">
+                <a href="https://eermau.github.io/">eermau.github.io</a>
+            </div>
+        </header>
+        <div id="container">
+
+            <div id="main" role="main">
+
+                <article class="markdown-body">
+                    <h1>Fullstack-projekti</h1>
+
+                    <h2>Työajanseuranta</h2>
+
+                    <p>Aloittakaa suunnittelemalla Excel-taulukko työajanseurantaa varten. Voitte käyttää annettua <a
+                            target="_blank" href="tuntiseuranta_esimerkki.xlsx">esimerkkiä</a> pohjana ja
+                        muokata sitä tarpeen mukaan.</p>
+
+                    <h2>GitHub-repository</h2>
+
+                    <ul>
+                        <li>Luokaa uusi GitHub-repository Tredu-organisaation sisälle.</li>
+                        <li>Nimetkää repository seuraavasti:
+
+                            `fs-projekti-tiimin-nimi`</li>
+                        <li>Kutsukaa kaikki ryhmän jäsenet mukaan repositoryyn:
+
+                            Settings → Collaborators</li>
+                    </ul>
+
+                    <h2>Kansiorakenne</h2>
+                    <p>
+
+                        Luokaa repositoryyn seuraavat kansiot:</p>
+
+                    <pre>
+/
+├── documents/
+│   ├── UI-suunnitelma
+│   ├── tietokantasuunnitelma
+│   ├── sprint1.md
+│   └── loppuraportti.md
+│
+└── project/
+    ├── backend/
+    ├── frontend/
+    └── database/
+</pre>
+                    <p>
+                        documents/-kansioon tallennetaan projektin dokumentaatio.</p>
+                    <p>
+                        project/-kansioon tulee projektin lähdekoodi. Jakakaa lähdekoodi esimerkiksi backend-, frontend-
+                        ja
+                        database-kansioihin.</p>
+
+                    <h2>Projektin suunnittelu</h2>
+
+                    <p>
+                        Ennen varsinaisen ohjelmoinnin aloittamista suunnitelkaa sovelluksen rakenne ja käyttöliittymä.
+                    </p>
+                    <h3>Tietokantasuunnitelma</h3>
+                    <p>
+                        Suunnitelkaa sovelluksen tietokanta ja tehkää siitä visuaalinen tietokantakaavio.</p>
+                    <p>
+                        Voitte käyttää esimerkiksi:</p>
+                    <ul>
+                        <li>Microsoft Visiota</li>
+                        <li><a href="https://drawsql.app/" target="_blank">drawSQL</a>-sovellusta</li>
+                    </ul>
+                    <p>
+                        Tietokantakaaviossa voidaan käyttää esimerkiksi kukonaskel-mallia (Crow's Foot).</p>
+                    <p>
+                        Tallentakaa valmis tietokantasuunnitelma `documents`-kansioon.</p>
+
+                    <h3>Käyttöliittymän suunnittelu</h3>
+                    <p>
+                        Suunnitelkaa sovelluksen käyttöliittymä eli tehkää rautalankamalli (wireframe).</p>
+                    <p>
+                        Voitte käyttää esimerkiksi:</p>
+                    <ul>
+                        <li>Figmaa</li>
+                        <li> Adobe XD:tä</li>
+
+                    </ul>
+
+                    <h3>Yksilöprojekti</h3>
+
+                    <p>Suunnitelkaa vähintään:</p>
+                    <ul>
+                        <li> yksi desktop-näkymä</li>
+                        <li>yksi mobiilinäkymä</li>
+
+                    </ul>
+
+                    <h3>Ryhmäprojekti</h3>
+
+                    <p>
+                        Jakakaa käyttöliittymän suunnittelu ryhmän jäsenten kesken. Sopikaa, kuka suunnittelee mitkäkin
+                        näkymät.</p>
+                    <ul>
+                        <li> Suosituksena on käyttää Figmaa ja jakaa sama työtila koko ryhmälle.</li>
+
+                        <li> Tallentakaa valmis UI-suunnitelma `documents`-kansioon.</li>
+
+                    </ul>
+
+
+
+                    <h2>User storyt ja projektin hallinta</h2>
+                    <p>
+                        Suunnitelkaa projektin user storyt ja lisätkää ne GitHubin Projects-osioon.</p>
+                    <p>
+                        Luokaa projektia varten Kanban-taulu.</p>
+
+                    <h3>Kanban-taulun sarakkeet</h3>
+
+                    <p>Taululla tulee olla vähintään seuraavat sarakkeet:</p>
+
+                    <table>
+                        <tr>
+                            <th>Sarake</th>
+                            <th>Tarkoitus</th>
+                        </tr>
+                        <tr>
+                            <td>Backlog </td>
+                            <td>Kaikki suunnitellut user storyt</td>
+                        </tr>
+                        <tr>
+                            <td>Current Sprint </td>
+                            <td>Tämänhetkiseen sprinttiin valitut user storyt</td>
+                        </tr>
+                        <tr>
+                            <td>In Progress </td>
+                            <td>Työn alla olevat tehtävät. Tehtävälle on määritetty tekijä.</td>
+                        </tr>
+                        <tr>
+                            <td>Done </td>
+                            <td>Valmiit user storyt</td>
+                        </tr>
+                        <tr>
+                            <td>Daily </td>
+                            <td>Päiväpalaverien tiedot</td>
+                        </tr>
+                    </table>
+
+                    <h3>Daily-sarake</h3>
+
+                    <p>Kirjatkaa päiväpalaverista vähintään:</p>
+                    <ul>
+                        <li> päivämäärä</li>
+                        <li> paikalla olleet henkilöt</li>
+                        <li> mitä kukin tekee tai mitä on työn alla</li>
+                        <li> mahdolliset erityiset huomiot tai ongelmat</li>
+
+                    </ul>
+
+
+                    <h2>Sprintit</h2>
+                    <p>
+                        Jakakaa projekti esimerkiksi kahteen sprinttiin.</p>
+                    <p>
+                        Suositeltu sprintin pituus on noin 2–3 viikkoa.</p>
+                    <p>Sprintin aikana seurataan tehtävien etenemistä GitHubin Project-taululla.</p>
+
+                    <h2>Sprintin päättäminen</h2>
+                    <p>
+                        Jokaisen sprintin lopussa tehkää sprintin päätösmuistio.</p>
+                    <p>
+                        Tallentakaa muistio `documents`-kansioon esimerkiksi nimellä:</p>
+                    <pre>
+    `sprint1memo.md`
+</pre>
+
+                    <h3>Sprintin päätösmuistion sisältö</h3>
+
+                    <p>Kirjatkaa esimerkiksi:</p>
+
+                    <li> Milloin sprintti alkoi?</li>
+                    <li> Milloin sprintti päättyi?</li>
+                    <li> Mitkä user storyt saatiin valmiiksi?</li>
+                    <li> Mikä onnistui?</li>
+                    <li> Mikä ei onnistunut?</li>
+                    <li> Oliko kommunikaatio riittävää?</li>
+                    <li> Saitteko tarvittaessa apua muilta tiimin jäseniltä?</li>
+                    <li> Oliko työnjako toimiva?</li>
+                    <li> Oliko jollakin liian paljon tai liian vähän tekemistä?</li>
+                    <li> Mitä tehdään seuraavassa sprintissä paremmin?</li>
+
+                    <p>Sprintin päätyttyä täydentäkää myös projektitaulua.</p>
+
+                    <p></p>Käykää yhdessä tiimin kanssa läpi, mitä seuraavaan sprinttiin kannattaa ottaa mukaan.</p>
+
+                    <h2>Projektin loppuvaihe</h2>
+                    <p>
+                        Kun sovellus on valmis, tehkää sille systeemitestaus.</p>
+
+                    <p>Testauksen voi toteuttaa esimerkiksi:</p>
+
+                    <ul>
+                        <li> Excel-työkirjan avulla</li>
+                        <li> Cypress-testeillä</li>
+                    </ul>
+                    <p>
+                        Testatkaa, että sovelluksen keskeiset toiminnallisuudet toimivat suunnitellusti.</p>
+
+                    <h2>Loppuraportti</h2>
+                    <p>
+                        Projektin lopuksi tehkää loppuraportti ja tallentakaa se `documents`-kansioon.</p>
+
+                    <p>Esimerkiksi:</p>
+
+                    <pre>`loppuraportti.md`</pre>
+
+                    <p>Käyttäkää loppuraportissa annettua loppuraportin <a href="loppuraportti.md"
+                            target="_blank">mallipohjaa</a>.</p>
+
+                    <p>Loppuraportissa kuvataan muun muassa projektin toteutus, eteneminen, lopputulos ja projektin
+                        aikana tehdyt havainnot.
+                    </p>
+
+                    <h2>Projektin eteneminen lyhyesti</h2>
+
+                    <p>Projektin eteneminen voidaan tiivistää seuraavasti:</p>
+
+                    <h3>1. Suunnittelu</h3>
+                    <ul>
+                        <li> Työajanseurannan suunnittelu</li>
+                        <li> Tietokantasuunnitelma</li>
+                        <li> UI-/rautalankamallit</li>
+                        <li> User storyt</li>
+                        <li>GitHubin valmistelu
+                            <ul>
+                                <li> Repository</li>
+                                <li> Kansiorakenne</li>
+                                <li> Tiimin jäsenten lisääminen</li>
+                                <li> GitHub Project / Kanban-taulu</li>
+                            </ul>
+                        </li>
+                    </ul>
+                   
+                    <h3>2. Sprintti 1</h3>
+                    <ul>
+                        <li> Tehtävien toteutus</li>
+                        <li> Päiväpalaverien kirjaaminen</li>
+                        <li> Tehtävien seuranta Kanban-taululla</li>
+                        <li> Sprintin päätösmuistio</li>
+                    </ul>
+                    <h3>3. Sprintti 2</h3>
+                    <ul>
+                        <li> Uusien tehtävien toteutus</li>
+                        <li> Projektin viimeistely</li>
+                        <li> Testaus</li>
+                    </ul>
+                    <h3>4. Projektin päättäminen</h3>
+                    <ul>
+                        <li> Systeemitestaus</li>
+                        <li> Loppuraportti</li>
+                        <li> Projektin dokumentaation viimeistely</li>
+                    </ul>
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            Ohjelmistokehittäjänä toimiminen | 2026</p>
+    </footer>
+</body>
+
+</html>
